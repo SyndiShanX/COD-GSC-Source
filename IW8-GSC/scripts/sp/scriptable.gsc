@@ -1,0 +1,49 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\sp\scriptable.gsc
+***********************************************/
+
+function scriptable_spglobalcallback() {
+  scripts\engine\scriptable::scriptable_setinitcallback(&scriptable_spcallback);
+}
+
+function scriptable_spcallback() {
+  var0 = gettime();
+  var1 = getscriptablearray("scriptable", "code_classname");
+
+  foreach(var3 in var1) {
+    if(isDefined(var3.initialized)) {
+      thread scriptable_print_warning();
+      continue;
+    }
+
+    if(isDefined(var3.script_noteworthy)) {
+      if(var3.script_noteworthy == "interactive_door") {
+        var3 scripts\sp\door_scriptable::scriptable_init();
+      } else if(issubstr(var3.script_noteworthy, "dynolight")) {
+        scripts\sp\interactables\dynolight::add_dynolight(var3);
+      }
+    }
+
+    var3.initialized = 1;
+  }
+
+  scripts\sp\interactables\dynolight::init();
+  waitframe();
+
+  if(!scripts\engine\utility::flag_exist("scriptables_ready")) {
+    scripts\engine\utility::flag_init("scriptables_ready");
+  }
+
+  scripts\engine\utility::flag_set("scriptables_ready");
+}
+
+function scriptable_print_warning() {
+  if(isDefined(level.scriptable_warning)) {
+    return;
+  }
+
+  level.scriptable_warning = 1;
+  wait 0.1;
+  iprintln("^3Scriptables tried re-initializing, you may want to map_restart for safety");
+}

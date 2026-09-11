@@ -1,0 +1,60 @@
+/**************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\maps\mp_broadcast2\mp_broadcast2_fx.gsc
+**************************************************************/
+
+function main() {
+  level._effect["vfx_br_smk_column_sm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_smk_column_sm.vfx");
+  level._effect["vfx_br_embers_mid"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_embers_mid.vfx");
+  level._effect["vfx_br_embers_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_embers_sml.vfx");
+  level._effect["vfx_br_fire_ground_xsm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_xsm.vfx");
+  level._effect["vfx_br_fire_ground_sm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_sm.vfx");
+  level._effect["vfx_br_fire_ground_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_med.vfx");
+  level._effect["vfx_br_car_fire_linger"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_car_fire_linger.vfx");
+  level._effect["vfx_br_fire_ground_line_xsm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_line_xsm.vfx");
+  level._effect["vfx_br_fire_ground_line_sm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_line_sm.vfx");
+  level._effect["vfx_br_fire_ground_line_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_line_med.vfx");
+  level._effect["vfx_br_leaves_falling"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_falling.vfx");
+  level._effect["vfx_br_leaves_falling_lrg"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_falling_lrg.vfx");
+  level._effect["vfx_br_leaves_swirling_olive"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_swirling_olive.vfx");
+  level._effect["vfx_br_mist_slow"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_mist_slow.vfx");
+  level._effect["vfx_br_electrical_transformer_sparks_2"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_electrical_transformer_sparks_2.vfx");
+  level._effect["vfx_br_ambient_smk"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_ambient_smk.vfx");
+  level._effect["vfx_br_ambient_smk_lg"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_ambient_smk_lg.vfx");
+  level._effect["vfx_br_ambient_smk_slow"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_ambient_smk_slow.vfx");
+  level._effect["vfx_br_trash_circle"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_trash_circle.vfx");
+  level._effect["vfx_br_insect_flies_trash"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_insect_flies_trash.vfx");
+  level._effect["vfx_br_insect_flies_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_insect_flies_sml.vfx");
+  level._effect["vfx_br_wind_debris"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_wind_debris.vfx");
+  level._effect["vfx_br_wind_blowing_sand"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_wind_blowing_sand.vfx");
+  level._effect["vfx_br_water_drip_sink"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_water_drip_sink.vfx");
+  level._effect["vfx_br_vent_xsm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_vent_xsm.vfx");
+  level._effect["vfx_br_vent_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_vent_sml.vfx");
+  level._effect["vfx_br_vent_debris_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_vent_debris_sml.vfx");
+  level._effect["vfx_br_vent_debris_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_vent_debris_med.vfx");
+  level._effect["vfx_br_vent_debris_lrg"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_vent_debris_lrg.vfx");
+  level._effect["vfx_hhat_elec_spark"] = loadfx("vfx/iw8_mp/level/hardhat/vfx_hhat_elec_spark.vfx");
+  level._effect["vfx_hhat_elec_spark_dir"] = loadfx("vfx/iw8_mp/level/hardhat/vfx_hhat_elec_spark_dir.vfx");
+  level._effect["vfx_hhat_flood_lensflare"] = loadfx("vfx/iw8_mp/level/hardhat/vfx_hhat_flood_lensflare.vfx");
+  level._effect["vfx_bcast_sunflare"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_sunflare.vfx");
+  level._effect["vfx_bcast_chimney_smk"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_chimney_smk.vfx");
+  level._effect["vfx_bcast_chimney_smk_2"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_chimney_smk_2.vfx");
+  level._effect["vfx_bcast_fire_light_sml"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_fire_light_sml.vfx");
+  level._effect["vfx_bcast_fire_light_med"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_fire_light_med.vfx");
+  level._effect["vfx_bcast_manhole_steam"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_manhole_steam.vfx");
+  level._effect["vfx_bcast_fire_car_med"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_fire_car_med.vfx");
+  level._effect["vfx_bcast_fire_car_lrg"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_fire_car_lrg.vfx");
+  level._effect["vfx_bcast_server_d"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_server_d.vfx");
+  level._effect["vfx_bcast_server_c"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_server_c.vfx");
+  level._effect["vfx_bcast_server_black_lm"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_server_black_lm.vfx");
+  level._effect["vfx_bcast_server_b"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_server_b.vfx");
+  level._effect["vfx_bcast_dust_motes_constant"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_dust_motes_constant.vfx");
+  level._effect["vfx_bcast_water_drip"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_water_drip.vfx");
+  level._effect["vfx_bcast_water_drip_fast"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_water_drip_fast.vfx");
+  level._effect["vfx_bcast_water_drip_line"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_water_drip_line.vfx");
+  level._effect["vfx_bcast_square_lensflare"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_square_lensflare.vfx");
+  level._effect["vfx_bcast_soft_lensflare"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_soft_lensflare.vfx");
+  level._effect["vfx_bcast_fluo_lensflare"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_fluo_lensflare.vfx");
+  level._effect["vfx_bcast_smk_column_lg"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_smk_column_lg.vfx");
+  level._effect["vfx_bcast_smk_column_md"] = loadfx("vfx/iw8_mp/level/broadcast/vfx_bcast_smk_column_md.vfx");
+}

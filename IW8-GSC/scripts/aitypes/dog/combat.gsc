@@ -1,0 +1,308 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\aitypes\dog\combat.gsc
+***********************************************/
+
+function dog_init(var0) {
+  self.fixednode = 0;
+  self.combatmode = "no_cover";
+  self.subclass = "dog";
+  self._blackboard.movetype = "walk";
+  self.meleechargedist = 384;
+  self.meleechargedistvsplayer = 384;
+  self.meleechargedistreloadmultiplier = 1;
+  self.meleerangesq = 4096;
+  self.unarmedmeleedamageoverride = 400;
+  self.meleemaxzdiff = 72;
+  self.meleetryhard = 1;
+  self.fnismeleevalid = &ismeleevalid;
+  self.fncanmovefrompointtopoint = &canmovefrompointtopoint;
+  self.fnsetstealthstate = &setstealthstate;
+  self.fnisinstealthidle = &scripts\aitypes\stealth::isidle;
+  self.fnisinstealthinvestigate = &scripts\aitypes\stealth::isinvestigating;
+  self.fnisinstealthhunt = &scripts\aitypes\stealth::ishunting;
+  self.fnisinstealthcombat = &scripts\aitypes\stealth::iscombating;
+  self.fnisinstealthidlescriptedanim = &scripts\aitypes\stealth::isidlescriptedanim;
+  self.fnstealthupdatevisionforlighting = &scripts\aitypes\stealth::updatevisionforlighting;
+  self.fnstealthgotonode = &scripts\sp\spawner::go_to_node;
+  self.smellradiussq = 589824;
+  self.smellouterradiussq = 685584;
+  self.barkradiussq = 409600;
+  self.barkouterradiussq = 490000;
+  self.combatradiussq = 262144;
+  return anim.success;
+}
+
+function canmovefrompointtopoint(var0, var1) {
+  return self maymovefrompointtopoint(var0, var1, 0, 1);
+}
+
+function updateeveryframe(var0) {
+  if(!isalive(self)) {
+    return anim.failure;
+  }
+
+  var1 = scripts\engine\utility::is_equal(self.demeanoroverride, "sprint") || isDefined(self.enemy);
+
+  if(var1) {
+    self._blackboard.movetype = "run";
+  } else {
+    self._blackboard.movetype = "walk";
+  }
+
+  return anim.success;
+}
+
+function updateeveryframe_stealth(var0) {
+  var1 = level.player;
+
+  switch (self.stealth.bsmstate) {
+    case 0:
+      var2 = distancesquared(var1.origin, self.origin);
+
+      if(var2 < self.smellradiussq) {
+        setstealthstate("investigate");
+      }
+
+      break;
+    case 1:
+      var2 = distancesquared(var1.origin, self.origin);
+
+      if(var2 > self.smellouterradiussq) {
+        if(!isDefined(self.stealth.threat_sight_lost) || self.stealth.threat_sight_lost) {
+          setstealthstate("idle");
+        }
+      } else if(var2 < self.combatradiussq && self cansee(var1)) {
+        setstealthstate("combat");
+      }
+
+      break;
+  }
+
+  return anim.success;
+}
+
+function enableeventlisteners(var0) {
+  var1 = ["bulletwhizby", "explode", "gunshot", "projectile_impact", "silenced_shot"];
+  jumpiffalse(var0) LOC_00000052;
+
+  foreach(var3 in var1) {
+    self addaieventlistener(var3);
+  }
+
+  return;
+}
+
+function dog_idle_init() {
+  enableeventlisteners(1);
+  self clearenemy();
+  scripts\stealth\enemy::set_sight_state("hidden");
+
+  foreach(var1 in level.players) {
+    if(!isDefined(var1.stealth)) {
+      continue;
+    }
+
+    if(!isDefined(var1.stealth.spotted_list)) {
+      continue;
+    }
+
+    var1.stealth.spotted_list[self.unique_id] = undefined;
+  }
+
+  scripts\stealth\event::event_escalation_clear();
+  thread scripts\stealth\enemy::set_alert_level("reset");
+
+  if(isDefined(self.stealth.funcs["hidden"])) {
+    scripts\stealth\callbacks::stealth_call_thread("hidden");
+  }
+
+  if(isDefined(self.target)) {
+    self.goalradius = 32;
+
+    if(isDefined(self.fnstealthgotonode)) {
+      self thread[[self.fnstealthgotonode]](undefined, undefined, undefined);
+      return;
+    }
+
+    return;
+  }
+}
+
+function dog_idle_init_task(var0) {
+  self.bt.instancedata[var0] = spawnStruct();
+  self.stealth.bidlecurious = 0;
+}
+
+function dog_idle(var0) {
+  var1 = self.bt.instancedata[var0];
+  var2 = level.player;
+  var3 = self getthreatsight(var2);
+  var4 = 0.25;
+
+  if(self.stealth.bidlecurious) {
+    var5 = 2000;
+
+    if(gettime() > var1.curiousstarttime + var5) {
+      if(var3 < var4 * 0.9) {
+        self.stealth.bidlecurious = 0;
+        self.stealth.idlecurioustarget = undefined;
+
+        if(!isDefined(self.pathgoalpos) && isDefined(var1.idlenode)) {
+          self._blackboard.idlenode = var1.idlenode;
+        }
+      }
+    }
+  } else if(var3 >= var4) {
+    self.stealth.bidlecurious = 1;
+    self.stealth.idlecurioustarget = var2;
+    var1.curiousstarttime = gettime();
+    var1.idlenode = self._blackboard.idlenode;
+    self._blackboard.idlenode = undefined;
+  }
+
+  self._blackboard.movetype = "walk";
+  return anim.running;
+}
+
+function dog_idle_terminate_task(var0) {
+  self.bt.instancedata[var0] = undefined;
+  self.stealth.bidlecurious = undefined;
+  self.stealth.idlecurioustarget = undefined;
+}
+
+function dog_investigate_init_task(var0) {
+  self.bt.instancedata[var0] = spawnStruct();
+  self.stealth.bbark = 0;
+  self.stealth.bgrowl = 0;
+}
+
+function dog_investigate(var0) {
+  var1 = level.player;
+  var2 = distancesquared(self.origin, var1.origin);
+
+  if(var2 < self.barkradiussq) {
+    self.stealth.bbark = 1;
+    self.stealth.bgrowl = 0;
+  } else if(var2 > self.barkouterradiussq) {
+    self.stealth.bbark = 0;
+    self.stealth.bgrowl = 1;
+  }
+
+  if(self.stealth.bbark || self.stealth.bgrowl) {
+    self._blackboard.target = var1;
+  } else {
+    self._blackboard.target = undefined;
+  }
+
+  self._blackboard.movetype = "run";
+  return anim.running;
+}
+
+function dog_investigate_terminate_task(var0) {
+  self.bt.instancedata[var0] = undefined;
+  self.stealth.bbark = undefined;
+  self.stealth.bgrowl = undefined;
+  self._blackboard.target = undefined;
+}
+
+function ismeleevalid(var0, var1) {
+  if(!scripts\aitypes\melee::ismeleevalid_common(var0, var1)) {
+    return anim.failure;
+  }
+
+  return anim.success;
+}
+
+function dog_followenemy_init(var0) {
+  var1 = spawnStruct();
+  var1.nextupdatetime = 0;
+  self.bt.instancedata[var0] = var1;
+}
+
+function dog_followenemy(var0) {
+  var1 = self.enemy;
+  var2 = self.bt.instancedata[var0];
+  var3 = gettime();
+
+  if(var3 >= var2.nextupdatetime) {
+    var2.nextupdatetime = var3 + 500;
+    var4 = 192;
+    var5 = var1.origin - self.origin;
+    var6 = length(var5);
+
+    if(var6 > var4 && !istrue(self.dontmelee)) {
+      var7 = var1.origin - var5 * var4 / var6;
+      var8 = getclosestpointonnavmesh(var7, self);
+      self setbtgoalpos(1, var8);
+      self.btgoalradius = 64;
+    }
+  }
+
+  if(isDefined(self.stealth)) {
+    if(!isDefined(self.pathgoalpos)) {
+      self.stealth.bbark = 1;
+    } else {
+      self.stealth.bbark = undefined;
+    }
+  }
+
+  return anim.running;
+}
+
+function dog_followenemy_terminate(var0) {
+  self.bt.instancedata[var0] = undefined;
+
+  if(!isDefined(self.enemy)) {
+    self clearbtgoal(1);
+    return;
+  }
+}
+
+function dog_combat_init() {
+  enableeventlisteners(0);
+  scripts\stealth\event::event_escalation_clear();
+  scripts\stealth\enemy::set_sight_state("spotted");
+}
+
+function enterstealthstate(var0) {
+  exitstealthstate(self.stealth.bsmstate);
+  self.stealth.bsmstate = var0;
+
+  switch (var0) {
+    case 0:
+      dog_idle_init();
+      break;
+    case 1:
+      break;
+    case 3:
+      dog_combat_init();
+      break;
+  }
+}
+
+function exitstealthstate(var0) {
+  switch (var0) {
+    case 0:
+      break;
+    case 1:
+      break;
+  }
+}
+
+function setstealthstate(var0, var1) {
+  switch (var0) {
+    case "idle":
+      enterstealthstate(0);
+      self notify("stealth_idle");
+      break;
+    case "investigate":
+      enterstealthstate(1);
+      self notify("stealth_investigate");
+      break;
+    case "combat":
+      enterstealthstate(3);
+      self notify("stealth_combat");
+      break;
+  }
+}

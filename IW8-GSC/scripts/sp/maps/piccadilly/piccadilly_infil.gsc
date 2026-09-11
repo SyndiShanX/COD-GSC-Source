@@ -1,0 +1,3079 @@
+/***********************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\sp\maps\piccadilly\piccadilly_infil.gsc
+***********************************************************/
+
+function infil_init() {
+  precachemodel("offhand_wm_smartphone");
+  precachemodel("body_civ_western_girl_5_1");
+  precachemodel("civ_london_female_3_2");
+  scripts\engine\sp\utility::array_spawn_function_targetname("sicario_street_friendly", &postspawn_ally);
+  scripts\engine\sp\utility::array_spawn_function_targetname("car1_terry", &postspawn_car1_terry);
+  scripts\engine\sp\utility::array_spawn_function_targetname("car1_terries", &postspawn_car1_terries);
+  scripts\engine\sp\utility::array_spawn_function_targetname("car2_terry", &postspawn_car2_terry);
+  scripts\engine\sp\utility::array_spawn_function_targetname("intro_civs", &postspawn_intro_civ);
+  scripts\engine\utility::flag_init("intro_skipped");
+  scripts\engine\utility::flag_init("intro_bink_done");
+  scripts\engine\utility::flag_init("intro_civs_ready");
+  scripts\engine\utility::flag_init("camera_move_done");
+  scripts\engine\utility::flag_init("cars_ready");
+  scripts\engine\utility::flag_init("boots_on_the_ground");
+  scripts\engine\utility::flag_init("intro_sas_ready");
+  scripts\engine\utility::flag_init("player_is_behind_ally");
+  scripts\engine\utility::flag_init("player_at_standoff");
+  scripts\engine\utility::flag_init("sas2_ready");
+  scripts\engine\utility::flag_init("standoff_ready");
+  scripts\engine\utility::flag_init("car2_guys_dead");
+  scripts\engine\utility::flag_init("force_bomb_start");
+  scripts\engine\utility::flag_init("player_golden_path_knockdown");
+  scripts\engine\utility::flag_init("start_car2");
+  scripts\engine\utility::flag_init("car2_detonation");
+  scripts\engine\utility::flag_init("post_explosion");
+  scripts\engine\utility::flag_init("player_is_up");
+  scripts\engine\utility::flag_init("sicario_street_exit");
+  scripts\engine\utility::flag_init("moving_cars_2");
+  scripts\engine\utility::flag_init("weapons_free");
+  scripts\engine\utility::flag_init("gun_raised");
+  scripts\engine\utility::flag_init("standoff_complete");
+  scripts\engine\utility::flag_init("standoff_vo_complete");
+  thread setup_level_arrays();
+  thread setup_civ_groups();
+  var0 = getEntArray("player_movement_clip", "script_noteworthy");
+
+  foreach(var2 in var0) {
+    var2 notsolid();
+  }
+}
+
+function setup_level_arrays() {
+  level.intro_windows["front"] = [];
+  level.intro_windows["back"] = [];
+  level.intro_windows["special1"] = [];
+  thread setup_civ_types();
+  level.background_civs["tele"] = [];
+  level.background_civs["ai"] = [];
+  level.background_civs["fake"] = [];
+  level.scriptable_cleanup = [];
+  level.stepback["g1"] = [];
+  level.trailer_left_cars = [];
+}
+
+function setup_civ_groups() {
+  var0 = [];
+  level.skippable_ents = [];
+  level.intro_civs = [];
+  level.intro_civs["adult"] = var0;
+  level.intro_civs["male"] = var0;
+  level.intro_civs["female"] = var0;
+  level.intro_civs["kids"] = getspawnerarray("civilian_new_child");
+  level.intro_civs["noStandoff"] = [];
+  level.intro_civs["injured"] = [];
+  level.intro_civs["oneOff"] = [];
+  level.intro_civs["dead"] = [];
+  level.intro_civs["post"] = [];
+
+  foreach(var2 in level.intro_civs["kids"]) {
+    if(var2.script_namenumber == "male") {
+      level.intro_civs["boy"] = var2;
+      continue;
+    }
+
+    level.intro_civs["girl"] = var2;
+  }
+
+  var4 = getspawnerarray("civilians_intro");
+
+  foreach(var2 in var4) {
+    if(var2.script_namenumber == "random") {
+      level.intro_civs["adult"][level.intro_civs["adult"].size] = var2;
+      continue;
+    }
+
+    if(var2.script_namenumber == "male") {
+      level.intro_civs["male"][level.intro_civs["male"].size] = var2;
+      continue;
+    }
+
+    if(var2.script_namenumber == "female") {
+      level.intro_civs["female"][level.intro_civs["female"].size] = var2;
+    }
+  }
+}
+
+function postspawn_ally() {
+  scripts\common\utility::enable_cqbwalk();
+  scripts\common\ai::magic_bullet_shield();
+  self.goalradius = 40;
+  self.maxsightdistsqrd = 3610000;
+  self.primaryweapon = isundefinedweapon();
+  self.secondaryweapon = isundefinedweapon();
+  var0 = scripts\sp\utility::make_weapon_special("papa320_black_rain");
+  scripts\anim\shared::forceuseweapon(var0, "primary");
+
+  if(scripts\sp\starts::is_after_start("post_bomb")) {
+    scripts\engine\sp\utility::set_force_color("p");
+    scripts\common\utility::disable_cqbwalk();
+    scripts\common\ai::stop_magic_bullet_shield();
+    return;
+  }
+}
+
+function postspawn_car1_terry() {
+  self.dontmelee = 1;
+  self.grenadeammo = 0;
+  thread scripts\common\ai::magic_bullet_shield();
+  scripts\engine\utility::disable_pain();
+  scripts\engine\sp\utility::disable_surprise();
+  scripts\sp\utility::context_melee_allow(0);
+  self actoraimassistoff();
+  thread terry_damage_monitor();
+
+  if(self.animname == "car1_terry1") {
+    level.aq_soldier_3 = self;
+  }
+
+  self allowedstances("stand");
+  thread notify_whizby_from_player();
+  swap_weapon_to("iw8_pi_mike1911");
+  scripts\common\ai::gun_remove();
+  scripts\engine\utility::flag_wait("car2_detonation");
+  thread scripts\common\ai::stop_magic_bullet_shield();
+  self actoraimassiston();
+  scripts\common\ai::gun_recall();
+  scripts\common\utility::clear_demeanor_override();
+  self.dontevershoot = 0;
+}
+
+function postspawn_car1_terries() {
+  self.ignoreme = 1;
+  self.health = 25;
+  thread scripts\common\ai::magic_bullet_shield();
+  swap_weapon_to("iw8_pi_mike1911");
+  scripts\sp\utility::context_melee_allow(0);
+  scripts\common\ai::gun_remove();
+  scripts\engine\utility::disable_pain();
+  self visiblenotsolid();
+  self actoraimassistoff();
+  thread terry_damage_monitor();
+
+  if(self.animname == "car1_terry2") {
+    level.car1_terry2 = self;
+  } else {
+    level.car1_terry3 = self;
+  }
+
+  scripts\engine\utility::flag_wait("car2_detonation");
+  self actoraimassiston();
+  scripts\common\ai::gun_recall();
+  self visiblesolid();
+  self endon("death");
+
+  if(self.animname == "car1_terry2") {
+    wait 7.4;
+  } else {
+    wait 8;
+  }
+
+  scripts\common\ai::stop_magic_bullet_shield();
+  self.allowdeath = 1;
+  self.skipdeathanim = 1;
+}
+
+function postspawn_car2_terry() {
+  self endon("death");
+  self.grenadeammo = 0;
+  self.dontevershoot = 1;
+  self.ignoreme = 1;
+  self.baseaccuracy = 0.25;
+  self.combatmode = "no_cover";
+  scripts\engine\sp\utility::set_attackeraccuracy(10);
+  scripts\sp\utility::context_melee_allow(0);
+  self actoraimassistoff();
+  thread terry_damage_monitor();
+
+  if(self.animname == "car2_terry1") {
+    level.aq_soldier_1 = self;
+  }
+
+  if(self.animname == "car2_terry2") {
+    level.aq_soldier_2 = self;
+  }
+
+  thread notify_whizby_from_player();
+  swap_weapon_to("iw8_pi_mike1911");
+
+  if(!scripts\engine\utility::flag("weapons_free")) {
+    scripts\common\utility::demeanor_override("casual");
+  }
+
+  wait 0.1;
+  self.ignoreall = 0;
+  scripts\engine\utility::flag_wait("weapons_free");
+  self actoraimassiston();
+  scripts\common\ai::gun_recall();
+  scripts\common\utility::clear_demeanor_override();
+  self.dontevershoot = 0;
+}
+
+function terry_damage_monitor() {
+  level endon("car2_detonation");
+
+  for(;;) {
+    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7);
+
+    if(isDefined(var1) && var1 == level.player) {
+      if(isDefined(var4) && var4 == "MOD_MELEE") {
+        scripts\sp\player_death::set_custom_death_quote(88);
+        scripts\sp\utility::missionfailedwrapper();
+      }
+    }
+  }
+}
+
+function swap_weapon_to(var0) {
+  self.primaryweapon = isundefinedweapon();
+  self.secondaryweapon = isundefinedweapon();
+  var1 = scripts\sp\utility::make_weapon(var0);
+  scripts\anim\shared::forceuseweapon(var1, "primary");
+}
+
+function notify_whizby_from_player() {
+  level endon("weapons_free");
+
+  for(;;) {
+    self waittill("bulletwhizby", var0);
+
+    if(scripts\engine\utility::is_equal(var0, level.player)) {
+      scripts\engine\utility::flag_set("weapons_free");
+    }
+  }
+}
+
+function postspawn_intro_civ() {
+  self endon("death");
+  self.goalradius = 40;
+  scripts\asm\asm_bb::bb_setcivilianstate("casual");
+  scripts\engine\utility::set_movement_speed(30 + randomint(30));
+
+  if(scripts\engine\utility::is_equal(self.script_noteworthy, "teleport_closer")) {
+    level.background_civs["tele"][level.background_civs["tele"].size] = self;
+  }
+
+  if(scripts\engine\utility::is_equal(self.script_noteworthy, "front")) {
+    scripts\engine\utility::flag_wait("car2_detonation");
+    wait 1;
+    self delete();
+    return;
+  }
+
+  level.background_civs["ai"][level.background_civs["ai"].size] = self;
+}
+
+function start() {
+  scripts\sp\hud_util::fade_out(0);
+}
+
+function main() {
+  var0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  setglobalsoundcontext("dusty", "yes");
+  var1 = getDvar("OMNONNMOTP");
+  setsaveddvar("OMNONNMOTP", "0.1 500 1.5 10000");
+  thread skippable_intro();
+  thread intro_london_bink();
+  thread spawn_animated_intro_civs();
+  thread intro_bus(var0);
+  scripts\engine\utility::delaythread(0.1, &scripts\engine\sp\utility::battlechatter_off);
+  thread sfx_piccadilly_intro_mix();
+  thread vo_intro_walla();
+  scripts\engine\sp\utility::array_spawn_targetname("intro_civs");
+  level.street_friendlies = scripts\engine\sp\utility::array_spawn_targetname("sicario_street_friendly");
+
+  foreach(var3 in level.street_friendlies) {
+    if(scripts\engine\utility::is_equal(var3.script_friendname, "Sgt. Crowley")) {
+      var3 scripts\sp\maps\piccadilly\piccadilly_gap::set_friendname("Cst. Brooks", "Trojan 3-1");
+      continue;
+    }
+
+    if(scripts\engine\utility::is_equal(var3.script_friendname, "Cst. Brooks")) {
+      var3 scripts\sp\maps\piccadilly\piccadilly_gap::set_friendname("Sgt. Crowley", "Sabre 2-4");
+    }
+  }
+
+  level.car1_terries = scripts\engine\sp\utility::array_spawn_targetname("car1_terries", 1);
+  level.car2_terries = scripts\engine\sp\utility::array_spawn_targetname("car2_terry", 1);
+  level.car1_terry = scripts\engine\sp\utility::spawn_targetname("car1_terry", 1);
+  level.skippable_ents[level.skippable_ents.size] = level.car1_terry;
+  level.player lerpfovscalefactor(0, 0);
+  level.player modifybasefov(53, 0.01);
+  intro_street_player_movement();
+  level.scr_model["player_rig"] = "viewhands_fullbody_kyle_sas_urban";
+  level.player_rig = scripts\engine\sp\utility::spawn_anim_model("player_rig", var0.origin, var0.angles);
+  var0 scripts\common\anim::anim_first_frame_solo(level.player_rig, "intro_slamzoom");
+  level.skippable_ents[level.skippable_ents.size] = level.player_rig;
+  level.kyledrone = scripts\engine\sp\utility::spawn_targetname("kyle", 1);
+  kyledrone_extras(level.kyledrone);
+  level.skippable_ents[level.skippable_ents.size] = level.kyledrone;
+  level.truck = setup_scriptable_car("sas_intro_decho");
+  level.truck thread scripts\sp\maps\piccadilly\piccadilly_lighting::setup_truck_lighting();
+  thread scripts\sp\maps\piccadilly\piccadilly_lighting::infil_start();
+  level.cars_bomb["van"] = setup_scriptable_car("car2_bomb");
+  level.cars_bomb["car1"] = setup_scriptable_car("car1_bomb");
+  level.cars_bomb["ralfa"] = setup_scriptable_car("car3_bomb");
+  level.cars_bomb["cab"] = setup_scriptable_car("car4_bomb");
+  setup_temp_car_stuff(level.cars_bomb["van"]);
+  thread intro_background_traffic();
+  thread show_aftermath_geo();
+  scripts\engine\sp\objectives::objective_add("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_INTRO");
+  setmusicstate("mx_piccadilly_truckintro_os");
+  thread attach_player_to_rig(level.player_rig);
+  var5 = scripts\engine\utility::array_combine(level.street_friendlies, level.car1_terries, [level.car1_terry]);
+  scripts\engine\utility::array_thread(var5, &intro_anims_allies, var0);
+  var6 = [level.player_rig, level.kyledrone];
+  scripts\engine\utility::array_thread(var6, &intro_anims_non_ai, var0);
+  var0 notify("start_bus");
+  scripts\engine\utility::array_thread(level.car2_terries, &intro_anims_car2, var0);
+  thread intro_car(var0);
+  scripts\engine\utility::flag_wait("boots_on_the_ground");
+  level notify("vo_standoff_walla");
+  setsaveddvar("OMNONNMOTP", var1);
+  scripts\engine\sp\objectives::objective_update("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_APPROACH_VAN", &"PICCADILLY/CURSOR_TARGET");
+  scripts\engine\sp\objectives::objective_set_on_entity("piccadilly_objective", "Target", level.cars_bomb["van"]);
+  scripts\engine\sp\objectives::objective_set_z_offset("piccadilly_objective", 120);
+  thread scripts\engine\sp\utility::autosave_now();
+  thread player_speed_management_intro("car2_detonation");
+  thread player_is_close_watcher();
+  thread player_roe_check();
+}
+
+function catchup() {
+  scripts\engine\utility::flag_set("boots_on_the_ground");
+  scripts\engine\utility::flag_set("camera_move_done");
+  scripts\engine\utility::flag_set("intro_bink_done");
+  scripts\engine\utility::flag_set("sas2_ready");
+  var0 = getEnt("intro_bus", "targetname");
+  var0 delete();
+}
+
+function skippable_intro() {
+  var0 = ["skippable_intro_ready", "skippable_civs_ready"];
+  level scripts\engine\utility::waittill_all_in_array(var0);
+  var1 = scripts\engine\utility::array_combine(level.intro_civs["injured"], level.intro_civs["dead"], level.intro_civs["noStandoff"], level.intro_civs["oneOff"], level.intro_civs["post"]);
+  var2 = scripts\engine\utility::array_combine(level.street_friendlies, level.skippable_ents, level.car1_terries, level.car2_terries);
+  var3 = scripts\engine\utility::array_combine(level.intro_cars, level.cars_bomb, [level.truck]);
+  var4 = scripts\engine\utility::array_combine(var1, var2, var3);
+  wait 1.5;
+  var5 = scripts\sp\utility::userskip_wait();
+  setmusicstate("");
+
+  if(!var5) {
+    return;
+  }
+
+  scripts\sp\hud_util::fade_out(0);
+  var6 = "intro_slamzoom";
+  var7 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+
+  foreach(var9 in var4) {
+    if(!isDefined(var9)) {
+      continue;
+    }
+
+    if(scripts\engine\utility::array_contains(var3, var9)) {
+      thread skip_ahead_scriptable(var9, var7);
+    } else if(isDefined(level.scr_anim[var9.animname][var6])) {
+      thread skip_ahead(var9, var6);
+    }
+
+    if(isDefined(var9)) {
+      var9 stopsounds();
+    }
+  }
+
+  if(isDefined(level.intro_bus)) {
+    level.intro_bus delete();
+  }
+
+  waitframe();
+  level notify("all_ents_are_ready");
+  level.player stopsounds();
+  level.player_rig stopsounds();
+  getrandomnodedestination(0, 0);
+  level.player clearcinematicmotionoverride();
+  level.player dontinterpolate();
+  level.player setOrigin(level.player_rig.origin);
+  level.player setplayerangles(level.player_rig.origin);
+  level.player playerlinktoabsolute(level.player_rig, "tag_player");
+  level.player lerpfovscalefactor(1, 0);
+  scripts\engine\utility::delaythread(0.25, &scripts\sp\hud_util::fade_in, 0.05);
+  scripts\sp\utility::userskip_stop();
+  scripts\engine\utility::flag_set("intro_skipped");
+  level.player clearclienttriggeraudiozone(2.5);
+  setmusicstate("");
+
+  if(!scripts\engine\utility::flag("intro_bink_done")) {
+    if(iscinematicplaying()) {
+      stopcinematicingame();
+    }
+
+    setomnvar("ui_hide_hud", 0);
+    level.player scripts\sp\utility::allow_cg_drawcrosshair(1);
+    setomnvar("ui_hide_weapon_info", 0);
+  }
+
+  scripts\engine\utility::flag_set("camera_move_done");
+  scripts\engine\utility::flag_set("intro_bink_done");
+  scripts\engine\utility::exploder("rain_amb");
+  visionsetnaked("", 1);
+  level thread scripts\engine\sp\utility::dof_disable_autofocus();
+  thread unlink_player_after_boots();
+}
+
+function skip_ahead(var0, var1) {
+  var2 = getanimlength(scripts\engine\utility::getanim(var0));
+
+  if(var2 <= var1) {
+    self stopsounds();
+    waitframe();
+    self delete();
+    return;
+  }
+
+  level waittill("all_ents_are_ready");
+
+  if(self.animname == "player_rig") {
+    var1 -= 0.5;
+  }
+
+  var3 = (var2 - var1) / var2;
+  var3 = 1 - var3;
+  self setanimtime(scripts\engine\utility::getanim(var0), var3);
+}
+
+function player_speed_management_intro(var0) {
+  scripts\sp\player::player_movement_state("creep");
+  var1 = 40;
+  var2 = 90;
+  var3 = 20;
+  var4 = 140;
+
+  while(!scripts\engine\utility::flag(var0)) {
+    var5 = sortbydistance(level.street_friendlies, level.player.origin)[0];
+    var6 = distance(var5.origin, level.player.origin);
+    var7 = scripts\engine\math::normalize_value(var3, var4, var6);
+    var8 = scripts\engine\math::factor_value(var1, var2, var7);
+    scripts\engine\sp\utility::player_speed_set(var8);
+    waitframe();
+  }
+
+  scripts\sp\player::player_movement_state("cqb");
+}
+
+function kyledrone_extras() {
+  level endon("death");
+  level.kyledrone scripts\engine\sp\utility::enable_dontevershoot();
+  level.kyledrone scripts\engine\sp\utility::set_ignoreall(1);
+  level.kyledrone scripts\engine\sp\utility::set_ignoreme(1);
+  level.kyledrone.script_friendname = "Sgt. Kyle Garrick";
+  level.kyledrone.name = "Sgt. Kyle Garrick";
+  level.kyledrone scripts\engine\sp\utility::name_hide();
+}
+
+function sfx_piccadilly_intro_mix() {
+  wait 0.1;
+  level.player setclienttriggeraudiozonepartial("piccadilly_intro_mix", "mix");
+}
+
+function intro_london_bink() {
+  level endon("intro_skipped");
+  GscBinSkip4(0x35);
+}
+
+function cine_letterboxing() {
+  level.player setcinematicmotionoverride("disabled");
+  hidecinematicletterboxing(0, 0);
+  level waittill("cine_letterboxing");
+  getrandomnodedestination(1.5, 0);
+  level.player clearcinematicmotionoverride();
+}
+
+function setup_scripted_car(var0) {
+  var1 = getEnt(var0, "targetname");
+  var1.animname = var0;
+  var1 scripts\engine\sp\utility::assign_animtree();
+  return var1;
+}
+
+function setup_scriptable_car(var0) {
+  scripts\engine\utility::flag_wait("scriptables_ready");
+  var1 = getscriptablearray(var0, "targetname");
+  var1[0].animname = var0;
+  var1[0] scripts\engine\sp\utility::assign_animtree();
+  thread setup_script_collision();
+  var1[0] setscriptablepartstate("lights_controller", "on_nolight");
+  return var1[0];
+}
+
+function setup_temp_car_stuff() {
+  var0 = getEnt("truck_light", "targetname");
+  var0 linkTo(self, "tag_origin", (-20, -20, 90), (0, 0, 0));
+  self.lightback = var0;
+  var0 = getEnt("truck_light_driver", "targetname");
+  var0 linkTo(self, "tag_origin", (60, -5, 70), (0, 0, 0));
+  self.lightfront = var0;
+  var1 = [(-28, 15, 25), (0, 30, 25), (0, 0, 25)];
+  var2 = getEntArray("truck_bomb", "targetname");
+  self.bombs = [];
+
+  for(var3 = 0; var3 < var2.size; var3++) {
+    var2[var3] linkTo(self, "tag_origin", var1[var3], (0, 0, 0));
+    self.bombs[self.bombs.size] = var2[var3];
+  }
+}
+
+function setup_script_collision() {
+  if(isDefined(self.script_noteworthy)) {
+    switch (self.script_noteworthy) {
+      case "bomb_car_coll":
+      case "intro_slamzoom_car_r3":
+      case "intro_slamzoom_car_r2":
+      case "intro_slamzoom_car_r1":
+        var0 = sortbydistance(level.script_car_collision, self.origin)[0];
+        self.scriptcoll = var0;
+        self.scriptcoll linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+        self.scriptcoll.trigger scripts\engine\utility::trigger_off();
+        thread delete_my_script_collision();
+        break;
+      default:
+        break;
+    }
+
+    return;
+  }
+}
+
+function delete_my_script_collision() {
+  if(self.animname == "intro_car5") {
+    scripts\engine\utility::flag_wait("boots_on_the_ground");
+  } else {
+    scripts\engine\utility::flag_wait("combat_start");
+  }
+
+  self.scriptcoll scripts\sp\maps\piccadilly\piccadilly_ambient::script_collision_delete();
+}
+
+function car_civs() {
+  scripts\engine\utility::flag_wait("scriptables_ready");
+  thread car_civs_intro();
+}
+
+function car_civs_intro() {
+  var0 = getscriptablearray("intro_street_civ_car", "targetname");
+  thread scripts\engine\utility::array_thread_amortized(var0, &scriptable_car_passenger, 0.1);
+}
+
+function scriptable_car_passenger() {
+  self.type = get_car_type();
+  self.passengers = [];
+  var0 = "rf";
+  var1 = ["male", "female"];
+  var2 = randomintrange(0, 2);
+  var3 = scripts\sp\maps\piccadilly\piccadilly_civs::spawn_civ(var1[var2], 1);
+
+  if(isDefined(var3)) {
+    self.passengers[self.passengers.size] = var3;
+    var3.animname = self.type + "_" + var0;
+    var3.seat = var0;
+    thread street_car_passenger(var3);
+    scripts\engine\sp\utility::add_cleanup_ent(var3, "infil_ents");
+    return;
+  }
+}
+
+function get_car_type() {
+  var0 = ["calfa", "ralfa", "skilo", "decho", "victor40"];
+
+  foreach(var2 in var0) {
+    if(issubstr(self.classname, var2)) {
+      return var2;
+    }
+  }
+
+  return undefined;
+}
+
+function street_car_passenger(var0) {
+  self endon("death");
+  self endon("exiting_car");
+  var1 = [];
+  var2 = cos(18);
+  self linkTo(var0);
+  var0 thread scripts\common\anim::anim_loop_solo(self, "car_idle_" + self.seat, "stop_loop_" + self.animname);
+
+  if(self.seat == "rf") {
+    var1 = ["car_right_rf", "car_right_fwd_rf", "car_right_back_rf"];
+  } else {
+    var1 = ["car_right_lf", "car_right_fwd_lf", "car_right_back_lf"];
+  }
+
+  scripts\engine\utility::flag_wait("boots_on_the_ground");
+  var3 = gettime();
+  var4 = randomintrange(6000, 8000);
+
+  for(;;) {
+    if(in_player_fov(var2)) {
+      var0 notify("stop_loop_" + self.animname);
+      var0 scripts\common\anim::anim_single_solo(self, "car_react_" + self.seat);
+      var0 thread scripts\common\anim::anim_loop_solo(self, "car_react_" + self.seat + "_idle", "stop_loop_" + self.animname);
+
+      while(in_player_fov(var2)) {
+        waitframe();
+      }
+
+      var0 notify("stop_loop_" + self.animname);
+      var0 scripts\common\anim::anim_single_solo(self, "car_react_back_" + self.seat);
+      var0 thread scripts\common\anim::anim_loop_solo(self, "car_idle_" + self.seat, "stop_loop_" + self.animname);
+      wait randomfloatrange(1, 2.5);
+      var3 = gettime();
+    } else if(gettime() > var3 + var4) {
+      var5 = randomintrange(0, 3);
+      GscBinSkip4(0x35, var2);
+    }
+
+    wait 0.5;
+  }
+}
+
+function in_player_fov(var0) {
+  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self gettagorigin("j_head"), var0)) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function cut_anim_short(var0) {
+  self endon("player_is_looking_at_me");
+
+  while(!in_player_fov(var0)) {
+    waitframe();
+  }
+
+  scripts\engine\sp\utility::anim_stopanimScripted();
+}
+
+function intro_street_player_movement() {
+  if(!scripts\engine\sp\utility::is_default_start()) {
+    level.player modifybasefov(65, 0.05);
+    return;
+  }
+}
+
+function setup_vo_civs() {
+  level.civ_type["male"][level.civ_type["male"].size] = 8;
+  level.civ_type["female"][level.civ_type["female"].size] = 14;
+  level.civ_type["male"][level.civ_type["male"].size] = 2;
+  level.intro_vo_civs = [];
+  level.intro_vo_civs[8] = "uk_civilian_male_1";
+  level.intro_vo_civs[14] = "uk_civilian_female_1";
+  level.intro_vo_civs[2] = "uk_civilian_male_2";
+}
+
+function spawn_animated_intro_civs() {
+  setup_vo_civs();
+
+  for(var0 = 1; var0 < 36; var0++) {
+    if(var0 != 30) {
+      thread intro_civ_setup(var0);
+    }
+  }
+
+  thread intro_civ_anims(level.intro_civs["injured"], 1);
+  thread intro_civ_anims(level.intro_civs["dead"], 0);
+  thread intro_civ_anims(level.intro_civs["noStandoff"], 0);
+  thread car_civs();
+  thread intro_civ_background();
+  scripts\engine\utility::flag_set("intro_civs_ready");
+  scripts\engine\utility::delaythread(0.5, &scripts\sp\hud_util::fade_in, 0.05);
+  thread intro_civ_oneoff();
+
+  for(var0 = 36; var0 < 54; var0++) {
+    thread intro_civ_post_setup(var0);
+  }
+
+  thread intro_civ_post_anims();
+  wait 0.4;
+  level notify("skippable_civs_ready");
+}
+
+function intro_civ_background() {
+  var0 = scripts\engine\utility::getStructArray("background_civs_idle", "targetname");
+  scripts\engine\utility::array_thread(var0, &intro_civ_background_idle);
+  scripts\engine\utility::flag_wait("car2_detonation");
+  wait 1;
+  var0 = scripts\engine\utility::getStructArray("post_explosion_run_to", "script_noteworthy");
+  level.background_civs["fake"] = scripts\engine\utility::array_removedead(level.background_civs["fake"]);
+  level.background_civs["fake"] = scripts\engine\utility::array_removeundefined(level.background_civs["fake"]);
+  scripts\engine\utility::array_thread(level.background_civs["fake"], &background_scatter_fake, var0);
+  var1 = 0;
+
+  foreach(var3 in level.background_civs["ai"]) {
+    if(isDefined(var3)) {
+      var3 forceteleport(var3.origin, (0, 0, 0));
+      var3 setgoalpos(var3.origin);
+
+      if(var1 >= var0.size) {
+        var1 = 0;
+      }
+
+      GscBinSkip4(0x6e, var3, var0[var1]);
+    }
+  }
+
+  var5 = scripts\engine\utility::getStructArray("teleport_closer", "script_noteworthy");
+
+  foreach(var3 in level.background_civs["tele"]) {
+    if(isDefined(var3)) {
+      var7 = var5[0];
+      var5 = scripts\engine\utility::array_remove(var5, var5[0]);
+      var3 forceteleport(var7.origin, (0, 0, 0));
+      var3 setgoalpos(var7.origin);
+
+      if(var1 >= var0.size) {
+        var1 = 0;
+      }
+
+      GscBinSkip4(0x6e, var3, var0[var1]);
+    }
+  }
+
+  var7 = undefined;
+}
+
+function intro_civ_background_idle() {
+  var0 = randomintrange(1, 5);
+  var1 = get_random_spawner(var0);
+  var2 = scripts\engine\sp\utility::fakeactorspawn(var1);
+  var2.animname = "generic";
+  var2.animnode = self;
+  var2.current_state = "idle";
+  var3 = randomfloatrange(0, 1.5);
+  var2 scripts\engine\utility::delaythread(var3, &civ_loop, self);
+  level.background_civs["fake"][level.background_civs["fake"].size] = var2;
+  scripts\engine\sp\utility::add_cleanup_ent(var2, "infil_ents");
+}
+
+function civ_loop(var0) {
+  self endon("civ_stop_background_loop");
+  self endon("death");
+
+  for(;;) {
+    var1 = randomintrange(1, 5);
+    var0 scripts\common\anim::anim_single_solo(self, "background_idle" + var1);
+  }
+}
+
+function background_scatter_fake(var0) {
+  self endon("death");
+  wait 3;
+  self notify("civ_stop_background_loop");
+  scripts\engine\sp\utility::anim_stopanimScripted();
+  self.animnode.node_claimed = [];
+  self.current_node = self.animnode;
+  var1 = scripts\engine\utility::getStruct(self.animnode.target, "targetname");
+  var2 = scripts\sp\fakeactor_node::fakeactor_node_get_path(var1, self.origin, scripts\sp\fakeactor::is_frantic(), 1);
+  self.forced_node_path = var2;
+}
+
+function background_scatter_runto(var0) {
+  self endon("death");
+  self notify("stop_going_to_node");
+  scripts\engine\utility::set_movement_speed(scripts\sp\maps\piccadilly\piccadilly_util::get_random_civilian_speed());
+  wait randomfloatrange(2.5, 4.5);
+  self setgoalpos(var0.origin);
+  wait 0.5;
+  scripts\engine\utility::waittill_any("goal", "goal_reached");
+  self delete();
+}
+
+function attach_and_detach_phone() {
+  self attach("offhand_wm_smartphone", "tag_accessory_right");
+  level waittill("delete_phones");
+  self detach("offhand_wm_smartphone", "tag_accessory_right");
+}
+
+function setup_civ_types() {
+  level.civ_type["girl"] = [51];
+  level.civ_type["boy"] = [29, 31];
+  level.civ_type["male"] = [1, 2, 5, 6, 7, 10, 13, 15, 17, 19, 24, 28, 32, 34, 35, 36, 37, 38, 39, 46, 47];
+  level.civ_type["female"] = [3, 4, 8, 9, 11, 12, 14, 16, 18, 20, 21, 22, 23, 25, 26, 27, 26, 33, 40, 41, 42, 43, 44, 45, 48, 49, 50, 52, 53];
+}
+
+function intro_civ_setup(var0) {
+  var1 = get_random_spawner(var0);
+  var2 = bodyonly_guy_setup(var1, var0);
+  thread bodyonly_guy_damage_monitor();
+  var2 thread scripts\sp\maps\piccadilly\piccadilly_util::acievement_monitor();
+  scripts\engine\sp\utility::add_cleanup_ent(var2, "infil_ents");
+
+  if(var0 == 22 || var0 == 31) {
+    level.intro_civs["oneOff"][level.intro_civs["oneOff"].size] = var2;
+  } else if(!isDefined(level.scr_anim["civ" + var0]["intro_standoff"])) {
+    level.intro_civs["noStandoff"][level.intro_civs["noStandoff"].size] = var2;
+  } else if(isDefined(level.scr_anim["civ" + var0]["intro_idle"])) {
+    level.intro_civs["injured"][level.intro_civs["injured"].size] = var2;
+  } else {
+    level.intro_civs["dead"][level.intro_civs["dead"].size] = var2;
+  }
+
+  intro_civ_alterations(var2, var0);
+
+  if(isDefined(level.intro_vo_civs[var0])) {
+    var3 = level.intro_vo_civs[var0];
+    level.intro_vo_civs[var3] = var2;
+    level.intro_vo_civs[var0] = undefined;
+    return;
+  }
+}
+
+function intro_civ_alterations(var0) {
+  switch (var0) {
+    case 34:
+    case 19:
+      thread attach_and_detach_phone();
+      break;
+    case 8:
+      civ_different_everything("body_civ_london_male_1_1", "head_sc_m_antoniazzi_civ");
+      break;
+    case 5:
+      civ_different_everything("body_civ_london_male_10_1", "head_sc_m_androsov_civ_tint");
+      break;
+    case 1:
+      civ_different_everything("body_civ_london_male_7_2", "head_sc_m_tang_civ");
+      break;
+    case 4:
+      civ_different_everything("body_civ_london_female_8_1", "head_sc_f_rezaee");
+      break;
+    case 20:
+      civ_different_everything("body_civ_london_female_4_1", "head_sc_f_eghbali_hair");
+      break;
+    case 14:
+      civ_different_everything("body_civ_london_female_9_2", "head_sc_f_toyouri");
+      break;
+    case 16:
+      civ_different_everything("body_civ_london_female_10_2", "head_sc_f_hoggard_civ");
+      break;
+    case 33:
+      civ_different_everything("body_civ_london_female_6_1", "head_sc_f_cromwell");
+      break;
+    case 31:
+      civ_different_everything("body_civ_western_boy_2_1", "head_sc_m_vozhyuk_child");
+      break;
+    case 29:
+    case 26:
+    case 6:
+    case 2:
+      thread hide_during_intro();
+      break;
+  }
+}
+
+function civ_different_everything(var0, var1) {
+  self setModel(var0);
+  self detach(self.headmodel);
+  self.headmodel = var1;
+  self attach(self.headmodel);
+}
+
+function hide_during_intro() {
+  if(scripts\sp\starts::is_after_start("infil")) {
+    return;
+  }
+
+  self hide();
+  level scripts\engine\utility::waittill_any_timeout(20, "all_ents_are_ready", "intro_skipped");
+  self show();
+}
+
+function intro_civ_anims(var0, var1) {
+  var2 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  var3 = "intro";
+  var4 = self;
+
+  if(level.start_point == "infil") {
+    foreach(var6 in self) {
+      var2 scripts\common\anim::anim_first_frame_solo(var6, var3 + "_slamzoom");
+    }
+
+    scripts\engine\utility::flag_wait("intro_civs_ready");
+    var2 notify("stop_first_frame");
+
+    foreach(var6 in self) {
+      thread anim_single_then_loop_ent(var6, var2, var3 + "_slamzoom", var3);
+    }
+  } else if(level.start_point == "infil_car1") {
+    foreach(var6 in self) {
+      var2 thread scripts\common\anim::anim_loop_solo(var6, var3, "stop_loop_intro");
+    }
+  }
+
+  if(level.start_point == "infil_car1" || level.start_point == "infil") {
+    if(var1) {
+      var12 = [];
+      scripts\engine\utility::flag_wait("standoff_ready");
+
+      foreach(var6 in self) {
+        if(!var6.play_out_intro) {
+          var6 notify("anim_finished");
+        }
+      }
+
+      foreach(var6 in self) {
+        if(isDefined(var6)) {
+          if(var6.play_out_intro) {
+            if(var6.animname == "civ20") {
+              thread anim_wait_for_ent_flag(var6, var2);
+              var4 = scripts\engine\utility::array_remove(var4, var6);
+            } else {
+              thread anim_wait_for_ent_flag(var6, var2);
+            }
+
+            continue;
+          }
+
+          var12 = var6;
+          var6 scripts\engine\sp\utility::anim_stopanimScripted();
+        }
+      }
+
+      var2 notify("stop_loop_intro");
+      var2 scripts\common\anim::anim_single(var12, var3 + "_standoff");
+    } else {
+      scripts\engine\utility::flag_wait("force_bomb_start");
+      level notify("intro_anim_finished");
+      var2 notify("stop_loop_intro");
+    }
+  }
+
+  level scripts\engine\sp\utility::notify_delay("delete_phones", 0.1);
+  var2 scripts\common\anim::anim_single(var4, var3 + "_run");
+  jumpiffalse(var0) LOC_0000026b;
+  var2 notify("stop_loop_intro");
+
+  foreach(var6 in self) {
+    if(isDefined(var6) || isalive(var6)) {
+      var2 thread scripts\common\anim::anim_loop_solo(var6, var3 + "_idle");
+    }
+  }
+
+  return;
+}
+
+function anim_wait_for_ent_flag(var0, var1) {
+  level endon("force_bomb_start");
+  scripts\engine\utility::ent_flag_wait("this_anim_finished");
+  self notify("anim_finished");
+  var0 scripts\common\anim::anim_single_solo(self, var1 + "_standoff");
+}
+
+#using_animtree("generic_human");
+
+function post_bomb_civ_death(var0) {
+  if(!isDefined(self) || !isalive(self)) {
+    return;
+  }
+
+  self endon("death");
+
+  if(isDefined(level.scr_anim[self.animname]["intro_last_frame"])) {
+    var0 scripts\common\anim::anim_first_frame_solo(self, "intro_last_frame");
+    self notsolid();
+    self clearanim(%head, 0.1);
+    scripts\asm\shared\utility::setfacialindexfornonai("death");
+    return;
+  }
+
+  self delete();
+}
+
+function intro_civ_oneoff() {
+  if(level.start_point != "infil") {
+    scripts\engine\utility::array_call(self, &delete);
+    return;
+  }
+
+  var0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  var0 scripts\common\anim::anim_single(self, "intro_slamzoom");
+  scripts\engine\utility::array_call(self, &delete);
+}
+
+function get_random_spawner(var0) {
+  var1 = undefined;
+
+  if(scripts\engine\utility::array_contains(level.civ_type["girl"], var0)) {
+    var1 = level.intro_civs["girl"];
+  } else if(scripts\engine\utility::array_contains(level.civ_type["boy"], var0)) {
+    var1 = level.intro_civs["boy"];
+  } else if(scripts\engine\utility::array_contains(level.civ_type["male"], var0)) {
+    var1 = get_random_spawner_type("male");
+  } else if(scripts\engine\utility::array_contains(level.civ_type["female"], var0)) {
+    var1 = get_random_spawner_type("female");
+  } else {
+    var1 = get_random_spawner_type("adult");
+  }
+
+  if(var0 == 3 || var0 == 23 || var0 == 44 || var0 == 50) {
+    var1.script_char_index = 5;
+  } else if(var0 == 9 || var0 == 49 || var0 == 52) {
+    var1.script_char_index = 6;
+  } else {
+    var1.script_char_index = undefined;
+  }
+
+  return var1;
+}
+
+function get_random_spawner_type(var0) {
+  var1 = level.intro_civs[var0][randomint(level.intro_civs[var0].size)];
+  return var1;
+}
+
+function bodyonly_guy_setup(var0) {
+  var1 = scripts\engine\sp\utility::bodyonlyspawn(self);
+  var1.animname = "civ" + var0;
+  var1.spawner = self;
+  var1.animationarchetype = "civilian";
+  var1.fakeactor_face_anim = 1;
+  var1 scripts\engine\utility::ent_flag_init("this_anim_finished");
+
+  if(var0 == 3 || var0 == 6 || var0 == 9 || var0 == 10 || var0 == 17 || var0 == 20 || var0 == 23 || var0 == 24 || var0 == 27 || var0 == 28) {
+    var1.play_out_intro = 1;
+  } else {
+    var1.play_out_intro = 0;
+  }
+
+  var1 scripts\common\ai::magic_bullet_shield(1);
+  var1.team = "allies";
+  level thread scripts\sp\friendlyfire::friendly_fire_think(var1);
+
+  if(!isai(var1) && !istrue(var1.script_fakeactor) && !isDefined(var1.anim_getrootfunc)) {
+    var1.anim_getrootfunc = &scripts\sp\maps\piccadilly\piccadilly::get_anim_model_root;
+  }
+
+  return var1;
+}
+
+function bodyonly_guy_damage_monitor() {
+  self endon("death");
+  self setCanDamage(1);
+
+  for(;;) {
+    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7);
+
+    if(isDefined(var1)) {
+      self.lastattacker = var1;
+
+      if(isPlayer(var1)) {
+        if(scripts\engine\utility::flag("car2_guys_dead") && isPlayer(var1)) {
+          scripts\sp\friendlyfire::missionfail(1);
+        } else if(!scripts\engine\utility::flag("gun_raised") && !scripts\engine\utility::flag("player_is_up") && isPlayer(var1)) {
+          scripts\sp\player_death::set_custom_death_quote(9);
+          thread scripts\sp\utility::missionfailedwrapper();
+        }
+
+        break;
+      }
+    }
+  }
+
+  if(isDefined(self.magic_bullet_shield)) {
+    scripts\common\ai::stop_magic_bullet_shield();
+  }
+
+  self startragdoll();
+  self notsolid();
+}
+
+function intro_civ_post_setup(var0) {
+  var1 = get_random_spawner(var0);
+  var2 = bodyonly_guy_setup(var1, var0);
+  thread bodyonly_guy_damage_monitor();
+
+  if(var0 == 41) {
+    thread attach_and_detach_phone();
+  } else if(var0 == 48) {
+    var2 setModel("civ_london_female_3_2");
+  } else if(var0 == 51) {
+    var2 setModel("body_civ_western_girl_5_1");
+  } else if(var0 == 52) {
+    var2 setModel("body_civ_london_female_4_1");
+  }
+
+  scripts\engine\sp\utility::add_cleanup_ent(var2, "post_bomb_ents");
+  level.intro_civs["post"][level.intro_civs["post"].size] = var2;
+}
+
+function intro_civ_post_anims() {
+  var0 = scripts\engine\utility::getStruct("intro_civ_animnode", "targetname");
+  var1 = "intro";
+
+  if(level.start_point == "infil" || level.start_point == "infil_car1") {
+    foreach(var3 in self) {
+      var0 thread scripts\common\anim::anim_loop_solo(var3, var1, "stop_loop_post_intro");
+    }
+
+    scripts\engine\utility::flag_wait_all("player_at_standoff", "intro_sas_ready");
+    var0 notify("stop_loop_post_intro");
+
+    foreach(var3 in self) {
+      thread anim_single_then_loop(var3, var0, var1 + "_standoff", var1 + "_standoff_idle");
+    }
+
+    scripts\engine\utility::flag_wait("start_car2");
+
+    foreach(var3 in self) {
+      var3 notify("anim_finished");
+      var3 scripts\engine\sp\utility::anim_stopanimScripted();
+      var0 notify("stop_loop_post_intro_" + var3.animname);
+      thread anim_single_then_last(var3, var0);
+    }
+
+    return;
+  }
+}
+
+function anim_single_then_loop(var0, var1, var2, var3) {
+  self endon("anim_finished");
+  var0 scripts\common\anim::anim_single_solo(self, var1);
+  var0 thread scripts\common\anim::anim_loop_solo(self, var2, var3);
+}
+
+function anim_single_then_loop_ent(var0, var1, var2, var3) {
+  self endon("anim_finished");
+  scripts\engine\utility::ent_flag_clear("this_anim_finished");
+  var0 scripts\common\anim::anim_single_solo(self, var1);
+  scripts\engine\utility::ent_flag_set("this_anim_finished");
+  var0 thread scripts\common\anim::anim_loop_solo(self, var2, var3);
+}
+
+function anim_single_then_last(var0, var1) {
+  var0 scripts\common\anim::anim_single_solo(self, var1 + "_car");
+  var0 scripts\common\anim::anim_last_frame_solo(self, var1 + "_car");
+  scripts\engine\utility::flag_wait("car2_detonation");
+  var0 scripts\common\anim::anim_single_solo(self, var1 + "_run");
+
+  if(isDefined(level.scr_anim[self.animname][var1 + "_run_idle"])) {
+    var0 thread scripts\common\anim::anim_loop_solo(self, var1 + "_run_idle");
+    return;
+  }
+
+  thread post_bomb_civ_death(var0);
+}
+
+function intro_background_traffic() {
+  thread spawn_cross_street_traffic();
+  thread spawn_back_street_traffic();
+  thread spawn_back_street_loop();
+  thread setup_post_bomb_crash();
+}
+
+function spawn_cross_street_traffic() {
+  scripts\engine\utility::flag_wait_any("boots_on_the_ground", "intro_skipped");
+  var0 = scripts\common\vehicle::spawn_vehicles_from_targetname("moving_car");
+
+  foreach(var2 in var0) {
+    var2 scripts\common\vehicle::vehicle_lights_on("headlights");
+    var2 scripts\common\vehicle::vehicle_lights_on("brakelights");
+    scripts\engine\sp\utility::add_cleanup_ent(var2, "cross_traffic");
+  }
+
+  var4 = 0;
+  var5 = 1;
+
+  while(var5 < 4) {
+    var6 = getvehiclenode("moving_car_lane" + var5, "targetname");
+    thread cross_street_drive(var0, var6);
+    var5++;
+    var4 += 2;
+    wait 1;
+  }
+}
+
+function cross_street_drive(var0, var1) {
+  level endon("car2_detonation");
+
+  for(;;) {
+    var2 = randomfloatrange(0.5, 2.5);
+    wait var2;
+    self[var1] scripts\common\vehicle::attach_vehicle_and_gopath(var0);
+    var2 = randomfloatrange(4, 5.5);
+    wait var2;
+    self[var1 + 1] scripts\common\vehicle::attach_vehicle_and_gopath(var0);
+    wait var2;
+  }
+}
+
+function spawn_back_street_traffic() {
+  scripts\engine\utility::flag_wait("boots_on_the_ground");
+
+  for(var0 = 1; var0 < 12; var0++) {
+    var1 = scripts\common\vehicle::spawn_vehicle_from_targetname("car_leaving" + var0);
+    var1 notsolid();
+    thread back_street_traffic_drive(var1);
+  }
+}
+
+function back_street_traffic_drive(var0) {
+  if(var0 == 10) {
+    wait 1.8;
+  } else if(var0 == 11) {
+    wait 2.2;
+  }
+
+  scripts\common\vehicle_paths::gopath(self);
+  self.script_vehicle_selfremove = 1;
+}
+
+function spawn_back_street_loop() {
+  var0 = scripts\common\vehicle::spawn_vehicles_from_targetname("car_leaving_side");
+
+  foreach(var2 in var0) {
+    if(var2.script_noteworthy == "1") {
+      var0 = sortbydistance(var0, var2.origin);
+    }
+  }
+
+  var4 = scripts\common\vehicle::spawn_vehicles_from_targetname("car_leaving_main");
+
+  foreach(var2 in var4) {
+    if(var2.script_noteworthy == "1") {
+      var4 = sortbydistance(var4, var2.origin);
+    }
+  }
+
+  var7 = scripts\engine\utility::array_combine(var0, var4);
+
+  foreach(var2 in var7) {
+    scripts\engine\sp\utility::add_cleanup_ent(var2, "background_cars");
+    var2 scripts\common\vehicle::vehicle_lights_on("headlights");
+    var2 scripts\common\vehicle::vehicle_lights_on("brakelights");
+  }
+
+  scripts\engine\utility::flag_wait("boots_on_the_ground");
+  wait 6.7;
+  var10 = getvehiclenode("backstreet_endnode", "targetname");
+
+  foreach(var2 in var4) {
+    thread back_street_drive(var2);
+  }
+}
+
+function back_street_drive(var0) {
+  level endon("car2_detonation");
+
+  if(!isDefined(self.target)) {
+    return;
+  }
+
+  thread delete_on_flag("car2_detonation");
+  var1 = getvehiclenode(self.target, "targetname");
+  thread scripts\common\vehicle::attach_vehicle_and_gopath(var1);
+  wait 2;
+  var2 = squared(70);
+
+  for(;;) {
+    var3 = distance2dsquared(self.origin, var0.origin);
+
+    if(var3 <= var2) {
+      break;
+    }
+
+    wait 0.1;
+  }
+
+  while(!scripts\engine\utility::flag("car2_detonation")) {
+    var1 = getvehiclenode("m6", "targetname");
+    thread scripts\common\vehicle::attach_vehicle_and_gopath(var1);
+    wait 2;
+
+    for(;;) {
+      var3 = distance2dsquared(self.origin, var0.origin);
+
+      if(var3 <= var2) {
+        break;
+      }
+
+      wait 0.1;
+    }
+  }
+}
+
+function delete_on_flag(var0) {
+  self endon("death");
+  self endon("entitydeleted");
+  scripts\engine\utility::flag_wait("car2_detonation");
+  self delete();
+}
+
+function setup_post_bomb_crash() {
+  var0 = getscriptablearray("backend_car_crash", "targetname");
+  level.scriptable_cleanup = scripts\engine\utility::array_combine(level.scriptable_cleanup, var0);
+  scripts\engine\utility::flag_wait("car2_detonation");
+  wait 1;
+
+  foreach(var2 in var0) {
+    var2.origin += (0, 0, 96);
+  }
+
+  var0[0] setscriptablepartstate("body", "light_smoke");
+  var0[1] setscriptablepartstate("body", "light_smoke");
+  scripts\engine\utility::array_call(var0, &setscriptablepartstate, "lights_controller", "on_nolight");
+}
+
+function show_aftermath_geo() {
+  thread show_aftermath_cars();
+  thread show_aftermath_windows();
+  thread show_aftermath_debris();
+  thread intro_lights_setup_omni();
+  scripts\engine\utility::flag_wait("car2_detonation");
+  thread carbomb_shop_windows();
+  thread move_hole_clip();
+  scripts\engine\utility::delaythread(0.5, &dead_charred_bodies);
+  scripts\engine\utility::delaythread(0.4, &delete_storefront_signs);
+  scripts\engine\utility::delaythread(0.5, &intro_lights);
+  scripts\engine\utility::delaythread(0.8, &intro_street_lamps);
+}
+
+function show_aftermath_cars() {
+  var0 = getEntArray("post_carbomb", "targetname");
+  var1 = getEnt("post_carbomb_clip", "targetname");
+  scripts\engine\utility::array_call(var0, &hide);
+  var1 notsolid();
+  scripts\engine\utility::flag_wait("car2_detonation");
+  wait 0.1;
+  scripts\engine\utility::array_call(var0, &show);
+  var1 solid();
+}
+
+function show_aftermath_windows() {
+  var0 = getEnt("store_glass_break", "targetname");
+  var0 moveTo(var0.origin + (0, 0, -250), 0.01);
+  scripts\engine\utility::flag_wait("car2_detonation");
+  wait 0.8;
+  var0 moveTo(var0.origin + (0, 0, 250), 0.01);
+}
+
+function show_aftermath_debris() {
+  var0 = getEnt("crater_debris", "targetname");
+  var1 = getEntArray("deadbody_crater", "targetname");
+  var0 moveTo(var0.origin + (0, 0, -100), 0.01);
+
+  foreach(var3 in var1) {
+    var3 moveTo(var3.origin + (0, 0, -100), 0.01);
+  }
+
+  scripts\engine\utility::flag_wait("car2_detonation");
+  wait 1;
+  var0 moveTo(var0.origin + (0, 0, 100), 0.01);
+
+  foreach(var3 in var1) {
+    var3 moveTo(var3.origin + (0, 0, 100), 0.01);
+  }
+
+  var7 = getscriptablearray("flag_destroyed", "script_noteworthy");
+  var7[0] setscriptablepartstate("base", "dead");
+}
+
+function move_hole_clip() {
+  var0 = getEnt("intro_street_hole_clip", "targetname");
+  var0 delete();
+}
+
+function dead_charred_bodies() {
+  var0 = scripts\engine\utility::getStructArray("intro_civ_dead_struct", "targetname");
+
+  foreach(var2 in var0) {
+    var3 = level.intro_civs["adult"][0];
+    var4 = scripts\engine\sp\utility::bodyonlyspawn(var3);
+    var4.animname = "male_rf";
+    var4.spawner = self;
+    thread start_anim_death(var4);
+  }
+}
+
+function start_anim_death(var0) {
+  var0 scripts\common\anim::anim_single_solo(self, "skilo_death");
+  self setModel("burntbody_male");
+  var0 scripts\common\anim::anim_last_frame_solo(self, "skilo_death");
+  self notsolid();
+}
+
+function delete_storefront_signs() {
+  var0 = getEnt("post_explosion_sign", "targetname");
+  var0 delete();
+}
+
+function intro_lights_setup_omni() {
+  var0 = getEntArray("post_explosion", "targetname");
+
+  foreach(var2 in var0) {
+    if(var2.classname == "light_omni" || !isDefined(var2.script_type)) {
+      var2.og_intensity = var2 getlightintensity();
+      var2 setlightintensity(0);
+    }
+  }
+}
+
+function intro_lights() {
+  scripts\engine\utility::flag_set("post_explosion");
+  var0 = getEntArray("post_explosion", "targetname");
+
+  foreach(var2 in var0) {
+    if(isDefined(var2.og_intensity)) {
+      var2 setlightintensity(var2.og_intensity);
+    }
+  }
+
+  var4 = getEntArray("pre_explosion", "targetname");
+  scripts\engine\utility::array_thread(var4, &intro_lights_cleanup);
+}
+
+function intro_lights_cleanup() {
+  self setlightintensity(0);
+}
+
+function intro_street_lamps() {
+  var0 = undefined;
+  var1 = scripts\engine\utility::getStructArray("post_explosion_radius_dmg", "targetname");
+
+  foreach(var3 in var1) {
+    if(scripts\engine\utility::is_equal(var3.script_noteworthy, "300")) {
+      var4 = randomfloatrange(0.9, 1.4);
+      thread radius_damage(var3);
+      continue;
+    }
+
+    thread radius_damage();
+  }
+}
+
+function radius_damage(var0) {
+  if(isDefined(var0)) {
+    wait var0;
+  }
+
+  var1 = int(self.script_noteworthy);
+  radiusdamage(self.origin, self.radius, var1, var1, undefined, "MOD_EXPLOSIVE", undefined, 1, 0);
+}
+
+function attach_player_to_rig(var0) {
+  level endon("intro_skipped");
+  level.player enableinvulnerability();
+  level.player freezecontrols(1);
+  level.player takeallweapons();
+  level.player playerlinktoabsolute(var0, "tag_player");
+  level.player disableoffhandweapons();
+  level.player allowsprint(0);
+  level.player allowcrouch(0);
+  level.player allowprone(0);
+  level waittill("fp_transition");
+  var1 = scripts\engine\utility::spawn_tag_origin(var0 gettagorigin("tag_player"), var0 gettagangles("tag_player"));
+  level.player unlink();
+  level.player playerlinktodelta(var1, "tag_origin", 1, 24, 58, 20, 30);
+  GscBinSkip4(0x35);
+}
+
+function unlink_player_after_boots(var0) {
+  scripts\engine\utility::flag_wait("boots_on_the_ground");
+  level.player unlink();
+  level.player disableinvulnerability();
+  level.player enableoffhandweapons();
+  level.player allowsprint(1);
+  level.player allowcrouch(1);
+  level.player allowprone(1);
+  self delete();
+
+  if(isDefined(var0)) {
+    var0 delete();
+  }
+
+  level.scr_model["player_rig"] = "viewhands_kyle_sas_urban";
+  level thread scripts\sp\maps\piccadilly\piccadilly_util::piccadilly_weapons();
+}
+
+function stop_user_skip() {
+  wait 13;
+  scripts\sp\utility::userskip_stop();
+}
+
+function player_is_close_watcher() {
+  level endon("sas2_ready");
+  var0 = getEnt("player_is_close", "targetname");
+
+  while(!level.player istouching(var0)) {
+    waitframe();
+  }
+
+  scripts\engine\utility::flag_set("player_is_behind_ally");
+}
+
+function intro_anims_car2(var0, var1) {
+  self endon("death");
+  var2 = "intro_slamzoom";
+
+  if(self.animname == "car2_terry_driver") {
+    level.truck_driver = self;
+    scripts\common\ai::gun_remove();
+    var0 scripts\common\anim::anim_single_solo(self, var2);
+    level.car2_terries = scripts\engine\utility::array_remove(level.car2_terries, self);
+    self delete();
+    return;
+  }
+
+  thread intro_anim_force_stop();
+  var0 scripts\common\anim::anim_single_solo(self, "intro_slamzoom");
+  scripts\common\ai::gun_remove();
+  var0 thread scripts\common\anim::anim_loop_solo(self, var2 + "_v1_idle", "stop_terry_intro_idle");
+  self notify("intro_anim_done");
+  scripts\engine\utility::flag_wait("intro_sas_ready");
+  thread intro_anims_standoff(var0);
+}
+
+function intro_anims_allies(var0) {
+  self endon("death");
+  var1 = "intro_slamzoom";
+  var2 = undefined;
+
+  if(self.animname == "sas2") {
+    var3 = ["dx_vom_mick_infil_car1_street_70", "dx_vom_mick_infil_car1_street_80", "dx_vom_mick_infil_car1_street_90"];
+    thread scripts\sp\maps\piccadilly\piccadilly_util::notetrack_nag(var3, "player_at_standoff");
+  }
+
+  var0 scripts\common\anim::anim_single_solo(self, var1);
+  level notify(self.animname + "_in_position");
+
+  if(self.animname == "car1_terry1" || self.animname == "car1_terry2" || self.animname == "car1_terry3") {
+    var0 scripts\common\anim::anim_last_frame_solo(self, var1);
+    scripts\engine\utility::flag_wait("sas2_ready");
+  }
+
+  if(scripts\engine\utility::flag("player_is_behind_ally")) {
+    if(self.animname == "sas2") {
+      scripts\engine\utility::flag_set("sas2_ready");
+      scripts\engine\utility::flag_set("standoff_ready");
+      level.cars_bomb["car1"] notify("start_car1_standoff_v2");
+      level notify("start_intro_vo");
+    }
+
+    var0 scripts\common\anim::anim_single_solo(self, var1 + "_v2");
+    self notify("intro_anim_done");
+
+    if(self.animname == "sas1") {
+      scripts\engine\utility::flag_set("player_at_standoff");
+      scripts\engine\utility::flag_set("intro_sas_ready");
+    }
+  } else {
+    if(self.animname == "sas2") {
+      scripts\engine\utility::flag_set("sas2_ready");
+    }
+
+    if(self.animname == "car1_terry2" || self.animname == "car1_terry3") {
+      var0 thread scripts\common\anim::anim_loop_solo(self, var1 + "_v1_idle", "stop_terry_intro_idle");
+      scripts\engine\utility::flag_wait("standoff_ready");
+    } else if(self.animname == "sas2") {
+      var2 = spawnStruct();
+      var2.origin = var0.origin;
+      var0 scripts\common\anim::anim_single_solo(self, var1 + "_v1_arrival");
+      var2 thread scripts\common\anim::anim_loop_solo_with_nags(self, var1 + "_v1_sas2_idle", self.animname + "_intro_idle");
+      level notify("v1_arrival_finished");
+    } else {
+      var0 scripts\common\anim::anim_single_solo(self, var1 + "_v1_arrival");
+      var0 thread scripts\common\anim::anim_loop_solo(self, var1 + "_v1_idle", self.animname + "_intro_idle");
+      level notify("v1_arrival_finished");
+    }
+
+    scripts\engine\utility::flag_wait("player_at_standoff");
+    var0 notify(self.animname + "_intro_idle");
+
+    if(self.animname == "sas2") {
+      var2 notify(self.animname + "_intro_idle");
+      level.cars_bomb["car1"] notify("start_car1_standoff_v1");
+      scripts\engine\utility::flag_set("standoff_ready");
+    }
+
+    var0 scripts\common\anim::anim_single_solo(self, var1 + "_v1_exit");
+    self notify("intro_anim_done");
+
+    if(self.animname == "sas1") {
+      scripts\engine\utility::flag_set("intro_sas_ready");
+    }
+  }
+
+  thread intro_anims_standoff(var0);
+}
+
+function intro_standoff_nag() {
+  level endon("player_at_standoff");
+}
+
+function intro_anim_force_stop() {
+  self endon("intro_anim_done");
+  scripts\engine\utility::flag_wait("start_car2");
+  scripts\engine\sp\utility::anim_stopanimScripted();
+}
+
+function intro_anims_standoff(var0) {
+  scripts\engine\utility::flag_wait("player_at_standoff");
+  var0 notify("stop_terry_intro_idle");
+  level notify("start_standoff_scene");
+  self endon("start_car2_scene");
+  thread intro_anims_car2_scene(var0);
+  var0 scripts\common\anim::anim_single_solo(self, "standoff");
+
+  if(!scripts\engine\utility::flag("start_car2")) {
+    scripts\engine\utility::flag_set("start_car2");
+    return;
+  }
+}
+
+function intro_anims_car2_scene(var0) {
+  scripts\engine\utility::flag_wait("start_car2");
+  self notify("start_car2_scene");
+  var0 notify("stop_sas2_standoff_idle");
+  var1 = undefined;
+  scripts\engine\sp\utility::anim_stopanimScripted();
+  var0 scripts\common\anim::anim_single_solo(self, "car2_drives_off");
+
+  if(self.animname == "sas2" || self.animname == "car1_terry1") {
+    if(self.animname == "sas2") {
+      scripts\engine\utility::delaythread(3, &scripts\sp\maps\piccadilly\piccadilly_anim::drop_weapon_now, self);
+    }
+
+    var2 = scripts\engine\utility::getStruct("golden_spot_animnode", "targetname");
+    var0 = spawn("script_origin", var2.origin);
+    thread goldenpath_moveTo(var0);
+  } else if(self.animname == "car2_terry1" || self.animname == "car2_terry2" || self.animname == "car2_terry3" || self.animname == "car1_terry2" || self.animname == "car1_terry3") {
+    self endon("death");
+    self.allowdeath = 1;
+  } else if(self.animname == "sas1" || self.animname == "sas3") {
+    if(self.animname == "sas1") {
+      var0 notify("start_car1_extras");
+    }
+
+    thread allies_explosion_bullet_shield();
+  }
+
+  var0 scripts\common\anim::anim_single_solo(self, "car_explosion");
+
+  if(scripts\engine\utility::array_contains(level.street_friendlies, self)) {
+    if(self.animname == "sas2") {
+      var0 scripts\common\anim::anim_last_frame_solo(self, "car_explosion");
+      level.street_friendlies = scripts\engine\utility::array_remove(level.street_friendlies, self);
+      self visiblenotsolid();
+      scripts\engine\utility::flag_wait("combat_start");
+      scripts\common\ai::stop_magic_bullet_shield();
+      self delete();
+      return;
+    }
+
+    if(self.animname == "sas1") {
+      level.player thread scripts\engine\sp\utility::smart_dialogue("dx_vom_kyle_infil_car1_street_290");
+      var3 = distancesquared(level.player.origin, self.origin);
+
+      if(var3 > squared(150)) {
+        var4 = getanimlength(scripts\engine\utility::getanim("car_explosion_exit"));
+        var0 thread scripts\common\anim::anim_single_solo(self, "car_explosion_exit");
+        wait var4 / 1.2;
+      } else {
+        var0 scripts\common\anim::anim_single_solo(self, "car_explosion_enter");
+        var0 thread scripts\common\anim::anim_loop_solo(self, "car_explosion_idle", "stop_loop_" + self.animname);
+
+        for(;;) {
+          var3 = distancesquared(level.player.origin, self.origin);
+
+          if(var3 > squared(150)) {
+            break;
+          }
+
+          waitframe();
+        }
+
+        var0 notify("stop_loop_" + self.animname);
+        var0 thread scripts\common\anim::anim_single_solo(self, "car_explosion_idle_exit");
+      }
+    } else if(self.animname == "sas3") {
+      self setgoalpos(self.origin);
+      self.ignoreall = 1;
+
+      if(isalive(level.car1_terry2)) {
+        kill_target(level.car1_terry2);
+      }
+
+      if(isalive(level.car1_terry)) {
+        wait 1.3;
+        kill_target(level.car1_terry);
+      }
+
+      self.ignoreall = 0;
+    }
+
+    scripts\engine\utility::flag_wait("car2_guys_dead");
+    var1 = scripts\engine\utility::getStruct("post_bomb_" + self.animname, "targetname");
+    thread start_ally_stayahead_movement(var1);
+    return;
+  }
+
+  if(self.animname == "car2_terry1" || self.animname == "car2_terry2" || self.animname == "car2_terry3") {
+    level.car2_terries = scripts\engine\utility::array_remove(level.car2_terries, self);
+    self.skipdeathanim = 1;
+    self kill();
+    return;
+  }
+
+  if(self.animname == "car1_terry2" || self.animname == "car1_terry3") {
+    if(!isDefined(self)) {
+      return;
+    }
+
+    self.allowdeath = 1;
+    self.noragdoll = 1;
+    self.skipdeathanim = 1;
+    self kill();
+    return;
+  }
+
+  if(isDefined(self.animname == "car1_terry1")) {
+    self endon("death");
+    self.ignoreall = 0;
+    self getenemyinfo(level.player);
+    scripts\engine\sp\utility::set_favoriteenemy(level.player);
+    scripts\engine\sp\utility::disable_dontevershoot();
+    return;
+  }
+}
+
+function allies_explosion_bullet_shield() {
+  self.no_friendly_fire_fail = 1;
+  scripts\engine\utility::flag_wait("player_is_up");
+  wait 5;
+  self.no_friendly_fire_fail = 0;
+}
+
+function goldenpath_moveTo(var0) {
+  self linkTo(var0);
+  level waittill("move_knockback_scene");
+  scripts\engine\sp\utility::add_cleanup_ent(var0, "script_origins");
+}
+
+function kill_target(var0) {
+  self endon("death");
+
+  if(!isalive(var0)) {
+    return;
+  }
+
+  var0 endon("death");
+  self shoot(1, var0 gettagorigin("j_head"), 1, 1);
+  wait 0.3;
+  self shoot(1, var0 gettagorigin("j_head"), 1, 1);
+
+  if(isDefined(var0.magic_bullet_shield) && var0.magic_bullet_shield == 1) {
+    var0 scripts\common\ai::stop_magic_bullet_shield();
+  }
+
+  var0 kill();
+}
+
+function intro_anims_non_ai(var0) {
+  level endon("start_car2");
+  var1 = "intro_slamzoom";
+
+  if(self.animname == "player_rig") {
+    thread rain_exploder();
+    thread infil_visionset();
+    scripts\engine\utility::array_thread(level.street_friendlies, &scripts\engine\sp\utility::name_hide);
+    var0 scripts\common\anim::anim_single_solo(self, var1);
+    scripts\engine\utility::flag_set("boots_on_the_ground");
+    scripts\engine\utility::array_thread(level.street_friendlies, &scripts\engine\sp\utility::name_show);
+    return;
+  }
+
+  var0 scripts\common\anim::anim_single_solo(self, var1);
+
+  if(isDefined(self)) {
+    self delete();
+    return;
+  }
+}
+
+function rain_exploder() {
+  level endon("intro_skipped");
+  wait 13;
+  scripts\engine\utility::stop_exploder("rain_amb");
+  wait 31;
+  scripts\engine\utility::exploder("rain_amb");
+}
+
+function infil_visionset() {
+  level endon("intro_skipped");
+  wait 12;
+  visionsetnaked("piccadilly_infill", 1);
+  wait 35;
+  visionsetnaked("", 1);
+}
+
+function intro_bus(var0) {
+  level endon("intro_skipped");
+  level.intro_bus = setup_scripted_car("intro_bus");
+  level.intro_bus endon("entitydeleted");
+  var0 scripts\common\anim::anim_first_frame_solo(level.intro_bus, "intro_slamzoom");
+  var0 waittill("start_bus");
+  var0 scripts\common\anim::anim_single_solo(level.intro_bus, "intro_slamzoom");
+  level.intro_bus delete();
+}
+
+function intro_car(var0) {
+  scripts\engine\utility::flag_wait("scriptables_ready");
+  level.car_order = 1;
+  var1 = 1;
+
+  if(level.start_point != "infil") {
+    var1 = 100;
+  }
+
+  get_intro_cars(var0, var1);
+  thread intro_truck_anims(level.truck, var0);
+  thread intro_car2_anims(level.cars_bomb["van"], var0);
+  thread intro_car1_anims(level.cars_bomb["car1"], var0);
+  thread intro_cars_extra(level.cars_bomb["ralfa"], var0);
+  thread intro_cars_extra(level.cars_bomb["cab"], var0);
+  thread player_hit_watcher();
+  wait 0.3;
+  level notify("skippable_intro_ready");
+}
+
+function get_intro_cars(var0, var1) {
+  var2 = scripts\engine\utility::getStruct("intro_order_r1", "targetname");
+  var3 = getscriptablearray("intro_slamzoom_car_r1", "script_noteworthy");
+  var3 = sortbydistance(var3, var2.origin);
+  var2 = scripts\engine\utility::getStruct("intro_order_r2", "targetname");
+  var4 = getscriptablearray("intro_slamzoom_car_r2", "script_noteworthy");
+  var4 = sortbydistance(var4, var2.origin);
+  var2 = scripts\engine\utility::getStruct("intro_order_r3", "targetname");
+  var5 = getscriptablearray("intro_slamzoom_car_r3", "script_noteworthy");
+  var5 = sortbydistance(var5, var2.origin);
+  level.intro_cars = scripts\engine\utility::array_combine(var3, var4, var5);
+
+  foreach(var7 in level.intro_cars) {
+    thread intro_car_anims(level.intro_cars[var8], var0, level.car_order);
+    level.car_order++;
+  }
+}
+
+function play_quick_reaction(var0) {
+  scripts\engine\utility::flag_wait("car2_detonation");
+  self notify("exiting_car");
+
+  if(distancesquared(self.origin, level.player.origin) <= squared(175)) {
+    scripts\common\ai::magic_bullet_shield();
+    wait randomfloatrange(1.25, 2.75);
+    scripts\engine\sp\utility::anim_stopanimScripted();
+    var0 notify("stop_loop_" + self.animname);
+    var0 thread scripts\common\anim::anim_loop_solo(self, "car_react_rf_idle");
+    scripts\common\ai::stop_magic_bullet_shield();
+    thread bodyonly_guy_in_car_damage_monitor(var0);
+    return;
+  }
+
+  scripts\engine\sp\utility::anim_stopanimScripted();
+  var0 notify("stop_loop_" + self.animname);
+  var0 thread scripts\common\anim::anim_single_solo(self, "car_react_rf");
+  wait 2;
+  self delete();
+}
+
+function bodyonly_guy_in_car_damage_monitor(var0) {
+  self endon("death");
+  self setCanDamage(1);
+
+  for(;;) {
+    self waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8);
+
+    if(isDefined(var2)) {
+      self.lastattacker = var2;
+
+      if(isPlayer(var2)) {
+        scripts\sp\friendlyfire::missionfail(1);
+        break;
+      }
+    }
+  }
+
+  if(isDefined(self.magic_bullet_shield)) {
+    scripts\common\ai::stop_magic_bullet_shield();
+  }
+
+  self startragdoll();
+  self notsolid();
+}
+
+#using_animtree("scriptables");
+
+function intro_car_anims(var0, var1, var2) {
+  self.animname = "intro_car" + var1;
+  scripts\engine\sp\utility::assign_animtree();
+
+  if(var1 == 3 || var1 == 4) {
+    return;
+  }
+
+  if(var1 == 8 || var1 == 9) {
+    level.intro_windows["back"][level.intro_windows["back"].size] = self;
+  } else if(var1 == 10) {
+    level.intro_windows["front"][level.intro_windows["front"].size] = self;
+  } else if(var1 == 12) {
+    level.intro_windows["special1"][level.intro_windows["special1"].size] = self;
+  } else {
+    level.scriptable_cleanup[level.scriptable_cleanup.size] = self;
+  }
+
+  self.intro_animation = scripts\engine\utility::getanim("intro_slamzoom");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "single anim", "intro_slamzoom", self.animname, self.intro_animation);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "single anim", "intro_slamzoom");
+  setup_script_collision();
+  var3 = getstartorigin(var0.origin, var0.angles, self.intro_animation);
+  var4 = getstartangles(var0.origin, var0.angles, self.intro_animation);
+  self.origin = var3;
+  self.angles = var4;
+  self setflaggedanimknoball("single anim", self.intro_animation, %root, 1, 0, var2);
+  var5 = getanimlength(self.intro_animation);
+
+  if(level.start_point == "infil" && (var1 == 1 || var1 == 2 || var1 == 11 || var1 == 12 || var1 == 13)) {
+    level.trailer_left_cars[level.trailer_left_cars.size] = self;
+
+    if(var1 != 13) {
+      self.tiresounds = "veh_piccadilly_wet_car_tires_lp_0" + level.trailer_left_cars.size;
+    }
+
+    var6 = getEnt("car" + var1 + "_trigger", "targetname");
+    var6 enablelinkTo();
+    var6 linkTo(self, "tag_origin", (45, 0, 20), (0, 0, 0));
+  }
+
+  if(var1 == 5) {
+    if(!scripts\engine\utility::flag("boots_on_the_ground")) {
+      wait var5 / 1.5;
+    }
+
+    GscBinSkip4(0x35);
+  }
+
+  if(var1 == 11 || var1 == 12) {
+    self setscriptablepartstate("lights_controller", "on");
+  } else {
+    self setscriptablepartstate("lights_controller", "on_nolight");
+  }
+
+  if(var1 == 1 || var1 == 2 || var1 == 11 || var1 == 12) {
+    thread stop_loop_sound_after_anim();
+  }
+
+  scripts\engine\utility::flag_wait("car2_detonation");
+
+  if(isDefined(self.passengers)) {
+    scripts\engine\utility::array_thread(self.passengers, &play_quick_reaction, self);
+    return;
+  }
+}
+
+function stop_loop_sound_after_anim() {
+  level endon("car2_detonation");
+  self waittillmatch("single anim", "end");
+  self.tiresounds = undefined;
+  self stoploopsound();
+}
+
+function hide_intro_car() {
+  if(isDefined(self) && isDefined(self.passengers)) {
+    foreach(var1 in self.passengers) {
+      if(isDefined(var1) && isalive(var1)) {
+        var1 delete();
+      }
+    }
+  }
+
+  wait 1;
+  self setscriptablepartstate("hide_car", "hide_car");
+}
+
+function debug_cars(var0) {
+  for(;;) {
+    wait 0.5;
+  }
+}
+
+function player_hit_watcher() {
+  level endon("car2_detonation");
+
+  while(level.trailer_left_cars.size < 4) {
+    waitframe();
+  }
+
+  var0 = undefined;
+  var1 = getEnt("car11_trigger", "targetname");
+  var2 = getEnt("car1_trigger", "targetname");
+  var3 = getEnt("car13_trigger", "targetname");
+  var4 = getEnt("car2_trigger", "targetname");
+  var5 = [var1, var2, var3, var4];
+  level scripts\engine\utility::waittill_any("get_out_of_car", "intro_skipped");
+
+  foreach(var7 in level.trailer_left_cars) {
+    if(isDefined(var7.tiresounds)) {
+      var7 playLoopSound(var7.tiresounds);
+    }
+  }
+
+  thread stop_sounds_post_bomb();
+
+  for(;;) {
+    while(!level.player scripts\engine\sp\utility::is_touching_any(var5)) {
+      waitframe();
+    }
+
+    if(level.player istouching(var1)) {
+      var0 = [level.trailer_left_cars[2], level.trailer_left_cars[0], level.trailer_left_cars[4], level.trailer_left_cars[1]];
+    } else if(level.player istouching(var2)) {
+      var0 = [level.trailer_left_cars[0], level.trailer_left_cars[4], level.trailer_left_cars[1]];
+    } else if(level.player istouching(var3)) {
+      var0 = [level.trailer_left_cars[4], level.trailer_left_cars[1]];
+    } else if(level.player istouching(var4)) {
+      var0 = [level.trailer_left_cars[1]];
+    }
+
+    foreach(var7 in var0) {
+      var7 setscriptablepartstate("lights_controller", "taillights_braking");
+      var7 setanimrate(var7.intro_animation, 0);
+      var7 scalevolume(0, 0.5);
+    }
+
+    while(level.player scripts\engine\sp\utility::is_touching_any(var5)) {
+      waitframe();
+    }
+
+    wait 1;
+
+    if(level.player scripts\engine\sp\utility::is_touching_any(var5)) {
+      return;
+    }
+
+    foreach(var7 in var0) {
+      var7 setscriptablepartstate("lights_controller", "taillights_on");
+      var7 setanimrate(var7.intro_animation, 1);
+      var7 scalevolume(1, 0.5);
+    }
+  }
+}
+
+function stop_sounds_post_bomb() {
+  scripts\engine\utility::flag_wait("car2_detonation");
+
+  foreach(var1 in level.trailer_left_cars) {
+    if(isDefined(var1.tiresounds)) {
+      var1 stoploopsound(var1.tiresounds);
+    }
+  }
+}
+
+#using_animtree("");
+
+function intro_truck_anims(var0, var1) {
+  var2 = scripts\engine\utility::getanim("intro_slamzoom");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "single anim", "intro_slamzoom", self.animname, var2);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "single anim", "intro_slamzoom");
+  var3 = getstartorigin(var0.origin, var0.angles, var2);
+  var4 = getstartangles(var0.origin, var0.angles, var2);
+  self.origin = var3;
+  self.angles = var4;
+  thread intro_truck_fx();
+  self setflaggedanimknoball("single anim", var2, %root, 1, 0, var1);
+}
+
+function intro_truck_fx() {
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pic_window_drips"), self, "tag_origin");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pic_window_drips_rear_passenger"), self, "tag_window_front_right");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pic_window_drips_rear_passenger"), self, "tag_window_back_right");
+}
+
+function play_scriptable_car_with_notetracks(var0, var1, var2) {
+  thread scripts\common\notetrack::start_notetrack_wait(self, "single anim", "intro_slamzoom", self.animname, var2);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "single anim", "intro_slamzoom");
+  var3 = getstartorigin(var0.origin, var0.angles, var2);
+  var4 = getstartangles(var0.origin, var0.angles, var2);
+  self.origin = var3;
+  self.angles = var4;
+  self setflaggedanimknoball("single anim", var2, %root, 1, 0, var1);
+}
+
+function intro_car2_anims(var0, var1) {
+  var2 = scripts\engine\utility::getanim("intro_slamzoom");
+  play_scriptable_car_with_notetracks(var0, var1, var2);
+  scripts\engine\utility::flag_wait_all("intro_sas_ready", "player_at_standoff");
+  var2 = scripts\engine\utility::getanim("standoff");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_standoff", "standoff", self.animname, var2);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "car2_standoff", "standoff");
+  self setanimknoball(scripts\engine\utility::getanim("standoff"), %root, 1, 0, 1);
+  scripts\engine\utility::flag_wait("start_car2");
+  var2 = scripts\engine\utility::getanim("car2_drives_off");
+  thread car2_delete_extras(var2);
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_drives", "car2_drives_off", self.animname, var2);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "car2_drives", "car2_drives_off");
+  thread scripts\engine\sp\utility::autosave_now();
+  self setflaggedanimknoball("car2_drives", var2, %root, 1, 0, 1);
+  scripts\engine\utility::flag_wait("car2_detonation");
+  scripts\engine\utility::delaythread(0.4, &scripts\engine\sp\utility::cleanup_ents, "cross_traffic");
+}
+
+function car2_delete_extras(var0) {
+  var1 = getanimlength(var0);
+  wait var1;
+  scripts\engine\utility::flag_set("force_bomb_start");
+  self.lightback setlightintensity(0);
+  self.lightfront setlightintensity(0);
+  scripts\engine\utility::array_delete(self.bombs);
+}
+
+function intro_car1_anims(var0, var1) {
+  var2 = scripts\engine\utility::getanim("intro_slamzoom");
+  play_scriptable_car_with_notetracks(var0, var1, var2);
+  thread intro_car1_version1(var0);
+  thread intro_car1_version2(var0);
+}
+
+function intro_car1_version1(var0) {
+  self endon("start_car1_standoff_v2");
+  var1 = scripts\engine\utility::getanim("intro_slamzoom_v1_exit");
+  var2 = getanimlength(var1);
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_slamzoom_v1_exit", "intro_slamzoom_v1_exit", self.animname, var1);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "car1_slamzoom_v1_exit", "intro_slamzoom_v1_exit");
+  self waittill("start_car1_standoff_v1");
+  self setanimknoball(var1, %root, 1, 0, 1);
+  var3 = scripts\engine\utility::getanim("intro_standoff");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_intro_standoff", "intro_standoff", self.animname, var3);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "car1_intro_standoff", "intro_standoff");
+  wait var2;
+  self setanim(var3, 1, 0, 1);
+  self clearanim(var1, 0);
+  var0 waittill("start_car1_extras");
+  thread clip_delete("car1_door_clip", "forever");
+  wait 3.3;
+  self setanimknoball(scripts\engine\utility::getanim("car_explosion"), %root, 1, 0, 1);
+}
+
+function intro_car1_version2(var0) {
+  self endon("start_car1_standoff_v1");
+  var1 = scripts\engine\utility::getanim("intro_slamzoom_v2");
+  var2 = getanimlength(var1);
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_slamzoom_v2", "intro_slamzoom_v2", self.animname, var1);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "car1_slamzoom_v2", "intro_slamzoom_v2");
+  self waittill("start_car1_standoff_v2");
+  self setanimknoball(var1, %root, 1, 0, 1);
+  var3 = scripts\engine\utility::getanim("intro_standoff");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_intro_standoff", "intro_standoff", self.animname, var3);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "car1_intro_standoff", "intro_standoff");
+  wait var2;
+  self setanimknoball(var3, %root, 1, 0, 1);
+  var0 waittill("start_car1_extras");
+  thread clip_delete("car1_door_clip", "forever");
+  wait 3.3;
+  self setanimknoball(scripts\engine\utility::getanim("car_explosion"), %root, 1, 0, 1);
+}
+
+function intro_cars_extra(var0, var1) {
+  var2 = scripts\engine\utility::getanim("intro_slamzoom");
+  play_scriptable_car_with_notetracks(var0, var1, var2);
+  scripts\engine\utility::flag_wait("start_car2");
+  self setanimknoball(scripts\engine\utility::getanim("car2_drives_off"), %root, 1, 0, 1);
+  scripts\engine\utility::flag_wait("car2_detonation");
+  var3 = getscriptablearray("extra_car_eos", "targetname");
+  wait 0.12;
+  self setscriptablepartstate("Piccadilly_Death", "picc_death", 1);
+  wait 0.2;
+  var3[0] setscriptablepartstate("Piccadilly_Death", "picc_death", 1);
+}
+
+function player_roe_check() {
+  level endon("car2_detonation");
+  thread player_fire_check();
+  scripts\engine\utility::flag_wait("weapons_free");
+
+  if(!scripts\engine\utility::flag("gun_raised")) {
+    scripts\sp\player_death::set_custom_death_quote(88);
+    scripts\sp\utility::missionfailedwrapper();
+    return;
+  }
+}
+
+function player_fire_check() {
+  level.player scripts\engine\utility::waittill_any("weapon_fired", "grenade_fire");
+  scripts\engine\utility::flag_set("weapons_free");
+}
+
+function intro_slamzoom() {
+  var0 = scripts\engine\utility::getStruct("intro_slamzoom", "targetname");
+  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
+  level.player enableinvulnerability();
+  level.player playerdisabletriggers();
+  level.player cleardamageindicators();
+  level.player freezecontrols(1);
+  level.player takeallweapons();
+  level.player hidelegsandshadow();
+  var2 = var0 scripts\engine\utility::spawn_tag_origin();
+  var2.angles += (80, 0, 0);
+  level.player playersetgroundreferenceent(var2);
+  level.player playerlinktoabsolute(var2, "tag_origin");
+  wait 0.05;
+  level.player playerenabletriggers();
+  var3 = 1.85;
+  level.player playSound("slomo_whoosh");
+  var2 moveTo(var1.origin, var3, var3 * 0.9, var3 * 0.1);
+  wait var3 * 0.5;
+  var2 rotateTo(var1.angles, var3 * 0.5, var3 * 0.25, var3 * 0.25);
+  wait var3 * 0.5;
+  level.player unlink();
+  level.player playersetgroundreferenceent(undefined);
+  level.player disableinvulnerability();
+  level.player showlegsandshadow();
+  level.player freezecontrols(0);
+  var2 delete();
+  level thread scripts\sp\maps\piccadilly\piccadilly_util::piccadilly_weapons();
+}
+
+function infil_car1_start() {
+  thread spawn_animated_intro_civs();
+  scripts\engine\sp\utility::array_spawn_targetname("intro_civs");
+  level.street_friendlies = scripts\engine\sp\utility::array_spawn_targetname("sicario_street_friendly");
+  level.car1_terry = scripts\engine\sp\utility::spawn_targetname("car1_terry");
+  level.car1_terries = scripts\engine\sp\utility::array_spawn_targetname("car1_terries", 1);
+  level.car2_terries = scripts\engine\sp\utility::array_spawn_targetname("car2_terry", 1);
+  var0 = scripts\engine\utility::array_combine(level.street_friendlies, level.car2_terries, level.car1_terries, [level.car1_terry]);
+  var1 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  scripts\engine\utility::array_thread(var0, &setup_intro_idles, var1);
+  level.truck = setup_scriptable_car("sas_intro_decho");
+  level.cars_bomb["van"] = setup_scriptable_car("car2_bomb");
+  level.cars_bomb["car1"] = setup_scriptable_car("car1_bomb");
+  level.cars_bomb["ralfa"] = setup_scriptable_car("car3_bomb");
+  level.cars_bomb["cab"] = setup_scriptable_car("car4_bomb");
+  thread setup_temp_car_stuff();
+  setglobalsoundcontext("dusty", "yes");
+  scripts\engine\sp\objectives::objective_add("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_APPROACH_VAN", &"PICCADILLY/CURSOR_TARGET");
+  scripts\engine\sp\objectives::objective_set_on_entity("piccadilly_objective", "Target", level.cars_bomb["van"]);
+  scripts\engine\sp\objectives::objective_set_z_offset("piccadilly_objective", 120);
+  scripts\engine\sp\utility::set_start_location("sicario_street", [level.player]);
+  thread player_roe_check();
+  thread spawn_cross_street_traffic();
+  thread show_aftermath_geo();
+  thread intro_car(var1);
+  intro_street_player_movement();
+  thread player_speed_management_intro("car2_detonation");
+}
+
+function infil_car1_main() {
+  scripts\sp\utility::nvidiaansel_allowduringcinematic(1);
+  thread clip_delete("temp_block_ally_clip", "car2_detonation");
+  thread clip_delete("temp_standoff_clip", "car2_detonation");
+  thread temp_approach_standoff_vo();
+  scripts\engine\utility::flag_wait("player_at_standoff");
+  setsaveddvar("LTQMSPKRKO", 4);
+  scripts\engine\sp\objectives::objective_remove("piccadilly_objective");
+  scripts\engine\sp\objectives::objective_add("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_MAINTAIN_ROE");
+  thread intro_standoff();
+  var0 = getEnt("out_of_bounds_2", "targetname");
+  thread scripts\sp\trigger::trigger_outofbounds(var0);
+}
+
+function infil_car1_catchup() {
+  scripts\engine\utility::flag_set("standoff_complete");
+  scripts\engine\utility::flag_set("car2_detonation");
+  scripts\engine\utility::flag_set("car2_guys_dead");
+  level.player modifybasefov(65, 0.05);
+
+  if(!scripts\sp\starts::is_after_start("gap")) {
+    thread scripts\sp\maps\piccadilly\piccadilly_ambient::ambient_combat_popo();
+  }
+
+  var0 = getEnt("out_of_bounds_2", "targetname");
+  thread scripts\sp\trigger::trigger_outofbounds(var0);
+  thread intro_lights();
+  thread delete_storefront_signs();
+}
+
+function clip_delete(var0, var1) {
+  var2 = getEnt(var0, "targetname");
+  var2 solid();
+
+  if(scripts\engine\utility::flag_exist(var1)) {
+    scripts\engine\utility::flag_wait(var1);
+  } else {
+    level waittill(var1);
+  }
+
+  var2 delete();
+}
+
+function van_anim_jumpto(var0) {
+  var0 waittill("stop_terry_intro_idle");
+  var0 scripts\common\anim::anim_single_solo(self, "standoff");
+}
+
+function setup_intro_idles(var0) {
+  var1 = undefined;
+
+  if(self.animname == "car2_terry_driver") {
+    level.car2_terries = scripts\engine\utility::array_remove(level.car2_terries, self);
+    self delete();
+    return;
+  }
+
+  if(self.animname == "sas2") {
+    var1 = spawnStruct();
+    var1.origin = var0.origin;
+    var2 = ["dx_vom_mick_infil_car1_street_70", "dx_vom_mick_infil_car1_street_80", "dx_vom_mick_infil_car1_street_90"];
+    thread scripts\sp\maps\piccadilly\piccadilly_util::notetrack_nag(var2, "player_at_standoff");
+    var1 thread scripts\common\anim::anim_loop_solo_with_nags(self, "intro_slamzoom_v1_sas2_idle", "stop_terry_intro_idle");
+  } else {
+    var0 thread scripts\common\anim::anim_loop_solo(self, "intro_slamzoom_v1_idle", "stop_terry_intro_idle");
+  }
+
+  if(self.animname == "sas1" || self.animname == "sas2" || self.animname == "sas3" || self.animname == "car1_terry1" || self.animname == "car1_terry2" || self.animname == "car1_terry3") {
+    scripts\engine\utility::flag_wait("player_at_standoff");
+    var0 notify("stop_terry_intro_idle");
+
+    if(self.animname == "sas2") {
+      var1 notify("stop_terry_intro_idle");
+      scripts\engine\utility::flag_set("standoff_ready");
+    }
+
+    var0 scripts\common\anim::anim_single_solo(self, "intro_slamzoom_v1_exit");
+    scripts\engine\utility::flag_set("intro_sas_ready");
+    thread intro_anims_standoff(var0);
+    return;
+  }
+
+  scripts\engine\utility::flag_wait("intro_sas_ready");
+  thread intro_anims_standoff(var0);
+}
+
+function standoff_terry_vo() {}
+
+function temp_approach_standoff_vo() {
+  thread post_car_vo();
+  level scripts\engine\utility::waittill_either("player_at_standoff", "start_intro_vo");
+  level.player scripts\engine\sp\utility::smart_player_dialogue_interrupt("dx_vom_kyle_infil_car1_street_20");
+  thread car2_taking_off_vo();
+  wait 1.5;
+  thread standoff_terry_vo();
+}
+
+function post_car_vo() {
+  wait 1;
+  level.street_friendlies[1] scripts\engine\sp\utility::smart_dialogue("dx_vom_mick_infil_car1_street_10");
+  wait 0.65;
+
+  if(!scripts\engine\utility::flag("player_at_standoff")) {
+    standoff_nag_vo();
+  }
+
+  level.intro_vo_civs = undefined;
+}
+
+function standoff_nag_vo() {
+  level endon("player_at_standoff");
+  level.intro_vo_civs["uk_civilian_male_1"] scripts\engine\sp\utility::smart_dialogue("dx_vom_ucm1_infil_car1_street_30");
+  level.intro_vo_civs["uk_civilian_female_1"] scripts\engine\sp\utility::smart_dialogue("dx_vom_ucf1_infil_car1_street_40");
+  level.intro_vo_civs["uk_civilian_male_2"] scripts\engine\sp\utility::smart_dialogue("dx_vom_ucm2_infil_car1_street_50");
+  level.street_friendlies[0] scripts\engine\sp\utility::smart_dialogue("dx_vom_s26_infil_car1_street_60");
+}
+
+function car2_taking_off_vo() {
+  scripts\engine\utility::flag_wait("start_car2");
+  wait 3.65;
+  level.player_dialogue_emitter delete();
+  wait 1.05;
+  level thread scripts\sp\maps\piccadilly\piccadilly_util::say("dx_vom_gfc_infil_car1_street_240");
+  wait 2.1;
+  level.street_friendlies[0] scripts\sp\maps\piccadilly\piccadilly_util::say("dx_vom_s26_infil_car1_street_250");
+  wait 0.45;
+
+  if(scripts\engine\utility::flag("player_golden_path_knockdown")) {
+    level.player scripts\engine\sp\utility::smart_dialogue("dx_vom_kyle_infil_car1_street_260");
+  } else {
+    level.street_friendlies[0] scripts\sp\maps\piccadilly\piccadilly_util::say("dx_vom_s26_infil_car1_street_270");
+    level.street_friendlies[0] scripts\sp\maps\piccadilly\piccadilly_util::say("dx_vom_s26_infil_car1_street_280");
+  }
+
+  scripts\common\anim::addnotetrack_flag("sas1", "standoff_vo_complete", "standoff_vo_complete", "car_explosion_enter");
+  scripts\common\anim::addnotetrack_flag("sas1", "standoff_vo_complete", "standoff_vo_complete", "car_explosion_exit");
+}
+
+function intro_standoff() {
+  scripts\engine\utility::flag_wait_or_timeout("weapons_free", 3);
+  scripts\engine\utility::flag_wait("force_bomb_start");
+  thread scripts\engine\sp\utility::autosave_by_name("standoff_complete");
+  thread carbomb_main();
+  thread carbomb_player_react();
+  thread scripts\sp\maps\piccadilly\piccadilly_ambient::ambient_combat_popo();
+  thread scripts\sp\maps\piccadilly\piccadilly_combat::police_vignette();
+  wait 1.7;
+
+  if(!scripts\engine\utility::flag("weapons_free")) {
+    scripts\engine\utility::flag_set("weapons_free");
+  }
+
+  var0 = scripts\engine\sp\utility::get_closest_to_player_view(level.car2_terries, level.player, 1);
+  var0.ignoreme = 1;
+  var0.ignoreall = 0;
+  var0 scripts\engine\utility::delaythread(5, &scripts\engine\sp\utility::set_ignoreme, 0);
+
+  foreach(var2 in level.street_friendlies) {
+    var2.ignoreall = 0;
+    var2.ignoreme = 0;
+    var2.dontevershoot = 0;
+  }
+
+  wait 2.6;
+  scripts\engine\utility::flag_set("standoff_complete");
+}
+
+function carbomb_shop_windows() {
+  wait 0.25;
+  var0 = 1;
+  var1 = anglesToForward((0, 360, 0));
+
+  while(var0 < 7) {
+    var2 = getglassarray("intro_glass" + var0);
+    thread glass_management(var2);
+    wait 0.25;
+    var0++;
+  }
+}
+
+function glass_management(var0) {
+  foreach(var2 in self) {
+    destroyglass(var2, var0);
+  }
+
+  wait 0.3;
+
+  foreach(var2 in self) {
+    deleteglass(var2);
+  }
+}
+
+function carbomb_main() {
+  if(level.start_point == "post_bomb") {
+    level.player modifybasefov(65, 0.15);
+    scripts\engine\utility::exploder("aftermath");
+    thread aftermath_ambience();
+  } else {
+    thread car2_detonates();
+    thread car_windows_break();
+  }
+
+  thread post_explosion_visionset();
+  var0 = scripts\engine\utility::getStructArray("civ_stunned", "targetname");
+  thread scripts\sp\maps\piccadilly\piccadilly_combat::fake_civ_stream("aftermath_fake_civs", "combat_start");
+  level.street_friendlies = scripts\engine\utility::array_removedead(level.street_friendlies);
+  level.street_friendlies = scripts\engine\utility::array_removeundefined(level.street_friendlies);
+}
+
+function post_explosion_visionset() {
+  waitframe();
+  visionsetalternate(1, 0.5);
+}
+
+function car2_detonates() {
+  scripts\engine\utility::flag_set("car2_detonation");
+  level.player scripts\engine\utility::delaythread(0.2, &scripts\engine\sp\utility::play_sound_on_entity, "dx_vom_plr_explosion_efforts");
+  wait 0.25;
+  setglobalsoundcontext("dusty", "");
+  level.player modifybasefov(65, 0.15);
+  wait 1.2;
+  thread aftermath_ambience();
+}
+
+function aftermath_ambience() {
+  level endon("sicario_street_exit");
+  level notify("vo_post_expl_walla");
+  var0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+  thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var0.origin);
+  scripts\engine\utility::delaythread(5, &scripts\engine\utility::play_sound_in_space, "pdilly_first_explosion_car_accident", (-1371, -980, 155));
+  scripts\engine\utility::delaythread(9, &scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams, var0.origin);
+}
+
+function car_windows_break() {
+  wait 0.25;
+  var0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+  var1 = scripts\engine\utility::array_combine(level.intro_windows["front"], level.intro_windows["back"], level.intro_windows["special1"]);
+  var1 = sortbydistance(var1, var0.origin);
+  var2 = [0, 1, 0, 0];
+  var3 = 0;
+
+  foreach(var5 in var1) {
+    var5 setscriptablepartstate("Window_Blast", "destroyed", 1);
+
+    if(scripts\engine\utility::array_contains(level.intro_windows["front"], var5)) {
+      var5 setscriptablepartstate("Damage_Blast", "front", 1);
+    } else if(scripts\engine\utility::array_contains(level.intro_windows["special1"], var5)) {
+      var5 setscriptablepartstate("Damage_Blast", "special1", 1);
+    } else {
+      var5 setscriptablepartstate("Damage_Blast", "back", 1);
+    }
+
+    if(!scripts\engine\utility::is_equal(var2[var3], 1)) {
+      wait 0.5;
+    }
+
+    var3++;
+  }
+}
+
+function carbomb_player_react() {
+  level.scr_model["player_rig"] = "viewhands_fullbody_kyle_sas_urban";
+  level.knockdownanime = ["car_explosion", "crouch"];
+  level.touching = setup_player_animnode();
+  var0 = spawn("script_origin", level.player.origin);
+  var0.angles = level.player.angles;
+  scripts\engine\sp\utility::add_cleanup_ent(var0, "script_origins");
+
+  if(!level.player isonground() && level.knockdownanime[0] == "car_explosion_short") {
+    var1 = scripts\common\utility::groundpos(var0.origin);
+    var0 moveTo(var1, 0.3, 0.2);
+  }
+
+  var2 = var0 scripts\sp\player_rig::link_player_to_rig(level.knockdownanime[0], "stand", 1, 0.2, 1);
+  var0 thread scripts\common\anim::anim_single_solo(var2, level.knockdownanime[0]);
+  var2 show();
+  var3 = thread anim_weapon_for_player();
+  thread player_damage_based_on_dist();
+  var2 linkTo(var0);
+
+  if(level.knockdownanime[0] != "car_explosion_short") {
+    var0 rotateTo((0, 0, 0), 0.2);
+  }
+
+  thread carbomb_player_extras();
+
+  if(level.touching) {
+    scripts\engine\utility::flag_set("player_golden_path_knockdown");
+    wait 1;
+
+    if(isDefined(level.intro_origin)) {
+      var0.origin = level.intro_origin;
+    } else if(isDefined(level.intro_animnode)) {
+      var0.origin = level.intro_animnode.origin;
+    }
+  }
+
+  var2 waittillmatch("single anim", "end");
+  level.player showviewmodel();
+  var3 delete();
+  scripts\sp\player_rig::unlink_player_from_rig(0, level.knockdownanime[1], 1);
+  scripts\engine\utility::flag_set("player_is_up");
+  var4 = scripts\engine\utility::getStruct("circle_objective_struct", "targetname");
+  scripts\engine\sp\objectives::objective_remove_all_locations("piccadilly_objective");
+  scripts\engine\sp\objectives::objective_update("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_INVESTIGATE");
+  scripts\engine\sp\objectives::objective_add_location_position("piccadilly_objective", "smoke_reveal", var4.origin);
+  thread player_speed_post_bomb();
+  level.scr_model["player_rig"] = "viewhands_kyle_sas_urban";
+}
+
+function anim_weapon_for_player() {
+  var0 = spawn("script_model", level.player.origin);
+  var0 scripts\common\utility::make_weapon_model("iw8_pi_papa320", ["rec_papa320_r", "mag_papa320_r", "slide_papa320_r"]);
+  var0 linkTo(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
+  return var0;
+}
+
+function setup_player_animnode() {
+  var0 = getEnt("standoff_golden_spot", "targetname");
+  var1 = getEntArray("golden_spots", "targetname");
+  var2 = getEnt("golden_spot_car", "targetname");
+
+  if(level.player istouching(var0)) {
+    var3 = scripts\engine\utility::getStruct("golden_spot_node_plr", "targetname");
+    var4 = scripts\engine\utility::getStruct(var3.target, "targetname");
+    level.intro_origin = pointonsegmentnearesttopoint(var3.origin, var4.origin, level.player.origin);
+    return true;
+  } else if(level.player istouching(var4)) {
+    var3 = scripts\engine\utility::getStruct(var4.target, "targetname");
+    var4 = scripts\engine\utility::getStruct(var3.target, "targetname");
+    level.intro_origin = pointonsegmentnearesttopoint(var3.origin, var4.origin, level.player.origin);
+  } else {
+    foreach(var6 in var3) {
+      if(level.player istouching(var6)) {
+        var7 = scripts\engine\utility::getStructArray(var6.target, "targetname");
+        level.intro_animnode = scripts\engine\utility::getclosest(level.player.origin, var7);
+
+        if(isDefined(var6.script_noteworthy) && var6.script_noteworthy == "left") {
+          level.knockdownanime = ["car_explosion_left", "crouch"];
+        }
+
+        return true;
+      }
+    }
+
+    var6 = undefined;
+    var7 = undefined;
+    var9 = scripts\engine\utility::getStructArray("golden_spot_node", "script_noteworthy");
+    level.intro_animnode = scripts\engine\utility::getclosest(level.player.origin, var9);
+  }
+
+  level.knockdownanime = ["car_explosion_short", "stand"];
+  return false;
+}
+
+function player_damage_based_on_dist() {
+  var0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+  var1 = distance2dsquared(level.player.origin, var0.origin);
+  var2 = squared(600);
+  var3 = squared(750);
+
+  if(var1 <= var2) {
+    wait 0.3;
+    level.player kill();
+    wait 0.4;
+    scripts\engine\sp\utility::anim_stopanimScripted();
+    return;
+  }
+
+  if(var1 <= var3) {
+    wait 0.3;
+    level.player scripts\sp\utility::do_damage(80, var0.origin);
+    return;
+  }
+}
+
+function carbomb_player_extras() {
+  var0 = 3.5;
+
+  if(level.knockdownanime[0] == "car_explosion") {
+    wait 0.7;
+  } else if(level.knockdownanime[0] == "car_explosion_short") {
+    wait 0.4;
+    var0 = 2;
+  } else if(level.knockdownanime[0] == "car_explosion_left") {
+    wait 0.5;
+    var0 = 3;
+  }
+
+  self playSound("plr_breath_pain_init");
+  scripts\engine\utility::delaycall(2.3, &playsound, "breathing_better");
+  var1 = self gettagorigin("j_head");
+  earthquake(0.5, 0.7, var1, 200);
+  screenshake(var1, 2, 0, 0, 0.5);
+  playrumbleonposition("grenade_rumble", var1);
+  wait 0.5;
+  self shellshock("explosion", var0);
+  scripts\engine\utility::delaycall(var0 - 1, &fadeoutshellshock);
+}
+
+function player_speed_post_bomb() {
+  scripts\sp\player::player_movement_state("cqb");
+  scripts\engine\utility::flag_wait("combat_approach");
+  scripts\sp\player::player_movement_state("default");
+}
+
+function post_bomb_start() {
+  thread spawn_animated_intro_civs();
+  thread vo_post_bomb_walla();
+  level.street_friendlies = scripts\engine\sp\utility::array_spawn_targetname("sicario_street_friendly");
+
+  foreach(var1 in level.street_friendlies) {
+    if(var1.animname == "sas2") {
+      level.street_friendlies = scripts\engine\utility::array_remove(level.street_friendlies, var1);
+      var1 scripts\common\ai::stop_magic_bullet_shield();
+      var1 delete();
+      continue;
+    }
+
+    var2 = scripts\engine\utility::getStruct("post_bomb_" + var1.animname, "targetname");
+    var1 forceteleport(var2.origin, var2.angles);
+    thread start_ally_stayahead_movement(var1);
+  }
+
+  var4 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  level.truck = setup_scriptable_car("sas_intro_decho");
+  level.cars_bomb["van"] = setup_scriptable_car("car2_bomb");
+  level.cars_bomb["car1"] = setup_scriptable_car("car1_bomb");
+  level.cars_bomb["ralfa"] = setup_scriptable_car("car3_bomb");
+  level.cars_bomb["cab"] = setup_scriptable_car("car4_bomb");
+  thread intro_car(var4);
+  thread carbomb_main();
+  setup_temp_car_stuff(level.cars_bomb["van"]);
+  level.cars_bomb["van"].lightback setlightintensity(0);
+  level.cars_bomb["van"].lightfront setlightintensity(0);
+  scripts\engine\utility::array_delete(level.cars_bomb["van"].bombs);
+  level.cars_bomb["van"] scripts\engine\utility::delaycall(1, &hide);
+  thread scripts\sp\maps\piccadilly\piccadilly_combat::police_vignette();
+  var5 = scripts\engine\utility::getStruct("circle_objective_struct", "targetname");
+  scripts\engine\sp\objectives::objective_add("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_INVESTIGATE");
+  scripts\engine\sp\objectives::objective_add_location_position("piccadilly_objective", "standoff", var5.origin);
+  scripts\engine\sp\utility::set_start_location("carbomb", [level.player]);
+}
+
+function post_bomb_main() {
+  level thread scripts\sp\maps\piccadilly\piccadilly_combat::car_jumper();
+  thread post_bomb_vo();
+  thread post_bomb_ambient();
+  scripts\engine\utility::flag_wait("sicario_street_exit");
+  thread street_cleanup_ents();
+  scripts\engine\utility::flag_wait("combat_approach");
+  thread street_cleanup_approach();
+  scripts\engine\utility::flag_wait("combat_start");
+  thread street_cleanup_combat();
+}
+
+function post_bomb_catchup() {
+  scripts\engine\utility::flag_set("standoff_complete");
+  scripts\engine\utility::flag_set("combat_approach");
+  thread scripts\sp\maps\piccadilly\piccadilly_ambient::main();
+  thread post_explosion_visionset();
+}
+
+function post_bomb_ambient() {
+  scripts\engine\utility::flag_wait_any("combat_approach", "car2_guys_dead");
+
+  if(scripts\engine\utility::flag("car2_guys_dead")) {
+    wait 3.5;
+  }
+
+  thread scripts\sp\maps\piccadilly\piccadilly_ambient::main();
+  scripts\engine\sp\utility::battlechatter_on("axis");
+}
+
+function start_ally_stayahead_movement(var0) {
+  if(!scripts\engine\utility::flag("combat_start")) {
+    var1 = scripts\engine\utility::getStruct("post_bomb_poi_" + self.animname, "targetname");
+    scripts\common\ai::poi_enable(1, var1);
+
+    if(self.animname == "sas1") {
+      level.infil_leader = self;
+      scripts\sp\utility::set_stayahead_values(2, 140, 150, 0.1);
+      scripts\sp\utility::set_stayahead_values(3, 120, 25, 0.2);
+      scripts\sp\utility::set_stayahead_values(4, 80, -100, 0.1);
+      scripts\sp\utility::set_stayahead_wait_values(-200, 2, 1);
+      var2 = scripts\engine\utility::getStructArray("street_wait_node_" + self.animname, "targetname");
+      scripts\sp\utility::set_stayahead_wait_nodes(var2);
+      scripts\sp\utility::enable_stayahead(level.player);
+    } else {
+      var2 = scripts\engine\utility::getStructArray("street_wait_node_" + self.animname, "targetname");
+      scripts\sp\utility::set_stayahead_wait_nodes(var2, 1);
+      wait_to_create_team(level, self);
+    }
+
+    thread scripts\sp\spawner::go_to_node(var1);
+    self.ignoreall = 1;
+    scripts\engine\utility::flag_wait_or_timeout("combat_start", 7);
+    scripts\sp\utility::disable_stayahead(165, 1);
+    scripts\common\ai::poi_enable(0);
+
+    if(!scripts\engine\utility::flag("combat_start")) {
+      scripts\engine\utility::flag_wait("combat_start");
+    }
+  }
+
+  scripts\engine\sp\utility::set_force_color("y");
+  scripts\engine\sp\utility::enable_ai_color();
+  scripts\common\utility::disable_cqbwalk();
+  scripts\engine\sp\utility::activate_trigger_with_targetname("friendly_combat_color_start");
+}
+
+function wait_to_create_team(var0) {
+  while(!isDefined(level.infil_leader)) {
+    waitframe();
+  }
+
+  level.infil_leader scripts\sp\utility::stayahead_add_to_team(var0, 180, 125, 50);
+}
+
+function street_cleanup_ents() {
+  if(isDefined(level.cleanup_ents) && isDefined(level.cleanup_ents["background_cars"])) {
+    scripts\engine\sp\utility::cleanup_ents("background_cars");
+    return;
+  }
+}
+
+function street_cleanup_approach() {
+  if(isDefined(level.truck)) {
+    level.truck hide();
+  }
+
+  wait 0.1;
+
+  if(isDefined(level.cleanup_ents) && isDefined(level.cleanup_ents["infil_ents"])) {
+    scripts\engine\sp\utility::cleanup_ents("infil_ents");
+  }
+
+  wait 0.1;
+
+  if(isDefined(level.cleanup_ents) && isDefined(level.cleanup_ents["script_origins"])) {
+    scripts\engine\sp\utility::cleanup_ents("script_origins");
+    return;
+  }
+}
+
+function street_cleanup_combat() {
+  var0 = getEntArray("sicario_street_ents", "script_noteworthy");
+
+  if(istrue(var0.size)) {
+    scripts\engine\utility::array_delete(var0);
+  }
+
+  wait 0.2;
+
+  if(isDefined(level.scriptable_cleanup)) {
+    scripts\engine\utility::array_call(level.scriptable_cleanup, &setscriptablepartstate, "lights_controller", "off");
+    waitframe();
+    scripts\engine\utility::array_call(level.scriptable_cleanup, &hide);
+  }
+
+  scripts\engine\utility::flag_wait_any("middle_road", "going_left_side", "going_right_side");
+
+  if(isDefined(level.cleanup_ents) && isDefined(level.cleanup_ents["post_bomb_ents"])) {
+    scripts\engine\sp\utility::cleanup_ents("post_bomb_ents");
+    return;
+  }
+}
+
+function combat_ambience() {
+  level endon("combat_start");
+  var0 = getspawnerarray("aftermath_fake_civs");
+  var1 = sortbydistance(var0, level.player.origin)[0];
+  thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var1.origin);
+  var2 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+  scripts\engine\utility::delaythread(1.6, &scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams, var2.origin);
+  var3 = gettime();
+
+  for(;;) {
+    var4 = randomintrange(10, 20);
+
+    for(var5 = 0; var5 < var4; var5++) {
+      magicbullet("iw8_ar_akilo47", var1.origin + (0, 0, 70), var1.origin);
+      wait randomfloatrange(0.1, 0.2);
+    }
+
+    if(gettime() - var3 > 7000) {
+      thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var1.origin);
+      var3 = gettime();
+    }
+
+    wait randomfloatrange(2, 4);
+  }
+}
+
+function post_bomb_background_vo() {
+  level scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_gfc_infil_car1_street_320");
+  level.player scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_kyle_infil_car1_street_330");
+  level.player scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_kyle_infil_car1_street_360");
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_uk51_post_bomb_street_10", 100);
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_uk52_post_bomb_street_20", 100);
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_gfc_post_bomb_street_30", 200);
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_uk51_post_bomb_street_90", 300);
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_gfc_post_bomb_street_100", 400);
+
+  if(scripts\engine\utility::flag("combat_start")) {
+    return;
+  }
+
+  level endon("combat_start");
+
+  if(!isDefined(level.sas)) {
+    level.sas = level.street_friendlies;
+  }
+
+  level.sas[0] thread scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_s26_infil_car1_street_430");
+  level.player scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_kyle_infil_car1_street_440");
+  var0 = ["dx_vom_s26_infil_car1_street_400", "dx_vom_s26_infil_car1_street_410", "dx_vom_s26_infil_car1_street_420"];
+  var1 = scripts\engine\sp\utility::create_deck(var0);
+
+  for(;;) {
+    level.sas[0] thread scripts\asm\gesture::ai_request_gesture("military_point", level.carjumper);
+    level.sas[0] scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter(var1 scripts\engine\sp\utility::deck_draw());
+    wait randomfloatrange(8, 12);
+  }
+}
+
+function post_bomb_vo() {
+  if(level.start_point != "post_bomb") {
+    scripts\engine\utility::flag_wait("standoff_vo_complete");
+  }
+
+  thread post_bomb_background_vo();
+  scripts\engine\utility::flag_wait("combat_approach");
+
+  if(!isDefined(level.sas)) {
+    level.sas = level.street_friendlies;
+  }
+
+  wait 0.3;
+  level.sas[0] scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_s151_post_bomb_street_60");
+  wait 0.2;
+  level.sas[1] scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_s152_post_bomb_street_70");
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_gfc_post_bomb_street_40", 400);
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_uk51_post_bomb_street_50", 400);
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_uk52_post_bomb_street_80", 400);
+  level.player scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_kyle_combat_ext_20", 400);
+  scripts\sp\maps\piccadilly\piccadilly_util::add_to_chatter("dx_vom_gfc_combat_ext_30", 400);
+}
+
+function standoff_start() {
+  thread spawn_animated_trailer_civs();
+  scripts\engine\sp\utility::array_spawn_targetname("intro_civs");
+  level.street_friendlies = scripts\engine\sp\utility::array_spawn_targetname("sicario_street_friendly");
+  level.car2_terries = scripts\engine\sp\utility::array_spawn_targetname("car2_terry", 1);
+  var0 = scripts\engine\utility::array_combine(level.street_friendlies, level.car2_terries);
+  var1 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  scripts\engine\utility::array_thread(var0, &standoff_trailer_setup, var1);
+  level.truck = setup_scriptable_car("sas_intro_decho");
+  level.cars_bomb["van"] = setup_scriptable_car("car2_bomb");
+  level.cars_bomb["car1"] = setup_scriptable_car("car1_bomb");
+  level.cars_bomb["ralfa"] = setup_scriptable_car("car3_bomb");
+  level.cars_bomb["cab"] = setup_scriptable_car("car4_bomb");
+  thread setup_temp_car_stuff();
+  setglobalsoundcontext("dusty", "yes");
+  scripts\engine\sp\objectives::objective_add("intro", "current", undefined, &"PICCADILLY/OBJ_APPROACH_VAN");
+  scripts\engine\sp\objectives::objective_set_on_entity("intro", "Target", level.cars_bomb["van"]);
+  scripts\engine\sp\objectives::objective_set_z_offset("intro", 120);
+  scripts\engine\sp\utility::set_start_location("sicario_street", [level.player]);
+  thread intro_car(var1);
+}
+
+function standoff_main() {
+  setomnvar("ui_hide_hud", 1);
+  level.player scripts\sp\utility::allow_cg_drawcrosshair(0);
+  setomnvar("ui_hide_weapon_info", 1);
+  level.player modifybasefov(50, 0.1);
+  level.player waittill("melee_pressed");
+  trailer_car_drive_off(level.cars_bomb["van"]);
+  level notify("start_trailer_scene");
+  thread post_explosion_visionset();
+  wait 1;
+  scripts\engine\utility::exploder("aftermath");
+  level waittill("forever");
+}
+
+function standoff_trailer_setup(var0) {
+  if(self.animname == "car2_terry_driver") {
+    self delete();
+    return;
+  }
+
+  var0 scripts\common\anim::anim_first_frame_solo(self, "car_explosion");
+  level waittill("start_trailer_scene");
+  var0 scripts\common\anim::anim_single_solo(self, "car_explosion");
+  var0 scripts\common\anim::anim_last_frame_solo(self, "car_explosion");
+}
+
+function spawn_animated_trailer_civs() {
+  var0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+
+  for(var1 = 1; var1 < 36; var1++) {
+    if(var1 != 30) {
+      thread trailer_civ_setup(var1, var0);
+    }
+  }
+
+  var0 = scripts\engine\utility::getStruct("intro_civ_animnode", "targetname");
+
+  for(var1 = 36; var1 < 54; var1++) {
+    thread trailer_civ_setup(var1, var0);
+  }
+
+  thread intro_civ_post_anims();
+}
+
+function trailer_civ_setup(var0, var1) {
+  var2 = get_random_spawner(var0);
+  var3 = bodyonly_guy_setup(var2, var0);
+
+  if(!isDefined(level.scr_anim[var3.animname]["intro_run"])) {
+    var3 delete();
+    return;
+  }
+
+  var1 scripts\common\anim::anim_first_frame_solo(var3, "intro_run");
+  level waittill("start_trailer_scene");
+  var1 scripts\common\anim::anim_single_solo(var3, "intro_run");
+  var1 scripts\common\anim::anim_last_frame_solo(var3, "intro_run");
+}
+
+function trailer_car_drive_off() {
+  var0 = scripts\engine\utility::getanim("car2_drives_off");
+  var1 = getanimlength(var0);
+  thread car2_delete_extras(var0);
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_drives", "car2_drives_off", self.animname, var0);
+  thread scripts\sp\anim::animscriptdonotetracksthread(self, "car2_drives", "car2_drives_off");
+  self setflaggedanimknoball("car2_drives", var0, %root, 1, 0, 1);
+  wait var1 / 1.1;
+}
+
+function skip_ahead_scriptable(var0, var1) {
+  if(scripts\engine\utility::is_equal(self.animname, "intro_car3") || scripts\engine\utility::is_equal(self.animname, "intro_car4")) {
+    return;
+  }
+
+  if(scripts\engine\utility::is_equal(self.animname, "intro_car5")) {
+    self clearanim(%root, 0);
+    var2 = scripts\engine\utility::getanim("intro_slamzoom");
+    var3 = getstartorigin(var0.origin, var0.angles, var2);
+    var4 = getstartangles(var0.origin, var0.angles, var2);
+    self.origin = var3;
+    self.angles = var4;
+    self setflaggedanimknoballrestart("single anim", var2, %root, 1, 0, 1100);
+    waitframe();
+    thread hide_intro_car();
+    return;
+  } else {
+    self clearanim(%root, 0);
+    var2 = scripts\engine\utility::getanim("intro_slamzoom");
+    var3 = getstartorigin(var3.origin, var3.angles, var2);
+    var4 = getstartangles(var3.origin, var3.angles, var2);
+    self.origin = var3;
+    self.angles = var4;
+    level waittill("all_ents_are_ready");
+    self setflaggedanimknoballrestart("single anim", var2, %root, 1, 0, 1050);
+    waitframe();
+    self setanimrate(var2, 1);
+  }
+
+  self stopsounds();
+}
+
+function vo_intro_walla() {
+  level waittill("vo_standoff_walla");
+  var0 = level.player.origin;
+  var1 = spawn("script_origin", (-2626, -3381, 60));
+  var2 = spawn("script_origin", (-2694, -3728, 60));
+  var1 playLoopSound("scn_piccadilly_standoff_walla_left_lp");
+  var2 playLoopSound("scn_piccadilly_standoff_walla_right_lp");
+  level waittill("vo_pre_expl_walla");
+  thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_pre_expl_walla_left", (-2626, -3381, 60));
+  var1 scripts\engine\sp\utility::sound_fade_and_delete(1.5, 1);
+  wait 0.1;
+  thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_pre_expl_walla_right", (-2694, -3728, 60));
+  var2 scripts\engine\sp\utility::sound_fade_and_delete(1.5, 1);
+  level waittill("vo_expl_walla");
+  wait 0.4;
+  thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_expl_walla_left", (-2626, -3381, 60));
+  thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_expl_walla_right", (-2694, -3728, 60));
+  level waittill("vo_post_expl_walla");
+  wait 2;
+  thread vo_post_bomb_walla();
+}
+
+function vo_post_bomb_walla() {
+  thread scripts\engine\utility::play_loopsound_in_space("scn_piccadilly_streets_injured_grp_04_lp", (-2557, -3388, 60));
+  thread scripts\engine\utility::play_loopsound_in_space("scn_piccadilly_streets_injured_grp_02_lp", (-2394, -3406, 60));
+  thread scripts\engine\utility::play_loopsound_in_space("scn_piccadilly_streets_injured_grp_01_lp", (-2088, -3394, 60));
+  thread scripts\engine\utility::play_loopsound_in_space("scn_piccadilly_streets_injured_grp_03_lp", (-1904, -3819, 60));
+  thread scripts\engine\utility::play_loopsound_in_space("scn_piccadilly_streets_injured_grp_04_lp", (-2124, -3793, 60));
+}

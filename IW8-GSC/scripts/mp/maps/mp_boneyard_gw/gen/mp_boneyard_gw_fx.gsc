@@ -1,0 +1,6 @@
+/********************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\maps\mp_boneyard_gw\gen\mp_boneyard_gw_fx.gsc
+********************************************************************/
+
+function main() {}

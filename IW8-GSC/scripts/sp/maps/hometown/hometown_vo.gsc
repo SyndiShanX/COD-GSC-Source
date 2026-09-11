@@ -1,0 +1,3013 @@
+/****************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\sp\maps\hometown\hometown_vo.gsc
+****************************************************/
+
+function main() {}
+
+function register_buried_sources() {
+  var0 = level.player getEye();
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("rescuer_1", "Rescuer 1", var0 + (0, 0, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("rescuer_2", "Rescuer 2", var0 + (0, 0, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("rescuer_3", "Rescuer 3", var0 + (0, 0, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("rescuer_4", "Rescuer 4", var0 + (-400, 400, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("rescuer_5", "Rescuer 5", var0 + (-350, 450, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("rescuer_6", "Rescuer 6", var0 + (400, 400, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("rescuer_7", "Rescuer 7", var0 + (350, 450, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("civilian_1", "Civilian 1", var0 + (-350, -450, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("civilian_2", "Civilian 2", var0 + (-400, -500, 60));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("father", "Father", (2215, 900, 60));
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+}
+
+function buried_start_vo() {
+  level endon("buried_complete");
+  level endon("buried_scene_start_vo");
+  register_buried_sources();
+  GscBinSkip4(0x35);
+}
+
+function start_weak_moans() {
+  level endon("farah_pulled_arm");
+  wait 1;
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_buried_start_rubble_10");
+}
+
+function buried_unheard_yells() {
+  level endon("farah_buried_vo_press");
+  var0 = load_rubble_res1_yells_01();
+  var1 = load_rubble_res2_yells_01();
+  var2 = load_rubble_res3_yells_01();
+  var3 = load_rubble_dad_yells_01();
+  var4 = load_rubble_res1_calming_01();
+  var5 = load_rubble_res1_yells_02();
+  var6 = load_rubble_res2_yells_02();
+  var7 = load_rubble_res3_yells_02();
+  var8 = load_rubble_res1_yells_03();
+  var9 = load_rubble_res2_yells_03();
+  var10 = load_rubble_res3_yells_03();
+  wait 1;
+  var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  wait 0.8;
+  var11 = 0.4;
+  var12 = 1;
+  var13 = 100;
+  var14 = 100;
+
+  for(;;) {
+    var1 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait_plus_minus_vo_bucket_duration(var1, var11, var12);
+    var2 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait_plus_minus_vo_bucket_duration(var2, var11, var12);
+    var15 = randomfloatrange(0, 100);
+
+    if(var15 < var13) {
+      var3 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+      var4 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+      wait_plus_minus_vo_bucket_duration(var4, var11, var12);
+
+      if(var13 > 20) {
+        var13 -= 20;
+      }
+    }
+
+    var6 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait_plus_minus_vo_bucket_duration(var6, var11, var12);
+    var7 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait_plus_minus_vo_bucket_duration(var7, var11, var12);
+    var5 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait_plus_minus_vo_bucket_duration(var5, var11, var12);
+    var15 = randomfloatrange(0, 100);
+
+    if(var15 < var14) {
+      var3 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+      var4 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+      wait_plus_minus_vo_bucket_duration(var4, var11, var12);
+      var14 -= 33.334;
+    }
+
+    var9 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait_plus_minus_vo_bucket_duration(var9, var11, var12);
+    var8 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait_plus_minus_vo_bucket_duration(var8, var11, var12);
+    var10 thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait_plus_minus_vo_bucket_duration(var10, var11, var12);
+  }
+}
+
+function wait_plus_minus_vo_bucket_duration(var0, var1) {
+  var2 = self;
+  var3 = var2.last_played.duration;
+  wait randomfloatrange(var3 * var0, var3 + var1);
+}
+
+function buried_background_conversations() {
+  level endon("farah_buried_vo_press");
+  var0 = load_rubble_res4_5_getwater_01();
+  var1 = load_rubble_res6_7_getrope_01();
+  var2 = load_rubble_civ1_2_phone_convo_01();
+  wait 5;
+
+  for(;;) {
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket_looping(0.1, 1);
+    var1 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket_looping(0.1, 1);
+    var2 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket_looping(0.1, 1);
+  }
+}
+
+function wait_pull_arm() {
+  level endon("tile_grab_vo");
+  level waittill("farah_pulled_arm");
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_buried_start_rubble_725", 1);
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_buried_start_rubble_730", 1);
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_buried_start_rubble_740", 1);
+}
+
+function wait_grab_tile() {
+  level endon("farah_buried_vo_press");
+  level waittill("tile_grab_vo");
+  wait 2.5;
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_buried_start_rubble_1040", 1);
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_buried_start_rubble_1045", 1);
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_buried_start_rubble_1050", 1);
+}
+
+function farah_hit_grunts() {
+  var0 = ["dx_vom_far_buried_start_noise1_10", "dx_vom_far_buried_start_noise2_10", "dx_vom_far_buried_start_noise3_10"];
+  var1 = scripts\engine\sp\utility::create_deck(var0);
+
+  for(;;) {
+    level waittill("farah_buried_vo_press_begin");
+    level.player thread scripts\sp\maps\hometown\hometown_vo_util::say(var1 scripts\engine\sp\utility::deck_draw(), 1);
+  }
+}
+
+function buried_heard_yells() {
+  var0 = 0;
+  level.player scripts\engine\utility::delaycall(2, &setclienttriggeraudiozone, "ht_rubble_underneath_people_near", 3.5);
+  play_rescuer_reaction01();
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("father", "dx_vom_dad_buried_start_noise1_50", "That's them, I told you...!");
+
+  if(level.rebar_hits > 1) {
+    level.rebar_hits = 1;
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("rescuer_2", "dx_vom_re2_buried_start_noise2_70", "Keep going, we hear you!");
+  } else {
+    wait 0.2;
+    play_rescuer_nags();
+    var0 = play_rescuer_reaction02(0);
+  }
+
+  if(level.rebar_hits < 2) {
+    play_rescuer_nags();
+    play_rescuer_reaction02(var0);
+  }
+
+  level notify("buried_hit_vo_finished");
+  level.buried_vo_finished = 1;
+}
+
+function play_rescuer_reaction01() {
+  if(!scripts\sp\maps\hometown\hometown_vo_util::get_vo_source_is_speaking("rescuer_1")) {
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("rescuer_1", "dx_vom_re1_buried_start_noise1_10", "Quiet! Quiet! I heard something!");
+    return;
+  }
+
+  if(!scripts\sp\maps\hometown\hometown_vo_util::get_vo_source_is_speaking("rescuer_2")) {
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("rescuer_2", "dx_vom_re2_buried_start_noise1_20", "Shh...shh... Listen, listen...");
+    return;
+  }
+
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("rescuer_3", "dx_vom_re3_buried_start_noise1_30", "Did you hear that?");
+}
+
+function play_rescuer_nags() {
+  var0 = load_noise_res_nags();
+  level endon("farah_buried_vo_press");
+
+  for(;;) {
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    wait 0.1;
+  }
+}
+
+function play_rescuer_reaction02(var0) {
+  if(!scripts\sp\maps\hometown\hometown_vo_util::get_vo_source_is_speaking("rescuer_1") && var0 != 1) {
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("rescuer_1", "dx_vom_re1_buried_start_noise1_40", "Here, here, over here...");
+    return 1;
+  }
+
+  if(!scripts\sp\maps\hometown\hometown_vo_util::get_vo_source_is_speaking("rescuer_2") && var0 != 2) {
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("rescuer_2", "dx_vom_re2_buried_start_noise2_40", "Keep making noise so we can find you!");
+    return 2;
+  }
+
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("rescuer_3", "dx_vom_re3_buried_start_noise2_90", "Someone\x92s in there, I heard the sound.");
+  return 3;
+}
+
+function carried_start_vo() {
+  level endon("alley_vo_started");
+  level waittill("buried_scene_start_vo");
+  var0 = level.player gettagorigin("tag_eye");
+  wait 28.85;
+  scripts\sp\maps\hometown\hometown_vo_util::unregister_all_vo_sources();
+  childthread scripts\engine\utility::play_sound_in_space("dx_vom_dad_carried_start_rescue_140", (2207, 885, 60));
+  wait 64.15;
+  attack_sequence();
+}
+
+function attack_sequence() {
+  thread scripts\engine\utility::play_sound_in_space("dx_vom_cvm1_carried_start_attack_10", (414.682, -797.072, 60));
+  wait 30;
+  GscBinSkip4(0x35);
+}
+
+function russian_vo() {
+  var0 = spawn("script_origin", (487, -956, 60));
+  var0 scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_ru1_carried_start_attack_60");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_ru1_carried_start_attack_70");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_ru2_carried_start_attack_80");
+  var0 delete();
+}
+
+function alley_start_vo() {
+  level.player endon("death");
+  level notify("alley_vo_started");
+  level.player endon("farah_entered_house_notify");
+  var0 = [];
+  GscBinSkip0(0x2e, var0.size, "dx_vom_dad_alley_sneak_71");
+}
+
+function say_if_good_distance(var0, var1, var2) {
+  var3 = get_min_time_to_point(var1[0], var1[1], length2d(level.player getvelocity()));
+
+  if(scripts\sp\maps\hometown\hometown_vo_util::get_player_progress_toward_self() <= 0.5) {
+    scripts\sp\maps\hometown\hometown_vo_util::say(var0);
+    return;
+  }
+
+  if(var3 > lookupsoundlength(var0) / 1000 * var2) {
+    scripts\sp\maps\hometown\hometown_vo_util::say(var0);
+    return;
+  }
+}
+
+function get_min_time_to_point(var0, var1, var2) {
+  if(!isDefined(var2) || var2 == 0) {
+    return 2147483647;
+  }
+
+  var3 = (var0, var1, 0);
+  var4 = distance2d(level.player.origin, var3);
+  return var4 / var2;
+}
+
+function wrong_way_warning() {
+  GscBinSkip4(0x35);
+}
+
+function alley_wrong_way_spotted() {
+  for(;;) {
+    level waittill("stealth_event", var0);
+
+    if(var0.type == "cover_blown" || var0.type == "combat") {
+      level notify("stop_all_wrong_way_warnings");
+      level.farah_father_ai scripts\sp\maps\hometown\hometown_vo_util::say_as_chatter("dx_vom_dad_alley_street_102", 1);
+      level.russian_shooter_3_ai scripts\sp\maps\hometown\hometown_vo_util::say_as_chatter("dx_vom_ru3_alley_street_110");
+      level.russian_shooter_2_ai scripts\sp\maps\hometown\hometown_vo_util::say_as_chatter("dx_vom_ru2_alley_street_120");
+      return;
+    }
+  }
+}
+
+function injured_civilian_reactions() {
+  wait 4;
+  level.gasattack_civ_female_01 scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_female_1");
+  level.gasattack_civ_male_01 scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_male_1");
+  level.gasattack_civ_male_02 scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_male_2");
+  level.gasattack_civ_male_03 scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_male_3");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_alley_triage_10", "Bring water! Get the bandages!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_2", "dx_vom_cvm2_alley_triage_20", "No, we have to take them to a hospital!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_alley_triage_30", "They won't make it! We'll sew them up here.");
+}
+
+function civilian_gas_reactions() {
+  wait 1;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_2", "dx_vom_cvm2_alley_triage_40", "What's that sound?");
+  wait 3.5;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_alley_triage_50", "Please! No!");
+  wait 0.3;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_2", "dx_vom_cvm2_alley_triage_60", "Have mercy!");
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_alley_triage_70", "<choking sounds>");
+  wait 0.2;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_2", "dx_vom_cvm2_alley_triage_80", "<choking sounds>");
+  wait 0.1;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_alley_triage_100", "<coughing/pain efforts>");
+  wait 0.05;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_2", "dx_vom_cvm2_alley_triage_110", "<coughing/pain efforts>");
+  wait 0.75;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_3", "dx_vom_cvm3_alley_triage_120", "<coughing/pain efforts>");
+}
+
+function civilian_death_sequence_01() {
+  level scripts\engine\utility::play_sound_in_space("dx_vom_cvm2_alley_street_40", (550, -1030, 10));
+  level.russian_shooter_2_ai scripts\engine\sp\utility::smart_dialogue("dx_vom_ru2_alley_street_60");
+  wait 0.1;
+  level.russian_shooter_2_ai scripts\engine\sp\utility::smart_dialogue("dx_vom_ru2_alley_street_70");
+  level.russian_shooter_3_ai scripts\engine\sp\utility::smart_dialogue("dx_vom_ru3_alley_street_80");
+  level.russian_shooter_2_ai scripts\engine\sp\utility::smart_dialogue("dx_vom_ru2_alley_street_90");
+}
+
+function register_house_enter_vo_sources() {
+  level.farah_father_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("father", "Father");
+  level.hadir_body_model scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("hadir", "Hadir");
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+}
+
+function house_enter_start_vo() {
+  level.player endon("grabbed_by_boss");
+
+  if(scripts\sp\maps\hometown\hometown_util::skipchildrenkillingscene()) {
+    level endon("house_enter_boss_anim_complete");
+  }
+
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_house_enter_reunion_00", 1);
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_house_enter_reunion_05");
+  scripts\engine\utility::flag_wait("objective_prepare_to_escape");
+  thread wait_for_get_phone();
+  level waittill("waiting_in_foyer");
+  nag_get_to_foyer();
+  register_house_enter_vo_sources();
+  scripts\engine\utility::flag_wait("russian_entered_house");
+  wait 47.25;
+  level notify("stop_farah_reaction");
+
+  if(level.player scripts\sp\maps\hometown\hometown_util::get_is_looking_at(level.farah_father_ai, undefined, "j_chest", 1)) {
+    level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_house_boss_dadfight_60");
+  }
+
+  thread farah_idle_hide_hints();
+  wait 10;
+  play_start_hunting_vo();
+}
+
+function nag_get_to_foyer() {
+  var0 = [];
+  GscBinSkip0(0x2e, var0.size, "dx_vom_dad_house_enter_foyer_70");
+}
+
+function wait_for_get_phone() {
+  level endon("player_got_phone");
+  var0 = [];
+  GscBinSkip0(0x2e, var0.size, "dx_vom_dad_house_enter_kitchen_10");
+}
+
+function register_house_boss_vo_sources() {
+  level.hadir_body_model scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("hadir", "Hadir");
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+  level.goliath_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("russian_j12", "Russian J-12");
+  level.goliath_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_attached("russian_j13", "Russian J-13", "tag_stowed_hip_rear");
+}
+
+function house_boss_start_vo() {
+  register_house_boss_vo_sources();
+  thread lookat_brother_vo();
+  level.boss_vo = spawnStruct();
+  level.boss_vo.last_stab_time = -10000000;
+  level.boss_vo.start_time = gettime();
+  goto_boss_phase(0);
+  thread update_boss_vo_context();
+  thread start_boss_checks();
+  thread check_stabbed();
+  thread check_grabbed();
+  thread check_stab_countered();
+  thread boss_struggle_vo();
+}
+
+function farah_idle_hide_hints() {
+  level.player endon("death");
+  level.player endon("grabbed_by_boss");
+  level endon("boss_stab_vo_start");
+  level endon("boss_struggle_vo_start");
+  level endon("goliath_weapon_exists");
+  wait_not_hidden_for_time(6);
+  wait 0.5;
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_house_boss_hide_20");
+  wait_not_hidden_for_time(12);
+  wait 0.5;
+  level.player scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_house_boss_hide_10");
+}
+
+function wait_not_hidden_for_time(var0) {
+  var1 = gettime();
+  var2 = var0;
+  var3 = [level.goliath_ai, level.player];
+  var4 = scripts\engine\trace::create_ainosight_contents();
+
+  for(;;) {
+    var5 = !scripts\engine\trace::ray_trace_passed(level.player.origin + (0, 0, 5), level.player.origin + (0, 0, 50), [level.player], scripts\engine\trace::create_all_contents());
+
+    if(var5) {
+      var1 = gettime();
+    }
+
+    var6 = scripts\engine\utility::time_has_passed(var1, var2);
+    var7 = scripts\engine\trace::ray_trace_passed(level.goliath_ai getEye(), level.player getEye(), var3, var4);
+
+    if(var6 && var7) {
+      break;
+    }
+
+    waitframe();
+  }
+}
+
+function check_stab_countered() {
+  level endon("boss_struggle_vo_start");
+  level waittill("boss_counter_vo_start");
+  stop_boss_checks();
+
+  switch (level.player.context_melee_animation) {
+    case "boss_counter_left":
+      thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(0.85, "farah", "dx_vom_far_house_boss_stab3_20", "<choking/struggling efforts>");
+      wait 0.15;
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_caught_30", "What do we have here?!");
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_caught_20", "Got you, suka!");
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab3_50", "That\x92s it... go to sleep. Go to sleep...");
+      break;
+    case "boss_counter_right":
+      thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(1.5, "farah", "dx_vom_far_house_boss_stab1_25", "<stab effort>");
+      thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(4.25, "farah", "dx_vom_far_house_boss_stab1_00", "<hurt/getting hit by soldier>");
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_caught_10", "There you are!");
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab1_80", "Noisey little rat!");
+      break;
+    case "boss_counter_back":
+      thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(0.65, "farah", "dx_vom_far_house_boss_stab3_20", "<choking/struggling efforts>");
+      wait 0.15;
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_caught_40", "You little rat!");
+      wait 0.1;
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab3_30", "Trying to kill me?!");
+      wait 1;
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab1_70", "Too slow , suka!");
+      break;
+    case "boss_counter_front":
+      thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(1.75, "farah", "dx_vom_far_house_boss_stab1_25", "<hurt/getting hit by soldier>");
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab3_10", "Bitch!");
+      wait 0.85;
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab3_40", "Lose to a child- fucking girl...?!, no way...!");
+      break;
+    default:
+      break;
+  }
+}
+
+function play_start_hunting_vo() {
+  level.goliath_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("russian_j12", "Russian J-12");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_patrol_10", "Sonovabitch!");
+  wait 0.45;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_patrol_20", "Fuck you. Piece of shit.");
+}
+
+function update_boss_vo_context() {
+  level endon("boss_struggle_vo_start");
+
+  for(;;) {
+    waitframe();
+    var0 = scripts\engine\trace::ray_trace_passed(level.goliath_ai getEye(), level.player getEye(), [level.player, level.goliath_ai], scripts\engine\trace::create_ainosight_contents());
+    level.boss_vo.context["can_see_player"] = var0;
+    var1 = !scripts\engine\trace::ray_trace_passed(level.player.origin + (0, 0, 5), level.player.origin + (0, 0, 50), [level.player], scripts\engine\trace::create_all_contents());
+    level.boss_vo.context["player_under_something"] = var1;
+  }
+}
+
+function lookat_brother_vo() {
+  level endon("boss_struggle_vo_start");
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("farah", "dx_vom_far_house_boss_brother_40", "Brother...?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("farah", "dx_vom_far_house_boss_brother_50", "Hadir...?");
+  var1 = 0;
+  var2 = level.hadir_body_model gettagorigin("j_clavicle_ri");
+
+  while(isDefined(level.hadir_body_model)) {
+    level.player scripts\sp\maps\hometown\hometown_util::wait_lookat(var2, 150, undefined, 0.3, 35);
+    var1++;
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+
+    if(var0.open_lines.size > 0) {
+      wait 2;
+      continue;
+    }
+
+    wait 5;
+  }
+}
+
+function cool_circle(var0, var1, var2) {
+  self endon("stop_drawing_cool_circle");
+
+  for(;;) {
+    var3 = var2;
+    var4 = 50;
+
+    for(var5 = 0; var5 < var4; var5++) {
+      scripts\engine\utility::draw_circle(var0 + (0, 0, var3), var1, (1, 1, 1), 1 - var5 / var4, 1, 1);
+      var3 += 0.5;
+    }
+
+    waitframe();
+  }
+}
+
+function check_grabbed() {
+  level endon("boss_struggle_vo_start");
+  level.player waittill("grabbed_by_boss");
+  level.boss_vo notify("stop_checks");
+  wait 1.3;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_house_boss_stab3_20", "<choking/struggling efforts>");
+  wait 0.7;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab3_50", "You're coming with me...");
+}
+
+function skip_to_final_phase() {
+  level.goliath_boss_round = 2;
+
+  for(var0 = 0; var0 <= 4; var0++) {
+    goto_boss_phase(var0);
+  }
+
+  level.player waittill("knife_change");
+}
+
+function start_boss_checks() {
+  level.goliath_ai endon("death");
+  level.player endon("death");
+  level.boss_vo endon("stop_checks");
+  level endon("boss_stab_vo_start");
+  level endon("boss_struggle_vo_start");
+  thread start_idle();
+  GscBinSkip4(0x6e, level.boss_vo, level.boss_vo);
+}
+
+function stop_boss_checks() {
+  level.boss_vo notify("stop_checks");
+}
+
+function start_idle() {
+  level.player endon("death");
+  level.goliath_ai endon("death");
+  level.boss_vo endon("stop_idle");
+  level.boss_vo endon("stop_checks");
+  level endon("boss_stab_vo_start");
+  level endon("boss_struggle_vo_start");
+
+  if(level.goliath_ai[[level.goliath_ai.fnisinstealthcombat]]()) {
+    idle_combat();
+    return;
+  }
+
+  idle_hunt();
+}
+
+function stop_idle() {
+  level.boss_vo notify("stop_idle");
+}
+
+function goto_boss_phase(var0) {
+  if(isDefined(level.boss_vo.phase) && level.boss_vo.phase == var0) {
+    return;
+  }
+
+  switch (var0) {
+    case 0:
+      level.boss_vo.noise = load_noise0();
+      level.boss_vo.spotted = load_spotted0();
+      level.boss_vo.lost = load_lost0();
+      level.boss_vo.hunt = load_hunt0();
+      level.boss_vo.hunt_loop = load_hunt0_loop();
+      level.boss_vo.combat = load_combat0();
+      level.boss_vo.combat_loop = load_combat0_loop();
+      break;
+    case 1:
+      level.boss_vo.noise = load_noise1();
+      level.boss_vo.spotted = load_spotted1();
+      level.boss_vo.lost = load_lost1();
+      level.boss_vo.hunt = load_hunt1();
+      level.boss_vo.hunt_loop = load_hunt1_loop();
+      level.boss_vo.combat = load_combat1();
+      level.boss_vo.combat_loop = load_combat1_loop();
+      break;
+    case 2:
+      level.boss_vo.noise = load_noise2();
+      level.boss_vo.spotted = load_spotted2();
+      level.boss_vo.lost = load_lost2();
+      level.boss_vo.hunt = load_hunt2();
+      level.boss_vo.hunt_loop = load_hunt2_loop();
+      level.boss_vo.combat = load_combat2();
+      level.boss_vo.combat_loop = load_combat2_loop();
+      break;
+    case 3:
+      level.boss_vo.noise = load_noise3();
+      level.boss_vo.spotted = load_spotted3();
+      level.boss_vo.lost = load_lost3();
+      level.boss_vo.hunt = load_hunt3();
+      level.boss_vo.hunt_loop = load_hunt3_loop();
+      level.boss_vo.combat = load_combat3();
+      level.boss_vo.combat_loop = load_combat3_loop();
+      break;
+    case 4:
+      level.boss_vo.noise = load_noise4();
+      level.boss_vo.spotted = load_spotted4();
+      level.boss_vo.lost = load_lost4();
+      level.boss_vo.hunt = load_hunt4();
+      level.boss_vo.hunt_loop = load_hunt4_loop();
+      level.boss_vo.combat = load_combat4();
+      level.boss_vo.combat_loop = load_combat4_loop();
+      break;
+    default:
+      break;
+  }
+
+  level.boss_vo.phase = var0;
+}
+
+function check_heard_player() {
+  for(var0 = -1;; var0 = gettime()) {
+    level waittill("stealth_event", var1);
+
+    if(var1.type == "combat") {
+      continue;
+    }
+
+    if(level.goliath_ai[[level.goliath_ai.fnisinstealthcombat]]() || !scripts\engine\utility::time_has_passed(level.boss_vo.last_stab_time, 10)) {
+      continue;
+    }
+
+    thread heard_player(var0);
+  }
+}
+
+function heard_player(var0) {
+  level endon("stealth_event");
+  stop_idle();
+
+  if(scripts\engine\utility::time_has_passed(var0, 1)) {
+    level.boss_vo.noise scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+
+  if(level.boss_vo.phase == 0 && level.boss_vo.lost.open_lines.size == 0) {
+    goto_boss_phase(1);
+  }
+
+  if(level.boss_vo.phase == 0) {
+    play_giveup_after_time();
+  }
+
+  thread start_idle();
+}
+
+function check_found_player() {
+  level.player endon("death");
+
+  for(;;) {
+    level.goliath_ai waittill("stealth_combat");
+    found_player();
+  }
+}
+
+function found_player() {
+  if(level.boss_vo.phase < 2) {
+    goto_boss_phase(2);
+  }
+
+  stop_idle();
+
+  if(scripts\engine\utility::time_has_passed(level.boss_vo.last_stab_time, 10)) {
+    level.boss_vo.spotted scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+
+  thread start_idle();
+}
+
+function play_giveup_after_time() {
+  wait 5;
+  level.boss_vo.lost scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+}
+
+function check_lost_player() {
+  level.player endon("death");
+
+  for(;;) {
+    level.goliath_ai waittill("stealth_hunt");
+    lost_player();
+  }
+}
+
+function lost_player() {
+  if(scripts\sp\maps\hometown\hometown_vo_util::get_vo_source_is_speaking("russian_j12")) {
+    scripts\sp\maps\hometown\hometown_vo_util::get_vo_source("russian_j12") scripts\engine\utility::waittill_any("stop_vo", "vo_finished");
+    stop_idle();
+    wait 0.5;
+  }
+
+  stop_idle();
+
+  if(scripts\engine\utility::time_has_passed(level.boss_vo.start_time, 1)) {
+    level.boss_vo.lost scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+
+  thread start_idle();
+}
+
+function check_stabbed() {
+  level endon("boss_struggle_vo_start");
+  level endon("boss_counter_vo_start");
+  level waittill("boss_stab_vo_start");
+  stop_boss_checks();
+  stop_idle();
+  level.boss_vo.last_stab_time = gettime();
+  thread check_stabbed();
+  boss_stabbed();
+}
+
+function boss_stabbed() {
+  level endon("boss_stab_vo_start");
+
+  if(level.boss_vo.phase < 3) {
+    goto_boss_phase(3);
+    GscBinSkip4(0x35);
+  }
+
+  if(level.boss_vo.phase == 3 && level.goliath_boss_round == 0) {
+    level.boss_vo.combat = load_combat3();
+    GscBinSkip4(0x35);
+  }
+
+  goto_boss_phase(4);
+  GscBinSkip4(0x35);
+}
+
+function second_stab_lines() {
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(0.6, "farah", "dx_vom_far_house_boss_kill_13", "<stab effort>");
+  wait 1;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(1.2, "farah", "dx_vom_far_house_boss_stab1_25", "<stab effort>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab2_10", "<large pain, wounded effort>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab2_20", "Fucking rat!");
+}
+
+function first_stab_lines() {
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(0.6, "farah", "dx_vom_far_house_boss_stab1_00", "<hurt/getting hit by soldier>");
+  wait 1;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(0.85, "farah", "dx_vom_far_house_boss_kill_11", "<stab effort>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab1_10", "Shit!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab1_20", "God damn mother fu----!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab1_30", "<wounded, hurt knife pull effort>");
+}
+
+function idle_hunt() {
+  level.boss_vo.hunt endon("interrupted");
+
+  for(;;) {
+    wait randomfloatrange(6, 10);
+
+    if(level.boss_vo.hunt.open_lines.size == 0) {
+      if(level.boss_vo.phase == 0) {
+        goto_boss_phase(1);
+      } else {
+        level.boss_vo.hunt = level.boss_vo.hunt_loop;
+      }
+    }
+
+    level.boss_vo.hunt scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function idle_combat() {
+  level.boss_vo.combat endon("interrupted");
+
+  for(;;) {
+    wait randomfloatrange(1, 3);
+
+    if(level.boss_vo.combat.open_lines.size == 0) {
+      level.boss_vo.combat = level.boss_vo.combat_loop;
+    }
+
+    if(level.boss_vo.phase == 2 && level.boss_vo.context["player_under_something"]) {
+      level.boss_vo.hunt_loop scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(level.boss_vo.context);
+      continue;
+    }
+
+    level.boss_vo.combat scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(level.boss_vo.context);
+  }
+}
+
+function boss_struggle_vo() {
+  level waittill("boss_struggle_vo_start");
+  thread boss_final_struggle_catch_lines();
+  wait 1;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_house_boss_stab3_20", "<choking/struggling efforts>");
+  wait 5;
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("hadir", "Hadir");
+  wait 5;
+  continuous_stabs();
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(2, "russian_j12", "dx_vom_rj12_house_boss_stab1_30", "Argghhh...!!");
+  wait 6;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(0.25, "russian_j12", "dx_vom_rj12_house_boss_kill_65", "I'll crush your little neck...!");
+  wait 1.5;
+  hadir_choking();
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(0, "hadir", "dx_vom_had_house_boss_kill_105", "<struggling / getting out from under boss");
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(0.2, "farah", "dx_vom_far_house_boss_kill_100", "<firing efforts / roar>Ahhh!");
+  setmusicstate("");
+  wait 0.1;
+  scripts\sp\maps\hometown\hometown_vo_util::stop_vo_source("russian_j12");
+  wait 0.2;
+}
+
+function boss_final_struggle_catch_lines() {
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_caught_10", "There you are!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_caught_20", "Got you, suka!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab3_30", "Trying to kill me?!");
+  wait 0.85;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_stab3_10", "Bitch!");
+  wait 1;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_rescued_12", "<struggling to free himself>");
+}
+
+function hadir_choking() {
+  level endon("player_shot_boss");
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_boss_kill_72", "<efforts of being strangled>");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_boss_kill_70", "<efforts of getting choked>");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+
+  for(;;) {
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function timeout_vo() {
+  level waittill("stab_delay_time_exceeded");
+  wait 1.8;
+  level.hadir_ai stopsounds();
+  level.goliath_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_rj12_house_boss_dadfight_808");
+}
+
+function continuous_stabs() {
+  level endon("start_kill_flip_vo");
+  GscBinSkip4(0x35);
+}
+
+function boss_efforts_getting_stabbed(var0) {
+  var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  wait 0.25;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("russian_j12", "dx_vom_rj12_house_boss_rescued_12", "<struggling to free himself>");
+}
+
+function get_him_farah() {
+  level endon("start_stab");
+  wait 1;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("hadir", "dx_vom_had_house_boss_kill_32", "Get him, Farah!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("hadir", "dx_vom_had_house_boss_rescued_11", "<struggling / fighting soldier>");
+}
+
+function play_hadir_stab_cheer(var0, var1) {
+  level endon("start_stab");
+  wait 0.6;
+  var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  var2 = "dx_vom_had_house_boss_rescued_11";
+  level.hadir_ai thread scripts\sp\maps\hometown\hometown_vo_util::say(var2);
+  wait 1;
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say(var1 scripts\engine\sp\utility::deck_draw(), 1);
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say(var2);
+}
+
+function equals_any(var0, var1) {
+  foreach(var3 in var1) {
+    if(var0 == var3) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function knock_off_check() {
+  for(;;) {
+    var0 = level.goliath_ai scripts\engine\utility::waittill_any_return("smartobject_knock_off_30", "smartobject_knock_off_36");
+    iprintlnbold(var0);
+    wait 2;
+  }
+}
+
+function lean_table_check() {
+  for(;;) {
+    var0 = level.goliath_ai scripts\engine\utility::waittill_any_return("smartobject_lean_table_30", "smartobject_lean_table_36", "smartobject_lean_table_l_30", "smartobject_lean_table_l_36", "smartobject_lean_table_r_30", "smartobject_lean_table_r_36");
+    iprintlnbold(var0);
+    wait 2;
+  }
+}
+
+function lean_wall_check() {
+  for(;;) {
+    var0 = level.goliath_ai scripts\engine\utility::waittill_any_return("smartobject_lean_wall_l", "smartobject_lean_wall_r");
+    iprintlnbold(var0);
+    wait 2;
+  }
+}
+
+function look_check() {
+  for(;;) {
+    var0 = level.goliath_ai scripts\engine\utility::waittill_any_return("smartobject_look_down", "smartobject_look_high", "smartobject_look_over", "smartobject_look_under_10");
+    iprintlnbold(var0);
+    wait 2;
+  }
+}
+
+function house_exit_start_vo() {
+  level.boss_vo = undefined;
+  scripts\sp\maps\hometown\hometown_vo_util::unregister_all_vo_sources();
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("hadir", "Hadir");
+  GscBinSkip4(0x35);
+}
+
+function walk_to_dad() {
+  level endon("hadir_mourn_father");
+  wait 2;
+
+  for(;;) {
+    waitframe();
+    var0 = level.hadir_ai pathdisttogoal();
+
+    if(300 > var0 && var0 > 150) {
+      scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("hadir", "dx_vom_had_poppies_start_fields_30", "We'll go through the poppies. They'll hide us. Let's go.");
+      break;
+    }
+
+    if(var0 < 150) {
+      return;
+    }
+  }
+}
+
+function hadir_mourn_father() {
+  wait 1;
+  wait 1;
+}
+
+function reassure_hadir() {
+  level endon("boss_stuff_pickup");
+  scripts\engine\utility::flag_set("hadir_reassured");
+}
+
+function wait_mourn_father() {
+  level endon("house_exit_complete");
+  level waittill("player_mourn_father");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_house_exit_dad_40", "Good-bye, daddy. I love you.");
+}
+
+function equipment_nags() {
+  while(!scripts\engine\utility::flag("got_gas_mask_from_boss") || !scripts\engine\utility::flag("tried_to_get_gun")) {
+    if(!scripts\engine\utility::flag("got_gas_mask_from_boss") && !scripts\engine\utility::flag("tried_to_get_gun")) {
+      thread play_vo_on_stuff_pickup();
+      get_either_nags();
+    } else if(scripts\engine\utility::flag("tried_to_get_gun")) {
+      get_mask_nags();
+      thread get_mask_vo();
+    } else {
+      get_gun_nags();
+      thread get_gun_vo();
+    }
+
+    level scripts\engine\utility::waittill_any("got_gas_mask_from_boss", "tried_to_get_gun");
+  }
+
+  wait 1;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("hadir", "dx_vom_had_house_exit_dad_10", "Come on...");
+  thread walk_to_dad();
+}
+
+function play_vo_on_stuff_pickup() {
+  level.player waittill("boss_stuff_pickup", var0);
+
+  if(var0 == "gas_mask") {
+    get_mask_vo();
+    return;
+  }
+
+  get_gun_vo();
+}
+
+function lock_pry_nags() {
+  level endon("lock_broken");
+  GscBinSkip4(0x35);
+}
+
+function lock_pry_efforts() {
+  level waittill("start_lock_pry");
+
+  for(;;) {
+    var0 = 0;
+
+    while(var0 < 0.5) {
+      if(!level.player useButtonPressed()) {
+        var0 = 0;
+      }
+
+      waitframe();
+      var0 += 0.05;
+    }
+
+    level.player thread scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_house_exit_lock_101", 1);
+    wait 0.5;
+
+    while(level.player useButtonPressed()) {
+      waitframe();
+    }
+
+    level.player thread scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_prylock", 1);
+  }
+}
+
+function lock_boost_nags() {
+  level.hadir_ai endon("trigger");
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_10", "I can't reach the lock!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_20", "Come, I'll lift you...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_30", "Help me, Farah, I can't reach.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_32", "Step here, sister.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_34", "It's too high, help me...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_40", "Over the door...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_50", "See if you can reach it...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_52", "I'll help you reach the lock, sister.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_54", "I'm not tall enough we have to do it together.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_lock_56", "Step here. I'll help you up.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(undefined, "dx_vom_had_house_exit_lock_10");
+  wait 0.5;
+  var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(undefined, "dx_vom_had_house_exit_lock_20");
+
+  for(;;) {
+    wait randomfloatrange(7, 12);
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function get_either_nags() {
+  level.player endon("boss_stuff_pickup");
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_32", "Farah, let's see what he's got.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_33", "He has things we can use.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_34", "Sister, let's take his things.");
+  wait 5;
+
+  for(;;) {
+    wait randomfloatrange(7, 12);
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function get_mask_nags() {
+  level.player endon("boss_stuff_pickup");
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_70", "Take his mask, sister...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_80", "The mask, Farah, take it.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_81", "You need the mask for the gas outside, remember?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_82", "We can't go if you have no mask, Farah.");
+  scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("hadir");
+  wait 4;
+  var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(undefined, "dx_vom_had_house_exit_loot_70");
+
+  for(;;) {
+    wait randomfloatrange(7, 12);
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function get_gun_nags() {
+  level.player endon("boss_stuff_pickup");
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_35", "Let's try to take his rifle.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_36", "Maybe you can take his gun.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_house_exit_loot_37", "Try to grab his gun, sister.");
+  scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("hadir");
+  wait 1;
+  var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(undefined, "dx_vom_had_house_exit_loot_35");
+
+  for(;;) {
+    wait randomfloatrange(7, 12);
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function get_gun_vo() {
+  wait 0.85;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_house_exit_loot_40", "<efforts straining to pick up gun>");
+  wait 0.5;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_house_exit_loot_50", "He's too heavy.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_house_exit_loot_60", "We have to go.");
+}
+
+function get_mask_vo() {
+  wait 6;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_house_exit_loot_90", "Got it.");
+}
+
+function escape_vo_init() {
+  if(!isDefined(level.hadir_ai.escape_nags)) {
+    init_gas_escape_vo();
+    return;
+  }
+}
+
+function init_gas_escape_vo() {
+  var0 = [];
+  var1 = ["dx_vom_had_gas_start_playground_60", "dx_vom_had_gas_start_playground_61", "dx_vom_had_gas_start_playground_62", "dx_vom_had_gas_start_streets_170"];
+  var0 = scripts\engine\sp\utility::create_deck(var1);
+  var2 = [];
+  GscBinSkip0(0x2e, var2.size, "dx_vom_had_gas_start_playground_120");
+}
+
+function is_near(var0, var1) {
+  return distance2dsquared(self.origin, var0) < var1 * var1;
+}
+
+function get_hadir_gas_escape_nag() {
+  var0 = gettime();
+
+  for(;;) {
+    var1 = get_in_danger(level.player);
+
+    if(scripts\sp\maps\hometown\hometown_vo_util::get_player_progress_toward_self() > 0.5) {
+      return;
+    }
+
+    if(scripts\sp\maps\hometown\hometown_vo_util::get_player_progress_toward_self() == 0.5 && !scripts\engine\utility::time_has_passed(var0, 12) && var1 < 2) {} else {
+      var2 = is_near(level.hadir_ai, (-375.315, -2392.98, 7.96669), 82);
+      var3 = is_near(level.hadir_ai, (-20.4396, -2455.15, 6.21089), 318);
+      var4 = is_near(level.hadir_ai, (585.258, -2742.31, 10.7235), 118);
+      var5 = is_near(level.hadir_ai, (748.985, -2976.42, -6.40835), 150);
+      var6 = is_near(level.hadir_ai, (1018.49, -3061.24, 24.9231), 186);
+      var7 = is_near(level.hadir_ai, (1190.28, -2767.94, -0.530097), 128);
+      var8 = is_near(level.hadir_ai, (1472.25, -2449.1, 30.9651), 172);
+      var9 = is_near(level.hadir_ai, (2263.27, -2225.97, 20.1957), 336);
+      var10 = is_near(level.hadir_ai, (3228.07, -2247.75, 52.6683), 284);
+      var11 = is_near(level.player, (-882.589, -2506.98, 6.99609), 142);
+      var12 = is_near(level.player, (585.258, -2742.31, 10.7235), 118);
+      var13 = is_near(level.player, (748.985, -2976.42, -6.40835), 150);
+      var14 = is_near(level.player, (1018.49, -3061.24, 24.9231), 186);
+      var15 = is_near(level.player, (1190.28, -2767.94, -0.530097), 128);
+      var16 = is_near(level.player, (2263.27, -2225.97, 20.1957), 336);
+      var17 = var11 || var12 || var13 || var14;
+      var18 = 0;
+
+      if(isDefined(level.player.last_nag_pos)) {
+        var19 = level.hadir_ai.origin - level.player.origin;
+        var20 = level.hadir_ai.origin - level.player.last_nag_pos;
+        var21 = length2dsquared(var20) - length2dsquared(var19);
+        var18 = var21 < -1600;
+      }
+
+      level.player.last_nag_pos = level.player.origin;
+      var22 = level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::get_player_progress_toward_self() <= 0.3 && var18;
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "crossing_seen_approaching", var1 > 1);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "crossing_seen", var1);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "wrong_way", var22);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "crawling", var2);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "yellow_car", var4 && !var12);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "blue_car", var5 && !var13);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "red_truck", var6 && !var14);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "white_car", var7 && !var15);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "alley", var9 && !var16);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "poppies", var10);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "crossing_unseen", var17 && !var1);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      var23 = get_nag(level.hadir_ai, level.hadir_ai.escape_nags, "generic", 1);
+
+      if(isDefined(var23)) {
+        return var23;
+      }
+
+      foreach(var25 in level.hadir_ai.escape_nags) {
+        if(var25 scripts\engine\sp\utility::deck_is_empty()) {
+          var25 scripts\engine\sp\utility::deck_shuffle();
+        }
+      }
+    }
+
+    wait 1;
+  }
+}
+
+function get_nag(var0, var1, var2) {
+  if(var2 && !var0[var1] scripts\engine\sp\utility::deck_is_empty()) {
+    return var0[var1] scripts\engine\sp\utility::deck_draw();
+  }
+}
+
+function gas_sources() {
+  scripts\sp\maps\hometown\hometown_vo_util::unregister_all_vo_sources();
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("hadir", "Hadir");
+  scripts\sp\maps\hometown\hometown_vo_util::find_and_register_vo_source("ru_soldier_1", "Russian Soldier", "russian_gas_execution_a1", "script_noteworthy");
+  scripts\sp\maps\hometown\hometown_vo_util::find_and_register_vo_source("ru_soldier_2", "Russian Soldier", "russian_gas_execution_a2", "script_noteworthy");
+  scripts\sp\maps\hometown\hometown_vo_util::find_and_register_vo_source("ru_soldier_3", "Russian Soldier", "russian_gas_patrol", "script_noteworthy");
+  scripts\sp\maps\hometown\hometown_vo_util::get_vo_source("ru_soldier_1") scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_attached("ru_team_leader", "Russian Team Leader", "tag_stowed_hip_rear");
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("civilian_male_1", "Civilian", (-780, -2732, 8));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("civilian_child_male_1", "Civilian", (-364.5, -2361.5, 8));
+}
+
+function gas_start_vo() {
+  gas_sources();
+  escape_vo_init();
+  thread missing_ru_soldier();
+  level.hadir_ai waittill("goal");
+  scripts\engine\utility::flag_wait("road_cross_flag");
+  thread hadir_soldier_warning();
+  level.hadir_ai waittill("goal_changed");
+  var0 = [];
+  GscBinSkip0(0x2e, var0.size, "dx_vom_had_gas_start_playground_62");
+}
+
+function hadir_soldier_warning() {
+  level endon("road_cross_mid_flag");
+  level.hadir_ai thread scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_start_streets_21");
+  level.hadir_ai thread scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_start_playground_110");
+  wait 8.5;
+  level.hadir_ai thread scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_330");
+  wait 2.5;
+  level.hadir_ai thread scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_311");
+}
+
+function gas_mid_start_vo() {
+  if(!isDefined(level.hadir_ai.escape_nags)) {
+    wait 0.5;
+    level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_10");
+    escape_vo_init();
+  }
+
+  thread russian_carhide_convo();
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::goalpos_and_nagtill(3, "cars_street_start_flag", &get_hadir_gas_escape_nag, 3, 1.2, 5, 0.5, 1);
+
+  if(!scripts\engine\utility::flag("safe_for_hadir_to_progress")) {
+    level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_240");
+    level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_250");
+  }
+
+  wait 1;
+  color_traversal_nagtill(level.hadir_ai, 2, "cars_flank_mid_flag", &get_hadir_gas_escape_nag, 1, 1.2, 3, 0.5, 1.2, 1);
+  wait 0.2;
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_370");
+  wait 9;
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_270");
+  wait 1;
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_290");
+  wait 0.5;
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_mid_carhide_300");
+  color_traversal_nagtill(level.hadir_ai, 2, "town_exit_gate_start_flag", &get_hadir_gas_escape_nag, 1, 1.2, 3, 0.5, 1.2, 1);
+}
+
+function color_traversal_nagtill(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
+  if(isDefined(var1)) {
+    if(!isarray(var1)) {
+      var1 = [var1];
+    }
+
+    foreach(var10 in var1) {
+      if(scripts\engine\utility::flag_exist(var10) && scripts\engine\utility::flag(var10)) {
+        return;
+      }
+
+      level endon(var10);
+      self endon(var10);
+    }
+  }
+
+  for(;;) {
+    while(!scripts\sp\maps\hometown\hometown_vo_util::get_at_goalpos(undefined, 40)) {
+      waitframe();
+    }
+
+    childthread scripts\sp\maps\hometown\hometown_vo_util::nagtill_delayed(var0, "new_goal", var2, var3, var4, var5, var6, var7, var8);
+
+    while(scripts\sp\maps\hometown\hometown_vo_util::get_at_goalpos(undefined, 40)) {
+      waitframe();
+    }
+
+    self notify("new_goal");
+  }
+}
+
+function hadir_setgoal(var0) {
+  level.hadir_ai setgoalnode(var0);
+  level.hadir_ai notify("new_setgoal", var0);
+  level.hadir_ai endon("stop_color_nags");
+  level.hadir_ai.reached_goal = undefined;
+  level.hadir_ai.reached_goal = level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::goalpos_and_nagtill(2, "new_setgoal", &get_hadir_gas_escape_nag, 1, 1);
+}
+
+function russian_carhide_convo() {
+  scripts\engine\sp\utility::trigger_wait("cars_street_start_trigger", "script_noteworthy");
+  wait 5;
+  scripts\sp\maps\hometown\hometown_vo_util::find_and_register_vo_source("ru_soldier_1", "Russian Soldier", "russian_gas_execution_b1", "script_noteworthy");
+  scripts\sp\maps\hometown\hometown_vo_util::find_and_register_vo_source("ru_soldier_2", "Russian Soldier", "russian_gas_execution_b2", "script_noteworthy");
+  scripts\sp\maps\hometown\hometown_vo_util::find_and_register_vo_source("ru_soldier_3", "Russian Soldier", "russian_gas_briefing_latecomer", "script_noteworthy");
+  scripts\sp\maps\hometown\hometown_vo_util::find_and_register_vo_source("ru_soldier_4", "Russian Soldier", "russian_gas_briefing_straggler", "script_noteworthy");
+  scripts\sp\maps\hometown\hometown_vo_util::get_vo_source("ru_soldier_2") scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_attached("ru_team_leader", "Russian Team Leader", "tag_stowed_hip_rear");
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("civilian_male_3", "Civilian", (671.8, -2832, 8));
+  wait 7;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_mid_carhide_50", "This one's still breathing...");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_60", "We have orders to kill the wounded...");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_mid_carhide_70", "Have you ever been on a mission like this?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_80", "Never. But what are we going to do- break orders?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_mid_carhide_81", "I've heard Barkov executes people for less.");
+  scripts\engine\utility::flag_wait("cars_flank_mid_flag");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_90", "And Moscow is fine with him taking all the women and children?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_mid_carhide_91", "I doubt they even know...");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_92", "Quiet. Here comes Viktor.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_3", "dx_vom_ru3_gas_mid_carhide_100", "Full sweep.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_110", "Any resistance?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_3", "dx_vom_ru3_gas_mid_carhide_120", "Nothing we couldn't handle.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_130", "Women? Children?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_3", "dx_vom_ru3_gas_mid_carhide_140", "On their way to the trucks. Full load.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_team_leader", "dx_vom_rutl_gas_mid_carhide_170", "D Group- confirm status?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_180", "This is D-5. Objective is complete. We're ready to clear out.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_team_leader", "dx_vom_rutl_gas_mid_carhide_190", "Copy. Any additional cargo?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_200", "They're inbound to the trucks now.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_team_leader", "dx_vom_rutl_gas_mid_carhide_210", "Understood.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_team_leader", "dx_vom_rutl_gas_mid_carhide_220", "J-Group reported a casualty. Maintain a perimeter at your location until the threat is neutralized. Clear?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_mid_carhide_230", "Will comply.");
+}
+
+function gas_exit_start_vo() {
+  escape_vo_init();
+  scripts\engine\utility::flag_wait("town_exit_gate_start_flag");
+  wait 1;
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::goalpos_and_nagtill(8, "town_exit_alley_mid_flag", &get_hadir_gas_escape_nag, 12);
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::goalpos_and_nagtill(8, "gas_last_building_enter_flag", &get_hadir_gas_escape_nag, 12);
+  level.hadir_ai scripts\engine\sp\utility::wait_for_notify_or_timeout("stop_loop", 1);
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_gas_exit_window_10");
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::goalpos_and_nagtill(8, "village_exit_flag", &get_hadir_gas_escape_nag, 12);
+}
+
+function alley_attack() {}
+
+function get_in_danger(var0) {
+  if(isDefined(self.origin)) {
+    var1 = self;
+  } else {
+    var1 = level.player;
+  }
+
+  var1 = scripts\sp\maps\hometown\hometown_vo_util::default_if_undefined(var1, 400);
+  var2 = vectorNormalize(level.player getvelocity());
+  var3 = 0;
+
+  foreach(var5 in getaiarrayinradius(var1.origin, var1, "axis")) {
+    if(!scripts\engine\trace::ray_trace_passed(var5 getEye(), level.player getEye(), [level.player, var5], scripts\engine\trace::create_ainosight_contents())) {
+      continue;
+    }
+
+    if(var2 == (0, 0, 0)) {
+      return 1;
+    }
+
+    var6 = vectorNormalize(var5.origin - var1.origin);
+
+    if(scripts\engine\math::anglebetweenvectors(var2, var6) < 90) {
+      return 2;
+    }
+
+    var3 = 1;
+  }
+
+  return var3;
+}
+
+function notify_enter_tunnel() {
+  waitframe();
+  var0 = (-459.151, -2414.09, 18.9434);
+
+  for(;;) {
+    var1 = level.player getstance() == "prone";
+    var2 = distance2dsquared(level.player.origin, var0) < 1600;
+
+    if(var1 && var2) {
+      break;
+    }
+
+    wait 1;
+  }
+
+  level notify("player_entering_tunnel");
+}
+
+function bool_to_string(var0) {
+  if(var0) {
+    return "true";
+  }
+
+  return "false";
+}
+
+function missing_ru_soldier() {
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_gas_start_streets_30", "<coughing/dying efforts>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_gas_start_streets_40", "Is this one of them?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_start_streets_50", "Doesn't matter.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_3", "dx_vom_ru3_gas_start_streets_52", "They're all terrorists. So Barkov wants the whole place wiped out. It's the only way to be sure.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_team_leader", "dx_vom_rutl_gas_start_streets_60", "J Group, we're ready to finish this up. What's your status?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_start_streets_70", "I'm getting a headcount, stand by.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_3", "dx_vom_ru3_gas_start_streets_80", "Sir, we've got a man missing.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_start_streets_90", "Who?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_3", "dx_vom_ru3_gas_start_streets_100", "J-12. He's not responding on radio.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_start_streets_110", "How can you lose him? He's the size of a truck.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_start_streets_120", "Take two men and sweep the area. Start with that house.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_3", "dx_vom_ru3_gas_start_streets_130", "Yes, Commander.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_gas_start_streets_140", "J Group has a man missing. We're holding here until we find him.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_team_leader", "dx_vom_rutl_gas_start_streets_150", "Copy.");
+}
+
+function poppies_vo_sources() {
+  scripts\sp\maps\hometown\hometown_vo_util::unregister_all_vo_sources();
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("hadir", "Hadir");
+}
+
+function get_poppies_nags() {
+  var0 = [];
+  GscBinSkip0(0x2e, var0.size, "dx_vom_had_poppies_start_fields_40");
+}
+
+function poppies_start_vo() {
+  poppies_vo_sources();
+
+  if(isDefined(level.start_point) && level.start_point == "poppies_start") {
+    escape_vo_init();
+    wait 5;
+  }
+
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::nagtill_delayed(8, "gas_mask_remove_trigger", level.hadir_ai.escape_nags["generic"], 12, 1.2, 20);
+  level.hadir_ai.escape_nags = undefined;
+  level.hadir_ai.poppies_nags = get_poppies_nags();
+  thread color_traversal_nagtill(level.hadir_ai, 8, "stop_color_nags", level.hadir_ai.poppies_nags, 12, 1.2);
+  thread mask_remove_helo_react();
+  scripts\engine\sp\utility::trigger_wait("start_execution_trigger", "script_noteworthy");
+  thread civilians_plead();
+  thread execution();
+  scripts\engine\sp\utility::trigger_wait("hadir_stayahead_wait_off_execution", "script_noteworthy");
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_poppies_start_fields_160");
+  deck_add(level.hadir_ai.poppies_nags, "dx_vom_had_poppies_start_fields_172");
+  deck_add(level.hadir_ai.poppies_nags, "dx_vom_had_poppies_start_fields_171");
+  scripts\engine\sp\utility::trigger_wait("civ_execution_trigger", "script_noteworthy");
+  deck_remove(level.hadir_ai.poppies_nags, "dx_vom_had_poppies_start_fields_172");
+  deck_remove(level.hadir_ai.poppies_nags, "dx_vom_had_poppies_start_fields_171");
+  scripts\engine\sp\utility::trigger_wait("pistol_intro_start_trigger", "script_noteworthy");
+  level.hadir_ai notify("stop_color_nags");
+}
+
+function deck_add(var0) {
+  self.items = scripts\engine\utility::array_insert(self.items, var0, self.index);
+}
+
+function deck_remove(var0) {
+  self.items = scripts\engine\utility::array_remove(self.items, var0);
+}
+
+function mask_remove_helo_react() {
+  scripts\engine\utility::flag_wait("gas_mask_remove_flag");
+  wait 1.5;
+  level.hadir_ai thread scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_poppies_start_fields_44");
+  wait 3.2;
+  level.player thread scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_far_poppies_start_fields_35");
+}
+
+function civilians_plead() {
+  level endon("shoot_all_the_civs");
+
+  while(!isDefined(level.poppies_enemies)) {
+    waitframe();
+  }
+
+  level.poppies_enemies[0] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("ru_soldier_1", "Russian Soldier");
+  level.poppies_enemies[1] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("ru_soldier_2", "Russian Soldier");
+  level.execution_civs_array[1] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_male_3");
+  level.execution_civs_array[2] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_male_1");
+  level.execution_civs_array[3] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_male_2");
+  level.execution_civs_array[5] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_female_1");
+  level.execution_civs_array[6] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_child_female_2");
+  level.execution_civs_array[7] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_female_2");
+  level.execution_civs_array[9] scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("civilian_child_female_1");
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_1", "dx_vom_cvf1_poppies_start_fields_50", "<screams/struggling efforts>");
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(5, "civilian_child_female_1", "dx_vom_ccf1_poppies_start_fields_60", "Baba! Baba!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line_delayed(7, "civilian_male_3", "dx_vom_cvm3_poppies_start_fields_70", "Don't touch her!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_3", "dx_vom_cvm3_poppies_start_fields_80", "<pain/wounded efforts>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_female_2", "dx_vom_ccf2_poppies_start_fields_180", "<crying/pleading>No! No, please!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_2", "dx_vom_cf2_poppies_start_fields_190", "Why are you doing this?!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru4_poppies_start_fields_200", "Two days ago, our men were ambushed by terrorists. I lost soldiers. Good soldiers.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru3_poppies_start_fields_90", "Get over there!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru3_poppies_start_fields_100", "Against the barn! Don't try anything, understand?!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru3_poppies_start_fields_110", "You too! Against the barn!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_poppies_start_fields_120", "<struggling/wounded efforts>We didn't do anything! We aren't fighters!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru3_poppies_start_fields_130", "Shut up! Not another word!");
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_2", "dx_vom_cvm2_poppies_start_fields_140", "<struggling/wounded efforts>");
+  wait 0.2;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_poppies_start_fields_150", "Move \x91em out!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru4_poppies_start_fields_210", "Those responsible were tracked back to this village. We know they're here. So do you.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru4_poppies_start_fields_230", "If you harbor terrorists, you are complicit in their attacks against our forces. This cannot go unpunished.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_3", "dx_vom_cvm3_poppies_start_fields_240", "It's him! He helps them!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_poppies_start_fields_250", "Liar!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_3", "dx_vom_cvm3_poppies_start_fields_260", "I saw him with weapons! I can show you!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_poppies_start_fields_270", "He's lying! He's trying to save himself!");
+  wait 0.5;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru4_poppies_start_fields_280", "I see...");
+}
+
+function execution() {
+  level waittill("shoot_all_the_civs");
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru4_poppies_start_fields_290", "Kill them all.");
+  wait 0.6;
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_male_1", "dx_vom_cvm1_poppies_start_fields_300", "No! Wait-!");
+  wait 1;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_1", "dx_vom_cvf1_poppies_start_fields_310", "No!");
+  wait 1;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_2", "dx_vom_cf2_poppies_start_fields_311", "You killed them!");
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_2", "dx_vom_cf2_pistol_start_overlook_11", "<crying/moaning efforts>");
+}
+
+function captured_civ_screams() {
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_female_1", "dx_vom_ccf1_poppies_start_fields_314", "Baba!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_female_2", "dx_vom_ccf2_poppies_start_fields_315", "<crying/screaming>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_1", "dx_vom_cvf1_poppies_start_fields_316", "<crying/screaming>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_poppies_start_fields_320", "Get the rest on the truck! Move!");
+}
+
+function pistol_vo_sources() {
+  scripts\sp\maps\hometown\hometown_vo_util::unregister_all_vo_sources();
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("hadir", "Hadir");
+  level.pistol_enemy_02_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("ru_soldier_1", "Russian Soldier");
+  level.pistol_enemy_01_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("ru_soldier_2", "Russian Soldier");
+  level.pistol_enemy_02_ai scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_attached("ru_team_leader", "Russian Team Leader", "tag_stowed_hip_rear");
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("civilian_female_1", "Civilian", (5810.91, -4777.24, -439.707));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("civilian_child_female_1", "Civilian", (5810.91, -4777.24, -439.707));
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("civilian_child_female_2", "Civilian", (5810.91, -4777.24, -439.707));
+}
+
+function pistol_start_vo() {
+  pistol_vo_sources();
+  escape_vo_init();
+  thread children_crying();
+
+  if(!isDefined(level.hadir_ai.poppies_nags)) {
+    level.hadir_ai.poppies_nags = get_poppies_nags();
+  }
+
+  deck_add(level.hadir_ai.poppies_nags, "dx_vom_had_pistol_start_overlook_40");
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::nagtill_delayed(12, "pistol_start_trigger", level.hadir_ai.poppies_nags, 8, 1.2, 20);
+  thread captured_civ_screams();
+  level waittill("remove_blocker");
+  level.pistol_enemy_02_ai scripts\engine\sp\utility::set_battlechatter(0);
+  level.pistol_enemy_01_ai scripts\engine\sp\utility::set_battlechatter(0);
+  level.pistol_vo = spawnStruct();
+  level.pistol_vo.context = [];
+  level.pistol_vo.context["never_spotted"] = 1;
+  level.pistol_vo.context["first_lost"] = 1;
+  level.pistol_vo.context["player_got_gun"] = 0;
+  level.pistol_vo.context["soldiers_alive"] = "both";
+  level.pistol_vo.context["times_called"] = 0;
+  level.pistol_vo.hunt = load_unharmed_pistol_fight_hunt();
+  level.pistol_vo.spotted = load_unharmed_pistol_fight_spotted();
+  level.pistol_vo.lost = load_unharmed_pistol_fight_lost();
+  level.pistol_vo.combat = load_unharmed_pistol_fight_combat();
+  level.pistol_vo.combat_distract = load_unharmed_pistol_combat_distract();
+  level.pistol_vo.distract = load_ru1_unspotted_pistol_idle_distract();
+  level.pistol_vo.distract_followup = load_ru2_unspotted_pistol_idle_distract();
+  level.pistol_vo.distract_end = load_unharmed_pistol_idle_distract_end();
+  level.pistol_vo.distract_end_followup = undefined;
+  level.pistol_vo.state = "idle";
+  thread pistol_fight_vo();
+  thread stealth_combat_check();
+  thread stealth_event_check();
+  thread pistol_pickup_check();
+  level.pistol_enemy_01_ai.shot_at_react = load_ru2_pistol_shot_at();
+  level.pistol_enemy_02_ai.shot_at_react = load_ru1_pistol_shot_at();
+  thread shot_at_check();
+  thread shot_at_check();
+  wait_soldier_death();
+  wait_truck_door_interact();
+}
+
+function pistol_pickup_check() {
+  scripts\engine\utility::flag_wait("objective_shoot_the_soldiers");
+  level.pistol_vo.context["player_got_gun"] = 1;
+}
+
+function wait_truck_door_interact() {
+  level endon("car_door_interacted");
+
+  if(getdvarint("greenlight") || getdvarint("greenlight_three_stab")) {
+    return;
+  }
+
+  var0 = (5579.22, -4307.96, -418.156);
+  level.hadir_ai scripts\sp\maps\hometown\hometown_util::wait_near(var0, 1000);
+  level.hadir_ai scripts\sp\maps\hometown\hometown_util::wait_near(level.player, 400);
+  level.hadir_ai scripts\sp\maps\hometown\hometown_vo_util::say("dx_vom_had_pistol_start_truck_30");
+  var1 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var1 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_pistol_start_truck_40", "Let's get out of here.");
+  var1 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_pistol_start_truck_50", "Let's get in the truck.");
+  var1 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_pistol_start_truck_60", "Come, Farah! It's time to go!");
+  var1 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("hadir", "dx_vom_had_pistol_start_truck_70", "In the truck, sister!");
+  wait 1;
+  var1 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(undefined, "dx_vom_had_pistol_start_truck_40");
+
+  for(;;) {
+    wait randomfloatrange(7, 12);
+    var1 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function first_spotted() {
+  level.pistol_enemy_01_ai endon("stealth_hunt");
+  level.pistol_enemy_02_ai endon("stealth_hunt");
+
+  if(isalive(level.pistol_enemy_02_ai)) {
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_spotted_10", "What the fuck?!");
+  }
+
+  level.pistol_vo.context["never_spotted"] = 0;
+
+  if(!isalive(level.pistol_enemy_02_ai) || !isalive(level.pistol_enemy_01_ai)) {
+    return;
+  }
+
+  level.pistol_vo.distract = load_unharmed_pistol_hunt_distract();
+  level.pistol_vo.distract_followup = undefined;
+  level.pistol_vo.distract_end = load_unharmed_pistol_hunt_distract_end();
+  level.pistol_vo.distract_end_followup = load_unharmed_pistol_hunt_distract_end_followup();
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_spotted_20", "There's a girl!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_spotted_30", "Hey! You!");
+}
+
+function first_lost() {
+  level.pistol_vo.context["first_lost"] = 0;
+
+  if(level.pistol_vo.context["player_got_gun"]) {
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_spotted_60", "Find her!");
+    return;
+  }
+
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_spotted_50", "Was she armed?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_spotted_60", "Find her!");
+  wait 1.5;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_spotted_70", "I don't think so...");
+}
+
+function wait_soldier_death() {
+  for(;;) {
+    if(isalive(level.pistol_enemy_01_ai) && isalive(level.pistol_enemy_02_ai)) {
+      scripts\engine\utility::waittill_any_ents(level.pistol_enemy_01_ai, "death", level.pistol_enemy_02_ai, "death");
+    } else if(isalive(level.pistol_enemy_01_ai)) {
+      level.pistol_enemy_01_ai waittill("death");
+    } else if(isalive(level.pistol_enemy_02_ai)) {
+      level.pistol_enemy_02_ai waittill("death");
+    } else {
+      break;
+    }
+
+    level.pistol_vo notify("enemy_died");
+    level notify("pistol_fight_state_change");
+    level.pistol_vo.state = "soldier_dying";
+    scripts\sp\maps\hometown\hometown_vo_util::stop_vo_source("ru_soldier_1");
+    scripts\sp\maps\hometown\hometown_vo_util::stop_vo_source("ru_soldier_2");
+    wait 1;
+    scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("ru_soldier_1");
+    scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("ru_soldier_2");
+
+    if(isalive(level.pistol_enemy_01_ai)) {
+      level.pistol_vo.context["soldiers_alive"] = "ru_soldier_2";
+      thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_20", "Luka! No-!");
+      level.pistol_vo.hunt = load_ru1_killed_hunt();
+      level.pistol_vo.combat = load_ru1_killed_combat();
+      level.pistol_vo.spotted = load_ru1_killed_spotted();
+      level.pistol_vo.lost = load_ru1_killed_lost();
+      level.pistol_vo.distract = load_ru1_killed_distract();
+      level.pistol_vo.combat_distract = level.pistol_vo.distract;
+    } else if(isalive(level.pistol_enemy_02_ai)) {
+      level.pistol_vo.context["soldiers_alive"] = "ru_soldier_1";
+      thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_10", "Andrei! No-!");
+      level.pistol_vo.hunt = load_ru2_killed_hunt();
+      level.pistol_vo.combat = load_ru2_killed_combat();
+      level.pistol_vo.spotted = load_ru2_killed_spotted();
+      level.pistol_vo.lost = load_ru2_killed_lost();
+      level.pistol_vo.distract = load_ru2_killed_distract();
+      level.pistol_vo.combat_distract = level.pistol_vo.distract;
+    } else {
+      break;
+    }
+
+    level.pistol_vo.distract_followup = undefined;
+    level.pistol_vo.distract_end = undefined;
+    level.pistol_vo.distract_end_followup = undefined;
+    level.pistol_vo.context["never_spotted"] = 0;
+    level.pistol_vo.context["first_lost"] = 0;
+
+    if(is_in_combat()) {
+      thread goto_state("combat");
+      continue;
+    }
+
+    thread goto_state("hunt");
+  }
+}
+
+function stealth_combat_check() {
+  for(;;) {
+    scripts\engine\utility::waittill_any_ents(level.pistol_vo, "fake_soldier_combat", level.pistol_enemy_01_ai, "stealth_combat", level.pistol_enemy_02_ai, "stealth_combat");
+    waitframe();
+  }
+}
+
+function shot_at_check() {
+  self endon("death");
+  var0 = 0;
+
+  for(;;) {
+    self waittill("bulletwhizby", var1, var2, var3, var4);
+
+    if(level.pistol_vo.state == "shot_at") {
+      continue;
+    }
+
+    level.pistol_vo.state = "shot_at";
+    wait 0.1;
+    level notify("pistol_fight_state_change");
+
+    if(self == level.pistol_enemy_01_ai) {
+      ru_1_shot_at(var0);
+    }
+
+    if(self == level.pistol_enemy_02_ai) {
+      ru_2_shot_at(var0);
+    }
+
+    var0++;
+
+    if(is_in_combat()) {
+      thread goto_state("combat");
+      continue;
+    }
+
+    thread goto_state("hunt");
+  }
+}
+
+function ru_1_shot_at(var0) {
+  level endon("pistol_fight_state_change");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat_20", "<reaction to getting shot at>");
+  level.pistol_enemy_01_ai.shot_at_react scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(level.pistol_vo.context);
+
+  if(isalive(level.pistol_enemy_02_ai) && var0 == 0) {
+    wait 1;
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat2_90", "She get you?!");
+    wait 0.2;
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_140", "Negative!");
+    return;
+  }
+}
+
+function ru_2_shot_at(var0) {
+  level endon("pistol_fight_state_change");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat_10", "<reaction to getting shot at>");
+  level.pistol_enemy_02_ai.shot_at_react scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(level.pistol_vo.context);
+  scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("ru_soldier_1");
+  scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("ru_soldier_2");
+  wait 1;
+
+  if(var0 == 0 && isalive(level.pistol_enemy_02_ai)) {
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat2_100", "Work on your aim, suka!");
+    return;
+  }
+
+  if(var0 == 1 && isalive(level.pistol_enemy_01_ai)) {
+    scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat2_120", "She missed again!");
+    return;
+  }
+}
+
+function stealth_event_check() {
+  for(;;) {
+    level waittill("stealth_event", var0);
+
+    if(!isDefined(var0.entity.source_name) || var0.entity.source_name != "farah") {
+      continue;
+    }
+
+    if(var0.type == "combat" && level.pistol_vo.state != "combat") {
+      thread goto_state("combat");
+    }
+
+    waitframe();
+  }
+}
+
+function get_closest_enemy_to_hadir() {
+  var0 = distance2dsquared(level.hadir_ai.origin, level.pistol_enemy_01_ai.origin);
+  var1 = distance2dsquared(level.hadir_ai.origin, level.pistol_enemy_02_ai.origin);
+
+  if(var0 < var1) {
+    return level.pistol_enemy_01_ai;
+  }
+
+  return level.pistol_enemy_02_ai;
+}
+
+function goto_state(var0) {
+  level notify("pistol_fight_state_change");
+  level endon("pistol_fight_state_change");
+  level.player endon("death");
+  level.pistol_vo endon("enemy_died");
+  var1 = undefined;
+
+  switch (var0) {
+    case "combat":
+      level.pistol_vo.state = "combat";
+      var2 = is_in_combat();
+
+      if(!var2 && level.pistol_vo.context["never_spotted"]) {
+        first_spotted();
+      } else if(!var2) {
+        level.pistol_vo.spotted scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+      }
+
+      var1 = wait_combat_exit();
+    case "hunt":
+      level.pistol_vo.state = "hunt";
+      var3 = !isDefined(var1) || var1;
+      scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("ru_soldier_1");
+      scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("ru_soldier_2");
+
+      if(var3 && level.pistol_vo.context["first_lost"]) {
+        first_lost();
+      } else if(var3) {
+        level.pistol_vo.lost scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+      }
+
+      wait_hunt_exit();
+      break;
+    case "investigate":
+      break;
+    case "idle":
+      break;
+    default:
+      break;
+  }
+}
+
+function is_in_combat() {
+  var0 = !isDefined(level.pistol_enemy_01_ai) || level.pistol_enemy_01_ai[[level.pistol_enemy_01_ai.fnisinstealthcombat]]();
+  var1 = !isDefined(level.pistol_enemy_02_ai) || level.pistol_enemy_02_ai[[level.pistol_enemy_02_ai.fnisinstealthcombat]]();
+  return var0 && var1;
+}
+
+function wait_combat_exit() {
+  level.pistol_enemy_01_ai endon("stealth_hunt");
+  level.pistol_enemy_02_ai endon("stealth_hunt");
+
+  if(!is_in_combat()) {
+    return 1;
+  }
+
+  scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("ru_soldier_1");
+  scripts\sp\maps\hometown\hometown_vo_util::wait_vo_source_finish_speaking("ru_soldier_2");
+
+  for(;;) {
+    wait randomfloatrange(4, 6);
+    level.pistol_vo.combat scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function wait_hunt_exit() {
+  for(;;) {
+    wait randomfloatrange(4, 6);
+    level.pistol_vo.hunt scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function pistol_fight_vo() {
+  level endon("pistol_enemies_dead");
+  GscBinSkip4(0x35);
+}
+
+function fail_steal_truck() {
+  level waittill("car_door_interacted_early");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_truckspot_10", "Hey! At the truck!");
+}
+
+function pistol_fired_check() {
+  level endon("car_door_interacted");
+  scripts\engine\utility::flag_wait("objective_shoot_the_soldiers");
+  var0 = [];
+  GscBinSkip0(0x2e, var0.size, "dx_vom_far_pistol_start_firstfire_10");
+}
+
+function get_revolver_reminders() {
+  level endon("objective_shoot_the_soldiers");
+  var0 = getEnt("farah_pistol_pickup", "script_noteworthy");
+  var1 = ["dx_vom_far_pistol_start_objective_10", "dx_vom_far_pistol_start_objective_20", "dx_vom_far_pistol_start_objective_30"];
+  var2 = scripts\engine\sp\utility::create_deck(var1);
+  level waittill("pistol_can_interact");
+  wait 10;
+  level.player scripts\sp\maps\hometown\hometown_util::wait_lookat(var0.origin + (0, 0, 40), 160, undefined, 0.3, 400);
+  wait randomfloatrange(0.1, 0.65);
+
+  if(distance2dsquared(level.player.origin, var0.origin) > 16000) {
+    level.player scripts\sp\maps\hometown\hometown_vo_util::say(var2 scripts\engine\sp\utility::deck_draw_specific("dx_vom_far_pistol_start_objective_20"));
+  }
+
+  var3 = 10;
+
+  for(var4 = 2;; var4 = min(var4 + 1, 5)) {
+    wait randomfloatrange(var3 - var4, var3 + var4);
+    level.player scripts\sp\maps\hometown\hometown_util::wait_lookat(var0.origin + (0, 0, 40), 160, undefined, 0.3, 400);
+    wait randomfloatrange(0.1, 0.65);
+
+    if(distance2dsquared(level.player.origin, var0.origin) < 16000) {
+      continue;
+    }
+
+    level.player scripts\sp\maps\hometown\hometown_vo_util::say(var2 scripts\engine\sp\utility::deck_draw());
+    var3 = min(var3 + 5, 25);
+  }
+}
+
+function value_plus_or_minus_offset(var0, var1) {
+  return randomfloatrange(var0 - var1, var0 + var1);
+}
+
+function distract_check() {
+  for(;;) {
+    level.player waittill("use_cellphone");
+    wait 2;
+    level notify("pistol_fight_state_change");
+    level.pistol_vo.state = "distracted";
+    scripts\sp\maps\hometown\hometown_vo_util::stop_vo_source("ru_soldier_1");
+    scripts\sp\maps\hometown\hometown_vo_util::stop_vo_source("ru_soldier_2");
+    thread enemies_distracted();
+    level.pistol_vo.context["times_called"]++;
+  }
+}
+
+function enemies_distracted() {
+  level endon("pistol_fight_state_change");
+  var0 = level.pistol_vo.context["times_called"];
+  wait 0.1;
+
+  if(is_in_combat()) {
+    level.pistol_vo.combat_distract scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket(level.pistol_vo.context);
+
+    if(level.pistol_vo.context["never_spotted"]) {
+      return;
+    }
+
+    if(is_in_combat()) {
+      thread goto_state("combat");
+      return;
+    }
+
+    thread goto_state("hunt");
+    return;
+  }
+
+  if(isDefined(level.pistol_vo.distract)) {
+    level.pistol_vo.distract scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+
+    if(isDefined(level.pistol_vo.distract_followup)) {
+      wait 0.2;
+      level.pistol_vo.distract_followup scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+    }
+  }
+
+  var1 = spawnStruct();
+  var1.finished_convo = 1;
+
+  if(level.pistol_vo.context["never_spotted"]) {
+    if(var0 == 0) {
+      GscBinSkip4(0x35, var1);
+    }
+
+    level.pistol_enemy_02_ai scripts\engine\utility::waittill_any("stealth_idle");
+  } else {
+    wait randomfloatrange(8, 15);
+  }
+
+  if(var1.finished_convo) {
+    if(isDefined(level.pistol_vo.distract_end)) {
+      level.pistol_vo.distract_end scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+
+      if(isDefined(level.pistol_vo.distract_end_followup)) {
+        wait 0.2;
+        level.pistol_vo.distract_end_followup scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+      }
+    }
+  }
+
+  if(level.pistol_vo.context["never_spotted"]) {
+    return;
+  }
+
+  if(is_in_combat()) {
+    thread goto_state("combat");
+    return;
+  }
+
+  thread goto_state("hunt");
+}
+
+function confused_about_phone(var0) {
+  var0.finished_convo = 0;
+  wait 2;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_10", "What do you think it was?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distractidle_20", "Don't know. Some animal?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_30", "That didn't sound like an animal.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distractidle_40", "Could be a cricket.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_50", "It's broad daylight. They come out at night.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distractidle_60", "Maybe the gas fucked \x91em up, then.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_70", "Maybe the gas fucked you up if you think that was a cricket.");
+  var0.finished_convo = 1;
+}
+
+function russian_found_revolver() {
+  level endon("pistol_fight_state_change");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_10", "A-2, you've got another truck on its way.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_team_leader", "dx_vom_rutl_pistol_start_rubanter_20", "Understood.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_30", "Hey, check it out!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_40", "I found a revolver!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_50", "He was armed?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_60", "Yeah. He didn't even go for it.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_70", "Look at this thing, it's brand new.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_80", "What do you need a revolver for? It's only six shots. You have a sidearm.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_90", "Not like this one.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_100", "Heh , so cool...");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_110", "Reap your spoils later, Ushkuinik. Finish searching these fuckers.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_120", "Yeah, but you stay away from my shit, okay?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_130", "I don't care about your shit. It can't even penetrate armor.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_140", "It's a .44! It'll punch a hole right through you.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_150", "Bull shit.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_160", "Want to bet on it?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_170", "You're not shooting that thing at me.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_180", "Yeah, because you're scared I'm right.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_190", "No, you just have shitty aim.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_200", "We'll test it back at camp, then.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_210", "How much?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_220", "No money. If you lose, you take my clean-up shift.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_230", "Cleanup?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_240", "What block?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_250", "General's quarters.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_260", "Are you fucking crazy?!");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_270", "Don't be a bitch.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_rubanter_290", "You'd rather sweat over opium than wipe up a little mess?");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_300", "100 percent.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_team_leader", "dx_vom_rutl_pistol_start_rubanter_310", "K-4, General Barkov's convoy is exiting the city. They're headed your way now. We need extra security on the vehicles.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_320", "Copy. Will comply.");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_rubanter_330", "Okay, let's finish this up before the General gets here.");
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_corpseloot_10", "This one's clean.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_corpseloot_20", "Same here.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_corpseloot_30", "Fuckin' heat...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_corpseloot_40", "Nothing on this one, either.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_corpseloot_50", "Keep searching 'em.");
+
+  for(;;) {
+    wait randomfloatrange(5, 8);
+    var0 scripts\sp\maps\hometown\hometown_vo_util::play_vo_bucket();
+  }
+}
+
+function children_crying() {
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_1", "dx_vom_cvf1_pistol_start_overlook_10", "<crying/moaning efforts>");
+  wait 1;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_male_1", "dx_vom_ccm1_pistol_start_overlook_12", "<crying/moaning efforts>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_male_2", "dx_vom_ccm2_pistol_start_overlook_13", "<crying/moaning efforts>");
+}
+
+function more_crying() {
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_1", "dx_vom_cvf1_pistol_start_overlook_140", "<crying/pleading efforts>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_female_2", "dx_vom_cf2_pistol_start_overlook_141", "<crying/pleading efforts>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_male_1", "dx_vom_ccm1_pistol_start_overlook_142", "<crying/pleading efforts>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_male_2", "dx_vom_ccm2_pistol_start_overlook_143", "<crying/pleading efforts>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_female_1", "dx_vom_ccf1_pistol_start_overlook_144", "<crying/pleading efforts>");
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("civilian_child_female_2", "dx_vom_ccf2_pistol_start_overlook_145", "<crying/pleading efforts>");
+}
+
+function drive_start_vo() {
+  level endon("drive_start_vo_kill");
+  level.player scripts\sp\maps\hometown\hometown_vo_util::register_vo_source("farah", "Farah");
+  scripts\sp\maps\hometown\hometown_vo_util::register_vo_source_at_pos("ru_soldier_4", "Russian Soldier", level.player.origin);
+  wait 9;
+  wait 1;
+  scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_pistol_start_taken_50", "<struggling/hitting efforts>");
+  thread scripts\sp\maps\hometown\hometown_vo_util::play_vo_line("farah", "dx_vom_far_pistol_start_taken_60", "No! Let go! Let go!");
+}
+
+function load_rubble_res1_yells_01() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_res1_yells_01");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_20", "Keep looking! There could be more survivors!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_30", "Listen for movement!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_40", "Don't stop, more people may be trapped underneath!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_50", "Come on , come on- There could still be people in there!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_60", "Listen closely for voices in the rubble!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_70", "There may be others, keep digging!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_80", "Pay attention- if we don't see them we may hear them!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_90", "Fast as you can, come on, let's find these people!;");
+  return var0;
+}
+
+function load_rubble_dad_yells_01() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_dad_yells_01");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("father", "dx_vom_dad_buried_start_rubble_100", "My family is in there!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("father", "dx_vom_dad_buried_start_rubble_760", "Sahar?! Fatima, Farah, Hadir?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(1);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("father", "dx_vom_dad_buried_start_rubble_110", "Please hurry... My wife and children were here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("father", "dx_vom_dad_buried_start_rubble_120", "Brother, please, my wife and kidsare under there!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("father", "dx_vom_dad_buried_start_rubble_130", "Hurry, hurry, please, my family was here, I'm telling you...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("father", "dx_vom_dad_buried_start_rubble_140", "We have to find them , please!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("father", "dx_vom_dad_buried_start_rubble_150", "They went shopping after school, with my wife...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_selection("highest_weight");
+  return var0;
+}
+
+function load_rubble_res1_calming_01() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_res1_calming_01");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_160", "If they're here, we'll find them, brother!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_170", "Have faith , man, we'll get them out!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_180", "Calm downn , my friend, we'll find them.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_190", "Don't worry, friend , they'll get to them.");
+  return var0;
+}
+
+function load_rubble_res2_yells_01() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_res2_yells_01");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_200", "Move that concrete!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_220", "Push , push!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_230", "Hard as you can, hard as you can!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_240", "Help us, help us!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_250", "Give me a shovel!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_260", "Watch that rebar!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_280", "Watch it now, don't fall!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_290", "Help me move this!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_300", "Pass it here, pass it here...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_310", "I'll help you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_320", "Give me some room!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_330", "I got it!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_340", "Both hands, guys, both hands...!");
+  return var0;
+}
+
+function load_rubble_res3_yells_01() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_res3_yells_01");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_350", "Watch your step, watch your step.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_360", "Bring the sledge! We need to break up these pieces!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_370", "Pry it with the shovel!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_380", "Put the pieces over here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_390", "Watch you head, watch your head!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_400", "Help him out over there!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_410", "Careful , it's heavy!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_420", "Lift with me, lift it!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_430", "I got it, I got it...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_440", "Coming through, coming through!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_450", "We need more manpower!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_460", "Out of the way!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_470", "Hand me a bucket!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_480", "Pass it down!");
+  return var0;
+}
+
+function load_rubble_res4_5_getwater_01() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_res4_5_getwater_01");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_4", "dx_vom_re4_buried_start_rubble_490", "Take these buckets, get water.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_5", "dx_vom_re5_buried_start_rubble_500", "From where?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_4", "dx_vom_re4_buried_start_rubble_510", "The hydrant in the square.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_5", "dx_vom_re5_buried_start_rubble_520", "The hydrant is buried under rubble!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_4", "dx_vom_re4_buried_start_rubble_530", "Take water from the fountain, go quickly!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_rubble_res6_7_getrope_01() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_res6_7_getrope_01");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_6", "dx_vom_re6_buried_start_rubble_540", "Joseph, we need more rope, go to my shop.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_7", "dx_vom_re7_buried_start_rubble_550", "Where do I look?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_6", "dx_vom_re6_buried_start_rubble_560", "In the basement.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_7", "dx_vom_re7_buried_start_rubble_570", "I'll need a flashlight.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_6", "dx_vom_re6_buried_start_rubble_580", "Behind the door. Bring it back with you, go!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_7", "dx_vom_re7_buried_start_rubble_590", "Tell my wife where I went!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_6", "dx_vom_re6_buried_start_rubble_600", "I will. Tell mine I'm here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_rubble_civ1_2_phone_convo_01() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_civ1_2_phone_convo_01");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_1", "dx_vom_civ1_buried_start_rubble_610", "My phone died.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_2", "dx_vom_civ2_buried_start_rubble_620", "Take mine!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_1", "dx_vom_civ1_buried_start_rubble_630", "Are you sure?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_2", "dx_vom_civ2_buried_start_rubble_640", "Yes, just give it back when you're through.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_1", "dx_vom_civ1_buried_start_rubble_650", "I am trying to find my brother.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_2", "dx_vom_civ2_buried_start_rubble_660", "Where was he?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_1", "dx_vom_civ1_buried_start_rubble_670", "Making deliveries in the city.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_2", "dx_vom_civ2_buried_start_rubble_680", "Let's hope he's okay.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_1", "dx_vom_civ1_buried_start_rubble_690", "If he is, we could use his truck...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_1", "dx_vom_civ1_buried_start_rubble_700", "Orhan, where are you...? I have no battery, a guy lent this to me... Yes, I'm fine, we are near the market... There was more than 5 bombs, I can tell you that, more than 2 hit the market and we could hear the bombs hitting before and after... They're still in the sky now, maybe you can you see them from where you are... Listen, if you can bring your truck back here we could really use it-");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_1", "dx_vom_civ1_buried_start_rubble_710", "My brother says the roads are all blocked with checkpoints, people are evacuating and the highway is not moving...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("civilian_2", "dx_vom_civ2_buried_start_rubble_720", "Better to go on foot, just bring plenty of water.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_rubble_res1_yells_02() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_770_850");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_770", "Stand back! Give us room to work!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_780", "Watch yourself, watch yourself!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_790", "Hey, out of the street, we have vehicles coming through...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_800", "Watch where you step, it's sharp!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_820", "Out of the way!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_830", "Step aside!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_840", "Clear a path!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_850", "Move, move!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_noise2_130", "Let\x92s keep searching this area.");
+  return var0;
+}
+
+function load_rubble_res2_yells_02() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_920_1030");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_1000", "Hand it down the line!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_1010", "Break up those cinder blocks!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_1020", "Pile them here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_1030", "Pass it down, pass it down!");
+  return var0;
+}
+
+function load_rubble_res3_yells_02() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_860_910");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_860", "Go to my truck, quickly, get my tools!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_870", "Grab a shovel! And get the crowbar!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_880", "Here take my keys, go!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_890", "Fast as you can, friend, go!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_900", "Get a flashlight too!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_910", "Bring the first-aid kit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_noise2_150", "Pass me the shovel\x85");
+  return var0;
+}
+
+function load_rubble_res1_yells_03() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_1060_1100");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_noise3_40", "Dig here , dig here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_noise3_50", "We\x92ll get you out, don\x92t worry\x85!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_noise3_100", "Set it down, watch the weight!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_1060", "I hear the Russian planes! They're coming back!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_1070", "They're getting closer , I can hear it!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_1080", "The Russian are moving in, we have to hurry!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_1090", "Let's move it, people, quickly, quickly!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_rubble_1100", "Hurry up, hurry up, every second counts!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_noise2_20", "It\x92s close...");
+  return var0;
+}
+
+function load_rubble_res2_yells_03() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_1180_1270");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_1150", "Someone watch the sky for movement!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_1160", "Watch the air for Russian fighters!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_rubble_1170", "Yusef, watch the sky for fighter jets!");
+  return var0;
+}
+
+function load_rubble_res3_yells_03() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket("rubble_1180_1270");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1180", "I found an arm here...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1190", "Get me a bag!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1200", "Take these buckets!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1210", "I see a body under the cinder blocks.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1220", "Keep these together, and bring another bag...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1230", "Let's find the rest of him if we can...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1240", "That leg belongs with this one, set it down gently.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1250", "The other shoe goes with it , don't separate them.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1260", "We need a body bag over here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_rubble_1270", "Gently with that, gently...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_noise3_80", "That\x92s it, it\x92s coming loose\x85");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_3", "dx_vom_re3_buried_start_noise3_120", "Almost there!");
+  return var0;
+}
+
+function load_noise_res_nags() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_noise1_70", "If you can hear me, make that sound again!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_1", "dx_vom_re1_buried_start_noise1_80", "Make some noise if you can move...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("rescuer_2", "dx_vom_re2_buried_start_noise1_110", "Knock again if you can hear me...!");
+  return var0;
+}
+
+function load_noise0() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_10", "Who\x92s there?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_20", "Hello?");
+  return var0;
+}
+
+function load_spotted0() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_sighted_10", "Hey!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_sighted_20", "You! Halt!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_sighted_30", "Hey, girl!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_sighted_31", "Stop! Don't move!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_sighted_32", "Hold it!");
+  return var0;
+}
+
+function load_lost0() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_70", "Nothing.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_60", "Hrmph...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_80", "Probably rats...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_investigate_90", "Or those fucking chickens...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_101", "No one here?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0, "russian_j12", "dx_vom_rj12_house_boss_investigate_103", "Maybe not.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_102", "Yes...? No...?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_104", "Hmph...rats in the walls.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_hunt0() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_patrol_30", "Rrgh! Worthless shit...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_patrol_40", "Argh...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j13", "dx_vom_rj13_house_boss_patrol_50", "12, report.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(1.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_60", "Report.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_70", "Searching house to house- Got a kid for the boss...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.25, "russian_j12", "dx_vom_rj12_house_boss_patrol_110", "Should I kill him?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_120", "Negative. Bring him to the trucks.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_121", "Bring the trucks here, no?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_122", "No.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_123", "Why?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_124", "Those are the orders.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_125", "Can't you carry him?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_126", "Then I can only bring one.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_127", "Do you have more than one?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_128", "No, but how can I search?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_129", "He'll be a human shield.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_131", "Are there snipers?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_132", "We've heard reports.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_133", "Where?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j13", "dx_vom_rj13_house_boss_patrol_134", "Just bring what you have, and kill the rest.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_135", "Copy that- Out.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_patrol_136", "Asshole.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_hunt0_loop() {
+  return undefined;
+}
+
+function load_combat0() {
+  return undefined;
+}
+
+function load_combat0_loop() {
+  return undefined;
+}
+
+function load_noise1() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_40", "Come out, lemme see your hands.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_50", "Let\x92s go...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_51", "Russian Army, show yourself.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_52", "Show me your hands.");
+  return var0;
+}
+
+function load_spotted1() {
+  return level.boss_vo.spotted;
+}
+
+function load_lost1() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_60", "Hrmph...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_102", "Yes...? No...?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_hunt1() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_30", "Someone there?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_57", "Who's in the house?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_hunt1_loop() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_53", "Say something...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_54", "Talk to me, I can help you.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_55", "Let me see you, I won't shoot.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_56", "Are you hurt, I have medicine.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_58", "Don't be afraid...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_investigate_59", "I won't hurt you...");
+  return var0;
+}
+
+function load_combat1() {
+  return undefined;
+}
+
+function load_combat1_loop() {
+  return undefined;
+}
+
+function load_noise2() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_00", "I can hear you, little one...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_01", "I heard that, child.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_02", "You're a clumsy little mouse, aren't you?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_spotted2() {
+  return level.boss_vo.spotted;
+}
+
+function load_lost2() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_30", "Now where did you go, eh?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd1trans_20", "Where are you?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_61", "Don't hide, it's not nice.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd1trans_40", "You want to hide, eh? Okay...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd1trans_50", "Don't make me have to come find you...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd1trans_60", "Where are you, little girl?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_hunt2() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_20", "It\x92s okay , let me see you.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_64", "Everything is going to be fine, just come out now.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_68", "Come with me, we'll get help for your father.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_69", "Your brother is asleep, help me wake him.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_71", "I think I hear your friends , let's go see...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_72", "You like sweets...? I have candy...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_73", "You want some...? You can have it...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_74", "Don't you want some candy...?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_hunt2_loop() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchloop_10", "Come on, get out here...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchloop_20", "I know you're still here...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_rule("'player_under_something == false");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchloop_30", "Come on out now...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchloop_40", "Stop hiding.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchloop_50", "Enough of this. Come out here.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchloop_60", "I promise I won't shoot, okay?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchloop_70", "You don't have to hide...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_combat2() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd1grab_10", "Stay where you are!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd1grab_20", "Don't even think about running!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd1grab_40", "Don't move, understand?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd1grab_50", "Stay right there...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(0, "'can_see_player");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_10", "Come back, little one! Don\x92t run!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_40", "Don\x92t worry, nothing to be afraid of.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_50", "I can protect you. Don\x92t be afraid.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_60", "Come back. I won\x92t shoot!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_62", "It's okay! The bad guys are gone now...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_63", "Nothing will happen to you...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_65", "Come on, now, let's go for a walk.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_66", "Let me show you something... come now.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_search_67", "Stop this, child, it's not safe for you here.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(0, "'can_see_player == false");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_fills_all();
+  return var0;
+}
+
+function load_combat2_loop() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchbucket_10", "Don't run away!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchbucket_20", "Come back!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchbucket_30", "Get back here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchbucket_40", "Stop running!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_searchbucket_50", "Where are you going?!");
+  return var0;
+}
+
+function load_noise3() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_noise1_10", "I heard that, you little shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_noise1_20", "I know you\x92re here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_noise1_30", "I\x92m coming for you, tifl(child)!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_spotted3() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_spotted1_10", "I see you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_spotted1_20", "You bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_spotted1_40", "You little shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_spotted1_50", "Gotcha now!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_spotted1_60", "Now you\x92re in trouble!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_spotted1_70", "Real trouble!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(0);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_spotted2_10", "There\x92s the fucking rat!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_spotted2_20", "You\x92re mine, rat!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_spotted2_30", "Found you, bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_lost3() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2trans_20", "Go ahead and hide, bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2trans_30", "I will find you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2trans_40", "You'd better hide, suka!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2trans_50", "Hide all you want! You're stuck in here with me!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2trans_60", "Run away, little girl! Run and hide!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_140", "You think you can hide forever?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(0);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2trans_10", "Hiding again , eh?!");
+  return var0;
+}
+
+function load_hunt3() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2hunt_10", "Who else is here?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2hunt_20", "Where's the mother...?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(1, "russian_j12", "dx_vom_rj12_house_boss_rnd2hunt_30", "Maybe she's with you...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.85, "russian_j12", "dx_vom_rj12_house_boss_rnd2hunt_40", "Hiding...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2hunt_50", "Don't have time for this...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_150", "There\x92s no escape, tifl(child)! Come out and let\x92s go outside.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_160", "The air is very dirty. I have something to help you...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(1, "russian_j12", "dx_vom_rj12_house_boss_hunt1_170", "Come, I\x92ll give it to you...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd2hunt_80", "Could just open the door...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_rnd2hunt_90", "Let the gas in...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_60", "Or take you to my friends...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_80", "Come on , try that again. Show me how brave you are...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j13", "dx_vom_rj13_house_boss_hunt1_180", "J-13 to 12, where are you?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0, "russian_j12", "dx_vom_rj12_house_boss_hunt1_190", "Searching... I found a girl.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0, "russian_j13", "dx_vom_rj13_house_boss_hunt1_200", "Good- General Barkov is here.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0, "russian_j13", "dx_vom_rj13_house_boss_hunt1_220", "Yes. Don\x92t come back empty handed. Out.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0, "russian_j12", "dx_vom_rj12_house_boss_hunt1_230", "Shit...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_hunt3_loop() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_80", "God damn heat.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_90", "Every fucking day... no thanks...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_250", "Nothing but trouble this one...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_270", "There\x92s no way out, tifl! You\x92re trapped!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_280", "Just give up...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_290", "Stop resisting...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_300", "Argghhh...!!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_360", "Fucking armor plates... don\x92t do shit...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_420", "Fuck this place...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_430", "Too hot... Dry...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(1);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_60", "You think I can\x92t find you!?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_120", "Hiding only makes it worse!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_40", "Where are you, little shit!?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(0);
+  return var0;
+}
+
+function load_combat3() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_20", "Look what you did to my leg, you bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_40", "You stab me? A little piece of shit child...?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_131", "The general doesn't like little terrorists...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_sequential();
+  return var0;
+}
+
+function load_combat3_loop() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_124", "You're dead now, you little bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_combat2loop_10", "Don't run away from me!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_combat2loop_20", "Come back here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_combat2loop_30", "I'm coming for you, tifl!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_combat2loop_40", "Come here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "russian_j12", "dx_vom_rj12_house_boss_combat2loop_50", "I'm gonna kill you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_225", "Don't run away you little shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_220", "Come face me!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_210", "You\x92re dead, you hear me?! Fucking dead!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt1_30", "Just like your fucking father!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_230", "This fucking family...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_hunt2_240", "These fucking pathetic people!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd3combatloop_10", "Get back here!!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd3combatloop_20", "Don't run away from me!!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd3combatloop_30", "You're going to die here, little girl!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd3combatloop_40", "You're gonna fuckin' get it!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd3combatloop_50", "Hiding won't save you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_rnd3combatloop_60", "There's no escaping this, suka! You're fucking done!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(0, "'can_see_player == false", undefined, 1000);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_10", "I know you're under there...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_40", "I can see you, suka...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_50", "Get out from under there...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_70", "I see you under there...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_120", "Hiding under the furniture like a scared cat...!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_140", "You think you're safe from me?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_150", "That won't protect you, child.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_160", "You're not safe there , kid!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_170", "Hiding under there won't save you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_180", "Hiding there won't save you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(0, "'player_under_something", undefined, 100000);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_190", "Time to see father again!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_200", "Game over, suka!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_210", "This is how I deal with rats!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_220", "I told you I'd find you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("russian_j12", "dx_vom_rj12_house_boss_found_230", "Don't worry. I'll take care of you.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::end_vo_group(0);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::set_vo_bucket_fills_all();
+  return var0;
+}
+
+function load_noise4() {
+  return level.boss_vo.noise;
+}
+
+function load_spotted4() {
+  return level.boss_vo.spotted;
+}
+
+function load_lost4() {
+  return level.boss_vo.lost;
+}
+
+function load_hunt4() {
+  return level.boss_vo.hunt;
+}
+
+function load_hunt4_loop() {
+  return level.boss_vo.hunt_loop;
+}
+
+function load_combat4() {
+  return level.boss_vo.combat_loop;
+}
+
+function load_combat4_loop() {
+  return level.boss_vo.combat;
+}
+
+function load_unharmed_pistol_fight_combat() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_30", "You can't run. Surrender- Now!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_180", "Surrender! Now!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_160", "Kill this bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_170", "Get her! What are you waiting for?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_180", "It\x92s just a kid! Go after her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shot_spot_10", "Shoot her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shot_spot_20", "Kill her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_spotted_33", "Get her, Luka!");
+  return var0;
+}
+
+function load_unharmed_pistol_fight_hunt() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_90", "You got anything?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.2, "ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_100", "Negative! She's still out here\x85");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_110", "Get out here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_search_10", "It's dangerous out here, kid. Don't get yourself hurt...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_search_20", "Don't be difficult. Get out here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_search_30", "We have food and water. You must be thirsty, yes?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_search_40", "No need to hide. Come on out.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_search_50", "You must be scared, out here all by yourself.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_search_60", "We know you're unarmed, kid.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_search_70", "It's over! Get out here, now!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_search_80", "You need to listen to us. Don't make things worse for yourself.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_search_90", "Show yourself. You don't have to hide.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_search_100", "Surrender, kid. There's no need to fight.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_120", "We\x92re gonna find you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_130", "You\x92re just a kid! You don\x92t want to hurt anyone!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_140", "Show yourself!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_150", "Come on out!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_160", "Come out now! It\x92s over!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_170", "This isn't a game, child! You're going to get yourself killed\x85");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_loop_60", "You don't have to run away! Come on out!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_loop_70", "Where are you?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_loop_80", "Come back here , kid. Don't run!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_loop_90", "Where the fuck did you run off to, eh?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_loop_100", "Get back out here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_loop_110", "Where did you go, little one?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_loop_120", "You don't have to run away! Come on out!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_return_150", "She can\x92t just disappear. Let's keep searching.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_return_160", "The girl's still here. Find her\x85");
+  return var0;
+}
+
+function load_unharmed_pistol_fight_spotted() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_spot_10", "Got her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_spot_20", "She's here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_spot_30", "I see her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_spot_40", "Bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_spot_50", "I found her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_spot_60", "Right here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_spot_70", "Got her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_spot_80", "She's here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_spot_90", "I see her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_spot_100", "Bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_spot_110", "I found her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_spot_120", "Right here!");
+  return var0;
+}
+
+function load_unharmed_pistol_fight_lost() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat_40", "Did you get her?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.65, "ru_soldier_1", "dx_vom_ru1_pistol_start_shotat_50", "Negative!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat_60", "Fuck- where'd she go?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.25, "ru_soldier_2", "dx_vom_ru2_pistol_start_shotat_70", "I don't know. Find her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.45, "ru_soldier_1", "dx_vom_ru1_pistol_start_shotat_80", "Okay, watch my back!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat2_130", "Where is she?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.35, "ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_150", "Just find her already!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_70", "Fuck- I don\x92t see her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_80", "She's hiding! Keep looking!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_112", "Fuck! We lost her!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.2, "ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_114", "No we didn't! She's still out here!");
+  return var0;
+}
+
+function load_ru1_unspotted_pistol_idle_distract() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket(undefined, 1);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_10", "You hear that?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_20", "It's coming from over there now...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_30", "There it is again...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_40", "Who's out there?! Show yourself!");
+  return var0;
+}
+
+function load_ru2_unspotted_pistol_idle_distract() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket(undefined, 1);
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_50", "Check it...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_60", "Let's go...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_70", "Someone's playing games...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_80", "Find this son of a bitch...");
+  return var0;
+}
+
+function load_unharmed_pistol_hunt_distract() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_distract_110", "I\x92ll check it.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_distract_120", "I\x92m on it. Cover me.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_distract_130", "I got it. Just watch my back.");
+  return var0;
+}
+
+function load_unharmed_pistol_idle_distract_end() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_80", "I don't see anything.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_90", "Probably nothing...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_100", "Sounds like it stopped. Whatever it was...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_110", "No visual. Could've been nothing...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distractidle_120", "Couldn't find anything.");
+  return var0;
+}
+
+function load_unharmed_pistol_hunt_distract_end() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_return_10", "No sign of the girl...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_return_20", "Nothing but the wind out there.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_return_30", "She\x92s not out there.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_return_70", "Couldn't find anything.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line_linked(0.2, "ru_soldier_2", "dx_vom_ru2_pistol_start_distract_return_80", "The girl's still here. Find her\x85");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_return_90", "Nothing's out there\x85");
+  return var0;
+}
+
+function load_unharmed_pistol_hunt_distract_end_followup() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_return_40", "She\x92s here somewhere...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_return_50", "It could hide her movement. Stay alert.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_distract_return_60", "She can\x92t just disappear. Keep searching.");
+  return var0;
+}
+
+function load_unharmed_pistol_combat_distract() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_distract_10", "The fuck?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_distract_20", "What--?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_distract_30", "Over there!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_distract_40", "Huh?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_distract_50", "-Shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_distract_60", "The fuck?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_distract_70", "What--?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_distract_80", "Over there!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_distract_90", "Huh?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_distract_100", "-Shit!");
+  return var0;
+}
+
+function load_ru1_killed_combat() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_70", "You killed my friend you fucking bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_80", "You\x92re dead, you hear me?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_90", "You think I\x92m afraid of a little girl?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_taunt_40", "You shoot at me, you\x92d better kill me!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_taunt_50", "I\x92m still here , suka! Try again!");
+  return var0;
+}
+
+function load_ru2_killed_combat() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_20", "You\x92re dead, you hear me?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_30", "You think I\x92m afraid of a little girl?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_taunt_10", "You shoot at me, you\x92d better kill me!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_taunt_20", "I\x92m still here , suka! Try again!");
+  return var0;
+}
+
+function load_ru1_killed_hunt() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_30", "You killed my friend you fucking bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_40", "You're dead you hear me?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_50", "You'll be food for the fuckin' worms!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_60", "Come on! Take your shot!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_110", "Think you can get a shot before I find you?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_120", "Come out! Bring your gun! Let\x92s play...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_taunt_60", "Take your shot , little girl. Come play...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_100", "I know you have a gun, suka!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_280", "Come out and fight! Come on!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_290", "You\x92re going to die out here! You\x92ll be food for the fuckin\x92 worms!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_hunt_300", "C\x92mon! Let me see that little face of yours!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_40", "Don\x92t risk your life. Drop the gun.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_50", "Don't do anything stupid, kid.");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_hunt_60", "You're just making it harder on yourself!");
+  return var0;
+}
+
+function load_ru2_killed_hunt() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_130", "You killed my friend you fucking bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_10", "Russian Army! Come out now!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_hunt_20", "I know you're here! Just give up!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_50", "Think you can get a shot before I find you?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_60", "Come out! Bring your gun! Let\x92s play...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_taunt_30", "Take your shot , little girl. Come play...");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_40", "I know you have a gun, suka!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_250", "Come out and fight! Come on!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_260", "You\x92re going to die out here! You\x92ll be food for the fuckin\x92 worms!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_hunt_270", "C\x92mon! Let me see that little face of yours!");
+  return var0;
+}
+
+function load_ru1_killed_spotted() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_spot_70", "Got you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_spot_80", "Little shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_spot_90", "Fucker!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_spot_100", "Bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_spot_110", "Found you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_spot_120", "I see you, bitch!");
+  return var0;
+}
+
+function load_ru2_killed_spotted() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_spot_10", "Got you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_spot_20", "Little shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_spot_30", "Fucker!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_spot_40", "Bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_spot_50", "Found you!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_spot_60", "I see you, bitch!");
+  return var0;
+}
+
+function load_ru1_killed_lost() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_70", "That's it! Run away!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_80", "You think I won't find you?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_90", "I know you're out there!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_100", "You can't hide forever!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shot2_distract_70", "Shit, where\x92d she go?!");
+  return var0;
+}
+
+function load_ru2_killed_lost() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_loop_10", "Where are you?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_loop_20", "Come back here , kid. Don't run!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_loop_30", "Where the fuck did you run off to, eh?");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_loop_40", "Get back out here!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_distract_loop_50", "Where did you go, little one?!");
+  return var0;
+}
+
+function load_ru1_killed_distract() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_miss_130", "Fuckin\x92 bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_miss_140", "Asshole!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_miss_150", "What the fuck is that?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_miss_160", "Son of a bitch!");
+  return var0;
+}
+
+function load_ru2_killed_distract() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_miss_10", "Fuckin\x92 bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_miss_20", "Asshole!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_miss_30", "What the fuck is that?!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_miss_40", "Son of a bitch!");
+  return var0;
+}
+
+function load_ru1_pistol_shot_at() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat2_10", "Fucker!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat2_20", "Get down!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat2_30", "Shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_shotat2_40", "Cover! Cover!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_distract_10", "Fucker!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_distract_20", "Bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_distract_30", "Shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_1", "dx_vom_ru1_pistol_start_kill_distract_40", "Agh!");
+  return var0;
+}
+
+function load_ru2_pistol_shot_at() {
+  var0 = scripts\sp\maps\hometown\hometown_vo_util::create_vo_bucket();
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_50", "Fucker!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_60", "Get down!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_70", "Shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_shotat2_80", "Cover! Cover!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_distract_50", "Fucker!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_distract_60", "Bitch!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_distract_70", "Shit!");
+  var0 scripts\sp\maps\hometown\hometown_vo_util::add_vo_line("ru_soldier_2", "dx_vom_ru2_pistol_start_kill_distract_80", "Agh!");
+  return var0;
+}

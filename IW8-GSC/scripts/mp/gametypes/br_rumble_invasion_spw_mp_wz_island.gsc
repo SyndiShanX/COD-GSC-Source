@@ -1,0 +1,64 @@
+/************************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\gametypes\br_rumble_invasion_spw_mp_wz_island.gsc
+************************************************************************/
+
+function initstructs() {
+  var0 = &ref_13933;
+  [[var0]]("brRumbleInv_team_spawns_allies", (42970.7, 27518.8, 1070.1), (0, 5.15387, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (42552.2, 28182.1, 1072.13), (0, 59.1683, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (46151.7, 27292.2, 1008.12), (0, 69.3849, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (43860.6, 25300.4, 1079.99), (0, 79.1263, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (47144, 33842.9, 373.162), (0, 255.462, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (48887.1, 34465.7, 273.927), (0, 324.445, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (47423.7, 37202, 260.041), (0, 55.9208, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (44434.1, 37273.4, 391.718), (0, 124.983, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (47038, 37916.9, 259.74), (0, 66.7712, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (41142.5, 36081.6, 1281.04), (0, 354.858, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (51044.1, 41869.1, 252.855), (0, 302.902, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (50926.1, 43143.1, 255.872), (0, 348.68, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (49903.6, 43682.4, 257.851), (0, 112.073, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (46169.7, 45607.2, 202.845), (0, 319.772, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (43092.5, 45611.4, 260.177), (0, 132.982, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (42260.2, 45225.6, 260.375), (0, 173.136, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (41564.2, 44631.7, 249.715), (0, 32.8731, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (39110.5, 43677.8, 808.851), (0, 25.7454, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_allies", (38014.7, 42663.5, 800.103), (0, 71.2062, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-30478.2, -30946.3, 884.896), (0, 257.601, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-30551.1, -27942.1, 886.797), (0, 202.556, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-26865.5, -28881.9, 889.095), (0, 278.826, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-29224.5, -26107.4, 888.869), (0, 149.65, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-27899.1, -26036.2, 887.029), (0, 256.254, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-22626.1, -24864.9, 888.125), (0, 271.935, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-21501.1, -24516.8, 887.029), (0, 259.976, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-25379.7, -20045.7, 889.798), (0, 186.083, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-23617.5, -20718.5, 888.125), (0, 199.309, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-22756.1, -19762.7, 888.125), (0, 175.549, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-18397.6, -23976.7, 888.125), (0, 254.353, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-18967.8, -19845.7, 887.029), (0, 278.034, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-19247.2, -16813.3, 887.031), (0, 228.138, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-19246.9, -15232.1, 888.282), (0, 184.261, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-20347.4, -15477, 888.125), (0, 185.967, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-21017.6, -12247.3, 878.653), (0, 185.017, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-15144, -17775.1, 888.125), (0, 241.645, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-15004.7, -16529.8, 888.125), (0, 216.697, 0), undefined);
+  [[var0]]("brRumbleInv_team_spawns_axis", (-16487.1, -12019.6, 888.155), (0, 194.125, 0), undefined);
+}
+
+function ref_13933(var0, var1, var2, var3) {
+  var4 = spawnStruct();
+  var4.targetname = var0;
+  var4.origin = var1;
+  var4.angles = var2;
+  var4.script_parameters = var3;
+
+  if(isDefined(var4.targetname)) {
+    if(!isDefined(level.struct_class_names["targetname"][var4.targetname])) {
+      level.struct_class_names["targetname"][var4.targetname] = [];
+    }
+
+    var5 = level.struct_class_names["targetname"][var4.targetname].size;
+    level.struct_class_names["targetname"][var4.targetname][var5] = var4;
+    return;
+  }
+}

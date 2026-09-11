@@ -1,0 +1,49 @@
+/***************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\vehicles\hoopty_truck_mp.gsc
+***************************************************/
+
+function hoopty_truck_mp_init() {
+  scripts\cp_mp\utility\script_utility::registersharedfunc("hoopty_truck", "spawnCallback", &hoopty_truck_mp_spawncallback);
+  hoopty_truck_mp_initmines();
+  hoopty_truck_mp_initspawning();
+  scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_registeroutoftimecallback("hoopty_truck", &scripts\cp_mp\vehicles\hoopty_truck::hoopty_truck_explode);
+}
+
+function hoopty_truck_mp_initspawning() {
+  var0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("hoopty_truck", 1);
+  var0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
+}
+
+function hoopty_truck_mp_initmines() {
+  var0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("hoopty_truck", 1);
+  var0.frontextents = 69;
+  var0.backextents = 102;
+  var0.leftextents = 30;
+  var0.rightextents = 30;
+  var0.bottomextents = 22;
+  var0.distancetobottom = 37;
+  var0.loscheckoffset = (0, 0, 55);
+}
+
+function hoopty_truck_mp_spawncallback(var0, var1) {
+  var2 = scripts\cp_mp\vehicles\hoopty_truck::hoopty_truck_create(var0, var1);
+
+  if(isDefined(var2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
+    var2.ondeathrespawn = &hoopty_truck_mp_ondeathrespawncallback;
+  }
+
+  return var2;
+}
+
+function hoopty_truck_mp_ondeathrespawncallback() {
+  thread hoopty_truck_mp_waitandspawn();
+}
+
+function hoopty_truck_mp_waitandspawn() {
+  var0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
+  var1 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var0, var1);
+  var2 = spawnStruct();
+  var3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("hoopty_truck", var1, var2);
+}

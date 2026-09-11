@@ -1,0 +1,2133 @@
+/************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\sp\maps\tunnels\zd30tunnels_basement.gsc
+************************************************************/
+
+function precache_basement() {
+  precachemodel("viewhands_alex_fullbody");
+  precachemodel("viewhands_alex_gloves_a");
+  precachemodel("ee_lighting_string_light_caged_01");
+  precachemodel("weapon_zd30_glowstick_wm_lit");
+  precachemodel("weapon_zd30_glowstick_wm_lit_stow");
+}
+
+function basement_setup() {
+  level.molotov_fake_light = getEnt("molotov_fake_lgt", "targetname");
+  level.molotov_fake_light.original_intensity = 50;
+  waitframe();
+  level.molotov_fake_light setlightintensity(0);
+}
+
+function basement_start() {
+  level.player clearclienttriggeraudiozone(1);
+  level.basement_jump_start = 1;
+  thread scripts\sp\hud_util::fade_out(0.1, "black");
+  level.player setcinematicmotionoverride("disabled");
+  hidecinematicletterboxing(0, 0);
+  scripts\engine\sp\objectives::objective_add("tunnels_search", "current", undefined, &"ZD30/OBJ_TUNNELS_SEARCH");
+}
+
+function basement_catchup() {
+  scripts\engine\sp\objectives::objective_add("tunnels_search", "current", undefined, &"ZD30/OBJ_TUNNELS_SEARCH");
+  scripts\sp\maps\tunnels\tunnels::level_tunnel_setup();
+  thread basement_env_fx();
+  scripts\sp\player::player_movement_state("cqb");
+}
+
+function basement() {
+  scripts\sp\maps\tunnels\tunnels::level_tunnel_setup();
+  scripts\sp\maps\tunnels\zd30tunnels_utility::farah_teleport("basement_farah");
+
+  if(!istrue(level.basement_jump_start)) {
+    scripts\sp\maps\tunnels\tunnels::alex_loadout();
+  }
+
+  scripts\engine\sp\utility::set_start_location("basement_new", [level.player]);
+  scripts\sp\player::player_movement_state("cqb");
+  level endon("basement_intro_skip");
+  level.farah.script_pushable = 0;
+  level.farah pushplayer(1);
+  thread scripts\engine\sp\utility::autosave_now();
+  level.player scripts\engine\sp\utility::allow_nvg(0, "zd30Tunnels", 1);
+  thread vfx_intro_collapse();
+  thread left_flank_trip_defuse_spawns_surprise_door_guy();
+  thread basement_intro_skip_think();
+  thread basement_triggered_vo();
+  thread basement_special_magic_molotov();
+  thread basement_first_blast_cancel();
+  thread basement_intro_player_speed_management();
+  basement_intro_scene();
+  scripts\engine\utility::delaythread(1, &basement_collapse_lights_on);
+  visionsetnaked("", 0.5);
+}
+
+function basement_env_fx() {
+  level endon("storage_reached");
+
+  if(scripts\engine\utility::flag("storage_reached")) {
+    return;
+  }
+
+  wait 5;
+  scripts\sp\maps\tunnels\zd30tunnels_utility::debug_print("falling rock thingy - started");
+  GscBinSkip4(0x35, 0, "basement_entering_tripweb", undefined);
+}
+
+function basement_live_grenade_monitor() {
+  for(;;) {
+    var0 = getEntArray("grenade", "classname");
+
+    if(isDefined(var0) &var0.size > 0) {
+      for(;;) {
+        var1 = getEntArray("grenade", "classname");
+
+        if(var1.size != var0.size) {
+          level.player notify("live_grenade");
+          wait 5;
+          break;
+        }
+
+        wait 0.1;
+      }
+    }
+
+    wait 0.1;
+  }
+}
+
+function basement_falling_rocks_thingy(var0, var1, var2, var3) {
+  if(isDefined(var1)) {
+    scripts\engine\utility::flag_wait(var1);
+  } else if(isDefined(var2)) {
+    var2 waittill("trigger");
+  } else {
+    waitframe();
+  }
+
+  if(isDefined(var0) && var0 >= 0.05) {
+    wait var0;
+  }
+
+  var4 = 3;
+
+  if(isDefined(level.falling_rocks_thingy_time)) {
+    if(gettime() - level.falling_rocks_thingy_time < var4 * 1000) {
+      return true;
+    }
+  }
+
+  level.falling_rocks_thingy_time = gettime();
+  var5 = randomfloatrange(0.2, 0.3);
+  var6 = randomfloatrange(1.25, 2.5);
+  earthquake(var5, var6, level.player.origin, 64);
+  var7 = 1.875;
+
+  if(var6 < var7) {
+    level.player playRumbleOnEntity("light_2s");
+  } else {
+    level.player playRumbleOnEntity("light_3s");
+  }
+
+  level.player playSound("zd30_tunnels_quake_lr");
+
+  if(istrue(var3) && randomfloatrange(0.1, 0.9) > 0.5) {
+    return true;
+  }
+
+  wait randomfloatrange(1, 2);
+  level.player playSound("zd30_tunnels_quake_rocks_lr");
+  scripts\engine\utility::exploder("unstable");
+  return false;
+}
+
+function basement_intro_skip_think() {
+  scripts\engine\utility::flag_wait("first_cell_guy_passed");
+  level notify("basement_intro_skip");
+  level.farah scripts\engine\sp\utility::anim_stopanimScripted();
+  level.farah.ignoreall = 0;
+  level.farah scripts\engine\sp\utility::enable_ai_color();
+  level.farah scripts\engine\sp\utility::name_show();
+  thread farah_pushable_reset();
+}
+
+function basement_triggered_vo() {
+  var0 = getEntArray("basement_vo_whisper", "targetname");
+
+  if(isDefined(var0) && var0.size > 0) {
+    scripts\engine\utility::array_thread(var0, &basement_vo_whisper);
+  }
+
+  var1 = getEntArray("basement_vo_alex_left", "targetname");
+  scripts\engine\utility::array_thread(var1, &basement_vo_player, "dx_vom_alx_tunnels_hunt_90", undefined, 1);
+  var2 = getEnt("basement_vo_alex_left_clear", "targetname");
+  thread basement_vo_player(var2, "dx_vom_alx_tunnels_hunt_100", undefined);
+  var1 = getEntArray("basement_vo_alex_right", "targetname");
+  scripts\engine\utility::array_thread(var1, &basement_vo_player, "dx_vom_alx_tunnels_search_40", undefined, 1);
+  var2 = getEnt("basement_vo_alex_right_clear", "targetname");
+  thread basement_vo_player(var2);
+  thread farah_calls_out_ceiling_guys();
+  thread farah_right_flank_hint();
+}
+
+function farah_right_flank_hint() {
+  level.player endon("death");
+  var0 = getEnt("right_flank_hint_vo", "targetname");
+  var0 endon("death");
+  var0 endon("entitydeleted");
+  var0 waittill("trigger");
+  level.farah thread scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_tunnels_hunt_80", 1, 0.5);
+  var1 = level.basement_right_flank_runner;
+  wait 0.1;
+
+  if(!isalive(var1)) {
+    return;
+  }
+
+  var1 endon("death");
+  var1 endon("goal");
+
+  for(;;) {
+    var2 = level.player scripts\engine\trace::can_see_origin(level.farah getEye(), 0) || level.player scripts\engine\trace::can_see_origin(level.farah.origin, 0);
+    var3 = level.player scripts\engine\trace::can_see_origin(var1 getEye(), 0) || level.player scripts\engine\trace::can_see_origin(var1.origin, 0);
+
+    if(var2 && var3) {
+      wait 0.2;
+      level.player scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_basement_tunnel_combat2_20", 1);
+      break;
+    }
+
+    waitframe();
+  }
+}
+
+function basement_intro_scene() {
+  level endon("basement_intro_skip");
+  thread sfx_intro_collapse();
+  thread mus_tunnels_intro();
+  thread cine_letterboxing_basement();
+  setomnvar("ui_hide_dpad_hud", 1);
+  level.player scripts\sp\utility::allow_cg_drawcrosshair(0);
+  setomnvar("ui_hide_weapon_info", 1);
+  setomnvar("ui_hide_hud", 1);
+  level.player scripts\engine\utility::delaycall(0.75, &playrumbleonentity, "light_3s");
+  var0 = getspawner("alex_wm", "targetname");
+  var1 = scripts\engine\sp\utility::dronespawn_bodyonly(var0);
+  var1.animname = "alex_wm";
+  var1.anim_getrootfunc = &scripts\asm\gesture\script_funcs::set_root;
+  alex_face_swap(var1, "head_hero_alex");
+  var2 = give_alex_weapon(var1);
+  level.alex_wm = var1;
+
+  if(scripts\engine\utility::flag("tunnels_transiton_skipped")) {
+    wait 0.5;
+  } else {
+    wait 4;
+  }
+
+  scripts\engine\utility::delaythread(0.3, &scripts\sp\hud_util::fade_in, 4, "black");
+  var3 = 0;
+  var4 = 0.25;
+  level.player setclientomnvar("ui_hide_hud", 1);
+  level.player freezecontrols(1);
+  level.player disableweapons();
+  level.player playerlinktodelta(level.player_rig, "tag_player", 1, var3, var3, var3, var3, 1);
+  level.player_rig show();
+  var5 = "basement_intro";
+  var6 = scripts\engine\utility::getStruct("basement_trapdoor", "targetname");
+  thread basement_intro_farah();
+  thread basement_intro_vo();
+  var6 thread scripts\common\anim::anim_single([level.player_rig, level.alex_wm], var5);
+  thread basement_tunnel_dof();
+  level.player_rig waittillmatch("single anim", "end");
+  level.player_rig hide();
+  level.player freezecontrols(0);
+  level.player enableweapons();
+
+  if(!istrue(level.basement_jump_start)) {
+    scripts\sp\player_rig::unlink_player_from_rig(1);
+  } else {
+    level.player unlink();
+  }
+
+  level.player setstance("stand");
+  level.player scripts\sp\utility::allow_cg_drawcrosshair(1);
+  setomnvar("ui_hide_weapon_info", 0);
+  setomnvar("ui_hide_hud", 0);
+  setomnvar("ui_hide_dpad_hud", 0);
+  var2 unlink();
+  var2 delete();
+  level.alex_wm delete();
+  waitframe();
+  scripts\engine\utility::flag_set("tunnels_gun_ready");
+  level.player showlegs();
+}
+
+function basement_tunnel_dof() {
+  wait 2;
+  setsaveddvar("OMNONNMOTP", "0.1 400 2 1000");
+  level.alex_wm thread scripts\engine\sp\utility::dof_enable_autofocus(5.6, 1, undefined, undefined, "tag_eye");
+  level.farah waittill("glowstick_swap");
+  level.farah thread scripts\engine\sp\utility::dof_enable_autofocus(5.6);
+  wait 6;
+  level.farah thread scripts\engine\sp\utility::dof_disable_autofocus();
+  setsaveddvar("OMNONNMOTP", "0.1 500 4 1000");
+}
+
+function basement_intro_player_speed_management() {
+  level.player thread scripts\engine\sp\utility::player_speed_percent(70, 0.05);
+  level.player allowsprint(0);
+  scripts\engine\utility::flag_wait("basement_intro_player_wire");
+  thread basement_env_fx();
+  level.player thread scripts\engine\sp\utility::player_speed_percent(100, 6);
+  scripts\engine\utility::flag_wait("basement_first_trap_passed");
+  level.player allowsprint(1);
+}
+
+function basement_intro_farah() {
+  level endon("basement_intro_skip");
+  var0 = 1;
+  var1 = scripts\engine\utility::getStruct("basement_trapdoor", "targetname");
+  level.farah scripts\engine\sp\utility::name_hide();
+  thread show_name_on_basement_intro_skip();
+  farah_basement_intro_enter_anim_with_glowstick(var1);
+
+  if(scripts\engine\utility::flag("basement_intro_player_moving")) {
+    farah_intro_anim(var1, "basement_intro_wire", 1);
+  } else {
+    farah_intro_anim(var1, "basement_intro_branch_enter", 1);
+    var2 = ["dx_vom_far_tunnels_tripwire_11", "dx_vom_far_tunnels_tripwire_12", "dx_vom_far_tunnels_tripwire_30"];
+    var3 = scripts\engine\sp\utility::create_deck(var2, 0);
+    var3.autoshuffle = 1;
+
+    if(var0) {
+      var4 = undefined;
+      var5 = 0;
+
+      while(!scripts\engine\utility::flag("basement_intro_player_wire")) {
+        var1 thread scripts\common\anim::anim_loop_solo(level.farah, "basement_intro_branch_idle", "basement_intro_idle_stop");
+
+        if(!isDefined(var4)) {
+          var4 = randomfloatrange(6, 8);
+        } else {
+          var4 = randomfloatrange(8, 12);
+        }
+
+        var5++;
+
+        if(var5 > 3) {
+          var4 = 45;
+        }
+
+        scripts\engine\utility::flag_wait_or_timeout("basement_intro_player_wire", var4);
+
+        if(!scripts\engine\utility::flag("basement_intro_player_wire")) {
+          var1 notify("basement_intro_idle_stop");
+          level.farah thread scripts\engine\sp\utility::smart_dialogue(var3 scripts\engine\sp\utility::deck_draw());
+          var1 scripts\common\anim::anim_single_solo(level.farah, "basement_intro_branch_nag");
+        } else {
+          break;
+        }
+
+        wait 0.05;
+      }
+    } else {
+      var1 thread scripts\common\anim::anim_loop_solo(level.farah, "basement_intro_branch_idle", "basement_intro_idle_stop");
+      scripts\engine\utility::flag_wait("basement_intro_player_wire");
+    }
+
+    var1 notify("basement_intro_idle_stop");
+    farah_intro_anim(var1, "basement_intro_branch_exit", 1);
+  }
+
+  level.farah scripts\engine\sp\utility::name_show();
+  farah_intro_anim(var1, "basement_intro_exit", 1);
+  level.tripwire_trap_count = level.tripwires.traps.size;
+  thread monitor_tripwire_defuse();
+  thread farah_calls_out_ceiling_hole();
+  var1 thread scripts\common\anim::anim_loop_solo(level.farah, "basement_trapdoor_idle");
+  thread basement_whisper_lights_scene();
+  scripts\engine\utility::flag_wait("basement_trapdoor_entered");
+  var1 notify("stop_loop");
+  var1 thread scripts\common\anim::anim_single_solo(level.farah, "basement_trapdoor_exit");
+  wait 1.3;
+  level.farah scripts\engine\sp\utility::anim_stopanimScripted();
+  thread farah_pushable_reset();
+  thread farah_trap_scene_enable_ai_color();
+}
+
+function show_name_on_basement_intro_skip() {
+  level waittill("basement_intro_skip");
+  level.farah scripts\engine\sp\utility::name_hide();
+  level.farah scripts\engine\sp\utility::name_show();
+}
+
+function farah_basement_intro_enter_anim_with_glowstick(var0) {
+  var1 = 1.2;
+  thread glowstick_anim(var0);
+  var0 thread scripts\common\anim::anim_single_solo(level.farah, "basement_intro_enter");
+  level.farah waittillmatch("single anim", "glowstick_stow");
+  level.farah.glowstick scripts\sp\maps\tunnels\zd30tunnels_utility::setanimrate_lerp(level.farah.glowstick scripts\engine\utility::getanim("use"), 1, var1, 1.25);
+  level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::setanimrate_lerp(level.farah scripts\engine\utility::getanim("basement_intro_enter"), 1, var1, 1.25);
+  wait 2.25;
+  level.farah.glowstick scripts\sp\maps\tunnels\zd30tunnels_utility::setanimrate_lerp(level.farah.glowstick scripts\engine\utility::getanim("use"), var1, 1, 1.25);
+  level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::setanimrate_lerp(level.farah scripts\engine\utility::getanim("basement_intro_enter"), var1, 1, 1.25);
+  level.farah waittillmatch("single anim", "end");
+}
+
+function glowstick_anim(var0) {
+  level.farah endon("death");
+  level.farah endon("entitydeleted");
+  level.farah.glowstick = scripts\engine\sp\utility::spawn_anim_model("farah_glowstick");
+  var0 thread scripts\common\anim::anim_single_solo(level.farah.glowstick, "use");
+  level.farah.glowstick waittillmatch("single anim", "glowstick_swap");
+  level.farah notify("glowstick_swap");
+  level.farah.glowstick setModel("weapon_zd30_glowstick_wm_lit");
+  playFXOnTag(level._effect[level.farah.glowstick_vfx], level.farah.glowstick, "tag_fx");
+  level.farah.glowstick waittillmatch("single anim", "end");
+  level.farah.glowstick linkTo(level.farah, level.farah.glowstick_tag, (0, 0, 0), (0, 0, 0));
+  thread swap_glowstick_when_player_isnt_looking();
+}
+
+function swap_glowstick_when_player_isnt_looking() {
+  while(scripts\engine\sp\utility::player_looking_at(level.farah.glowstick.origin, 0.6, 1, level.farah)) {
+    wait 0.1;
+  }
+
+  thread scripts\sp\maps\tunnels\zd30tunnels_utility::spawn_stowed_glowstick_on_farah();
+}
+
+function farah_intro_anim(var0, var1, var2) {
+  var0 thread scripts\common\anim::anim_single_solo(level.farah, var1);
+  waitframe();
+  level.farah setanimrate(level.farah scripts\engine\utility::getanim(var1), var2);
+  level.farah waittillmatch("single anim", "end");
+}
+
+function cine_letterboxing_basement() {
+  level waittill("cine_letterboxing");
+  getrandomnodedestination(1.5, 0);
+  level.player clearcinematicmotionoverride();
+}
+
+function alex_face_swap(var0) {
+  self detach(self.headmodel);
+  self.headmodel = var0;
+  self attach(self.headmodel);
+}
+
+function basement_intro_vo() {
+  wait 1.1;
+  level.alex_wm thread scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_tunnels_intro_10");
+  level thread scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_pri_tunnels_intro_11");
+  wait 12.2;
+  level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_alx_tunnels_intro_50");
+  scripts\engine\utility::flag_wait("basement_farah_goes_under_tripwire");
+  wait 1.5;
+  first_trip_defused_vo();
+}
+
+function first_trip_defused_vo() {
+  if(scripts\engine\utility::flag("basement_roof_hint")) {
+    return;
+  }
+
+  level endon("basement_roof_hint");
+  wait_any_trip_defused();
+  wait 0.65;
+  level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_alx_tunnels_tripwire_100");
+  level.farah scripts\engine\sp\utility::smart_dialogue("dx_vom_far_tunnels_tripwire_110");
+}
+
+function give_alex_weapon() {
+  foreach(var1 in self.fake_weapon_models) {
+    self detach(var1);
+  }
+
+  var3 = spawn("script_model", self gettagorigin("j_gun"));
+  var3 scripts\common\utility::make_weapon_model("iw8_sh_romeo870", ["reflex_west01"]);
+  var3.angles = self gettagangles("j_gun");
+  var3 hidepart("j_shell");
+  var3 hidepart("j_loose_round");
+  var3 hidepart("j_shell_fired");
+  var3 linkTo(self, "j_gun");
+  return var3;
+}
+
+function farah_calls_out_ceiling_hole() {
+  level endon("basement_second_trap_passed");
+  scripts\engine\utility::flag_wait("basement_roof_hint");
+  level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_tunnels_hunt_78");
+}
+
+function farah_trap_scene_enable_ai_color() {
+  level.farah endon("death");
+  scripts\engine\utility::flag_wait("basement_second_trap_passed");
+  level.farah scripts\engine\sp\utility::enable_ai_color();
+}
+
+function basement_whisper_lights_scene(var0) {
+  level endon("basement_intro_skip");
+  var1 = getEnt("basement_vo_whisper_first", "targetname");
+  var2 = getEnt(var1.target, "targetname");
+  var2.origin = (-6930, 6095, -388);
+  var1 waittill("trigger");
+  scripts\engine\utility::flag_set("triggered_basement_whisper");
+  var2 scripts\sp\maps\tunnels\zd30tunnels_utility::say("dx_vom_aq1_tunnels_hunt_02");
+  level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_tunnels_search_10", 1, 0.4);
+  var2 thread scripts\sp\maps\tunnels\zd30tunnels_utility::say("dx_vom_aq2_tunnels_hunt_04");
+  wait 0.25;
+  thread basement_lights_out(1);
+  thread basement_farah_lights_out_and_tripwire_hint_vo();
+
+  while(!is_trip_defused("trip_wall_monitor") && !istrue(var0)) {
+    wait 0.05;
+  }
+
+  level.player thread scripts\engine\sp\utility::blend_movespeedscale(1, 3);
+  var3 = 0;
+
+  if(!scripts\engine\utility::flag("basement_entering_tripweb") && !is_trip_defused("trip_web_monitor")) {
+    scripts\engine\utility::flag_wait("basement_entering_tripweb");
+    var4 = scripts\engine\utility::getStructArray("basement_vo_response", "targetname");
+    var4 = sortbydistance(var4, level.player.origin);
+    var5 = ["dx_vom_aq1_tunnels_hunt_66", var4[0].origin];
+    scripts\sp\maps\tunnels\zd30tunnels_utility::do_as_chatter(&scripts\engine\utility::play_sound_in_space, var5, 1, 0.85);
+    var3 = 1.25;
+  } else {
+    var3 = 1;
+  }
+
+  thread basement_paul_revere_scene(var3);
+}
+
+function basement_farah_lights_out_and_tripwire_hint_vo() {
+  level.player endon("death");
+  wait 1.2;
+
+  if(isDefined(level.lasttripwiredefusedtime)) {
+    var0 = lookupsoundlength("tripwire_pop_full") / 1000;
+    var1 = (gettime() - level.lasttripwiredefusedtime) / 1000;
+
+    if(var1 < var0) {
+      wait var0 - var1 + 0.25;
+    }
+  }
+
+  if(!scripts\engine\utility::flag("basement_entering_tripweb")) {
+    scripts\sp\maps\tunnels\zd30tunnels_utility::do_as_chatter(&lights_out_vo_seq);
+  }
+
+  wait 1;
+
+  if(level.start_point != "basement_tunnel") {
+    trip_wall_defuse_vo_nags();
+    scripts\engine\utility::flag_wait("basement_second_trap_passed");
+  }
+
+  thread trip_web_go_under_vo_nags();
+  scripts\engine\utility::flag_wait("basement_entering_tripweb");
+  level.farah waittill("goal");
+  level.farah waittill("goal_changed");
+
+  if(!is_trip_defused("trip_web_monitor")) {
+    level notify("stop_trip_web_nags");
+    level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_basement_tunnel_trips_40", 0, 2);
+    return;
+  }
+}
+
+function lights_out_vo_seq() {
+  level.farah stopsounds();
+
+  if(scripts\engine\utility::flag("basement_entering_tripweb")) {
+    return;
+  }
+
+  level.player scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_basement_tunnel_poweroff_10", 1);
+  level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_basement_tunnel_poweroff_20", 1);
+
+  if(scripts\engine\utility::flag("basement_entering_tripweb")) {
+    return;
+  }
+
+  level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_basement_tunnel_poweroff_30", 1);
+}
+
+function trip_wall_defuse_vo_nags() {
+  var0 = ["dx_vom_far_basement_tunnel_poweroff_40", "dx_vom_far_basement_tunnel_poweroff_50", "dx_vom_far_basement_tunnel_poweroff_60"];
+  var1 = scripts\engine\sp\utility::create_deck(var0, 1);
+  var1.autoshuffle = 0;
+  var2 = 12;
+  var3 = 1;
+  var4 = spawnStruct();
+  GscBinSkip4(0x6e, var4, "trip_wall_monitor");
+}
+
+function trip_web_go_under_vo_nags() {
+  if(scripts\engine\utility::flag("basement_trapwall_passed")) {
+    return;
+  }
+
+  level endon("stop_trip_web_nags");
+  level endon("basement_trapwall_passed");
+
+  if(!is_trip_defused("trip_web_monitor")) {
+    level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_tunnels_hunt_32");
+  }
+
+  wait 3;
+  var0 = ["dx_vom_far_basement_tunnel_poweroff_120", "dx_vom_far_basement_tunnel_poweroff_110", "dx_vom_far_basement_tunnel_poweroff_100", "dx_vom_far_basement_tunnel_poweroff_90"];
+  var1 = scripts\engine\sp\utility::create_deck(var0, 0);
+  var1.autoshuffle = 1;
+  var2 = 12;
+  var3 = 1;
+  var4 = spawnStruct();
+  GscBinSkip4(0x6e, var4, "trip_web_monitor");
+}
+
+function monitor_defuse(var0) {
+  self endon("stop_wait_tripped");
+  self.trap_defused = 0;
+  var1 = get_trap(var0);
+
+  if(!isDefined(var1)) {
+    return;
+  }
+
+  var1.defusehintstruct waittill("trigger");
+  self.trap_defused = 1;
+}
+
+function basement_paul_revere_scene(var0) {
+  var1 = spawn_paul_revere_scene_ai("paul_revere");
+  thread basement_paul_revere_behavior();
+  wait 0.2;
+
+  if(scripts\engine\utility::flag("basement_first_blast_cancel") || scripts\engine\utility::flag("basement_trapwall_passed")) {
+    return;
+  }
+
+  level.first_blast_enemy = spawn_paul_revere_scene_ai("first_blast");
+  thread basement_first_blast_behavior();
+  level notify("basement_first_blast_spawned");
+}
+
+function spawn_paul_revere_scene_ai(var0) {
+  var1 = scripts\engine\sp\utility::spawn_targetname(var0 + "_spawner", 1);
+  var1.animname = var0;
+  var1.allowdeath = 1;
+  var1 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
+  var1 thread scripts\sp\maps\tunnels\zd30tunnels_ai::shutup_when_hit();
+  var1 thread scripts\engine\sp\utility::name_hide();
+  return var1;
+}
+
+function basement_first_blast_cancel() {
+  level endon("basement_first_blast_spawned");
+  var0 = getEnt("first_blast_cancel_trig", "targetname");
+
+  for(;;) {
+    var0 waittill("damage", var1, var2);
+
+    if(!isDefined(var2) || !isPlayer(var2)) {
+      continue;
+    }
+
+    break;
+  }
+
+  scripts\engine\utility::flag_set("basement_first_blast_cancel");
+  var3 = scripts\engine\sp\utility::spawn_targetname("first_blast_spawner", 1);
+  wait 0.25;
+
+  if(isDefined(var3)) {
+    var3 kill();
+    return;
+  }
+
+  var4 = 2;
+
+  while(var4 > 0) {
+    if(isDefined(var3)) {
+      var3 kill();
+      return;
+    }
+
+    var4 -= 0.1;
+    wait 0.1;
+  }
+}
+
+function basement_first_blast_behavior() {
+  self endon("death");
+  self.ignoreme = 1;
+  self.disablearrivals = 1;
+  self.health = 60;
+  var0 = "basement_first_blast";
+  var1 = scripts\engine\utility::getStruct(var0, "targetname");
+  var1 scripts\common\anim::anim_single_solo(self, var0);
+  scripts\engine\sp\utility::set_goal_node_targetname("first_blast_goto");
+  scripts\engine\sp\utility::set_goal_radius(32);
+  self.disablereload = 1;
+  wait 3;
+  self.disablereload = 0;
+  self.ignoreme = 0;
+}
+
+function basement_paul_revere_behavior() {
+  self endon("death");
+  scripts\engine\utility::delaythread(0.05, &scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter, "dx_vom_aq1_tunnels_hunt_12", 1);
+  thread farah_call_out_runner();
+  thread alex_call_out_runner();
+  var0 = "basement_paul_revere";
+  var1 = scripts\engine\utility::getStruct(var0, "targetname");
+  var1 thread scripts\common\anim::anim_single_solo(self, var0);
+  var2 = 1.95;
+  wait var2;
+  self stopanimScripted();
+  self.ignoreall = 1;
+  self.dontshootwhilemoving = 1;
+  scripts\engine\sp\utility::set_maxfaceenemydist(8);
+  scripts\engine\sp\utility::set_grenadeammo(0);
+  scripts\engine\sp\utility::set_goal_node_targetname("paul_revere_goto");
+  scripts\engine\sp\utility::set_goal_radius(32);
+  scripts\common\utility::demeanor_override("sprint");
+  scripts\engine\utility::disable_pain();
+  thread wakeup_if_chased();
+  var3 = scripts\engine\utility::waittill_any_return("goal", "wake_from_chase");
+  self.ignoreall = 0;
+
+  if(!isDefined(var3) || var3 != "wake_from_chase") {
+    var4 = 512;
+    thread scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away(level.player, var4);
+    return;
+  }
+}
+
+function alex_call_out_runner() {
+  level.player endon("death");
+  GscBinSkip4(0x35, self);
+}
+
+function call_out_missed_shots(var0) {
+  var1 = 1;
+  level.player thread scripts\engine\sp\utility::notify_delay("runner_timeout", 3.5);
+  wait 0.2;
+
+  foreach(var3 in getaiarray("axis")) {
+    thread send_notify_on_damaged_by_player();
+    thread send_notify_on_killed_by_player();
+  }
+
+  while(var1 < 3) {
+    var5 = level.player scripts\engine\utility::waittill_any_return("weapon_fired", "damaged_enemy", "reload_start", "runner_timeout");
+
+    if(var5 == "weapon_fired") {
+      var1++;
+      continue;
+    }
+
+    if(var5 == "damaged_enemy") {
+      var1--;
+      continue;
+    }
+
+    break;
+  }
+
+  if(!isalive(var0)) {
+    return;
+  }
+
+  level.player scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_basement_tunnel_leftpath_30", 1, 0.3);
+}
+
+function send_notify_on_damaged_by_player() {
+  self endon("death");
+  level.player endon("runner_timeout");
+
+  for(;;) {
+    self waittill("damage", var0, var1);
+
+    if(isDefined(var1) && var1 == level.player) {
+      level.player notify("damaged_enemy");
+    }
+  }
+}
+
+function send_notify_on_killed_by_player() {
+  level.player endon("runner_timeout");
+  self waittill("death", var0);
+
+  if(isDefined(var0) && var0 == level.player) {
+    level.player notify("damaged_enemy");
+    return;
+  }
+}
+
+function drop_flare_when_dead(var0) {
+  var1 = scripts\engine\utility::waittill_any_return("death", "entitydeleted", "goal");
+
+  if(!isDefined(var0)) {
+    return;
+  }
+
+  stopFXOnTag(scripts\engine\utility::getfx("flare_spark"), var0, "tag_origin");
+  var2 = var0.origin;
+  var3 = var0.angles;
+  var0 delete();
+
+  if(isDefined(var1) && (var1 == "entitydeleted" || var1 == "goal")) {
+    return;
+  }
+
+  thread scripts\sp\player\flare::level_spawnstaticflare(var2, var3);
+}
+
+function wakeup_if_chased() {
+  self endon("death");
+  wait 5;
+  var0 = 32;
+
+  while(distancesquared(level.player.origin, self.origin) > var0 * var0) {
+    wait 0.25;
+  }
+
+  self notify("wake_from_chase");
+}
+
+function farah_call_out_runner() {
+  self endon("death");
+  wait 1.5;
+  level notify("stop_lights_vo");
+  level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_tunnels_hunt_11", 1, 0.4);
+}
+
+function call_out_runner_died() {
+  self endon("cleaned_up");
+  self endon("delete_when_dist_away");
+  var0 = gettime();
+  self waittill("death");
+  wait 0.3;
+  scripts\sp\maps\tunnels\zd30tunnels_utility::wait_combat_cooldown(0.6, 1);
+  level.player scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_tunnels_hunt_14", 0, 1);
+  return true;
+}
+
+function basement_enemy_flare_throw(var0) {
+  var1 = getEnt("basement_flare_trig", "targetname");
+  var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
+  var2.angles = (355, 80.4, 0);
+  var2.origin = (-6788, 6070, -408);
+  var2.script_noteworthy = 1200;
+  var3 = var2.origin;
+  playworldsound("flare_ignite_plr", var3);
+
+  if(isDefined(var0)) {
+    wait var0;
+  }
+
+  var1 thread scripts\sp\maps\tunnels\zd30tunnels_utility::magic_grenade_launch_think();
+  waitframe();
+  var1 notify("trigger");
+}
+
+function left_flank_trip_defuse_spawns_surprise_door_guy() {
+  var0 = getEnt("left_flank_trip_monitor", "targetname");
+  var1 = undefined;
+
+  foreach(var3 in level.tripwires.tripwires) {
+    if(isDefined(var3) && var3 istouching(var0)) {
+      var1 = var3;
+    }
+  }
+
+  var5 = randomfloatrange(0.35, 0.65);
+
+  if(isDefined(var1) && !istrue(var1.triggered)) {
+    var1 waittill("trigger", var6);
+
+    if(!isDefined(var6) || !isPlayer(var6)) {
+      var5 = randomfloatrange(0.35, 0.75);
+    }
+  }
+
+  var7 = getEnt("surprise_door_spawner", "targetname");
+
+  if(isDefined(var7)) {
+    var8 = getspawner(var7.target, "targetname");
+    var8.script_delay_spawn = var5;
+    var7.origin += (0, 0, 128);
+    return;
+  }
+}
+
+function basement_lights_out(var0) {
+  var1 = "basement_light";
+  var2 = "basement_light_model";
+  var3 = "ee_lighting_string_light_caged_01";
+  level.basement_lights = getEntArray(var1, "script_noteworthy");
+  level.basement_light_models = getEntArray(var2, "script_noteworthy");
+  var4 = sortbydistance(level.basement_light_models, level.player.origin)[0].origin;
+  thread scripts\engine\utility::play_sound_in_space("zd30_lights_off", var4);
+  wait 0.5;
+  var5 = 0;
+
+  if(var5) {
+    level.basement_lights = sortbydistance(level.basement_lights, level.player.origin);
+    level.basement_light_models = sortbydistance(level.basement_light_models, level.player.origin);
+
+    foreach(var7 in level.basement_lights) {
+      foreach(var9 in level.basement_light_models) {
+        if(distancesquared(var7.origin, var9.origin) < 400) {
+          var7.fixture = var9;
+        }
+      }
+    }
+
+    var12 = 0.35;
+    var13 = 4;
+    var14 = 0;
+
+    for(var15 = 0; var15 < level.basement_lights.size; var15++) {
+      var7 = level.basement_lights[var15];
+      var7 thread scripts\sp\maps\tunnels\zd30tunnels_utility::lights_lerp_off(0);
+
+      if(isDefined(var7.fixture)) {
+        var7.fixture thread scripts\sp\maps\tunnels\zd30tunnels_utility::lights_model_swap(var3);
+      }
+
+      if(var14 > var13) {
+        var14 = 0;
+        wait var12;
+        continue;
+      }
+
+      var14++;
+    }
+  } else {
+    wait 0.25;
+    var16 = 0;
+
+    if(isDefined(level.basement_lights) && isarray(level.basement_lights)) {
+      scripts\engine\utility::array_thread(level.basement_lights, &scripts\sp\maps\tunnels\zd30tunnels_utility::lights_lerp_off, var16);
+    }
+
+    if(isDefined(level.basement_light_models) && isarray(level.basement_light_models)) {
+      scripts\engine\utility::array_thread(level.basement_light_models, &scripts\sp\maps\tunnels\zd30tunnels_utility::lights_model_swap, var3);
+    }
+
+    wait var16;
+  }
+
+  if(!istrue(var0)) {
+    return;
+  }
+
+  level.player_overlay = scripts\sp\hud_util::create_client_overlay("black", 1, level.player);
+  level.player_overlay fadeovertime(2);
+  level.player_overlay.alpha = 0.5;
+  wait 1.95;
+  level.player_overlay fadeovertime(4);
+  level.player_overlay.alpha = 0;
+}
+
+function farah_calls_out_ceiling_guys() {}
+
+function basement_vo_another_tripwire() {}
+
+function basement_vo_player(var0, var1, var2, var3, var4, var5, var6) {
+  level endon("flare_in_fire");
+  self endon("death");
+  self endon("entitydeleted");
+  var7 = self;
+  var8 = self;
+
+  if(isDefined(self.target)) {
+    var7 = getEnt(self.target, "targetname");
+  }
+
+  jumpiffalse(istrue(var2)) LOC_0000004f;
+  level endon(self.targetname + "_notify");
+
+  for(;;) {
+    var7 waittill("trigger", var9);
+
+    if(isDefined(var9) && isPlayer(var9)) {
+      var10 = 1;
+      var11 = scripts\sp\maps\tunnels\zd30tunnels_ai::get_alive_enemies();
+
+      if(isDefined(var11)) {
+        foreach(var13 in var11) {
+          if(var13 istouching(var8)) {
+            var10 = 0;
+          }
+        }
+      }
+
+      if(var10) {
+        while((gettime() - level.player.last_weapon_fire_time) / 1000 < 0.5) {
+          wait 0.05;
+        }
+
+        if(!level.player istouching(self)) {
+          continue;
+        }
+
+        thread basement_vo_player_play(var0, var1, var2, var3, var4, var5, var6);
+
+        if(istrue(var2)) {
+          level notify(self.targetname + "_notify");
+        }
+
+        return;
+      }
+    }
+
+    wait 0.1;
+  }
+}
+
+function basement_vo_player_play(var0, var1, var2, var3, var4, var5, var6) {
+  self endon("death");
+  self endon("entitydeleted");
+  wait 0.2;
+  var7 = 0.3;
+  var8 = 0.3;
+  var9 = level.player scripts\sp\maps\tunnels\zd30tunnels_utility::is_combat_cooled_down(var7, var8);
+
+  if(isDefined(var1) && !var9) {
+    level.player scripts\engine\sp\utility::smart_player_dialogue(var1);
+  } else {
+    level.player scripts\engine\sp\utility::smart_player_dialogue(var0);
+  }
+
+  if(isDefined(var3) && isDefined(var3)) {
+    GscBinSkip1(0x74, var3, var4, var5, var6);
+  }
+}
+
+function basement_vo_farah_followup(var0, var1, var2) {
+  level endon("flare_in_fire");
+
+  if(isDefined(var2)) {
+    wait var2;
+  }
+
+  if(isDefined(level.farah) && isalive(level.farah)) {
+    level.farah endon("death");
+    var3 = 3;
+    var4 = 1.5;
+    var5 = level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::is_combat_cooled_down(var3, var4);
+
+    if(isDefined(var1) && !var5) {
+      level.farah thread scripts\engine\sp\utility::smart_dialogue(var1);
+      return;
+    }
+
+    level.farah thread scripts\engine\sp\utility::smart_dialogue(var0);
+    return;
+  }
+}
+
+function basement_vo_whisper() {
+  level endon("flare_in_fire");
+  var0 = getEnt(self.target, "targetname");
+
+  if(var0.classname != "script_origin") {
+    var1 = "dx_vom_aq1_tunnels_hunt_62";
+
+    if(isDefined(self.script_noteworthy)) {
+      var1 = self.script_noteworthy;
+    }
+
+    var2 = lookupsoundlength(var1) / 1000;
+    thread disable_enemy_battlechatter_while_inside();
+    self waittill("trigger");
+
+    if(isDefined(var0.target)) {
+      var3 = scripts\engine\utility::getStruct(var0.target, "targetname").origin;
+      thread scripts\engine\utility::play_sound_in_space(var1, var3);
+      return;
+    }
+
+    var4 = getaiarray("axis");
+
+    foreach(var6 in var4) {
+      if(isDefined(var6) && isalive(var6) && var6 istouching(var0)) {
+        var6 thread scripts\sp\maps\tunnels\zd30tunnels_utility::ai_playSound(var1);
+        level.enemy_last_scripted_vo = gettime();
+        return;
+      }
+    }
+
+    return;
+  }
+}
+
+function disable_enemy_battlechatter_while_inside() {
+  self waittill("trigger");
+
+  for(;;) {
+    var0 = scripts\sp\maps\tunnels\zd30tunnels_ai::get_alive_enemies();
+
+    if(!isDefined(var0)) {
+      self waittill("trigger");
+      continue;
+    }
+
+    foreach(var2 in var0) {
+      if(isDefined(var2) && isalive(var2)) {
+        if(var2 istouching(self)) {
+          var2 scripts\engine\sp\utility::set_battlechatter(0);
+          continue;
+        }
+
+        var2 scripts\engine\sp\utility::set_battlechatter(1);
+      }
+    }
+
+    wait 0.25;
+  }
+}
+
+function get_trap(var0) {
+  var1 = getEnt(var0, "targetname");
+
+  if(isDefined(level.tripwires.traps) && level.tripwires.traps.size > 0) {
+    foreach(var3 in level.tripwires.traps) {
+      if(isDefined(var3) && var3 istouching(var1)) {
+        return var3;
+      }
+    }
+
+    return;
+  }
+}
+
+function is_trip_defused(var0) {
+  var1 = getEnt(var0, "targetname");
+  var2 = 1;
+
+  if(isDefined(level.tripwires.traps) && level.tripwires.traps.size > 0) {
+    foreach(var4 in level.tripwires.traps) {
+      if(isDefined(var4) && var4 istouching(var1)) {
+        var2 = 0;
+      }
+    }
+  }
+
+  return var2;
+}
+
+function wait_any_trip_defused() {
+  foreach(var1 in level.tripwires.traps) {
+    if(isDefined(var1) && isDefined(var1.defusehintstruct)) {
+      var1.defusehintstruct endon("trigger");
+    }
+  }
+
+  level waittill("forever");
+}
+
+function wait_trip_defused(var0) {
+  while(!is_trip_defused(var0)) {
+    wait_any_trip_defused();
+    waitframe();
+  }
+}
+
+function wait_trip_defused_or_timeout(var0, var1) {
+  level endon(var0 + "_defused");
+  thread notify_on_trip_defused(level);
+  wait var1;
+  return true;
+}
+
+function notify_on_trip_defused(var0) {
+  wait_trip_defused(var0);
+  level notify(var0 + "_defused");
+}
+
+function mus_tunnels_intro() {
+  wait 3;
+  setmusicstate("mx_zd30_tunnel_tension");
+  wait 150;
+  setmusicstate("");
+}
+
+function sfx_intro_collapse() {
+  wait 0.1;
+  level.player playSound("scn_zd30_collapse_lr_01");
+}
+
+function trip_defused_already() {
+  var0 = 0;
+
+  for(var1 = 0; var1 < level.tripwires.traps.size; var1++) {
+    if(isDefined(level.tripwires.traps[var1])) {
+      var0++;
+    }
+  }
+
+  return var0 != level.tripwires.traps.size;
+}
+
+function monitor_tripwire_defuse() {
+  level.player endon("death");
+
+  while(!trip_defused_already()) {
+    wait 0.2;
+  }
+
+  level.player notify("tripmine_defused");
+}
+
+function slow_aim_ramp(var0, var1) {
+  var2 = var0;
+
+  while(var2 <= var1) {
+    level.player enableslowaim(var2, var2);
+    var2 += 0.02;
+    wait 0.05;
+  }
+
+  level.player enableslowaim(var1, var1);
+
+  if(var1 == 1) {
+    wait 0.05;
+    level.player disableslowaim();
+    return;
+  }
+}
+
+function basement_special_magic_flash() {
+  var0 = getEnt("directional_magic_flash_deleter", "targetname");
+  var1 = getEnt(var0.script_linkto, "script_linkname");
+  var2 = getEnt("only_when_someone_around", "targetname");
+  var3 = getEnt(var2.target, "targetname");
+  var1 endon("death");
+  var1 endon("entitydeleted");
+  thread delete_magic_flash_if_triggered(var0);
+  var2 waittill("trigger");
+  var4 = 0;
+  var5 = scripts\sp\maps\tunnels\zd30tunnels_ai::get_alive_enemies();
+
+  foreach(var7 in var5) {
+    if(var7 istouching(var3)) {
+      var4 = 1;
+    }
+  }
+
+  if(!var4) {
+    var1 delete();
+    return;
+  }
+}
+
+function delete_magic_flash_if_triggered(var0) {
+  self waittill("trigger");
+
+  if(isDefined(var0)) {
+    var0 delete();
+    return;
+  }
+}
+
+function basement_special_magic_molotov() {
+  var0 = getEnt("molotov_spark_lit", "targetname");
+  var1 = scripts\engine\utility::getStruct(var0.target, "targetname").origin;
+  var2 = level._effect["vfx_speaker_sparks"];
+  var3 = "emt_lighter_sparks";
+  level.molotov_spark_trig = var0;
+  level.fake_molotov_trig = getEnt("molotov_fake", "script_noteworthy");
+  var0 endon("death");
+  var0 endon("entitydeleted");
+  level.fake_molotov_trig endon("death");
+  level.fake_molotov_trig endon("entitydeleted");
+  var0 waittill("trigger");
+  playFX(var2, var1);
+  playworldsound(var3, var1);
+}
+
+function basement_special_magic_molotov_exploder_cleanup() {
+  level waittill("molotov_impact");
+  wait 0.1;
+  scripts\engine\utility::flag_wait("player_passed_right_flank");
+  scripts\engine\utility::stop_exploder("fake_molly");
+}
+
+function basement_tunnel_start() {
+  level.player clearclienttriggeraudiozone(1);
+  scripts\engine\sp\utility::set_start_location("basement_tunnel", [level.player]);
+  scripts\sp\maps\tunnels\zd30tunnels_utility::farah_teleport_and_reset("basement_tunnel_farah");
+  thread left_flank_trip_defuse_spawns_surprise_door_guy();
+  thread basement_triggered_vo();
+  thread basement_whisper_lights_scene(1);
+  thread basement_special_magic_molotov();
+  thread basement_first_blast_cancel();
+}
+
+function basement_tunnel_catchup() {}
+
+function basement_tunnel() {
+  thread farah_ceiling_takedown_scene();
+  thread farah_hallway_takedown_scene();
+  thread farah_disable_ai_color_before_hallway_takedown();
+}
+
+function farah_disable_ai_color_before_hallway_takedown() {
+  var0 = getEnt("post_ceiling_takedown_color_trig", "targetname");
+  var0 scripts\engine\utility::trigger_off();
+  scripts\engine\utility::flag_wait("farah_hallway_takedown_skipped");
+  var0 scripts\engine\utility::trigger_on();
+}
+
+function farah_ceiling_takedown_scene() {
+  var0 = getEnt("basement_ceiling_takedown_trig", "targetname");
+  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
+  thread farah_ceiling_takedown_early_watch(var0);
+  var2 = var0 scripts\engine\utility::waittill_any_return("trigger", "death", "entitydeleted");
+
+  if(!isDefined(var2) || var2 != "trigger") {
+    return;
+  }
+
+  if(isDefined(level.molotov_spark_trig)) {
+    level.molotov_spark_trig delete();
+  }
+
+  if(isDefined(level.fake_molotov_trig)) {
+    level.fake_molotov_trig delete();
+  }
+
+  level.farah_ceiling_takedown_scene_on = 1;
+  level.cancel_fake_molotov = 1;
+  var3 = 1.5;
+
+  while(!scripts\engine\sp\utility::player_looking_at(var1.origin, 0.9) && var3 > 0) {
+    var3 -= 0.05;
+    wait 0.05;
+  }
+
+  level.farah scripts\engine\sp\utility::disable_ai_color();
+  thread farah_ceiling_takedown();
+  thread farah_ceiling_takedown_aq();
+}
+
+function farah_ceiling_takedown_early_watch(var0) {
+  self endon("trigger");
+  self endon("death");
+  self endon("entitydeleted");
+  var1 = getEnt("basement_ceiling_takedown_trig_early", "targetname");
+  var1 waittill("trigger");
+
+  for(;;) {
+    if(level.player istouching(var1) && scripts\engine\utility::flag("basement_door_guy_dealt") && scripts\engine\sp\utility::player_looking_at(var0.origin, 0.9)) {
+      break;
+    }
+
+    wait 0.05;
+  }
+
+  self notify("trigger");
+}
+
+function farah_ceiling_takedown_aq() {
+  var0 = "basement_ceiling_takedown_aq";
+  var1 = scripts\engine\utility::getStruct(var0, "targetname");
+  var2 = "takedown1_victim";
+  var3 = scripts\engine\sp\utility::spawn_targetname(var2 + "_spawner", 1);
+  var3.animname = var2;
+  var3.health = 99999;
+  var3.allowdeath = 0;
+  var3.ignoreme = 1;
+  var3.ignoreall = 1;
+  var3 actoraimassistoff();
+  var3.noragdoll = 1;
+  var3 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
+  var3 thread scripts\engine\sp\utility::name_hide();
+  level.takedown_victim = var3;
+  var1 scripts\common\anim::anim_single_solo(var3, var0);
+  var1 scripts\common\anim::anim_last_frame_solo(var3, var0);
+  var3 visiblenotsolid();
+}
+
+function farah_ceiling_takedown() {
+  var0 = "basement_ceiling_takedown";
+  var1 = scripts\engine\utility::getStruct(var0, "targetname");
+  var2 = 0.85;
+  thread send_right_flank_goto(var2);
+  thread farah_takedown_burst_fire();
+  var1 scripts\common\anim::anim_single_solo(level.farah, var0);
+  var1 thread scripts\common\anim::anim_loop_solo(level.farah, var0 + "_idle");
+  scripts\engine\utility::flag_wait_any_timeout(20, "basement_right_flank_surpise_dealt", "player_passed_right_flank");
+  var1 notify("stop_loop");
+  var1 thread scripts\common\anim::anim_single_solo(level.farah, var0 + "_exit");
+  wait 2;
+  level.farah scripts\engine\sp\utility::anim_stopanimScripted();
+  level.farah scripts\engine\sp\utility::set_goal_radius(32);
+  level.farah scripts\engine\sp\utility::set_goal_node_targetname("right_flank_exit_node");
+}
+
+function send_right_flank_goto(var0) {
+  wait var0;
+
+  if(isDefined(level.basement_right_flank_runner) && isalive(level.basement_right_flank_runner)) {
+    level.basement_right_flank_runner notify("right_flank_goto");
+    return;
+  }
+}
+
+function farah_takedown_burst_fire() {
+  self endon("death");
+  wait randomfloatrange(0.1, 0.35);
+  self shoot();
+  wait randomfloatrange(0.1, 0.35);
+  self shoot();
+
+  if(scripts\engine\utility::cointoss()) {
+    wait randomfloatrange(0.1, 0.35);
+    self shoot();
+  }
+
+  if(isDefined(level.takedown_victim)) {
+    level.takedown_victim stopsounds();
+    level.takedown_victim playSound("generic_death_enemy_" + randomint(8) + 1);
+    return;
+  }
+}
+
+function farah_hallway_takedown_scene() {
+  var0 = getEnt("basement_hallway_takedown_trig", "targetname");
+  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
+  var2 = var0 scripts\engine\utility::waittill_any_return("trigger", "death", "entitydeleted");
+
+  if(!isDefined(var2) || var2 != "trigger") {
+    scripts\engine\utility::flag_set("farah_hallway_takedown_skipped");
+    return;
+  }
+
+  var3 = 1.5;
+
+  while(!scripts\engine\sp\utility::player_looking_at(var1.origin, 0.9) && var3 > 0) {
+    var3 -= 0.05;
+    wait 0.05;
+  }
+
+  var4 = "basement_hallway_takedown";
+  var5 = scripts\engine\utility::getStruct(var4, "targetname");
+  level.farah scripts\engine\utility::delaythread(3, &scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter, "dx_vom_far_basement_tunnel_combat2_80", 0);
+  thread farah_hallway_takedown(var4, var5);
+  thread farah_hallway_takedown_aq(var4, var5);
+}
+
+function farah_hallway_takedown(var0, var1) {
+  thread farah_hallway_takedown_clean_enemies();
+  thread farah_takedown_burst_fire();
+  var1 scripts\common\anim::anim_single_solo(level.farah, var0);
+  level.farah scripts\engine\sp\utility::set_goal_node_targetname("hallway_takedown_goto");
+  level.farah waittill("goal");
+}
+
+function farah_hallway_takedown_clean_enemies() {
+  var0 = getnode("first_cell_prep_node", "targetname");
+  var1 = getEnt("takedown2_scene_enemy_cleanup", "targetname");
+  var2 = scripts\sp\maps\tunnels\zd30tunnels_ai::get_alive_enemies();
+  var3 = 0;
+  var4 = 0;
+
+  foreach(var6 in var2) {
+    if(!var6 istouching(var1)) {
+      var4++;
+      continue;
+    }
+
+    var6 scripts\engine\sp\utility::set_goal_radius(32);
+    var6 scripts\engine\sp\utility::set_goal_node(var0);
+    var6 scripts\engine\utility::delaythread(5, &scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away, level.player, 500);
+    var3++;
+  }
+}
+
+function farah_hallway_takedown_aq(var0, var1) {
+  var2 = "takedown2_victim";
+  var3 = scripts\engine\sp\utility::spawn_targetname(var2 + "_spawner", 1);
+  var3.animname = var2;
+  var3.health = 99999;
+  var3.allowdeath = 0;
+  var3.ignoreme = 1;
+  var3.ignoreall = 1;
+  var3 actoraimassistoff();
+  var3.noragdoll = 1;
+  var3 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
+  var3 thread scripts\engine\sp\utility::name_hide();
+  level.takedown_victim = var3;
+  var1 scripts\common\anim::anim_single_solo(var3, var0);
+  var1 scripts\common\anim::anim_last_frame_solo(var3, var0);
+  var3 visiblenotsolid();
+}
+
+function remove_anim_corpse_col(var0, var1, var2, var3) {
+  var4 = scripts\engine\sp\utility::spawn_anim_model(var0, var2.origin, var2.angles);
+  var4 attach(var1);
+  var2 thread scripts\common\anim::anim_last_frame_solo(var4, var3);
+  waitframe();
+  scripts\common\anim::anim_set_time_solo(var4, var3, 1);
+  var4 notsolid();
+  self.skipdeathanim = 1;
+  self.noragdoll = 1;
+  self pushplayer(0);
+  self.allowdeath = 1;
+  self.diequietly = 1;
+
+  if(isDefined(self.magic_bullet_shield)) {
+    scripts\common\ai::stop_magic_bullet_shield();
+  }
+
+  self kill();
+  self delete();
+}
+
+function collapse_setup() {
+  level.collapse_geo_before = getEntArray("collapse_pre", "script_noteworthy");
+  level.collapse_geo_after = getEntArray("collapse_post", "script_noteworthy");
+
+  foreach(var1 in level.collapse_geo_after) {
+    if(isDefined(var1.classname) && var1.classname == "script_brushmodel") {
+      var1 connectpaths();
+    }
+
+    var1 hide();
+  }
+
+  level.collapse_clip = getEnt("collapse_clip", "targetname");
+  level.collapse_clip connectpaths();
+  level.collapse_hurt_trigs = getEntArray("collapse_fire_hurt_trig", "targetname");
+
+  foreach(var4 in level.collapse_hurt_trigs) {
+    var4.origin += (0, 0, 10000);
+  }
+
+  thread collapse_setup_tunnel_scriptables();
+  thread basement_collapse_crawl_vo_structs();
+}
+
+#using_animtree("scriptables");
+
+function collapse_setup_tunnel_scriptables() {
+  wait 0.25;
+  level.collapse_sag_beam = getscriptablearray("sag_beam", "targetname")[0];
+  level.collapse_geo_after = scripts\engine\utility::array_add(level.collapse_geo_after, level.collapse_sag_beam);
+  level.collapse_sag_beam.animname = "basement_collapse_sag_beam";
+  level.collapse_sag_beam useanimtree(#animtree);
+  level.collapse_sag_beam hide();
+}
+
+function collapse_start() {
+  level.player clearclienttriggeraudiozone(1);
+  scripts\engine\sp\utility::set_start_location("collapse", [level.player]);
+  scripts\sp\maps\tunnels\zd30tunnels_utility::farah_teleport_and_reset("collapse_farah");
+  visionsetalternate(0, 0.05);
+}
+
+function collapse_catchup() {
+  thread farah_pushable_reset();
+
+  foreach(var1 in level.collapse_geo_before) {
+    var1 hide();
+  }
+
+  foreach(var1 in level.collapse_geo_after) {
+    var1 show();
+  }
+
+  thread basement_collapse_objective_update();
+  scripts\sp\player::player_movement_state("default");
+  scripts\engine\utility::flag_set("flare_in_fire");
+  scripts\engine\utility::flag_set("collapse_hadir_convo");
+}
+
+function farah_pushable_reset() {
+  var0 = 2;
+
+  while(!isDefined(level.farah) || !isalive(level.farah)) {
+    var0 -= 0.25;
+    wait 0.25;
+
+    if(var0 <= 0) {
+      return;
+    }
+  }
+
+  level.farah.script_pushable = 1;
+  level.farah pushplayer(0);
+}
+
+function collapse() {
+  level.farah.script_pushable = 0;
+  thread collapse_farah_demeanor();
+  scripts\engine\utility::array_thread(level.collapse_hurt_trigs, &collapse_burn_player);
+  thread collapse_fuel_hint_dialogue();
+  thread collapse_player_slow_crawl();
+  collapse_farah_scene();
+}
+
+function collapse_player_slow_crawl() {
+  var0 = getEnt("slow_crawl_trig", "targetname");
+  var0 waittill("trigger");
+  var1 = 0.5;
+  var2 = 82;
+  var3 = 0;
+
+  for(;;) {
+    while(level.player istouching(var0)) {
+      if(!var3) {
+        level.player thread scripts\engine\sp\utility::player_speed_percent(var2, var1);
+        var3 = 1;
+      }
+
+      if(var3 && level.player getstance() != "prone") {
+        break;
+      }
+
+      wait var1;
+    }
+
+    if(var3) {
+      level.player thread scripts\engine\sp\utility::player_speed_percent(100, var1);
+      var3 = 0;
+    }
+
+    wait var1;
+    var0 waittill("trigger");
+  }
+}
+
+function collapse_farah_demeanor() {
+  scripts\engine\utility::flag_wait("farah_collapse_demeanor");
+  level.farah scripts\common\utility::demeanor_override("combat");
+}
+
+function collapse_fuel_hint_dialogue() {
+  scripts\engine\utility::flag_wait("collapse_gas_hint");
+  level.farah scripts\engine\sp\utility::smart_dialogue("dx_vom_far_tunnels_tripwall_32");
+  var0 = scripts\engine\utility::getStruct("fake_enemy_vo", "targetname").origin;
+  scripts\engine\utility::play_sound_in_space("dx_vom_aq1_tunnels_chamber_10", var0);
+}
+
+function collapse_oil_trap_wait() {
+  level endon("oil_fire_ignited");
+  scripts\engine\utility::flag_wait("flare_in_fire");
+  scripts\sp\player::player_movement_state("default");
+  thread fx_flare_oil_fire();
+  wait 1.5;
+  thread farah_gestures_fallback();
+}
+
+function collapse_farah_scene() {
+  collapse_oil_trap_wait();
+  var0 = undefined;
+
+  foreach(var2 in level.oil_fires) {
+    if(isDefined(var2.script_parameters) && var2.script_parameters == "basement_collapse") {
+      var0 = var2;
+    }
+  }
+
+  var0 thread scripts\sp\maps\tunnels\zd30tunnels_utility::oilfire_run(1.05);
+  level waittill("oil_fire_ignited", var4, var5, var6, var7, var8);
+
+  foreach(var10 in level.magic_grenades) {
+    if(isDefined(var10) && isDefined(var10.script_parameters) && var10.script_parameters == "basement_collapse") {
+      var10 delete();
+      thread farah_gestures_fallback();
+      break;
+    }
+  }
+
+  wait var8;
+  thread farah_collapse_react(1.1);
+  var4.oilfire_enabled = 0;
+  wait 0.05;
+
+  if(isDefined(var7)) {
+    stopFXOnTag(scripts\engine\utility::getfx(var7), var6, "tag_origin");
+  }
+
+  if(isDefined(var5)) {
+    scripts\engine\utility::stop_exploder(var5);
+  }
+
+  basement_collapse_lights_out();
+  thread collapse_explode(1.1);
+  thread farah_asking_are_you_ok();
+  wait 3;
+  var12 = getEnt("basement_collapse_cough_trig", "targetname");
+
+  if(isalive(level.player) && level.player istouching(var12)) {
+    thread disable_crosshair_for_time(3);
+    level.player forceplaygestureviewmodel("ges_ph_cough_a");
+    level.player playSound("gas_player_cough_1");
+  }
+
+  wait 3;
+  thread collapse_beam_bend();
+
+  if(scripts\engine\utility::flag("collapse_hadir_convo")) {
+    scripts\engine\utility::flag_clear("collapse_hadir_convo");
+  }
+
+  level.farah.script_pushable = 1;
+  thread collapse_farah_crawl();
+  scripts\engine\utility::flag_wait_or_timeout("farah_vo_trip_web", 3);
+  thread basement_collapse_objective_update();
+  crawl_nags();
+  scripts\engine\utility::flag_wait("collapse_hadir_convo");
+  thread scripts\engine\sp\utility::autosave_now();
+  thread mus_tunnels_crawl();
+  basement_collapse_crawl_vo();
+  level notify("basement_collapse_crawl_vo_finished");
+  level endon("stop_basement_env_fx");
+}
+
+function crawl_nags() {
+  level endon("collapse_hadir_convo");
+
+  if(scripts\engine\utility::flag("collapse_hadir_convo")) {
+    return;
+  }
+
+  var0 = ["dx_vom_far_tunnels_tripwall_40", "dx_vom_far_tunnels_tripwall_55", "dx_vom_far_tunnels_tripwall_60"];
+  var1 = scripts\engine\sp\utility::create_deck(var0, 0);
+  var1.autoshuffle = 1;
+
+  if(!scripts\engine\utility::flag("farah_vo_trip_web")) {
+    level.farah scripts\engine\sp\utility::smart_dialogue(var1 scripts\engine\sp\utility::deck_draw_specific("dx_vom_far_tunnels_tripwall_40"));
+  }
+
+  GscBinSkip4(0x35, var1, "said_crawl_hint", 15);
+}
+
+function crawl_hint_vo() {
+  level endon("collapse_hadir_convo");
+
+  if(scripts\engine\utility::flag("collapse_hadir_convo")) {
+    return;
+  }
+
+  scripts\engine\utility::flag_clear("crawl_hint_failsafe");
+  var0 = scripts\engine\utility::getStruct("hadir_vo_struct_start", "targetname");
+  scripts\sp\maps\tunnels\zd30tunnels_utility::debug_print("Collapse crawl hint - waiting");
+
+  while(!scripts\engine\sp\utility::player_looking_at(var0.origin, 0.75) && !scripts\engine\utility::flag("crawl_hint_failsafe")) {
+    wait 0.1;
+  }
+
+  if(scripts\engine\utility::flag("crawl_hint_failsafe")) {
+    scripts\sp\maps\tunnels\zd30tunnels_utility::debug_print("Collapse crawl hint - active due to failsafe trigger");
+  } else {
+    scripts\sp\maps\tunnels\zd30tunnels_utility::debug_print("Collapse crawl hint - active due to looking");
+  }
+
+  while(level.player getstance() == "stand") {
+    waitframe();
+  }
+
+  level notify("said_crawl_hint");
+  level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_alx_tunnels_tripwall_70");
+}
+
+function disable_crosshair_for_time(var0) {
+  level.player scripts\sp\utility::allow_cg_drawcrosshair(0);
+  wait var0;
+  level.player scripts\sp\utility::allow_cg_drawcrosshair(1);
+}
+
+function basement_collapse_crawl_vo() {
+  while(level.player getstance() != "prone") {
+    waitframe();
+  }
+
+  wait 1;
+  hadir_crawl_dialogue("dx_vom_had_caves_crawl_10");
+  wait 0.2;
+  level.farah scripts\engine\sp\utility::smart_dialogue("dx_vom_far_caves_crawl_20");
+  hadir_crawl_dialogue("dx_vom_had_caves_crawl_30");
+  level.player scripts\engine\sp\utility::smart_dialogue("dx_vom_alx_caves_crawl_35");
+  hadir_crawl_dialogue("dx_vom_had_caves_crawl_37");
+  level.farah scripts\engine\sp\utility::smart_dialogue("dx_vom_far_caves_crawl_40");
+  wait 0.5;
+  hadir_crawl_dialogue("dx_vom_had_caves_crawl_70");
+  wait 0.2;
+  level.farah scripts\engine\sp\utility::smart_dialogue("dx_vom_far_caves_crawl_80");
+  hadir_crawl_dialogue("dx_vom_had_caves_crawl_90");
+  wait 0.5;
+  level.farah scripts\engine\sp\utility::smart_dialogue("dx_vom_far_caves_crawl_95");
+}
+
+function basement_collapse_crawl_vo_structs() {
+  var0 = 256;
+  var1 = scripts\engine\utility::getStruct("hadir_vo_struct_start", "targetname");
+  level.vo_struct_trig = spawn("trigger_radius", var1.origin, 0, var0, 64);
+  level.vo_struct_trig.radius = var0;
+
+  for(;;) {
+    level.vo_struct_trig.origin = var1.origin;
+    waitframe();
+    level.vo_struct_trig waittill("trigger", var2);
+
+    if(!isDefined(var2) || !isPlayer(var2)) {
+      wait 0.05;
+      continue;
+    }
+
+    if(!isDefined(var1.target)) {
+      return;
+    }
+
+    var1 = scripts\engine\utility::getStruct(var1.target, "targetname");
+  }
+
+  level waittill("basement_collapse_crawl_vo_finished");
+  level.vo_struct_trig delete();
+}
+
+function hadir_crawl_dialogue(var0) {
+  level.hadir_craw_vo = var0;
+  scripts\engine\utility::play_sound_in_space(var0, level.vo_struct_trig.origin);
+}
+
+function basement_collapse_crawl_vo_structs_debug() {
+  var0 = 0.25;
+  var1 = int(var0 / 0.05);
+
+  for(;;) {
+    if(isDefined(level.hadir_craw_vo)) {}
+
+    thread scripts\engine\utility::draw_angles((0, 0, 0), level.vo_struct_trig.origin, (0, 0, 1), var1, 2);
+    thread scripts\engine\utility::draw_circle(level.vo_struct_trig.origin, level.vo_struct_trig.radius, (0.5, 0.5, 1), 1, 0, var1);
+    var2 = distance2d(level.player.origin, level.vo_struct_trig.origin);
+    var3 = "DIST=" + var2 + "/" + level.vo_struct_trig.radius;
+    wait var0;
+  }
+}
+
+function basement_collapse_objective_update() {
+  scripts\engine\sp\objectives::objective_update("tunnels_search", "current", undefined, &"ZD30/OBJ_TUNNELS_CRAWL");
+  var0 = scripts\engine\utility::getStruct("hadir_vo_struct_start", "targetname").origin;
+  scripts\engine\sp\objectives::objective_add_location_position("tunnels_search", "crawl", var0);
+  scripts\engine\utility::flag_wait("collapse_hadir_convo");
+
+  if(!scripts\engine\utility::flag("storage_reached")) {
+    var0 = scripts\engine\utility::getStruct("storage", "targetname").origin;
+    scripts\engine\sp\objectives::objective_remove_all_locations("tunnels_search");
+    scripts\engine\sp\objectives::objective_add_location_position("tunnels_search", "crawl_end", var0);
+    return;
+  }
+}
+
+function basement_collapse_lights_out() {
+  var0 = getEntArray("tunnel_collapse_light", "script_noteworthy");
+
+  foreach(var2 in var0) {
+    if(isDefined(var2)) {
+      var2 scripts\engine\utility::delaythread(0.25, &scripts\sp\maps\tunnels\zd30tunnels_utility::lights_lerp_off, 0);
+    }
+  }
+}
+
+function basement_collapse_lights_on() {
+  var0 = getEntArray("tunnel_collapse_light", "script_noteworthy");
+
+  foreach(var2 in var0) {
+    if(isDefined(var2.targetname) && var2.targetname == "script_light") {
+      var2 scripts\sp\lights::light_turn_on();
+    }
+  }
+}
+
+function farah_gestures_fallback() {
+  wait 0.25;
+  level.farah scripts\engine\sp\utility::smart_dialogue("dx_vom_far_tunnels_tripwall_22");
+  wait 0.25;
+}
+
+function farah_collapse_react(var0) {
+  level.farah endon("cancel_react_to_collapse");
+  thread farah_collapse_react_timeout(var0);
+  var1 = "collapse_react";
+  var2 = scripts\engine\utility::getStruct(var1, "targetname");
+  var2 thread scripts\sp\anim::anim_reach_solo(level.farah, var1);
+
+  if(isDefined(var0)) {
+    wait var0;
+  }
+
+  var2 scripts\sp\anim::anim_reach_solo(level.farah, var1);
+  level.farah notify("reacting_to_collapse");
+  var2 scripts\common\anim::anim_single_solo(level.farah, var1);
+  level.farah scripts\engine\sp\utility::enable_ai_color();
+}
+
+function farah_collapse_react_timeout(var0) {
+  level.farah endon("reacting_to_collapse");
+  wait var0 + 0.5;
+  level.farah notify("cancel_react_to_collapse");
+  level.farah scripts\engine\sp\utility::anim_stopanimScripted();
+  level.farah scripts\engine\sp\utility::enable_ai_color();
+}
+
+function farah_collapse_nag(var0, var1, var2) {
+  level endon(var1);
+
+  if(scripts\engine\utility::flag_exist(var1) && scripts\engine\utility::flag(var1)) {
+    return;
+  }
+
+  if(!isDefined(var2)) {
+    var2 = 6;
+  }
+
+  var3 = 300;
+  var4 = var2 * 3;
+
+  for(var5 = 0;; var5++) {
+    while(distance2dsquared(level.player.origin, level.farah.origin) > var3 * var3) {
+      wait 0.1;
+    }
+
+    var6 = min(var4, var2 + 3 * var5);
+    wait var6;
+    level.farah scripts\engine\sp\utility::smart_dialogue(var0 scripts\engine\sp\utility::deck_draw());
+  }
+}
+
+function collapse_farah_crawl() {
+  var0 = getEnt("crawl_clip_a", "targetname");
+  var0.origin -= (0, 0, 1000);
+  var1 = getEnt("crawl_clip_b", "targetname");
+  var1.origin -= (0, 0, 1000);
+  var2 = getEnt("crawl_clip_c", "targetname");
+  var2.origin -= (0, 0, 1000);
+  var3 = getEnt("crawl_clip_d", "targetname");
+  var3.origin -= (0, 0, 1000);
+  var4 = getEnt("crawl_clip_e", "targetname");
+  var4.origin -= (0, 0, 1000);
+  clear_all_crawl_flags();
+  var5 = scripts\engine\utility::getStruct("collapse_crawl_A", "targetname");
+  var6 = getnode("pre_collapse_node", "targetname");
+  level.farah scripts\common\utility::clear_demeanor_override();
+  level.farah scripts\engine\sp\utility::set_goal_node(var6);
+  level.farah scripts\engine\sp\utility::set_goal_radius(32);
+  scripts\engine\utility::flag_wait("collapse_crawl_a");
+  level.farah scripts\common\utility::clear_demeanor_override();
+  var7 = getnode("collapse_crawl_prep_node", "targetname");
+  level.farah scripts\engine\sp\utility::set_goal_node(var7);
+  level.farah waittill("goal");
+  var0.origin += (0, 0, 1000);
+  collapse_crawl_segment_anim(var5, "collapse_crawl_A", "collapse_crawl_b");
+  scripts\engine\utility::flag_wait("collapse_crawl_b");
+  var1.origin += (0, 0, 1000);
+  collapse_crawl_segment_anim(var5, "collapse_crawl_B", "collapse_crawl_c");
+  scripts\engine\utility::flag_wait("collapse_crawl_c");
+  var2.origin += (0, 0, 1000);
+  collapse_crawl_segment_anim(var5, "collapse_crawl_C", "collapse_crawl_d");
+  scripts\engine\utility::flag_wait("collapse_crawl_d");
+  var3.origin += (0, 0, 1000);
+  collapse_crawl_segment_anim(var5, "collapse_crawl_D", "collapse_crawl_e");
+  scripts\engine\utility::flag_wait("collapse_crawl_e");
+  var4.origin += (0, 0, 1000);
+  collapse_crawl_segment_anim(var5, "collapse_crawl_E", "collapse_crawl_f");
+  scripts\engine\utility::flag_wait("collapse_crawl_f");
+  var5 thread scripts\common\anim::anim_single_solo(level.farah, "collapse_crawl_F");
+  level.farah setanimrate(level.farah scripts\engine\utility::getanim("collapse_crawl_F"), 1.5);
+  level.farah waittillmatch("single anim", "end");
+  level.farah scripts\engine\sp\utility::enable_ai_color();
+  level.farah scripts\common\utility::demeanor_override("combat");
+}
+
+function clear_all_crawl_flags() {
+  scripts\engine\utility::flag_clear("collapse_crawl_a");
+  scripts\engine\utility::flag_clear("collapse_crawl_b");
+  scripts\engine\utility::flag_clear("collapse_crawl_c");
+  scripts\engine\utility::flag_clear("collapse_crawl_d");
+  scripts\engine\utility::flag_clear("collapse_crawl_e");
+}
+
+function collapse_crawl_segment_anim(var0, var1, var2, var3) {
+  thread scripts\common\anim::anim_single_solo(level.farah, var0);
+
+  if(!isDefined(var2)) {
+    var2 = 1;
+  }
+
+  if(!isDefined(var3)) {
+    var3 = 0;
+  }
+
+  wait var3;
+  level.farah setanimrate(level.farah scripts\engine\utility::getanim(var0), var2);
+
+  if(scripts\engine\sp\utility::player_looking_at(level.farah getEye(), 0.7, 1)) {
+    level.farah waittillmatch("single anim", "end");
+  }
+
+  if(!scripts\engine\utility::flag(var1)) {
+    thread scripts\common\anim::anim_loop_solo(level.farah, var0 + "_idle");
+    scripts\engine\utility::flag_wait(var1);
+    self notify("stop_loop");
+    return;
+  }
+}
+
+function collapse_explode(var0) {
+  scripts\engine\utility::exploder("tunnel_collapse");
+  var1 = scripts\engine\utility::getStruct("collapse_vfx", "targetname");
+  thread sfx_tunnel_collapse_02(var1.origin);
+  var2 = var1.origin;
+  var3 = 500;
+  var4 = getcorpsearray();
+
+  foreach(var6 in var4) {
+    var7 = var6 scripts\engine\sp\utility::get_corpse_origin();
+
+    if(distancesquared(var2, var7) < var3 * var3) {
+      var6 delete();
+    }
+  }
+
+  wait var0;
+
+  if(scripts\engine\utility::flag("farah_vo_trip_web")) {
+    scripts\engine\utility::flag_clear("farah_vo_trip_web");
+  }
+
+  foreach(var10 in level.collapse_geo_before) {
+    var10 hide();
+  }
+
+  foreach(var10 in level.collapse_geo_after) {
+    if(isDefined(var10.classname) && var10.classname == "script_brushmodel") {
+      var10 connectpaths();
+    }
+
+    var10 show();
+  }
+
+  level.collapse_clip hide();
+  visionsetalternate(1, 2);
+  var14 = 256;
+
+  foreach(var16 in level.oil_fire_fumes) {
+    if(distance(var1.origin, var16.origin) <= var14) {
+      stopFXOnTag(level._effect["vfx_oil_evaporate"], var16, "tag_origin");
+    }
+  }
+}
+
+function collapse_beam_bend() {
+  var0 = getEnt("trigger_sag_beam", "targetname");
+  var0 waittill("trigger");
+  level.collapse_sag_beam playSound("zd30_collapse_beam_shift");
+  wait 0.6;
+  level.collapse_sag_beam show();
+  level.collapse_sag_beam setscriptablepartstate("base", "cracked");
+  scripts\engine\utility::exploder("expl_sag_beam");
+}
+
+function collapse_burn_player() {
+  thread collapse_burn_player_death_hint();
+  var0 = 1.15;
+  level waittill("oil_fire_ignited", var1, var2, var3, var4, var5);
+
+  if(self.script_noteworthy == "1") {
+    wait var5 + 1.1 + 0.85;
+    self.origin -= (0, 0, 10000);
+    thread scripts\sp\maps\tunnels\zd30tunnels_utility::supplementary_fire_damage();
+    wait var0;
+  } else if(self.script_noteworthy == "2") {
+    wait var5 + 1.1 + 1.1;
+    self.origin -= (0, 0, 10000);
+    wait 0.05;
+    earthquake(0.7, 2, self.origin, 400);
+    level.player playRumbleOnEntity("heavy_1s");
+    thread scripts\sp\maps\tunnels\zd30tunnels_utility::supplementary_fire_damage();
+    wait var0;
+  } else {
+    wait var5 + 1.1 + 1.25;
+    self.origin -= (0, 0, 10000);
+    wait 0.05;
+    earthquake(0.4, 1.5, self.origin, 200);
+    level.player playRumbleOnEntity("light_1s");
+
+    if(self.script_noteworthy == "3") {
+      thread scripts\sp\maps\tunnels\zd30tunnels_utility::supplementary_fire_damage();
+    }
+
+    wait var0;
+  }
+
+  self delete();
+}
+
+function collapse_burn_player_death_hint() {
+  level.player waittill("death");
+
+  if(isDefined(level.collapse_hurt_trigs)) {
+    foreach(var1 in level.collapse_hurt_trigs) {
+      if(isDefined(var1) && level.player istouching(var1)) {
+        scripts\sp\player_death::set_custom_death_quote(66);
+      }
+    }
+
+    return;
+  }
+}
+
+function farah_asking_are_you_ok(var0) {
+  level endon("said_crawl_hint");
+  wait 3;
+  var0 = level.player.health / level.player.maxhealth;
+  wait 2;
+  level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_tunnels_tripwall_26", 1);
+
+  if(var0 > 0.99) {
+    level.player scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_tunnels_tripwall_28");
+    return;
+  }
+
+  if(var0 > 0.65) {
+    level.player scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_tunnels_tripwall_26");
+    return;
+  }
+
+  level.player scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_tunnels_tripwall_27");
+}
+
+function sfx_tunnel_collapse_02(var0) {
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_trans", var0);
+  wait 0.6;
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_fireball_front", (-6735, 5265, -436));
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_fireball_rear", (-6722, 5450, -417));
+  wait 1;
+  level.player playSound("scn_zd30_collapse_lr_02");
+}
+
+function mus_tunnels_crawl() {
+  setmusicstate("mx_zd30_hadir_mood");
+}
+
+function fx_flare_oil_fire() {
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_flare_oil_throw", (-6731, 4659, -425));
+  wait 1;
+  var0 = scripts\engine\utility::getStruct("collapse_flare_fire_start", "targetname").origin;
+  playFX(level._effect["vfx_collapse_ignite"], var0);
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_flare_oil_ignite", (-6727, 4826, -450));
+  wait 2;
+}
+
+function vfx_intro_collapse() {
+  wait 2.1;
+  scripts\engine\utility::exploder("tunnel_intro_dust");
+}

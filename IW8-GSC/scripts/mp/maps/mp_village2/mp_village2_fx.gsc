@@ -1,0 +1,67 @@
+/**********************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\maps\mp_village2\mp_village2_fx.gsc
+**********************************************************/
+
+function main() {
+  level._effect["vfx_village_dust_move_slow"] = loadfx("vfx/iw8_mp/level/village/vfx_village_dust_move_slow.vfx");
+  level._effect["vfx_village_ambient_falling_ashes_close"] = loadfx("vfx/iw8_mp/level/village/vfx_village_ambient_falling_ashes_close.vfx");
+  level._effect["vfx_village_fire_light"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_light.vfx");
+  level._effect["vfx_village_fire_light"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_light.vfx");
+  level._effect["vfx_village_fire_flare_wall"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_flare_wall.vfx");
+  level._effect["vfx_village_water_movement_2"] = loadfx("vfx/iw8_mp/level/village/vfx_village_water_movement_2.vfx");
+  level._effect["vfx_village_fire_sparks_lrg"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_sparks_lrg.vfx");
+  level._effect["vfx_village_fire_sparks_lrg"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_sparks_lrg.vfx");
+  level._effect["vfx_village_water_movement"] = loadfx("vfx/iw8_mp/level/village/vfx_village_water_movement.vfx");
+  level._effect["vfx_leaves_falling_olive"] = loadfx("vfx/iw8_mp/gen_amb/vfx_leaves_falling_olive.vfx");
+  level._effect["vfx_mosquitos_over_water_1"] = loadfx("vfx/iw8_mp/gen_amb/vfx_mosquitos_over_water_1.vfx");
+  level._effect["vfx_village_fluorescent_lf"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fluorescent_lf.vfx");
+  level._effect["vfx_moths_1"] = loadfx("vfx/iw8_mp/gen_amb/vfx_moths_1.vfx");
+  level._effect["vfx_village_incandescent_lf"] = loadfx("vfx/iw8_mp/level/village/vfx_village_incandescent_lf.vfx");
+  level._effect["vfx_village_water_drips"] = loadfx("vfx/iw8_mp/level/village/vfx_village_water_drips.vfx");
+  level._effect["vfx_village_tower_fire"] = loadfx("vfx/iw8_mp/level/village/vfx_village_tower_fire.vfx");
+  level._effect["vfx_village_fire_ceiling_03"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_ceiling_03.vfx");
+  level._effect["vfx_village_fire_ceiling_03"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_ceiling_03.vfx");
+  level._effect["vfx_village_waterfall_bottom"] = loadfx("vfx/iw8_mp/level/village/vfx_village_waterfall_bottom.vfx");
+  level._effect["vfx_village_splash_water_01"] = loadfx("vfx/iw8_mp/level/village/vfx_village_splash_water_01.vfx");
+  level._effect["vfx_village_fire_wall_wide"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_wall_wide.vfx");
+  level._effect["vfx_village_wood_beam_fire_1"] = loadfx("vfx/iw8_mp/level/village/vfx_village_wood_beam_fire_1.vfx");
+  level._effect["vfx_village_paper_boat"] = loadfx("vfx/iw8_mp/level/village/vfx_village_paper_boat.vfx");
+  level._effect["vfx_village_fire_tiny"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_tiny.vfx");
+  level._effect["vfx_village_fire_sml"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_sml.vfx");
+  level._effect["vfx_village_smoke_barn_window_small"] = loadfx("vfx/iw8_mp/level/village/vfx_village_smoke_barn_window_small.vfx");
+  level._effect["vfx_village_fire_ceiling_02"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_ceiling_02.vfx");
+  level._effect["vfx_village_ceiling_fire_drip_short"] = loadfx("vfx/iw8_mp/level/village/vfx_village_ceiling_fire_drip_short.vfx");
+  level._effect["vfx_village_fire_ground_spot_lrg"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_ground_spot_lrg.vfx");
+  level._effect["vfx_village_smoke_barn_window"] = loadfx("vfx/iw8_mp/level/village/vfx_village_smoke_barn_window.vfx");
+  level._effect["vfx_village_ambient_falling_ashes"] = loadfx("vfx/iw8_mp/level/village/vfx_village_ambient_falling_ashes.vfx");
+  level._effect["vfx_wood_beam_fire_1"] = loadfx("vfx/iw8_mp/level/village/vfx_wood_beam_fire_1.vfx");
+  level._effect["vfx_village_smoke_flat"] = loadfx("vfx/iw8_mp/level/village/vfx_village_smoke_flat.vfx");
+  level._effect["vfx_village_fire_embers"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_embers.vfx");
+  level._effect["vfx_village_fire_ceiling_01"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_ceiling_01.vfx");
+  level._effect["vfx_village_fire_floor"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_floor.vfx");
+  level._effect["vfx_village_fire_wall_detail_med"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_wall_detail_med.vfx");
+  level._effect["vfx_village_fire_crawl_line_wide"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_crawl_line_wide.vfx");
+  level._effect["vfx_village_fire_crawl_line_lg"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_crawl_line_lg.vfx");
+  level._effect["vfx_falling_dust_ceiling"] = loadfx("vfx/iw8_mp/gen_amb/vfx_falling_dust_ceiling.vfx");
+  level._effect["vfx_village_constant_motes"] = loadfx("vfx/iw8_mp/level/village/vfx_village_constant_motes.vfx");
+  level._effect["vfx_village_falling_pine_needles"] = loadfx("vfx/iw8_mp/level/village/vfx_village_falling_pine_needles.vfx");
+  level._effect["vfx_village_chimney_smoke_2"] = loadfx("vfx/iw8_mp/level/village/vfx_village_chimney_smoke_2.vfx");
+  level._effect["vfx_village_chimney_smoke_3"] = loadfx("vfx/iw8_mp/level/village/vfx_village_chimney_smoke_3.vfx");
+  level._effect["vfx_village_fire_building_med"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_building_med.vfx");
+  level._effect["vfx_village_fire_ground_line_med"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_ground_line_med.vfx");
+  level._effect["vfx_village_fire_cough"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_cough.vfx");
+  level._effect["vfx_village_fire_big_no_smoke"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_big_no_smoke.vfx");
+  level._effect["vfx_village_smoke_building_lg"] = loadfx("vfx/iw8_mp/level/village/vfx_village_smoke_building_lg.vfx");
+  level._effect["vfx_village_burning_floor_small"] = loadfx("vfx/iw8_mp/level/village/vfx_village_burning_floor_small.vfx");
+  level._effect["vfx_village_fire_building_lg"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_building_lg.vfx");
+  level._effect["vfx_village_sunflare"] = loadfx("vfx/iw8_mp/level/village/vfx_village_sunflare.vfx");
+  level._effect["vfx_trash_flies"] = loadfx("vfx/iw8_mp/gen_amb/vfx_trash_flies.vfx");
+  level._effect["vfx_gnat_swarm_1"] = loadfx("vfx/iw8_mp/gen_amb/vfx_gnat_swarm_1.vfx");
+  level._effect["vfx_butterflies"] = loadfx("vfx/iw8_mp/gen_amb/vfx_butterflies.vfx");
+  level._effect["vfx_bee_swarm"] = loadfx("vfx/iw8_mp/gen_amb/vfx_bee_swarm.vfx");
+  level._effect["vfx_village_burning_floor"] = loadfx("vfx/iw8_mp/level/village/vfx_village_burning_floor.vfx");
+  level._effect["vfx_village_ceiling_fire_drip"] = loadfx("vfx/iw8_mp/level/village/vfx_village_ceiling_fire_drip.vfx");
+  level._effect["vfx_village_fire_med"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_med.vfx");
+  level._effect["vfx_village_fire_big"] = loadfx("vfx/iw8_mp/level/village/vfx_village_fire_big.vfx");
+}

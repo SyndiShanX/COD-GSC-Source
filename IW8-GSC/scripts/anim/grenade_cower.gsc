@@ -1,0 +1,86 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\anim\grenade_cower.gsc
+***********************************************/
+
+#using_animtree("");
+
+function main() {
+  if(getdvarint("LPNQTQRRP", 0) == 1) {
+    self endon("killanimscript");
+    self endon("death");
+    self waittill("killanimscript");
+  }
+
+  self endon("killanimscript");
+  scripts\anim\utility::initialize("grenadecower");
+
+  if(isDefined(self.grenadecowerfunction)) {
+    self[[self.grenadecowerfunction]]();
+    return;
+  }
+
+  if(self.currentpose == "prone") {
+    return;
+  }
+
+  self animmode("zonly_physics");
+  self orientmode("face angle", self.angles[1]);
+  var0 = 0;
+
+  if(isDefined(self.grenade)) {
+    var0 = angleclamp180(vectortoangles(self.grenade.origin - self.origin)[1] - self.angles[1]);
+  } else {
+    var0 = self.angles[1];
+  }
+
+  if(self.currentpose == "stand") {
+    if(isDefined(self.grenade) && trydive(var0)) {
+      return;
+    }
+
+    self setflaggedanimknoballrestart("cowerstart", scripts\anim\utility::lookupanim("grenade", "cower_squat"), %body, 1, 0.2);
+    scripts\anim\notetracks::donotetracks("cowerstart");
+  }
+
+  self.currentpose = "crouch";
+  self.a.movement = "stop";
+  self setflaggedanimknoballrestart("cower", scripts\anim\utility::lookupanim("grenade", "cower_squat_idle"), $body, 1, 0.2);
+  scripts\anim\notetracks::donotetracks("cower");
+  self waittill("never");
+}
+
+function end_script() {
+  self.safetochangescript = 1;
+}
+
+function trydive(var0) {
+  if(randomint(2) == 0) {
+    return false;
+  }
+
+  if(self.stairsstate != "none") {
+    return false;
+  }
+
+  var1 = undefined;
+
+  if(abs(var0) > 90) {
+    var1 = scripts\anim\utility::lookupanim("grenade", "cower_dive_back");
+  } else {
+    var1 = scripts\anim\utility::lookupanim("grenade", "cower_dive_front");
+  }
+
+  var2 = getmovedelta(var1, 0, 0.5);
+  var3 = self localtoworldcoords(var2);
+
+  if(!self maymovetopoint(var3)) {
+    return false;
+  }
+
+  self.safetochangescript = 0;
+  self setflaggedanimknoballrestart("cowerstart", var1, %body, 1, 0.2);
+  scripts\anim\notetracks::donotetracks("cowerstart");
+  self.safetochangescript = 1;
+  return true;
+}

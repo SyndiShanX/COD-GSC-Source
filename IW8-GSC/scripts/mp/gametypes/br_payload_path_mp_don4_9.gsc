@@ -1,0 +1,177 @@
+/**************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\gametypes\br_payload_path_mp_don4_9.gsc
+**************************************************************/
+
+function toggle_farah_lights(var0, var1, var2) {
+  if(level.mapname != "mp_don4") {
+    return;
+  }
+
+  if(level.disable_super_in_turret.ref_1226a != var1 && !isDefined(level.disable_super_in_turret.ref_121fd)) {
+    return;
+  }
+
+  if(!isDefined(level.disable_super_in_turret.paths)) {
+    level.disable_super_in_turret.paths = [];
+  }
+
+  var3 = spawnStruct();
+  var3.nodes = [];
+  var3.origin = (31913.4, -6843.86, -431.106);
+  var3.script_index = var0;
+  var3.initchallengeandeventglobals = var2;
+  var3.nodes[0] = var3;
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (32261, -6483.22, -432.898);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (32613.2, -6126.27, -431.921);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (32971.7, -5776.29, -446.643);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (33329.1, -5426.82, -471.023);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (33682.8, -5071.91, -493.938);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (34035.2, -4716.61, -497.791);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (34385.9, -4359.33, -497.302);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (34737.6, -4001.66, -496.801);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (35088.8, -3644.85, -497.835);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (35440.2, -3287.51, -486.347);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (35791.3, -2930.62, -464.126);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (36141.7, -2574.36, -441.852);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (36493.3, -2219.01, -431.935);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (36847.9, -1864.63, -432.048);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (37200, -1508.15, -432.176);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (37554.4, -1154, -433.002);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (37907.8, -799.222, -431.318);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (38261.1, -443.411, -432.16);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (38613.9, -88.7425, -431.284);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (38965.4, 268.658, -432.713);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39304.8, 637.484, -432.746);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39643, 1007.29, -433.772);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39959.2, 1395.32, -431.567);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40244.5, 1806.09, -397.685);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40471.6, 2249.8, -349.045);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40677, 2705.44, -308.378);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40764.1, 3198.76, -283.084);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40762.6, 3700, -264.863);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40689.9, 4194.71, -234.722);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40639.7, 4692.6, -210.964);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40639.4, 5193.93, -204.453);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40653.4, 5694.8, -180.984);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40650.6, 6194.37, -139.323);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40638.1, 6694.52, -104.242);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40626.6, 7194.35, -83.3705);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40601.7, 7694.48, -63.4533);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40569.6, 8193.24, -44.2986);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40533.8, 8691.84, -27.9217);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40492.8, 9190.91, -13.148);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40438.4, 9687.92, -3.88398);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40341.6, 10178.8, -6.25901);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40219.7, 10664.5, -18.3373);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (40076.4, 11144.4, -37.2466);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39909.7, 11615.8, -75.0044);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39743.2, 12085.7, -128.661);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39565.5, 12551.7, -177.276);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39398.8, 13023.6, -185.874);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39283.7, 13510.8, -203.719);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39191.5, 14000.8, -253.68);
+  var4 = var3.nodes.size;
+  var3.nodes[var4] = spawnStruct();
+  var3.nodes[var4].origin = (39104, 14412.3, -288.2);
+  scripts\mp\gametypes\br_gametype_payload::ref_1318d(var0, var2);
+  level.disable_super_in_turret.paths[level.disable_super_in_turret.paths.size] = var3;
+}

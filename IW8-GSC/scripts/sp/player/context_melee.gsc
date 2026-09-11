@@ -1,0 +1,1595 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\sp\player\context_melee.gsc
+***********************************************/
+
+function main() {
+  if(istrue(level.context_melee_enabled)) {
+    return;
+  }
+
+  if(!isDefined(level.context_melee_has_been_enabled)) {
+    level.context_melee_has_been_enabled = 0;
+  }
+
+  if(!isDefined(level.context_melee_enabled)) {
+    level.context_melee_enabled = 1;
+  }
+
+  setdvarifuninitialized("context_melee_silent", 1);
+  setdvarifuninitialized("context_melee_blocked_hints", 0);
+  setdvarifuninitialized("context_melee_use_cursor_hint", 0);
+
+  if(!level.context_melee_has_been_enabled) {
+    precache();
+  }
+
+  thread enable_dynamic_takedowns();
+  level.context_melee_has_been_enabled = 1;
+  print_debug("context_melee enabled: " + gettime());
+}
+
+function precache() {
+  level.context_melee_lastframe_bone = "tag_player";
+  level.context_melee_player_link_bone = "tag_player";
+  level.context_melee_lastframe_type = "player_capsule";
+  level.context_melee_sight_disabled = 0;
+  level._effect["vfx_contextmelee_stab"] = loadfx("vfx/iw8/weap/_knife/vfx_contextmele_neckstab_med_ch2.vfx ");
+
+  if(!getdvarint("context_melee_use_cursor_hint")) {
+    scripts\engine\sp\utility::add_hint_string("context_melee_silent", &"CONTEXT_MELEE/SILENT_KILL", &context_melee_hint_break);
+    scripts\engine\sp\utility::add_hint_string("context_melee_stealth", &"CONTEXT_MELEE/STEALTH_KILL", &context_melee_hint_break);
+    scripts\engine\sp\utility::add_hint_string("context_melee_blocked", &"CONTEXT_MELEE/BLOCKED", &context_melee_hint_fail);
+    scripts\engine\sp\utility::add_hint_string("context_melee_scripted_fail", &"CONTEXT_MELEE/SCRIPTED_FAIL", &context_melee_hint_scripted_fail);
+    scripts\engine\sp\utility::add_hint_string("context_melee_scripted_noweap", &"CONTEXT_MELEE/SCRIPTED_NOWEAP", &context_melee_hint_scripted_noweap);
+  }
+
+  precachemodel("weapon_vm_me_soscar_knife");
+  precachemodel("axis_guide_simple");
+  dynamic_knife_anims();
+}
+
+function play_sound_safe(var0) {
+  if(!soundexists(var0)) {
+    return;
+  }
+
+  self playSound(var0);
+}
+
+function dynamic_knife_anims() {
+  scripts\engine\utility::flag_init("hold_context_melee");
+  dynamic_knife_kill_anims();
+  dynamic_knife_kill_anims_player();
+}
+
+#using_animtree("generic_human");
+
+function dynamic_knife_kill_anims() {
+  var0 = [];
+  GscBinSkip0(0x2e, "context_melee_kill_01_back", %vm_sp_context_melee_stand_1_rear_enemy);
+}
+
+#using_animtree("");
+
+function dynamic_knife_kill_anims_player() {
+  level.scr_animtree["context_melee_player_rig"] = #animtree;
+
+  if(!isDefined(level.scr_model) || !isDefined(level.scr_model["context_melee_player_rig"])) {
+    level.scr_model["context_melee_player_rig"] = "viewhands_base_iw8";
+  }
+
+  level.scr_anim["context_melee_player_rig"]["context_melee_kill_01_back"] = $vm_sp_context_melee_stand_1_rear_player;
+  level.scr_anim["context_melee_player_rig"]["context_melee_kill_01_left"] = % vm_sp_context_melee_stand_1_left_player;
+  level.scr_anim["context_melee_player_rig"]["context_melee_kill_01_right"] = % vm_sp_context_melee_stand_1_right_player;
+  level.scr_anim["context_melee_player_rig"]["context_melee_kill_01_front"] = % vm_sp_context_melee_stand_1_front_player;
+  scripts\common\anim::addnotetrack_customfunction("context_melee_player_rig", "cm_sfx_player", &context_melee_sfx_player, "context_melee_kill_01_back");
+  scripts\common\anim::addnotetrack_customfunction("context_melee_player_rig", "cm_sfx_player", &context_melee_sfx_player, "context_melee_kill_01_left");
+  scripts\common\anim::addnotetrack_customfunction("context_melee_player_rig", "cm_sfx_player", &context_melee_sfx_player, "context_melee_kill_01_right");
+  scripts\common\anim::addnotetrack_customfunction("context_melee_player_rig", "cm_sfx_player", &context_melee_sfx_player, "context_melee_kill_01_front");
+  level.scr_anim["context_melee_player_rig"]["context_melee_kill_02_back"] = % vm_sp_context_melee_stand_2_rear_player;
+  level.scr_anim["context_melee_player_rig"]["context_melee_kill_02_left"] = % vm_sp_context_melee_stand_2_left_player;
+  level.scr_anim["context_melee_player_rig"]["context_melee_kill_02_right"] = % vm_sp_context_melee_stand_2_right_player;
+  level.scr_anim["context_melee_player_rig"]["context_melee_kill_02_front"] = % vm_sp_context_melee_stand_2_front_player;
+  scripts\common\anim::addnotetrack_customfunction("context_melee_player_rig", "cm_sfx_player", &context_melee_sfx_player, "context_melee_kill_02_back");
+  scripts\common\anim::addnotetrack_customfunction("context_melee_player_rig", "cm_sfx_player", &context_melee_sfx_player, "context_melee_kill_02_left");
+  scripts\common\anim::addnotetrack_customfunction("context_melee_player_rig", "cm_sfx_player", &context_melee_sfx_player, "context_melee_kill_02_right");
+  scripts\common\anim::addnotetrack_customfunction("context_melee_player_rig", "cm_sfx_player", &context_melee_sfx_player, "context_melee_kill_02_front");
+}
+
+function context_melee_hint_break() {
+  if(!isDefined(level.player.context_melee_victim)) {
+    return true;
+  }
+
+  if(!isDefined(level.player.context_melee_hint)) {
+    return true;
+  }
+
+  if(isDefined(level.player.context_melee_allow_directions) && isDefined(level.player.context_melee_direction)) {
+    if(!scripts\engine\utility::array_contains(level.player.context_melee_allow_directions, level.player.context_melee_direction)) {
+      return true;
+    }
+  }
+
+  return istrue(level.player.context_melee_victim.in_melee_death);
+}
+
+function context_melee_hint_fail() {
+  if(!getdvarint("context_melee_blocked_hints")) {
+    return true;
+  }
+
+  if(context_melee_hint_not_allowed()) {
+    return true;
+  }
+
+  if(!isDefined(level.player.context_melee_has_enemy)) {
+    return true;
+  }
+
+  return false;
+}
+
+function context_melee_hint_scripted_fail() {
+  if(!getdvarint("context_melee_blocked_hints")) {
+    return true;
+  }
+
+  if(context_melee_hint_not_allowed()) {
+    return true;
+  }
+
+  if(!isDefined(level.player.context_melee_scripted_enemy_guess)) {
+    return true;
+  }
+
+  if(!is_enemy_onscreen(level.player.context_melee_scripted_enemy_guess)) {
+    return true;
+  }
+
+  return false;
+}
+
+function context_melee_hint_scripted_noweap() {
+  if(!getdvarint("context_melee_blocked_hints")) {
+    return true;
+  }
+
+  if(context_melee_hint_not_allowed()) {
+    return true;
+  }
+
+  if(!isDefined(level.player.context_melee_scripted_enemy_guess)) {
+    return true;
+  }
+
+  if(!is_enemy_onscreen(level.player.context_melee_scripted_enemy_guess)) {
+    return true;
+  }
+
+  return false;
+}
+
+function context_melee_hint_not_allowed() {
+  if(!isDefined(level.player.context_melee_hint)) {
+    return true;
+  }
+
+  if(level.player getstance() == "prone") {
+    return true;
+  }
+
+  if(isDefined(level.player.context_melee_allow_directions) && isDefined(level.player.context_melee_direction)) {
+    if(!scripts\engine\utility::array_contains(level.player.context_melee_allow_directions, level.player.context_melee_direction)) {
+      level.player.context_melee_hinted = 0;
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function scripted_melee_active(var0) {
+  if(var0 && !level.player isscriptedmeleeactive()) {
+    print_debug("scripted melee active " + gettime());
+    level.player.context_melee_last_active_time = gettime();
+    level.player setscriptedmeleeactive(var0);
+    return;
+  }
+
+  if(!var0 && level.player isscriptedmeleeactive()) {
+    print_debug("scripted melee INactive " + gettime());
+    level.player.context_melee_last_inactive_time = gettime();
+    level.player setscriptedmeleeactive(var0);
+    return;
+  }
+}
+
+function context_melee_cursor_hint_create() {
+  if(isDefined(level.player.context_melee_allow_directions) && isDefined(level.player.context_melee_direction)) {
+    if(!scripts\engine\utility::array_contains(level.player.context_melee_allow_directions, level.player.context_melee_direction)) {
+      return;
+    }
+  }
+
+  if(getdvarint("context_melee_use_cursor_hint") == 1) {
+    if(!isDefined(level.context_melee_hint_ent_set)) {
+      level.context_melee_hint_ent_set = 1;
+      level.context_melee_hint_ent thread scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", undefined, level.player.context_melee_hint, 360, 5000, 2000, undefined, undefined, undefined, undefined, "duration_none", "+melee", 0, 360);
+      level.context_melee_hint_ent setuseprioritymax();
+      return;
+    }
+
+    level.context_melee_hint_ent setHintString(level.player.context_melee_hint);
+    level.context_melee_hint_ent sethinticon("blank");
+    level.context_melee_hint_ent setusecommand("+melee");
+    return;
+  }
+
+  if(getdvarint("context_melee_use_cursor_hint") == 2) {
+    setomnvar("ui_in_world_text_index", 2);
+    setomnvar("ui_in_world_text_entnum", level.context_melee_hint_ent getentitynumber());
+    return;
+  }
+}
+
+function context_melee_cursor_hint_remove() {
+  if(getdvarint("context_melee_use_cursor_hint") && isDefined(level.context_melee_hint_ent)) {
+    level.context_melee_hint_ent_set = undefined;
+
+    if(getdvarint("context_melee_use_cursor_hint") == 1) {
+      level.context_melee_hint_ent thread scripts\sp\player\cursor_hint::remove_cursor_hint();
+    }
+
+    level.context_melee_hint_ent delete();
+    return;
+  }
+}
+
+function context_melee_cursor_hint_blocked() {
+  if(isDefined(level.context_melee_hint_ent)) {
+    if(getdvarint("context_melee_use_cursor_hint") == 1) {
+      level.player.context_melee_hint_blocked = scripts\engine\utility::ter_op(isDefined(level.player.context_melee_hint_blocked_custom), level.player.context_melee_hint_blocked_custom, &"CONTEXT_MELEE/BLOCKED");
+      level.context_melee_hint_ent setHintString(level.player.context_melee_hint_blocked);
+      level.context_melee_hint_ent sethinticon("hud_ability_disabled_x");
+    }
+
+    if(getdvarint("context_melee_use_cursor_hint") == 2) {
+      return;
+    }
+
+    return;
+  }
+}
+
+function dynamic_takedowns_monitor() {
+  level endon("stop_context_melee");
+
+  for(;;) {
+    if(istrue(self.in_melee_death)) {
+      scripted_melee_active(0);
+      thread context_melee_cursor_hint_remove();
+      waitframe();
+      continue;
+    }
+
+    self.context_melee_victim = undefined;
+    self.context_melee_direction = undefined;
+    self.context_melee_animation = undefined;
+
+    if(scripts\engine\utility::flag("hold_context_melee")) {
+      scripts\engine\utility::flag_waitopen("hold_context_melee");
+    }
+
+    var0 = check_for_close_victim();
+
+    if(isDefined(var0) && istrue(var0.in_melee_death)) {
+      scripted_melee_active(0);
+      thread context_melee_cursor_hint_remove();
+      self.context_melee_victim = undefined;
+      waitframe();
+      continue;
+    }
+
+    if(isDefined(var0)) {
+      var1 = player_stealth_kill_direction(var0);
+      var2 = get_anim_from_direction(var0, var1);
+
+      if(check_player_can_stealth_kill_me(var0, var2, var1)) {
+        self.context_melee_victim = var0;
+        self.context_melee_direction = var1;
+        self.context_melee_animation = var2;
+        scripted_melee_active(1);
+
+        if(getdvarint("context_melee_use_cursor_hint")) {
+          if(level.player getstance() == "stand") {
+            var3 = var0.origin + anglesToForward(vectortoangles(level.player.origin - var0.origin)) * 16 + (0, 0, level.context_melee_eye_height_stand);
+          } else {
+            var3 = var1.origin + anglesToForward(vectortoangles(level.player.origin - var1.origin)) * 16 + (0, 0, level.context_melee_eye_height_crouch);
+          }
+
+          if(!isDefined(level.context_melee_hint_ent)) {
+            level.context_melee_hint_ent = scripts\engine\utility::spawn_tag_origin(var3);
+          } else {
+            level.context_melee_hint_ent.origin = var3;
+          }
+
+          self.context_melee_hint = scripts\engine\utility::ter_op(isDefined(self.context_melee_hint_custom), self.context_melee_hint_custom, &"CONTEXT_MELEE/STEALTH_KILL_HINT");
+          thread context_melee_cursor_hint_create();
+        } else {
+          self.context_melee_hint = scripts\engine\utility::ter_op(isDefined(self.context_melee_hint_custom), self.context_melee_hint_custom, "context_melee_stealth");
+          thread scripts\engine\sp\utility::display_hint_forced(self.context_melee_hint);
+        }
+      } else {
+        print3d_debug(self.origin, "^1no animation", (0, 1, 0), 1, 0.1, 1, "line5");
+        self.context_melee_victim = undefined;
+        scripted_melee_active(0);
+      }
+    } else {
+      scripted_melee_active(0);
+    }
+
+    waitframe();
+  }
+}
+
+function enable_dynamic_takedowns() {
+  level notify("stop_context_melee");
+
+  if(!isDefined(self.melee_arms)) {
+    self.melee_arms = scripts\engine\sp\utility::spawn_anim_model("context_melee_player_rig", self.origin, self.angles);
+  }
+
+  self.melee_arms notsolid();
+  self.melee_arms hide();
+  level endon("stop_context_melee");
+  self notifyonplayercommand("player_scripted_melee", "+melee_zoom");
+  thread dynamic_takedowns_monitor();
+
+  for(;;) {
+    self waittill("player_scripted_melee");
+
+    if(level.script == "estate" && self isuseinprogress()) {
+      continue;
+    }
+
+    if(isalive(self.context_melee_victim)) {
+      var0 = self.context_melee_victim;
+      var1 = self.context_melee_direction;
+      var2 = self.context_melee_animation;
+
+      if(isDefined(var2)) {
+        if(isDefined(self.skip_context_melee_anim)) {
+          self notify("skipped_melee_anim");
+        } else {
+          thread do_context_melee(var0, var2);
+          level scripts\sp\utility::context_melee_waittill_player_finished();
+        }
+      }
+    }
+  }
+}
+
+function disable_dynamic_takedowns() {
+  level notify("stop_context_melee");
+  level.context_melee_enabled = 0;
+  scripted_melee_active(0);
+  thread context_melee_cursor_hint_remove();
+  self.context_melee_victim = undefined;
+  print_debug("context_melee disabled: " + gettime());
+}
+
+function check_for_close_victim() {
+  level endon("stop_context_melee");
+
+  if(getdvarint("LLNPMPRMLN") != 640) {
+    setsaveddvar("LLNPMPRMLN", 640);
+  }
+
+  if(getdvarint("OKQOTRLPRQ") != 384) {
+    setsaveddvar("OKQOTRLPRQ", 384);
+  }
+
+  if(getdvarint("MOSLLOQQSS") != 100) {
+    setsaveddvar("MOSLLOQQSS", 100);
+  }
+
+  var0 = scripts\engine\sp\utility::get_all_closest_living(level.player.origin, getaiarray("team3"), 512, 0);
+  var1 = scripts\engine\sp\utility::get_all_closest_living(level.player.origin, getaiarray("axis"), 512, 0);
+  var1 = scripts\engine\utility::array_combine(var0, var1);
+
+  foreach(var3 in var1) {
+    if(!isDefined(var3.context_melee_combatsight_buffer)) {
+      var3.context_melee_combatsight_buffer = 0;
+    }
+
+    if(!isDefined(var3.context_melee_combatsight_lastime)) {
+      var3.context_melee_combatsight_lastime = gettime();
+    }
+
+    if(!isDefined(var3.context_melee_combat_buffer) || var3.context_melee_combat_buffer == 0) {
+      if(var3 scripts\stealth\utility::bcisincombat() && isDefined(var3.enemy) && var3.enemy == level.player) {
+        if(context_melee_cansee(var3)) {
+          var3.context_melee_combatsight_buffer += 1;
+          var3.context_melee_combatsight_lastime = gettime();
+          print3d_debug(var3.origin, "cm sight buffer " + var3.context_melee_combatsight_buffer, (1, 0, 0), 1, 0.1, 1, "line1");
+        } else if(gettime() - var3.context_melee_combatsight_lastime > 2000) {
+          var3.context_melee_combatsight_buffer = 0;
+          print3d_debug(var3.origin, "cm sight buffer " + var3.context_melee_combatsight_buffer, (0, 1, 0), 1, 0.1, 1, "line1");
+        }
+      } else {
+        var3.context_melee_combatsight_buffer = 0;
+        print3d_debug(var3.origin, "cm sight buffer " + var3.context_melee_combatsight_buffer, (0, 1, 0), 1, 0.1, 1, "line1");
+      }
+
+      continue;
+    }
+
+    var3.context_melee_combatsight_buffer = 0;
+    print3d_debug(var3.origin, "cm sight buffer " + var3.context_melee_combatsight_buffer, (0, 1, 0), 1, 0.1, 1, "line1");
+  }
+
+  var3 = level.player getscriptedmeleetarget();
+
+  if(!isDefined(var3)) {
+    var3 = scripts\engine\sp\utility::get_closest_living(level.player.origin, var1);
+
+    if(isDefined(var3) && distance(level.player.origin, var3.origin) < 92) {
+      print_debug("scripted melee not returning an enemy but you're close enough to one.");
+      level.player.context_melee_scripted_enemy_guess = var3;
+
+      if(!getdvarint("context_melee_use_cursor_hint")) {
+        level.player thread scripts\engine\sp\utility::display_hint("context_melee_scripted_fail");
+      } else {
+        context_melee_cursor_hint_blocked();
+      }
+    } else {
+      thread context_melee_cursor_hint_remove();
+      level.player.context_melee_scripted_enemy_guess = undefined;
+    }
+
+    level.player.context_melee_has_enemy = undefined;
+    return undefined;
+  }
+
+  level.player.context_melee_has_enemy = var3;
+  level.player.context_melee_scripted_enemy_guess = undefined;
+
+  if(isPlayer(var3)) {
+    return undefined;
+  }
+
+  if(level.player ismeleeing()) {
+    return undefined;
+  }
+
+  if(!isalive(var3)) {
+    return undefined;
+  }
+
+  if(var3 scripts\sp\fakeactor::is_fakeactor() || !isai(var3)) {
+    return undefined;
+  }
+
+  if(isDefined(var3.context_melee_allowed) && !var3.context_melee_allowed) {
+    return undefined;
+  }
+
+  if(!isDefined(var3.animtree) || var3.animtree != "generic_human") {
+    return undefined;
+  }
+
+  if(isDefined(var3.unittype)) {
+    switch (var3.unittype) {
+      case "suicidebomber":
+      case "juggernaut":
+      case "dog":
+        return undefined;
+    }
+  }
+
+  if(var3 scripts\engine\utility::doinglongdeath()) {
+    return undefined;
+  }
+
+  if(getdvarint("context_melee_debug")) {
+    var5 = var3 gettagorigin("j_head");
+    var6 = var3 gettagorigin("tag_origin");
+    var7 = vectorNormalize(var5 - level.player.origin);
+    var8 = vectordot(var7, anglestoright(var3 gettagangles("j_head")));
+    print3d_debug(var5, "dot: " + abs(var8), (1, 1, 1), 1, 0.05, 1);
+    line_debug(var5, var5 + anglestoright(var3 gettagangles("j_head")) * 60, (1, 1, 1), 1, 0, 1);
+    line_debug(var6, var6 + anglesToForward(var3 gettagangles("tag_origin")) * 60, (1, 1, 1), 1, 0, 1);
+  }
+
+  if(!isDefined(var3.context_melee_combat_buffer)) {
+    var3.context_melee_combat_buffer = 0;
+  }
+
+  if(!isDefined(var3.context_melee_sight_buffer)) {
+    var3.context_melee_sight_buffer = 0;
+  }
+
+  if(isDefined(var3.context_melee_last_melee_finish_time) && gettime() - var3.context_melee_last_melee_finish_time < 600) {
+    print3d_debug(var3.origin, "waiting for previous melee buffer: " + gettime(), (1, 0, 0), 1, 0.1, 1, "line3");
+    var3.context_melee_sight_buffer = 12;
+    var3.context_melee_combat_buffer = 12;
+    thread combat_counter_reset();
+    return undefined;
+  }
+
+  if(var3 scripts\stealth\utility::bcisincombat() && isDefined(var3.enemy) && var3.enemy == level.player) {
+    if(var3.context_melee_combatsight_buffer > 15) {
+      print3d_debug(var3.origin, " no buffer bc I've been looking at you!", (0, 1, 0), 1, 0.1, 1, "line2");
+      return undefined;
+    }
+
+    var3.context_melee_combat_buffer += 1;
+
+    if(var3.context_melee_combat_buffer > 12) {
+      return undefined;
+    } else {
+      print3d_debug(var3.origin, "combat buffer", (1, 0, 1), 1, 0.1, 1, "line3");
+      thread combat_counter_reset();
+    }
+  } else {
+    var3.context_melee_combat_buffer = 0;
+  }
+
+  if(var3 isinscriptedstate() && context_melee_cansee(var3)) {
+    var3.context_melee_sight_buffer += 1;
+
+    if(var3.context_melee_sight_buffer > 12) {
+      return undefined;
+    } else {
+      print3d_debug(var3.origin, "I SEE YOU!", (1, 0, 0), 1, 0.1, 1, "line3");
+      thread combat_counter_reset();
+    }
+  } else {
+    var3.context_melee_sight_buffer = 0;
+  }
+
+  return var3;
+}
+
+function combat_counter_reset() {
+  self notify("counter_reset_stop");
+  self endon("death");
+  self endon("counter_reset_stop");
+  var0 = gettime();
+
+  for(;;) {
+    if(gettime() - var0 > 2000 && !context_melee_cansee()) {
+      break;
+    } else if(context_melee_cansee()) {
+      var0 = gettime();
+    }
+
+    waitframe();
+  }
+
+  print_debug("combat counter reset: " + gettime());
+  self.context_melee_sight_buffer = 0;
+  self.context_melee_combat_buffer = 0;
+}
+
+function is_enemy_onscreen(var0) {
+  if(isDefined(level.player worldpointtoscreenpos(var0 gettagorigin("j_head"), getdvarint("MRNKTKLLKP")))) {
+    return true;
+  } else if(isDefined(level.player worldpointtoscreenpos(var0 gettagorigin("j_spinelower"), getdvarint("MRNKTKLLKP")))) {
+    return true;
+  } else if(isDefined(level.player worldpointtoscreenpos(var0 gettagorigin("tag_origin"), getdvarint("MRNKTKLLKP")))) {
+    return true;
+  }
+
+  return false;
+}
+
+function physics_test(var0, var1, var2, var3, var4, var5, var6, var7) {
+  if(!isDefined(var4)) {
+    var4 = "collision failed";
+  }
+
+  var8 = undefined;
+
+  if(isDefined(var5) && isDefined(var5.capsule_radius) && var5.capsule_radius == 15) {
+    var9 = 1;
+  } else {
+    var9 = 0.8;
+  }
+
+  switch (var1) {
+    case "ray":
+      var9 = physics_raycast(var2, var3, get_melee_contents(), [level.player, var4], 0, "physicsquery_closest", 1);
+      break;
+    case "player_eye_cast":
+      var9 = physics_spherecast(var2, var3, 2, get_melee_contents(), [level.player, var4], "physicsquery_closest");
+      sphere_debug(var2, 2, (1, 0, 1), 0, 1);
+      sphere_debug(var3, 2, (1, 0, 1), 0, 1);
+      break;
+    case "player_capsule_cast":
+      var9 = physics_capsulecast(var2, var3, var6.capsule_radius * var9, var6.capsule_halfheight * var9, level.player getplayerangles(1), get_melee_contents(), [level.player, var4], "physicsquery_closest");
+      capsule_debug(var2 - (0, 0, var6.capsule_midpoint_height * 0.5), var6.capsule_radius * var9, var6.capsule_halfheight * var9 * 2, level.player getplayerangles(1), (1, 0, 1), 0, 1);
+      capsule_debug(var3 - (0, 0, var7.capsule_midpoint_height * 0.5), var7.capsule_radius * var9, var7.capsule_halfheight * var9 * 2, level.player getplayerangles(1), (1, 0, 1), 0, 1);
+      break;
+    case "capsule":
+      var9 = physics_capsulecast(var2, var3, var6.capsule_radius, var6.capsule_halfheight, level.player getplayerangles(1), get_melee_contents(), [level.player, var4], "physicsquery_closest");
+      break;
+    case "player_eye":
+      var9 = physics_getclosestpointtosphere(var2 + (0, 0, 2), 2, 0, get_melee_contents(), [level.player, var4], "physicsquery_closest");
+      sphere_debug(var2 + (0, 0, 2), 2, (1, 1, 1), 0, 1);
+      break;
+    case "enemy_eye":
+      var9 = physics_getclosestpointtosphere(var2 + (0, 0, 2), 2, 0, get_melee_sight_contents(), [level.player, var4, self], "physicsquery_closest");
+      sphere_debug(var2 + (0, 0, 2), 2, (1, 1, 1), 0, 1);
+      break;
+    case "player_capsule":
+      var9 = physics_getclosestpointtocapsule(var2, var7.capsule_radius * var9, var7.capsule_halfheight * var9, level.player getplayerangles(1), 0, get_melee_contents(), [level.player, var4], "physicsquery_closest");
+      capsule_debug(var2 - (0, 0, var7.capsule_midpoint_height * 0.5), var7.capsule_radius * var9, var7.capsule_halfheight * var9 * 2, level.player getplayerangles(1), (1, 1, 0), 0, 1);
+      break;
+  }
+
+  if(istrue(var9.size)) {
+    print3d_debug(var9[0]["position"], var5, (1, 0, 0), 1, 0.1, 1);
+    line_debug(var2, var9[0]["position"], (1, 0, 0), 1, 0, 1);
+    sphere_debug(var9[0]["position"], 2, (1, 0, 0), 0, 1);
+    return false;
+  }
+
+  return true;
+}
+
+function anim_collision_check(var0, var1, var2) {
+  level notify("tag_view_debug_end");
+
+  if(level.player getstance() == "prone") {
+    return false;
+  }
+
+  var3 = level.player getcollision(level.player getstance());
+  var4 = level.player getcollision("stand");
+  var5 = level.player getcollision("crouch");
+
+  if(var3.capsule_halfheight < var3.capsule_radius) {
+    var3.capsule_halfheight = var3.capsule_radius;
+  }
+
+  var6 = [0];
+  var7 = scripts\engine\sp\utility::spawn_anim_model("context_melee_player_rig", level.player.origin, level.player.angles);
+  var7 notsolid();
+  var7 hide();
+  var8 = scripts\engine\sp\utility::spawn_anim_model("context_melee_player_rig", level.player.origin, level.player.angles);
+  var8 notsolid();
+  var8 hide();
+  var9 = scripts\engine\utility::spawn_tag_origin();
+  set_scripted_node_angles(var9, var1, var2);
+  var9 scripts\common\anim::anim_first_frame_solo(var7, var0);
+  var9 scripts\common\anim::anim_last_frame_solo(var8, var0);
+  var7 linkTo(var9);
+  var8 linkTo(var9);
+  level.context_melee_eye_height_stand = var4.capsule_halfheight + var4.capsule_midpoint_height;
+  level.context_melee_eye_height_crouch = var5.capsule_halfheight + var5.capsule_midpoint_height;
+  var10 = var8 gettagorigin(level.context_melee_lastframe_bone) + anglestoup(var8 gettagangles(level.context_melee_lastframe_bone)) * level.context_melee_eye_height_stand;
+
+  foreach(var12 in var6) {
+    if(getdvarint("context_melee_debug")) {
+      line_debug(level.player getEye() + (0, 0, -0.1), var7 gettagorigin("tag_view"), (1, 1, 1), 1, 0, 1);
+      circle_debug(var7 gettagorigin(level.context_melee_player_link_bone), var3.capsule_radius, (1, 0, 0), 1, 1, 1);
+      circle_debug(var8 gettagorigin(level.context_melee_lastframe_bone), var3.capsule_radius, (1, 1, 0), 1, 1, 1);
+      line_debug(var8 gettagorigin(level.context_melee_lastframe_bone), var8 gettagorigin(level.context_melee_lastframe_bone) + anglestoup(var8 gettagangles(level.context_melee_lastframe_bone)) * level.context_melee_eye_height_stand, (0, 0, 1), 1, 0, 1);
+      line_debug(var8 gettagorigin(level.context_melee_lastframe_bone) + anglestoup(var8 gettagangles(level.context_melee_lastframe_bone)) * level.context_melee_eye_height_stand, var8 gettagorigin(level.context_melee_lastframe_bone) + anglestoup(var8 gettagangles(level.context_melee_lastframe_bone)) * level.context_melee_eye_height_stand + (0, 0, -60), (0, 0, 1), 1, 1, 1);
+      circle_debug(var10, var3.capsule_radius, (0, 0, 1), 1, 1, 1);
+
+      if(isDefined(self.proximity_bump_dist_sqr_override)) {
+        circle_debug(self.origin, sqrt(self.proximity_bump_dist_sqr_override), (1, 1, 0), 1, 1, 1);
+      } else {
+        circle_debug(self.origin, 16, (0, 1, 0), 1, 1, 1);
+      }
+
+      if(getdvarint("context_melee_debug_extra")) {
+        var7 show();
+        var8 show();
+      }
+    }
+
+    var13 = anglestoup(level.player getplayerangles(1)) * (var3.capsule_midpoint_height + var3.capsule_radius);
+    var14 = anglestoup(level.player getplayerangles(1)) * (var4.capsule_midpoint_height + var4.capsule_radius);
+
+    if(!physics_test("player_capsule_cast", level.player.origin + var13, var7 gettagorigin(level.context_melee_player_link_bone) + var14, self, "player capsule cast failed", var3, var4)) {
+      return !collision_check_failed(var9, var7, var8);
+    }
+
+    switch (level.context_melee_lastframe_type) {
+      case "player_eye":
+        if(!physics_test("player_eye", var8 gettagorigin(level.context_melee_lastframe_bone), undefined, self, "end pos eye failed", var3)) {
+          return !collision_check_failed(var9, var7, var8);
+        }
+
+        break;
+      case "player_capsule":
+        if(!physics_test("player_capsule", var10 - (0, 0, var4.capsule_halfheight * 0.5), undefined, self, "end pos capsule failed", var3, var4)) {
+          if(var15 < var6.size - 1) {
+            var9 rotateYaw(var12, 0.05, 0, 0);
+            break;
+          } else {
+            return !collision_check_failed(var9, var7, var8);
+          }
+        }
+
+        break;
+    }
+  }
+
+  var9 delete();
+  var7 scripts\engine\utility::delaycall(0.05, &delete);
+  var8 scripts\engine\utility::delaycall(0.05, &delete);
+  return true;
+}
+
+function collision_check_failed(var0, var1, var2) {
+  var0 delete();
+  var1 scripts\engine\utility::delaycall(0.05, &delete);
+  var2 scripts\engine\utility::delaycall(0.05, &delete);
+
+  if(!isDefined(level.player.context_melee_blocked_hint_allowed) || level.player.context_melee_blocked_hint_allowed) {
+    if(!getdvarint("context_melee_use_cursor_hint")) {
+      level.player.context_melee_hint_blocked = scripts\engine\utility::ter_op(isDefined(level.player.context_melee_hint_blocked_custom), level.player.context_melee_hint_blocked_custom, "context_melee_blocked");
+      level.player thread scripts\engine\sp\utility::display_hint_forced(level.player.context_melee_hint_blocked);
+    } else {
+      context_melee_cursor_hint_blocked();
+    }
+  }
+
+  return true;
+}
+
+function get_melee_contents() {
+  var0 = ["physicscontents_clipshot", "physicscontents_itemclip", "physicscontents_player", "physicscontents_playernosight", "physicscontents_solid", "physicscontents_vehicle", "physicscontents_glass"];
+  return physics_createcontents(var0);
+}
+
+function get_melee_sight_contents() {
+  var0 = ["physicscontents_foliage", "physicscontents_clipshot", "physicscontents_itemclip", "physicscontents_player", "physicscontents_playernosight", "physicscontents_solid", "physicscontents_vehicle"];
+  return physics_createcontents(var0);
+}
+
+function check_stealth_kill_visible(var0) {
+  self endon("death");
+  level.player endon("death");
+  level endon("stop_context_melee");
+
+  if(!getdvarint("context_melee_silent")) {
+    return false;
+  }
+
+  var1 = 600;
+
+  if(isDefined(level.stealth) && isDefined(level.stealth.damage_sight_range)) {
+    var1 = level.stealth.damage_sight_range;
+  }
+
+  var2 = 100;
+
+  if(isDefined(level.stealth) && isDefined(level.stealth.proximity_combat_radius_bump)) {
+    var2 = level.stealth.proximity_combat_radius_bump;
+  }
+
+  var3 = squared(var1 + 36);
+  var4 = getaiarrayinradius(level.player.origin, 2048, "axis");
+  var5 = getaiarrayinradius(level.player.origin, 2048, "team3");
+  var0 = scripts\engine\utility::array_combine(var4, var5);
+  var0 = scripts\engine\utility::array_remove(var0, self);
+  var0 = scripts\engine\utility::array_removedead_or_dying(var0);
+
+  if(var0.size < 1) {
+    print3d_debug(self.origin, "only enemy alive, no silent check", (0, 1, 0), 1, 0.1, 1, "line2");
+    return false;
+  }
+
+  var0 = sortbydistance(var0, self.origin);
+
+  foreach(var7 in var0) {
+    if(context_melee_cansee(var7)) {
+      return true;
+    }
+
+    if(context_melee_cansee(var7, self) && distancesquared(var7.origin, self.origin) < var3) {
+      return true;
+    }
+
+    if(distancesquared(var7.origin, self.origin) < squared(100)) {
+      if(physics_test("enemy_eye", self getEye(), var7 getEye(), var7, "silent sight check failed!", undefined)) {}
+
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function do_context_melee(var0, var1) {
+  self notify("start_context_melee");
+  var2 = level.player.origin;
+  var3 = level.player getstance();
+
+  if(!isDefined(self)) {
+    return;
+  }
+
+  if(!isalive(self)) {
+    return;
+  }
+
+  if(isDefined(self.stealth) && !istrue(self.keepstealthoncontextmelee)) {
+    scripts\engine\utility::ent_flag_clear("stealth_enabled");
+  }
+
+  self notify("end_patrol");
+  var4 = scripts\engine\utility::spawn_tag_origin();
+  var5 = self getlinkedparent();
+
+  if(getdvarint("context_melee_debug")) {
+    thread anim_ent_debug();
+  }
+
+  scripts\engine\sp\utility::anim_stopanimScripted();
+
+  if(isDefined(self.context_melee_origin)) {
+    var4.origin = self.context_melee_origin;
+  } else {
+    var4.origin = self.origin;
+  }
+
+  if(isDefined(self.context_melee_angles)) {
+    var4.angles = self.context_melee_angles;
+  } else {
+    set_scripted_node_angles(var4, var1, level.context_melee_collision_offset);
+    print_debug("^1Context Melee Kill from direction: " + var1);
+  }
+
+  axis_debug(var4, (0, 1, 1), 1000, 10);
+  print3d_debug(self.origin, "enemy melee pos: " + var1, (0, 1, 1), 1, 0.1, 1000);
+  line_debug(level.player.origin, self.origin, (0, 1, 1), 1, 0, 1000);
+  circle_debug(self.origin, 16, (0, 1, 1), 1, 1, 1000);
+  level.player.in_melee_death = 1;
+  self.context_melee_og_maxsightdistsqrd = self.maxsightdistsqrd;
+  self.context_melee_og_newenemyreactiondistsq = self.newenemyreactiondistsq;
+  self.context_melee_og_battlechatter = self.battlechatterallowed;
+  self.context_melee_og_allowdeath = self.allowdeath;
+  self.context_melee_og_animname = self.animname;
+  self.in_melee_death = 1;
+  self.allowantigrav = 0;
+  self.dontmelee = 1;
+  self.maxsightdistsqrd = 1;
+  self.fixednode = 0;
+  self.ignoreme = 1;
+  self.ignoreall = 1;
+  self.newenemyreactiondistsq = 0;
+  self.allowdeath = 0;
+  self.a.disablepain = 1;
+  self.allowpain = 0;
+  self.battlechatterallowed = 0;
+  self.animname = "generic";
+  self.context_melee_anim = var0;
+  self.remove_from_animloop = 1;
+
+  if(isDefined(self.script_stealthgroup) && !isDefined(self.context_melee_victim_lives)) {
+    scripts\stealth\group::group_removefrompod(undefined, self);
+  }
+
+  if(!isDefined(self.context_melee_victim_lives)) {
+    self setgoalpos(var4.origin);
+    self clearpath();
+  }
+
+  if(isDefined(self) && isalive(self) && !isDefined(self.delayeddeath) && !isDefined(self.melee)) {
+    thread scripts\common\ai::magic_bullet_shield();
+  }
+
+  if(isDefined(self) || isalive(self)) {
+    level.player enableinvulnerability();
+    level.player enablequickweaponswitch(1);
+    var4 scripts\common\anim::anim_first_frame_solo(level.player.melee_arms, var0);
+    waitframe();
+
+    if(getdvarint("context_melee_debug")) {
+      var6 = level.player getcollision("stand");
+      thread tag_view_debug();
+      print3d_debug(level.player.melee_arms gettagorigin(level.context_melee_player_link_bone), "melee anim start", (1, 0, 0), 1, 0.1, 1000);
+      line_debug(level.player.melee_arms gettagorigin(level.context_melee_player_link_bone), level.player.melee_arms.origin + anglesToForward(level.player.melee_arms.angles) * 100, (1, 0, 0), 1, 0, 1000);
+      circle_debug(level.player.melee_arms gettagorigin(level.context_melee_player_link_bone), var6.capsule_radius, (1, 0, 0), 1, 1, 1000);
+
+      if(isDefined(self.context_melee_combat_buffer) && self.context_melee_combat_buffer > 0) {
+        print_debug("combat counter was at: " + self.context_melee_combat_buffer + " of " + 12);
+      }
+    }
+
+    var7 = spawn("script_model", level.player.origin);
+
+    if(isDefined(level.player.context_melee_knife)) {
+      var7 setModel(level.player.context_melee_knife);
+    } else {
+      var7 setModel("weapon_vm_me_soscar_knife");
+    }
+
+    var7 notsolid();
+    var7 linkTo(level.player.melee_arms, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
+
+    if(!isDefined(self.context_melee_victim_lives)) {
+      scripts\engine\utility::delaythread(5, &death_safety, self);
+    }
+
+    level.player notify("context_melee_anim_started");
+    prep_player_and_enemy(level.player, self, var4, var0);
+
+    if(isDefined(var5)) {
+      print_debug("linking");
+      var4 linkTo(var5);
+      self linkTo(var4);
+      level.player.melee_arms linkTo(var4);
+    }
+
+    level.player lerpfovscalefactor(0, 0.25);
+    var8 = getanimlength(scripts\engine\utility::getanim(var0));
+    var9 = getanimlength(level.player.melee_arms scripts\engine\utility::getanim(var0));
+
+    if(var8 > var9) {
+      level.player thread scripts\engine\sp\utility::notify_delay("context_melee_longest_anim_ended", var8);
+    } else {
+      level.player thread scripts\engine\sp\utility::notify_delay("context_melee_longest_anim_ended", var9);
+    }
+
+    thread scripts\engine\sp\utility::notify_delay("context_melee_anim_ended_internal", var8);
+    level.player thread scripts\engine\sp\utility::notify_delay("context_melee_anim_ended", var9);
+    var10 = 0.5;
+    level.player scripts\engine\utility::delaycall(var9 - var10, &lerpfovscalefactor, 1, var10);
+    self notify("damage", 0, level.player, undefined, undefined, "MOD_MELEE");
+    thread enemy_end_death_logic(var0, var5);
+    thread player_end_death_logic(level.player, var7, var4, var2, var3);
+    var4 thread scripts\common\anim::anim_single([self, level.player.melee_arms], var0);
+  }
+
+  level.player waittill("context_melee_longest_anim_ended");
+  print_debug("longest melee anim finished");
+}
+
+function anim_ent_debug() {
+  self endon("death");
+
+  for(;;) {
+    sphere_debug(self.origin, 4, (1, 1, 1), 0, 1);
+    waitframe();
+  }
+}
+
+function context_melee_launch(var0, var1) {
+  level.player endon("death");
+  print_debug("launching!");
+  level.player.context_melee_launching = 1;
+  level.player enableweapons();
+
+  if(!level.player hasweapon("iw8_gunless_farrah")) {
+    level.player giveweapon("iw8_gunless_farrah");
+  }
+
+  level.player switchtoweaponimmediate("iw8_gunless_farrah");
+  earthquake(1, 0.3, level.player.origin, 75);
+  level.player playRumbleOnEntity("heavy_1s");
+  level.player thread scripts\sp\player::radial_distortion(0.05, 0.2, 0.25);
+  visionsetpain("damage_severe");
+  setsaveddvar("MLLRKTPNRR", 0);
+  setsaveddvar("OONLORSMO", 1.9);
+  level.player painvisionon();
+  level.player scripts\engine\utility::delaycall(0.2, &painvisionoff);
+  waitframe();
+  level.player unlink();
+  thread launch_push_player2();
+  var2 = getDvar("OMNONNMOTP");
+  setsaveddvar("OMNONNMOTP", "0.1 400 2 1000");
+  level.player scripts\engine\sp\utility::player_gesture_force("ges_htf_stab_a");
+  wait level.player getgestureanimlength("ges_htf_stab_a");
+  setsaveddvar("OMNONNMOTP", var2);
+  level.player.context_melee_launching = undefined;
+}
+
+function launch_push_player() {
+  var0 = vectorNormalize(anglesToForward(level.player.angles));
+  var1 = var0 * -1;
+
+  for(var2 = 0; var2 < 6; var2++) {
+    level.player pushplayervector(var1);
+    waitframe();
+    var1 *= 1.7;
+  }
+
+  wait 0.8;
+  var1 *= -0.6;
+
+  for(;;) {
+    var1 *= 0.75;
+
+    if(vectordot(var1, var0) < 0.5) {
+      level.player pushplayervector((0, 0, 0));
+      waitframe();
+      break;
+    } else {
+      level.player pushplayervector(var1);
+    }
+
+    waitframe();
+  }
+
+  print_debug("launching finished t:" + gettime());
+
+  if(getdvarint("context_melee_debug")) {
+    var3 = level.player getcollision("stand");
+    print3d_debug(level.player.origin + (0, 0, -2), "slide end", (1, 1, 0), 1, 0.1, 1000);
+    circle_debug(level.player.origin, var3.capsule_radius, (1, 1, 0), 1, 1, 1000);
+    return;
+  }
+}
+
+function launch_push_player2() {
+  var0 = vectorNormalize(anglesToForward(level.player.angles)) * -500;
+  level.player setvelocity(var0);
+}
+
+function set_scripted_node_angles(var0, var1, var2) {
+  if(!isDefined(var2)) {
+    var2 = (0, 0, 0);
+  }
+
+  switch (var1) {
+    case "front":
+      var0.angles = vectortoangles(level.player.origin - self.origin) + var2;
+      break;
+    case "left":
+      var0.angles = vectortoangles(level.player.origin - self.origin) + (0, -90, 0) + var2;
+      break;
+    case "right":
+      var0.angles = vectortoangles(level.player.origin - self.origin) + (0, 90, 0) + var2;
+      break;
+    case "back":
+      var0.angles = vectortoangles(self.origin - level.player.origin) + var2;
+      break;
+    default:
+      break;
+  }
+}
+
+function enemy_end_death_logic(var0, var1) {
+  self endon("death");
+  level endon("stop_context_melee");
+  self waittill("context_melee_anim_ended_internal");
+
+  if(!isDefined(self.context_melee_victim_lives)) {
+    context_melee_death(self);
+    context_melee_ragdoll(self);
+  } else {
+    self.in_melee_death = 0;
+    self.allowantigrav = 1;
+    self.dontmelee = 0;
+    self.maxsightdistsqrd = self.context_melee_og_maxsightdistsqrd;
+    self.fixednode = 0;
+    self.ignoreme = 0;
+    self.ignoreall = 0;
+    self.newenemyreactiondistsq = self.context_melee_og_newenemyreactiondistsq;
+    self.a.disablepain = 0;
+    self.battlechatterallowed = self.context_melee_og_battlechatter;
+    self.context_melee_anim = var0;
+    self.remove_from_animloop = undefined;
+    self.allowdeath = self.context_melee_og_allowdeath;
+    self.animname = self.context_melee_og_animname;
+    self.context_melee_last_melee_finish_time = gettime();
+
+    if(isDefined(var1)) {
+      self linkTo(var1);
+    }
+  }
+
+  self notify("context_melee_anim_ended");
+}
+
+function player_end_death_logic(var0, var1, var2, var3, var4) {
+  level.player endon("death");
+  level.player waittill("context_melee_anim_ended");
+  var0 delete();
+  var1 delete();
+  level.player.melee_arms hide();
+
+  if(getdvarint("context_melee_debug")) {
+    var5 = level.player getcollision("stand");
+    print3d_debug(level.player.origin + (0, 0, -2), "melee anim end", (1, 1, 0), 1, 0.1, 1000);
+    circle_debug(level.player.origin, var5.capsule_radius, (1, 1, 0), 1, 1, 1000);
+  }
+
+  release_player_from_viewmodel_anim(level.player, var2, var3, var4, var1);
+  level.player disableinvulnerability();
+  level.player enablequickweaponswitch(0);
+  level.player.melee_arms hide();
+  level.player.context_melee_next = get_next_anim(level.player.context_melee_next);
+  level.player.in_melee_death = undefined;
+}
+
+function tag_view_debug() {
+  self endon("death");
+  level endon("tag_view_debug_end");
+
+  if(getdvarint("context_melee_debug_extra")) {
+    for(;;) {
+      arrow_debug(self gettagorigin("tag_view"), self gettagorigin("tag_view") + anglesToForward(self gettagangles("tag_view")) * 10, (0.25, 0.25, 1), 1000);
+      wait 0.1;
+    }
+
+    return;
+  }
+}
+
+function prep_player_and_enemy(var0, var1, var2) {
+  prepare_player_for_viewmodel_anim();
+  var3 = getstartangles(var1.origin, var1.angles, var0 scripts\engine\utility::getanim(var2));
+  line_debug(var0.origin, var0.origin + anglesToForward(var0.angles) * 36, (0, 1, 0), 1, 0, 1000);
+  line_debug(var0.origin, var0.origin + anglesToForward(var3) * 36, (1, 0, 1), 1, 0, 1000);
+  thread axis_debug((0, 1, 0), 1000, 10);
+  print3d_debug(self.origin, "pre melee pos", (0, 1, 0), 1, 0.1, 1000);
+  line_debug(self.origin, self.origin + anglesToForward(self getplayerangles(1)) * 100, (0, 1, 0), 1, 0, 1000);
+  var4 = 0.2;
+  self playerlinktoblend(self.melee_arms, level.context_melee_player_link_bone, var4, 0.05, 0.1);
+  var5 = var0 scripts\engine\utility::spawn_tag_origin();
+  var0 linktoblendtotag(var5, "tag_origin");
+  var5 rotateTo(var3, var4, 0.1);
+  wait var4;
+  self playerlinktoabsolute(self.melee_arms, level.context_melee_player_link_bone);
+  var5 delete();
+  self.melee_arms show();
+}
+
+function context_melee_death(var0) {
+  if(!isDefined(var0)) {
+    return;
+  }
+
+  if(!isalive(var0)) {
+    return;
+  }
+
+  var0.skipdeathanim = 1;
+  var0.noragdoll = 1;
+  var0 pushplayer(0);
+  var0 scripts\anim\shared::dropallaiweapons();
+
+  if(isDefined(self.asm.flashlight) && isDefined(self.fnstealthflashlightdetach) && self.asm.flashlight) {
+    self[[self.fnstealthflashlightdetach]]();
+  }
+
+  var0.allowdeath = 1;
+  var0.diequietly = 1;
+
+  if(isDefined(var0.magic_bullet_shield)) {
+    var0 scripts\common\ai::stop_magic_bullet_shield();
+  }
+
+  if(isDefined(var0.damageshield)) {
+    var0.damageshield = 0;
+  }
+
+  if(isDefined(var0.stealth)) {
+    var0.stealth.override_damage_auto_range = 60;
+  }
+
+  var0 kill((0, 0, 0), level.player, level.player, "MOD_MELEE");
+
+  if(!istrue(var0.context_melee_ragdoll)) {
+    level.player.context_melee_kill_origin = var0.origin;
+    return;
+  }
+}
+
+function context_melee_fx(var0) {
+  if(isDefined(var0) && isDefined(var0.context_melee_anim)) {
+    switch (var0.context_melee_anim) {
+      case "context_melee_kill_01_back":
+        playFXOnTag(scripts\engine\utility::getfx("vfx_contextmelee_stab"), var0, "j_neck");
+        break;
+      default:
+        playFXOnTag(scripts\engine\utility::getfx("vfx_contextmelee_stab"), var0, "j_neck");
+        break;
+    }
+
+    return;
+  }
+}
+
+function context_melee_sfx(var0) {}
+
+function context_melee_ragdoll(var0) {
+  if(!isDefined(var0) && isDefined(level.player.context_melee_kill_origin)) {
+    foreach(var2 in getcorpsearray()) {
+      if(istrue(var2.context_melee_ragdoll)) {
+        continue;
+      }
+
+      if(var2 isragdoll()) {
+        continue;
+      }
+
+      var3 = var2.origin;
+
+      if(getdvarint("MQSNSOSMPN")) {
+        var3 = var2 getcorpsephysicsorigin();
+      }
+
+      if(isDefined(var3) && distancesquared(var3, level.player.context_melee_kill_origin) < squared(60)) {
+        var2 startragdoll();
+        var2.context_melee_ragdoll = 1;
+      }
+    }
+  } else if(isDefined(var0) && !istrue(var0.context_melee_ragdoll)) {
+    var0 thread scripts\anim\shared::dropallaiweapons();
+    var0 startragdoll();
+    var0.context_melee_ragdoll = 1;
+  }
+
+  level.player.context_melee_kill_origin = undefined;
+}
+
+function context_melee_rumble_light(var0) {
+  level.player playRumbleOnEntity("damage_light");
+}
+
+function context_melee_rumble_heavy(var0) {
+  level.player playRumbleOnEntity("heavy_1s");
+}
+
+function death_safety(var0) {
+  if(isDefined(var0)) {
+    if(isalive(var0)) {
+      if(isDefined(var0.magic_bullet_shield)) {
+        var0 scripts\common\ai::stop_magic_bullet_shield();
+      }
+
+      return;
+    }
+
+    return;
+  }
+}
+
+function check_player_can_stealth_kill_me(var0, var1) {
+  level endon("stop_context_melee");
+
+  if(isDefined(self.context_melee_allow_directions)) {
+    if(!scripts\engine\utility::array_contains(self.context_melee_allow_directions, var1)) {
+      print3d_debug(self.origin, "no melee!, direction " + var1 + " not allowed!", (1, 0, 0), 1, 0.1, 1, "line5");
+      return false;
+    }
+  }
+
+  if(!isDefined(var0)) {
+    print3d_debug(self.origin, "no melee!, target but no animation", (1, 0, 0), 1, 0.1, 1, "line5");
+    return false;
+  }
+
+  if(!isDefined(level.scr_anim["generic"][var0])) {
+    print3d_debug(self.origin, "no melee!, target but no generic animation", (1, 0, 0), 1, 0.1, 1, "line5");
+    return false;
+  }
+
+  if(self.currentpose != "stand" && self.currentpose != "crouch") {
+    print3d_debug(self.origin, "no melee!, AI is crouching or moving", (1, 0, 0), 1, 0.1, 1, "line5");
+    return false;
+  }
+
+  if(isDefined(self.melee)) {
+    if(isDefined(self.melee.initiated) && self.melee.initiated || isDefined(self.melee.inprogress) && self.melee.inprogress) {
+      print3d_debug(self.origin, "no melee!, target is already meleeing player!", (1, 0, 0), 1, 0.1, 1, "line5");
+      return false;
+    }
+  }
+
+  var2 = abs(self.origin[2] - level.player.origin[2]);
+
+  if(var2 >= 20) {
+    print3d_debug(self.origin, "no melee! height difference is " + var2 + " units", (1, 0, 0), 1, 0.1, 1, "line5");
+    return false;
+  }
+
+  if(level.player isjumping()) {
+    print3d_debug(self.origin, "no melee!, player is jumping", (1, 0, 0), 1, 0.1, 1, "line5");
+    return false;
+  }
+
+  if(!anim_collision_check(var0, var1)) {
+    if(!isDefined(level.context_melee_fail_attempts)) {
+      level.context_melee_fail_attempts = 0;
+    }
+
+    var3 = [5, -5, 15, -15, 30, -30, 45, -45];
+
+    if(level.context_melee_fail_attempts < var3.size) {
+      level.context_melee_collision_offset = (0, var3[level.context_melee_fail_attempts], 0);
+
+      if(!anim_collision_check(var0, var1, level.context_melee_collision_offset)) {
+        level.context_melee_fail_attempts += 1;
+        print3d_debug(self.origin, "collision extra fail attempts: " + level.context_melee_fail_attempts, (1, 0, 0), 1, 0.1, 1, "line3");
+        return false;
+      } else {
+        print3d_debug(self.origin, "collision extra success offset: " + level.context_melee_collision_offset, (0, 1, 1), 1, 0.1, 1, "line3");
+      }
+    } else {
+      level.context_melee_fail_attempts = undefined;
+      level.context_melee_collision_offset = undefined;
+      return false;
+    }
+  } else {
+    level.context_melee_fail_attempts = undefined;
+    level.context_melee_collision_offset = undefined;
+  }
+
+  if(getdvarint("context_melee_silent")) {
+    if(check_stealth_kill_visible()) {
+      return false;
+    }
+  }
+
+  print3d_debug(self.origin, "IS stealth melee target with anime: " + var0, (0, 1, 0), 1, 0.1, 1, "line5");
+  return true;
+}
+
+function player_stealth_kill_direction() {
+  var0 = self gettagangles("tag_origin");
+  var1 = self gettagorigin("tag_origin");
+  var2 = anglestoright(var0);
+  var3 = anglesToForward(var0);
+  var4 = level.player.origin - var1;
+  var4 = (var4[0], var4[1], 0);
+  var4 = vectorNormalize(var4);
+  var5 = abs(vectordot(var3, (0, 0, 1)));
+
+  if(var5 > 0.7) {
+    var3 = vectorNormalize((var2[0], var2[1], 0));
+  } else {
+    var3 = vectorNormalize((var3[0], var3[1], 0));
+  }
+
+  var6 = anglesToForward(self.angles);
+
+  if(vectordot(var4, var6) > vectordot(var3, var6)) {
+    var3 = var6;
+  }
+
+  var2 = vectorcross(var3, (0, 0, 1));
+  var7 = vectordot(var3, var4);
+  var8 = vectordot(var2, var4);
+
+  if(isDefined(self.context_melee_back_dot_override)) {
+    var9 = self.context_melee_back_dot_override;
+  } else {
+    var9 = -0.5;
+  }
+
+  if(var8 < var9) {
+    print3d_debug(self.origin, "direction: back dot: " + var8 + " threat: " + self getthreatsight(level.player), (0, 1, 0), 1, 0.1, 1, "line4");
+    return "back";
+  } else if(var8 > 0.6) {
+    print3d_debug(self.origin, "direction: front dot: " + var8 + " threat: " + self getthreatsight(level.player), (0, 1, 0), 1, 0.1, 1, "line4");
+    return "front";
+  } else if(var9 > 0) {
+    print3d_debug(self.origin, "direction: right dot: " + var8 + " threat: " + self getthreatsight(level.player), (0, 1, 0), 1, 0.1, 1, "line4");
+    return "right";
+  } else {
+    print3d_debug(self.origin, "direction: left dot: " + var8 + " threat: " + self getthreatsight(level.player), (0, 1, 0), 1, 0.1, 1, "line4");
+    return "left";
+  }
+
+  return undefined;
+}
+
+function get_next_anim(var0, var1) {
+  var2 = var0;
+
+  for(;;) {
+    var3 = "context_melee_kill_0" + var2 + "_";
+
+    if(isDefined(var1)) {
+      if(isDefined(level.scr_anim["generic"][var3 + var1])) {
+        return (var3 + var1);
+      }
+    }
+
+    var2++;
+    var3 = "context_melee_kill_0" + var2 + "_";
+
+    if(!isDefined(level.scr_anim["generic"][var3 + "back"]) && !isDefined(level.scr_anim["generic"][var3 + "front"]) && !isDefined(level.scr_anim["generic"][var3 + "left"]) && !isDefined(level.scr_anim["generic"][var3 + "right"])) {
+      var2 = 1;
+    }
+
+    if(!isDefined(var1)) {
+      return var2;
+    }
+
+    if(var2 == var0) {
+      break;
+    }
+  }
+
+  return undefined;
+}
+
+function get_anim_from_direction(var0) {
+  if(!isDefined(level.player.context_melee_next)) {
+    level.player.context_melee_next = 1;
+  }
+
+  var1 = undefined;
+
+  if(isDefined(self.context_melee_anim_name)) {
+    if(isDefined(self.context_melee_anim_name[var0])) {
+      var1 = self.context_melee_anim_name[var0];
+    } else if(isDefined(self.context_melee_anim_name["all"])) {
+      var1 = self.context_melee_anim_name["all"];
+    }
+  }
+
+  if(!isDefined(var1)) {
+    var1 = get_next_anim(level.player.context_melee_next, var0);
+  }
+
+  return var1;
+}
+
+function prepare_player_for_viewmodel_anim() {
+  scripts\sp\utility::nvidiaansel_scriptdisable(1);
+  level.player setstance("stand", 0, 1, 1);
+  thread freeze_controls_when_standing();
+  level.player freezelookcontrols(1);
+  level.player disableweapons();
+  level.player scripts\common\utility::allow_melee(0, "context_melee");
+  level.player scripts\common\utility::allow_prone(0, "context_melee");
+  level.player scripts\common\utility::allow_crouch(0, "context_melee");
+}
+
+function freeze_controls_when_standing() {
+  self endon("death");
+  level endon("stop_context_melee");
+
+  while(self getstance() != "stand") {
+    waitframe();
+  }
+
+  self freezecontrols(1);
+}
+
+function release_player_from_viewmodel_anim(var0, var1, var2, var3) {
+  if(istrue(level.context_melee_do_launch)) {
+    context_melee_launch(level.player, var2, var3);
+  }
+
+  level.player unlink();
+  level.player freezecontrols(0);
+  level.player freezelookcontrols(0);
+  level.player scripts\common\utility::allow_melee(1, "context_melee");
+  level.player scripts\common\utility::allow_prone(1, "context_melee");
+  level.player scripts\common\utility::allow_crouch(1, "context_melee");
+  level.player enableweapons();
+  level.player setstance(var1);
+  scripts\sp\utility::nvidiaansel_scriptdisable(0);
+}
+
+function context_melee_sfx_player(var0) {
+  play_sound_safe(var0, "context_melee_kill_02_back");
+}
+
+function context_melee_cansee(var0) {
+  if(level.context_melee_sight_disabled) {
+    return false;
+  }
+
+  if(!isDefined(var0)) {
+    var0 = level.player;
+  }
+
+  if(self aipointinfov(var0 getEye()) && self cansee(var0)) {
+    return true;
+  }
+
+  return false;
+}
+
+function print_debug(var0) {
+  if(getdvarint("context_melee_debug")) {
+    iprintln(var0);
+    return;
+  }
+}
+
+function print3d_debug(var0, var1, var2, var3, var4, var5, var6) {
+  if(!isDefined(var6)) {
+    var6 = "nothing";
+  }
+
+  var7 = level.player getcollision(level.player getstance());
+
+  switch (var6) {
+    case "nothing":
+      var6 = (0, 0, 0);
+      break;
+    case "line1":
+      var6 = (0, 0, 8) + (0, 0, var7.capsule_midpoint_height);
+      break;
+    case "line2":
+      var6 = (0, 0, 6) + (0, 0, var7.capsule_midpoint_height);
+      break;
+    case "line3":
+      var6 = (0, 0, 4) + (0, 0, var7.capsule_midpoint_height);
+      break;
+    case "line4":
+      var6 = (0, 0, 2) + (0, 0, var7.capsule_midpoint_height);
+      break;
+    case "line5":
+      var6 = (0, 0, 0) + (0, 0, var7.capsule_midpoint_height);
+      break;
+  }
+
+  if(getdvarint("context_melee_debug")) {
+    return;
+  }
+}
+
+function line_debug(var0, var1, var2, var3, var4, var5) {
+  if(getdvarint("context_melee_debug")) {
+    return;
+  }
+}
+
+function sphere_debug(var0, var1, var2, var3, var4) {
+  if(getdvarint("context_melee_debug")) {
+    return;
+  }
+}
+
+function axis_debug(var0, var1, var2) {
+  if(getdvarint("context_melee_debug")) {
+    scripts\engine\utility::draw_ent_axis(var0, var1, var2);
+    return;
+  }
+}
+
+function circle_debug(var0, var1, var2, var3, var4, var5) {
+  if(getdvarint("context_melee_debug")) {
+    scripts\engine\utility::draw_circle(var0, var1, var2, var3, var4, var5);
+    return;
+  }
+}
+
+function capsule_debug(var0, var1, var2, var3, var4, var5, var6) {
+  if(getdvarint("context_melee_debug")) {
+    scripts\engine\utility::draw_capsule(var0, var1, var2, var3, var4, var5, var6);
+    return;
+  }
+}
+
+function angles_debug(var0, var1, var2, var3, var4) {
+  if(getdvarint("context_melee_debug")) {
+    scripts\engine\utility::draw_angles(var0, var1, var2, var3, var4);
+    return;
+  }
+}
+
+function box_debug(var0, var1, var2, var3, var4) {
+  if(getdvarint("context_melee_debug")) {
+    scripts\engine\utility::draw_angles(var0, var1, var2, var3, var4);
+    return;
+  }
+}
+
+function arrow_debug(var0, var1, var2, var3) {
+  if(getdvarint("context_melee_debug")) {
+    var4 = vectortoangles(var0 - var1);
+    var5 = anglesToForward(var4);
+    line_debug(var0, var1, var2, 1, 0, var3);
+    line_debug(var0, var0 + var5 * 1, (1, 0, 0), 1, 0, var3);
+    return;
+  }
+}

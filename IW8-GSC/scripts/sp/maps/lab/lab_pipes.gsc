@@ -1,0 +1,822 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\sp\maps\lab\lab_pipes.gsc
+***********************************************/
+
+function pipes_outdoor_postload() {
+  scripts\engine\utility::flag_init("switch_to_kyle");
+  scripts\engine\utility::flag_init("sniper_targeting_player");
+  scripts\engine\utility::flag_init("sniper_killed");
+  scripts\engine\utility::flag_init("rpg_on_the_move");
+  scripts\engine\utility::flag_init("reverse_breach_start");
+  scripts\engine\utility::flag_init("heli_intro");
+  scripts\engine\utility::flag_init("heli_intro_wait");
+  scripts\engine\utility::flag_init("clear_parking_ai");
+  scripts\engine\utility::flag_init("parking_lot_clear");
+  scripts\engine\utility::flag_init("reverse_breach_guys_dead");
+  scripts\engine\utility::flag_init("final_guards_a");
+  scripts\engine\utility::flag_init("final_guards_b");
+  scripts\engine\utility::flag_init("jumpdown_scene_over");
+  scripts\engine\utility::flag_init("rpg_right_dead");
+  scripts\engine\utility::flag_init("pipes_bomb_planted");
+  thread pipes_jumpdown_lights_init();
+}
+
+function pipes_jumpdown_lights_init() {
+  var0 = getEntArray("pipes_jumpdown_lights", "targetname");
+
+  foreach(var2 in var0) {
+    var2.og_intensity = var2 getlightintensity();
+    var2 setlightintensity(0);
+  }
+}
+
+function pipes_outdoor_preload() {
+  precachemodel("offhand_wm_c4_bomb");
+  precachemodel("offhand_wm_c4");
+}
+
+function setup_post_cinematic() {
+  scripts\engine\sp\utility::add_global_spawn_function("allies", &scripts\sp\maps\lab\lab_util::allies_molotov_toggle, 1);
+  scripts\sp\maps\lab\lab_util::spawn_team_price();
+  thread kyle_loadout();
+  var0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
+  var0 scripts\sp\player_rig::link_player_to_rig("pipes_jumpdown", "crouch", 0, undefined, 1, 0, 0, 0, 0);
+  level.kyle scripts\engine\sp\utility::name_hide();
+  level.player thread scripts\sp\player::player_movement_state("default");
+  level.player modifybasefov(50, 0.05);
+  level.player enableinvulnerability();
+  level.player playerdisabletriggers();
+  level.player cleardamageindicators();
+  level.player hidelegsandshadow();
+  level.player hideviewmodel();
+  wait 0.3;
+  level.player notify("post_bink_setup_finished");
+}
+
+function pipes_jumpdown_start() {
+  scripts\engine\sp\utility::add_global_spawn_function("allies", &scripts\sp\maps\lab\lab_util::allies_molotov_toggle, 1);
+  scripts\sp\maps\lab\lab_util::spawn_team_price();
+  thread kyle_loadout();
+  var0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
+  var0 scripts\sp\player_rig::link_player_to_rig("pipes_jumpdown", "crouch", 0, undefined, 1, 0, 0, 0, 0);
+  level.kyle scripts\engine\sp\utility::name_hide();
+  level.player thread scripts\sp\player::player_movement_state("default");
+  level.player modifybasefov(50, 0.05);
+  level.player enableinvulnerability();
+  level.player playerdisabletriggers();
+  level.player cleardamageindicators();
+  level.player hidelegsandshadow();
+  level.player hideviewmodel();
+  hidecinematicletterboxing(0, 0);
+}
+
+function pipes_jumpdown_main() {
+  thread fix_door_clip();
+  level.player clearclienttriggeraudiozone(0.5);
+  thread enable_pipes_jumpdown_lights();
+  setmusicstate("mx_lab_pricekyle_infil");
+  scripts\engine\utility::delaythread(0.3, &scripts\engine\sp\utility::autosave_now);
+  scripts\engine\sp\utility::set_start_location("pipes_outdoor_start", [level.price, level.rebel_1, level.rebel_2, level.rebel_3]);
+  scripts\engine\utility::flag_set("ambush_end");
+  var0 = scripts\engine\utility::getStruct("sniper_scene", "targetname");
+  thread sniper_intro(level);
+  thread pipes_sniper_setup();
+  scripts\engine\utility::delaythread(12, &pipes_moments_setup);
+  pipes_jumpdown_scene();
+  thread remove_pipes_jumpdown_lights();
+  scripts\engine\sp\utility::autosave_by_name("pipes_jumpdown");
+}
+
+function fix_door_clip() {
+  var0 = getEntArray("jumpdown_doors", "targetname");
+  var1 = getEnt(var0[0].target, "targetname");
+  var1 unlink();
+  var1.origin = (-1282.79, -2235.51, -50);
+  var1.angles = (0, 45, 0);
+  var2 = getEnt(var0[1].target, "targetname");
+  var2 unlink();
+  var2.origin = (-1311.79, -2207.51, -50);
+  var2.angles = (0, 45, 0);
+}
+
+function enable_pipes_jumpdown_lights() {
+  var0 = getEntArray("pipes_jumpdown_lights", "targetname");
+
+  foreach(var2 in var0) {
+    var2 setlightintensity(var2.og_intensity);
+  }
+}
+
+function remove_pipes_jumpdown_lights() {
+  var0 = getEntArray("pipes_jumpdown_lights", "targetname");
+
+  foreach(var2 in var0) {
+    var2 thread scripts\sp\lights::lerp_intensity(0, 1.5);
+  }
+
+  wait 1.6;
+
+  foreach(var2 in var0) {
+    var2 delete();
+  }
+}
+
+function pipes_jumpdown_catchup() {
+  scripts\engine\utility::flag_set("ambush_end");
+  scripts\engine\utility::flag_set("jumpdown_scene_over");
+  scripts\sp\maps\lab\lab_util::setplayerviewmodel("viewhands_kyle_sas_urban", "viewhands_base_legs_iw8", "default_character_shadow");
+  scripts\sp\utility::context_melee_set_arms("viewhands_kyle_sas_urban");
+  scripts\engine\sp\utility::add_global_spawn_function("allies", &scripts\sp\maps\lab\lab_util::allies_molotov_toggle, 1);
+  thread fix_door_clip();
+}
+
+function pipes_moments_setup() {
+  thread rpg_left_spawn();
+  thread rpg_right_spawn();
+  thread pipes_to_hallway();
+}
+
+function rpg_impact(var0) {
+  var0 waittill("explode", var1);
+
+  if(isDefined(var1)) {
+    thread scripts\engine\sp\utility::earthquake_and_rumble(var1);
+    return;
+  }
+}
+
+#using_animtree("generic_human");
+
+function rpg_left_spawn() {
+  var0 = scripts\engine\sp\utility::spawn_targetname("rooftop_rpg_left", 1);
+  var1 = scripts\engine\utility::getStruct("pipes_rpg_left_struct", "targetname");
+  var2 = scripts\engine\utility::getStructArray("pipes_rpg_left_struct_lookat", "targetname");
+  var0 endon("death");
+  level.scr_anim["generic"]["rpg_reload"] = % rpg_stand_reload;
+  var0.goalradius = 4;
+  var0.dontevershoot = 1;
+  var0.fixednode = 1;
+  var0.dropweapon = 0;
+  var3 = spawn("script_origin", var1.origin);
+  var0.ignoreme = 1;
+  var0 setentitytarget(var3);
+  var3 dontinterpolate();
+  scripts\engine\utility::flag_wait("jumpdown_scene_over");
+  var4 = cos(65);
+
+  while(!rpg_left_fov_checks(var2, var4)) {
+    waitframe();
+  }
+
+  thread rpg_left_allies();
+  wait 2;
+  var5 = var0.origin + (0, 0, 45) + anglesToForward(var0.angles) * 35;
+  var6 = magicbullet("iw8_la_rpapa7_straight_slow", var5, var1.origin);
+  thread rpg_impact(var6);
+  wait 2;
+  level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_final_pipes_combat_50");
+  var0 scripts\common\anim::anim_generic(var0, "rpg_reload");
+  var0.dontevershoot = 0;
+  var0 clearentitytarget();
+  var3 delete();
+  wait 3;
+  level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_final_pipes_combat_40");
+}
+
+function rpg_left_fov_checks(var0) {
+  foreach(var2 in self) {
+    if(scripts\sp\maps\lab\lab_util::in_player_fov(var0, var2.origin)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function rpg_left_allies() {
+  var0 = scripts\engine\sp\utility::array_spawn_targetname("pipes_rpg_left_target", 1, 1);
+
+  foreach(var2 in var0) {
+    var2.fixednode = 1;
+  }
+}
+
+#using_animtree("");
+
+function rpg_right_spawn() {
+  var0 = scripts\engine\sp\utility::spawn_targetname("rooftop_rpg_right");
+  var0 thread scripts\engine\sp\utility::flag_on_death("rpg_right_dead");
+  var0 endon("death");
+  var1 = scripts\engine\utility::getStruct("pipes_rpg_right_struct", "targetname");
+  var2 = scripts\engine\utility::getStructArray("pipes_rpg_right_struct_lookat", "targetname");
+  level.scr_anim["generic"]["rpg_reload"] = % rpg_stand_reload;
+  var0.goalradius = 4;
+  var0.dontevershoot = 1;
+  var0.fixednode = 1;
+  var0.dropweapon = 0;
+  var3 = spawn("script_origin", var1.origin);
+  var0.ignoreme = 1;
+  var0 setentitytarget(var3);
+  var3 dontinterpolate();
+  scripts\engine\utility::flag_wait("jumpdown_scene_over");
+  rpg_right_allies();
+  right_rpg_fov_checks(var2, var1, var0);
+  scripts\engine\utility::flag_set("rpg_on_the_move");
+  level notify("rpg_right_start_moving");
+  var4 = var0.origin + (0, 0, 45) + anglesToForward(var0.angles) * 35;
+  var5 = magicbullet("iw8_la_rpapa7_straight_slow", var4, var1.origin);
+  thread rpg_impact(var5);
+  wait 0.5;
+  var0 scripts\common\anim::anim_generic(var0, "rpg_reload");
+  var0.dontevershoot = 0;
+  var0 clearentitytarget();
+  var3 delete();
+}
+
+function right_rpg_fov_checks(var0, var1) {
+  level endon("rush_right_rpg");
+  var2 = squared(500);
+  var3 = cos(45);
+
+  while(!scripts\engine\utility::flag("rush_right_rpg")) {
+    if(check_lookat(self[0], var3) || check_lookat(self[1], var3) && distancesquared(level.player.origin, var0.origin) <= var2 || check_lookat_guy(var1, var3)) {
+      break;
+    }
+
+    waitframe();
+  }
+}
+
+function check_lookat(var0) {
+  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var0) && scripts\engine\trace::ray_trace_passed(level.player getEye(), self.origin, [level.player])) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function check_lookat_guy(var0) {
+  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self getEye(), var0) && scripts\engine\trace::ray_trace_passed(level.player getEye(), self getEye(), [level.player, self])) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function rpg_right_allies() {
+  var0 = scripts\engine\sp\utility::array_spawn_targetname("pipes_rpg_right_target", 1, 1);
+
+  foreach(var2 in var0) {
+    var2 scripts\common\ai::magic_bullet_shield();
+    var2.fixednode = 1;
+    thread rpg_right_allies_post();
+  }
+}
+
+function rpg_right_allies_post() {
+  level scripts\engine\utility::waittill_any("rpg_right_start_moving", "rpg_right_dead");
+  scripts\common\ai::stop_magic_bullet_shield();
+}
+
+function jumpdown_cameradofsettings() {
+  level thread scripts\engine\sp\utility::dof_enable(2.8, 600, 400, 400);
+  wait 1;
+  level.kyle thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 10, undefined, undefined, "tag_eye");
+  wait 2.5;
+  level thread scripts\engine\sp\utility::dof_enable(2.8, 600, 2, 400);
+  wait 2;
+  level.kyle thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 3, undefined, undefined, "tag_eye");
+  wait 6.5;
+  level.price thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 5, undefined, undefined, "tag_eye");
+  wait 2;
+  level thread scripts\engine\sp\utility::dof_disable_autofocus();
+}
+
+function pipes_jumpdown_scene() {
+  level.player freezecontrols(1);
+  var0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
+  level.player scripts\common\utility::allow_cinematic_motion(0);
+  level.player_rig hide();
+  scripts\engine\utility::delaythread(0.8, &scripts\engine\sp\utility::activate_trigger_with_targetname, "pipes_jumpdown_trigger");
+  thread scripts\engine\utility::flag_set_delayed("sniper_intro", 4.5);
+  thread jumpdown_cameradofsettings();
+  thread pipes_fake_sniper_fire();
+  var0 thread scripts\common\anim::anim_single_solo(level.price, "pipes_jumpdown");
+  var0 thread scripts\common\anim::anim_single_solo(level.kyle, "pipes_jumpdown");
+  level.player dontinterpolate();
+  var0 scripts\common\anim::anim_single_solo(level.player_rig, "pipes_jumpdown");
+  var1 = getnode("pipes_price_node", "targetname");
+  level.price setgoalnode(var1);
+  scripts\engine\utility::flag_set("jumpdown_scene_over");
+  level.kyle scripts\sp\maps\lab\lab_util::disable_magic_bullet_delete();
+  level.player scripts\common\utility::allow_stand(1, "player_rig");
+  level.player scripts\common\utility::allow_prone(1, "player_rig");
+  level.player scripts\common\utility::allow_offhand_weapons(1, "player_rig");
+  level.player scripts\common\utility::allow_sprint(1, "player_rig");
+  level.player scripts\common\utility::allow_jump(1, "player_rig");
+  level.player scripts\common\utility::allow_armor(1, "player_rig");
+  level.player scripts\common\utility::allow_mantle(1, "player_rig");
+  level.player scripts\common\utility::allow_melee(1, "player_rig");
+  level.player unlink();
+  level.player setstance("crouch", 1, 1, 1);
+  var2 = scripts\engine\utility::drop_to_ground(level.player getEye(), 0, -60);
+  level.player setOrigin(var2, 1);
+  level.player disableinvulnerability();
+  level.player freezecontrols(0);
+  level.player showlegsandshadow();
+  level.player playerenabletriggers();
+  level.player showviewmodel();
+  level.player_rig delete();
+  level.player scripts\common\utility::allow_cinematic_motion(1);
+}
+
+function pipes_fake_sniper_fire() {
+  var0 = scripts\engine\utility::getStruct("pipes_sniper_target", "targetname");
+  level.fakesniper.desiredaimpos = var0.origin;
+  level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 0.05);
+  wait 0.2;
+  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
+  var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
+  var3 = scripts\engine\utility::getStruct(var2.target, "targetname");
+  var4 = scripts\engine\utility::getStruct(var3.target, "targetname");
+  level.fakesniper.desiredaimpos = var1.origin;
+  level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 1, 0.5, 0.1);
+  level.fakesniper.laser laserforceon();
+  wait 1.4;
+  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var1.origin);
+  level.fakesniper.laser scripts\engine\utility::delaycall(0.3, &laserforceoff);
+  wait 1.4;
+  level.fakesniper.desiredaimpos = var2.origin;
+  level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 1, 0.4, 0.3);
+  level.fakesniper.laser scripts\engine\utility::delaycall(0.2, &laserforceon);
+  wait 1.2;
+  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var2.origin);
+  level.fakesniper.laser scripts\engine\utility::delaycall(0.4, &laserforceoff);
+  wait 1.5;
+  level.fakesniper.desiredaimpos = var3.origin;
+  level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 1.5, 0.5, 0.5);
+  level.fakesniper.laser scripts\engine\utility::delaycall(1.2, &laserforceon);
+  wait 2;
+  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var3.origin);
+  level.fakesniper.laser scripts\engine\utility::delaycall(0.3, &laserforceoff);
+  wait 1.4;
+  level.fakesniper.desiredaimpos = var4.origin;
+  level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 1.5, 0.5, 0.5);
+  level.fakesniper.laser scripts\engine\utility::delaycall(1.2, &laserforceon);
+  wait 2;
+  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var4.origin);
+  level.fakesniper.laser scripts\engine\utility::delaycall(0.3, &laserforceoff);
+}
+
+function pipes_outdoor_start() {
+  thread scripts\sp\analytics::analytics_kleenex_update("pipes_stopwatch");
+  scripts\sp\maps\lab\lab_util::spawn_team_price();
+  thread kyle_loadout();
+  thread pipes_sniper_setup();
+  thread pipes_moments_setup();
+  var0 = scripts\engine\utility::getStruct("sniper_scene", "targetname");
+  thread sniper_intro(level);
+  scripts\engine\sp\utility::set_start_location("pipes_outdoor_start", [level.player, level.price, level.rebel_1, level.rebel_2, level.rebel_3]);
+  scripts\engine\sp\utility::activate_trigger_with_targetname("pipes_jumpdown_trigger");
+}
+
+function pipes_outdoor_main() {
+  thread vo_pipes_outdoor();
+  scripts\engine\sp\utility::array_spawn_targetname("pipe_outdoor_guys", 1, 1);
+  thread stackup_when_clear();
+  thread ai_saftey_nets();
+  scripts\engine\sp\utility::transient_load("lab_finale_tr");
+}
+
+function pipes_sniper_setup() {
+  level.sniper = scripts\engine\sp\utility::spawn_targetname("pipe_sniper", 1);
+  thread sniper_death_func();
+}
+
+function pipes_to_hallway() {
+  var0 = scripts\engine\utility::getStruct("pipes_exit_door_struct", "targetname");
+  var0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"SCRIPT/DOOR_HINT_USE", 45, 200, 55, 0);
+  scripts\engine\utility::flag_wait("reverse_breach_start");
+
+  if(isDefined(level.fakesniper)) {
+    level.fakesniper notify("kill_sniper");
+  }
+
+  var1 = scripts\engine\utility::getStructArray("reverse_breach_struct", "targetname");
+  var2 = cos(60);
+  var3 = squared(100);
+
+  for(;;) {
+    var4 = distancesquared(level.player.origin, var1[0].origin);
+    var5 = distancesquared(level.player.origin, var1[1].origin);
+
+    if(scripts\sp\maps\lab\lab_util::in_player_fov(var2, var1[0].origin, [level.player]) || scripts\sp\maps\lab\lab_util::in_player_fov(var2, var1[1].origin, [level.player])) {
+      break;
+    } else if(var4 <= var3 || var5 <= var3) {
+      break;
+    }
+
+    waitframe();
+  }
+
+  var0 scripts\sp\player\cursor_hint::remove_cursor_hint();
+  thread reverse_breach_scene();
+  thread scripts\engine\sp\utility::transient_load_array(["lab_hill_main_tr", "lab_hill_bottom_tr"]);
+}
+
+function reverse_breach_scene() {
+  var0 = getEnt("pipes_exit_door_l", "targetname");
+  var0.clip = getEnt(var0.target, "targetname");
+  var0.clip linkTo(var0);
+  var1 = scripts\engine\utility::getStruct("left_door_dust", "targetname");
+  var2 = scripts\engine\utility::getStruct("left_door_push", "targetname");
+  var2.power = anglesToForward(var2.angles) * 50;
+  var3 = getEnt("pipes_exit_door_r", "targetname");
+  var3.clip = getEnt(var3.target, "targetname");
+  var3.clip linkTo(var3);
+  var4 = scripts\engine\utility::getStruct("right_door_dust", "targetname");
+  var5 = scripts\engine\utility::getStruct("right_door_push", "targetname");
+  var5.power = anglesToForward(var5.angles) * 50;
+  var0.clip connectpaths();
+  var3.clip connectpaths();
+  thread spawn_reverse_breach_enemies();
+  var0 rotateYaw(-130, 0.3);
+  var0 playSound("scrpt_door_metal_heavy_bash_npc");
+  playFX(scripts\engine\utility::getfx("vfx_lab_jump_dust"), var1.origin);
+  wait 0.1;
+  var3 rotateYaw(130, 0.3);
+  var3 playSound("scrpt_door_metal_heavy_bash_npc");
+  playFX(scripts\engine\utility::getfx("vfx_lab_jump_dust"), var4.origin);
+  wait 0.3;
+  var0 rotateYaw(20, 0.2);
+  physicsjolt(var2.origin, 30, 1, var2.power);
+  wait 0.1;
+  var3 rotateYaw(-20, 0.2);
+  physicsjolt(var3.origin, 40, 1, var5.power);
+  wait 0.1;
+  var0 rotateYaw(-10, 0.4);
+  var3 rotateYaw(10, 0.4);
+}
+
+function spawn_reverse_breach_enemies() {
+  var0 = scripts\engine\sp\utility::array_spawn_targetname("reverse_breach", 1, 1);
+
+  foreach(var2 in var0) {
+    thread reverse_breach_orders();
+  }
+}
+
+function reverse_breach_orders() {
+  self endon("death");
+
+  if(scripts\engine\utility::is_equal(self.animname, "rb_door_guy")) {
+    self.goalradius = 25;
+    self.fixednode = 1;
+    self.allowdeath = 1;
+    var0 = scripts\engine\utility::getanim("reverse_breach");
+    var1 = scripts\engine\utility::getStruct("animnode_rb", "targetname");
+    var1 thread scripts\common\anim::anim_single_solo(self, "reverse_breach");
+    var2 = getanimlength(var0);
+    var3 = 1.4 / var2;
+    waitframe();
+    self setanimtime(var0, var3);
+    self waittillmatch("single anim", "end");
+    return;
+  }
+
+  self.ignoreall = 1;
+  self.goalradius = 25;
+  self.fixednode = 1;
+  self enableavoidance(0);
+  wait 0.7;
+  self.ignoreall = 0;
+}
+
+function vo_pipes_outdoor() {
+  level waittill("fakesniper_spawned");
+  level.fakesniper endon("kill_sniper");
+  var0 = ["dx_vom_pri_pipes_outdoor_callout_sniper_10", "dx_vom_pri_pipes_outdoor_callout_sniper_20", "dx_vom_pri_pipes_outdoor_callout_sniper_30"];
+
+  for(var1 = 0; var1 < 3; var1++) {
+    level.fakesniper waittill("new_target", var2);
+
+    if(!isDefined(var2) || var2 != level.player) {
+      continue;
+    }
+
+    wait randomfloatrange(0.5, 1);
+    var3 = gettime();
+    level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter(var0[var1]);
+    wait 12;
+  }
+}
+
+function sniper_death_func() {
+  level.sniper endon("kill_sniper_death_function");
+  scripts\common\ai::gun_remove();
+  self.health += 300;
+  thread running_away_watcher(level.sniper);
+  self waittill("death", var0);
+
+  if(isDefined(level.fakesniper)) {
+    level.fakesniper notify("kill_sniper");
+  }
+
+  if(isDefined(var0) && var0 == level.player) {
+    scripts\sp\maps\lab\lab_vo_util::wait_combat_cooldown(0.3, 1.5);
+    level.player thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_kyle_pipes_outdoor_callout_sniper_40");
+    return;
+  }
+}
+
+function running_away_watcher(var0) {
+  while(!isDefined(level.fakesniper)) {
+    waitframe();
+  }
+
+  level.fakesniper endon("kill_sniper");
+  scripts\engine\utility::flag_wait(var0);
+
+  if(isDefined(level.sniper)) {
+    level.sniper notify("kill_sniper_death_function");
+  }
+
+  if(isDefined(level.fakesniper)) {
+    level.fakesniper notify("kill_sniper");
+    return;
+  }
+}
+
+function fakesniper_control() {
+  level.fakesniper notify("script_control");
+  level.fakesniper laserforceoff();
+  wait 14;
+  level.fakesniper notify("end_script_control");
+}
+
+function pipes_outdoor_catchup() {
+  scripts\engine\utility::flag_set("parking_lot_clear");
+  scripts\engine\utility::flag_set("sniper_intro");
+}
+
+function sniper_intro(var0) {
+  var1 = scripts\engine\utility::getStruct("fake_sniper", "targetname");
+  level.fakesniper = scripts\engine\utility::spawn_script_origin(var1.origin, var1.angles);
+  level.fakesniper thread scripts\sp\scriptedsniper::spawn_scripted_sniper("fake_sniper", "sniper_model", undefined, "sniper_targeting_player", "sniper_killed", "script_control");
+  level.fakesniper.laser laserforceoff();
+  thread fakesniper_control();
+  wait 2;
+
+  if(isDefined(level.rebel_1) && isalive(level.rebel_1)) {
+    level.fakesniper.checkgroup[level.fakesniper.checkgroup.size] = level.rebel_1;
+  }
+
+  if(isDefined(level.rebel_2) && isalive(level.rebel_2)) {
+    level.fakesniper.checkgroup[level.fakesniper.checkgroup.size] = level.rebel_2;
+  }
+
+  if(isDefined(level.rebel_3) && isalive(level.rebel_3)) {
+    level.fakesniper.checkgroup[level.fakesniper.checkgroup.size] = level.rebel_3;
+    return;
+  }
+}
+
+function kyle_loadout() {
+  scripts\sp\maps\lab\lab_util::setplayerviewmodel("viewhands_kyle_sas_urban", "viewhands_base_legs_iw8", "default_character_shadow");
+  scripts\sp\utility::context_melee_set_arms("viewhands_kyle_sas_urban");
+  level.player takeallweapons();
+  GscBinSkip1(0x45, 0, scripts\sp\utility::make_weapon("iw8_ar_scharlie", ["reflex_west02", "bipodgrip"]));
+}
+
+function stackup_when_clear() {
+  thread watch_final_spawners();
+  thread ai_saftey_nets();
+  thread pipes_last_enemies();
+  scripts\engine\utility::flag_wait("pipes_building_approach");
+  level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_pipes_outdoor_combat_10");
+  level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_pipes_outdoor_combat_30");
+  wait 1;
+
+  while(getaiarray("axis").size > 2) {
+    level waittill("ai_killed");
+  }
+
+  scripts\sp\maps\lab\lab_vo_util::wait_combat_cooldown(0.6, 1.2);
+
+  if(getaiarray("axis").size == 2 && !scripts\engine\utility::flag("player_inside_hall")) {
+    level.price scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_pipes_outdoor_twoleft_10");
+  }
+
+  while(getaiarray("axis").size > 0) {
+    level waittill("ai_killed");
+  }
+
+  scripts\sp\maps\lab\lab_vo_util::wait_combat_cooldown(0.8, 4);
+  scripts\engine\utility::flag_wait("reverse_breach_guys_dead");
+  scripts\engine\utility::flag_set("parking_lot_clear");
+  var0 = getEntArray("outdoor_pipes_color_trig", "targetname");
+  scripts\engine\utility::array_delete(var0);
+}
+
+function ai_saftey_nets() {
+  scripts\engine\utility::flag_wait("clear_parking_ai");
+  var0 = getaiarray("axis");
+
+  if(isDefined(level.finale_heli)) {
+    if(isDefined(level.barkov)) {
+      var0 = scripts\engine\utility::array_remove(var0, level.barkov);
+    }
+  }
+
+  childthread scripts\engine\sp\utility::ai_delete_when_out_of_sight(var0, 400);
+
+  if(!isDefined(level.rebel_1) || !isDefined(level.rebel_2) || !isDefined(level.rebel_3)) {
+    childthread scripts\sp\maps\lab\lab_util::trigger_nearest_friendly_respawn_trigger();
+    return;
+  }
+}
+
+function watch_final_spawners() {
+  var0 = scripts\engine\utility::waittill_any_return("final_guards_a", "final_guards_b");
+
+  switch (var0) {
+    case "final_guards_a":
+      var1 = getEntArray("final_guards_b", "targetname");
+      break;
+    default:
+      var1 = getEntArray("final_guards_a", "targetname");
+      break;
+  }
+
+  scripts\engine\utility::array_delete(var1);
+}
+
+function pipes_last_enemies() {
+  level endon("clear_parking_ai");
+  scripts\engine\utility::flag_wait("pipes_building_approach");
+
+  while(getaiarray("axis").size > 4) {
+    level waittill("ai_killed");
+  }
+
+  var0 = getaiarray("axis");
+
+  foreach(var2 in var0) {
+    if(scripts\engine\utility::is_equal(var2.script_noteworthy, "rooftop_sniper") || scripts\engine\utility::is_equal(var2, level.barkov) || scripts\engine\utility::is_equal(var2.script_noteworthy, "rooftop_rpg")) {
+      continue;
+    }
+
+    if(isDefined(var2)) {
+      var2.goalradius = 200;
+      var2 setgoalentity(level.player);
+      var2.attackeraccuracy = 1;
+    }
+  }
+}
+
+function pipes_hallway_start() {
+  scripts\sp\maps\lab\lab_util::spawn_team_price();
+  thread kyle_loadout();
+  thread pipes_to_hallway();
+  scripts\engine\sp\utility::set_start_location("parking_hallway_start", [level.player, level.price, level.rebel_1, level.rebel_2, level.rebel_3]);
+}
+
+function pipes_hallway_main() {
+  thread scripts\sp\analytics::analytics_kleenex_update("pipes_hallway_stopwatch");
+  thread setup_heli();
+  scripts\engine\utility::flag_wait_any("parking_lot_clear", "player_at_final_pipes");
+  hallway_scene();
+}
+
+function hallway_scene() {
+  var0 = getEntArray("parking_lot_color_trigs", "script_noteworthy");
+  scripts\engine\utility::array_delete(var0);
+  thread vo_hallway_scene();
+  var1 = [level.price, level.rebel_1, level.rebel_2, level.rebel_3];
+  thread scripts\sp\maps\lab\lab_util::move_lab_allies("hallway_nodes", var1, 1);
+  scripts\engine\utility::flag_wait("player_inside_hall");
+  thread scripts\sp\maps\lab\lab_util::move_lab_allies("pipes_nodes", var1, 1);
+  scripts\engine\utility::flag_wait("player_at_final_pipes");
+}
+
+function setup_heli() {
+  scripts\engine\utility::flag_wait_any("parking_lot_clear", "player_inside_hall");
+  scripts\engine\utility::flag_wait("player_inside_hall");
+  scripts\sp\maps\lab\lab_finale::finale_heli_setup();
+}
+
+function vo_hallway_scene() {
+  if(scripts\engine\utility::flag("player_inside_hall")) {
+    return;
+  }
+
+  level.player scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_kyle_pipes_outdoor_outro_10");
+  level.price scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_pipes_outdoor_outro_20");
+  level.player scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_kyle_pipes_outdoor_outro_30");
+  scripts\engine\utility::waittill_any_ents(level.price, "goal", level, "player_inside_hall");
+  wait 8;
+  var0 = ["dx_vom_pri_pipes_outdoor_outro_40", "dx_vom_pri_pipes_outdoor_outro_50", "dx_vom_pri_pipes_outdoor_outro_60"];
+  level.price scripts\sp\maps\lab\lab_vo_util::nagtill("player_inside_hall", var0, 12, 2, 1.2, 1.2, 35, 5);
+}
+
+function pipes_hallway_catchup() {
+  level.catwalk_guys = [];
+}
+
+function final_pipes_start() {
+  scripts\sp\maps\lab\lab_util::spawn_team_price();
+  scripts\engine\sp\utility::set_start_location("final_pipes_start", [level.price, level.player, level.rebel_1, level.rebel_2, level.rebel_3]);
+  scripts\engine\sp\utility::activate_trigger_with_targetname("friendlies_to_final_pipes");
+  thread scripts\sp\maps\lab\lab_finale::finale_heli_setup();
+}
+
+function final_pipes_main() {
+  thread pipes_dialog();
+  c4_plating_logic();
+}
+
+function pipes_dialog() {
+  level endon("bomb_planted");
+  thread mus_bomb_planted();
+  scripts\engine\utility::flag_wait_or_timeout("clear_parking_ai", 3);
+  wait randomfloatrange(0.1, 0.3);
+
+  if(!scripts\engine\utility::flag("clear_parking_ai")) {
+    scripts\engine\utility::flag_set("clear_parking_ai");
+  }
+
+  level.price scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_final_pipes_charges_10");
+  wait 5;
+  var0 = ["dx_vom_pri_final_pipes_charges_20", "dx_vom_pri_final_pipes_charges_30", "dx_vom_pri_final_pipes_charges_40"];
+  level.price scripts\sp\maps\lab\lab_vo_util::nagtill("bomb_planted", var0);
+}
+
+function mus_bomb_planted() {
+  scripts\engine\utility::flag_wait("player_inside_hall");
+  setmusicstate("");
+}
+
+function c4_plating_logic() {
+  level.player endon("death");
+  var0 = scripts\engine\utility::getStructArray("bomb_plant", "targetname");
+
+  foreach(var2 in var0) {
+    var2 thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 1, 5), &"LAB/CURSOR_PLANT_CHARGES", 100, 200, 64, 1, undefined, undefined, undefined, undefined, undefined, undefined, 65, 80);
+  }
+
+  waittill_and_return_ent(var0[0], "trigger", var0[1], "trigger", var0[2], "trigger", var0[3], "trigger");
+  level notify("bomb_planted");
+  thread sfx_pipes_heli_flyover();
+
+  foreach(var2 in var0) {
+    if(isDefined(var2.cursor_hint_ent)) {
+      var2 scripts\sp\player\cursor_hint::remove_cursor_hint();
+    }
+  }
+
+  foreach(var7 in level.heroes) {
+    if(isDefined(var7)) {
+      var7.ignoreme = 1;
+    }
+  }
+}
+
+function sfx_pipes_heli_flyover() {
+  wait 1;
+  level.player playSound("scn_lab_pipes_heli_flyover_lr");
+}
+
+function final_pipes_catchup() {}
+
+function waittill_and_return_ent(var0, var1, var2, var3, var4, var5, var6, var7) {
+  thread waittill_trigger_pipes(var0, var1, "ent1_used");
+  thread waittill_trigger_pipes(var2, var3, "ent2_used");
+  thread waittill_trigger_pipes(var4, var5, "ent3_used");
+  thread waittill_trigger_pipes(var6, var7, "ent4_used");
+  level.og_zplanes = getDvar("OMNONNMOTP");
+  var8 = level scripts\engine\utility::waittill_any_return("ent1_used", "ent2_used", "ent3_used", "ent4_used");
+  scripts\engine\utility::flag_set("pipes_bomb_planted");
+  setsaveddvar("OMNONNMOTP", "0.1 400 1.5 1000");
+
+  switch (var8) {
+    case "ent1_used":
+      level.pipes_bomb = var0;
+      break;
+    case "ent2_used":
+      level.pipes_bomb = var2;
+      break;
+    case "ent3_used":
+      level.pipes_bomb = var4;
+      break;
+    case "ent4_used":
+      level.pipes_bomb = var6;
+      break;
+  }
+}
+
+function waittill_trigger_pipes(var0, var1, var2) {
+  level endon("pipes_bomb_planted");
+  var0 waittill(var1);
+  level notify(var2);
+}

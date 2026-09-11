@@ -1,0 +1,67 @@
+/************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\maps\mp_farms2_gw\mp_farms2_gw_fx.gsc
+************************************************************/
+
+function main() {
+  level._effect["vfx_gw_farms_tv_fix"] = loadfx("vfx/iw8/level/gw/vfx_gw_farms_tv_fix.vfx");
+  level._effect["vfx_equipment_tv_01_gw"] = loadfx("vfx/iw8/prop/scriptables/vfx_equipment_tv_01_gw.vfx");
+  level._effect["vfx_equipment_tv_01_anim"] = loadfx("vfx/iw8/prop/scriptables/vfx_equipment_tv_01_anim.vfx");
+  level._effect["vfx_gw_ghosttease1_large"] = loadfx("vfx/iw8/level/gw/vfx_gw_ghosttease1_large.vfx");
+  level._effect["vfx_gw_ghosttease1_med"] = loadfx("vfx/iw8/level/gw/vfx_gw_ghosttease1_med.vfx");
+  level._effect["vfx_br_dust_motes_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_dust_motes_sml.vfx");
+  level._effect["vfx_br_dust_motes_fast_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_dust_motes_fast_sml.vfx");
+  level._effect["vfx_br_dust_motes_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_dust_motes_med.vfx");
+  level._effect["vfx_br_dust_motes_fast_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_dust_motes_fast_med.vfx");
+  level._effect["vfx_br_ambient_ceiling_smk"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_ambient_ceiling_smk.vfx");
+  level._effect["vfx_br_ambient_smk"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_ambient_smk.vfx");
+  level._effect["vfx_br_ambient_smk_lg"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_ambient_smk_lg.vfx");
+  level._effect["vfx_br_ambient_room_smk"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_ambient_room_smk.vfx");
+  level._effect["vfx_br_haystack_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_haystack_med.vfx");
+  level._effect["vfx_br_wind_dust_debris"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_wind_dust_debris.vfx");
+  level._effect["vfx_br_trash_drift_01"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_trash_drift_01.vfx");
+  level._effect["vfx_br_hay_circle"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_hay_circle.vfx");
+  level._effect["vfx_br_trash_circle"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_trash_circle.vfx");
+  level._effect["vfx_br_chimney_smoke_1"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_chimney_smoke_1.vfx");
+  level._effect["vfx_br_chimney_smoke_2"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_chimney_smoke_2.vfx");
+  level._effect["vfx_br_black_smk"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_black_smk.vfx");
+  level._effect["vfx_br_black_smk_lg"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_black_smk_lg.vfx");
+  level._effect["vfx_br_smk_column_sm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_smk_column_sm.vfx");
+  level._effect["vfx_br_smk_column_md"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_smk_column_md.vfx");
+  level._effect["vfx_br_smk_column_lg"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_smk_column_lg.vfx");
+  level._effect["vfx_br_fire_ground_xsm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_xsm.vfx");
+  level._effect["vfx_br_fire_ground_sm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_sm.vfx");
+  level._effect["vfx_br_fire_ground_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_med.vfx");
+  level._effect["vfx_br_fire_ground_line_xsm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_line_xsm.vfx");
+  level._effect["vfx_br_fire_ground_line_sm"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_line_sm.vfx");
+  level._effect["vfx_br_fire_ground_line_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fire_ground_line_med.vfx");
+  level._effect["vfx_br_leaves_falling_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_falling_sml.vfx");
+  level._effect["vfx_br_leaves_falling"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_falling.vfx");
+  level._effect["vfx_br_leaves_falling_lrg"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_falling_lrg.vfx");
+  level._effect["vfx_br_leaves_falling_yellow_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_falling_yellow_sml.vfx");
+  level._effect["vfx_br_leaves_falling_yellow"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_falling_yellow.vfx");
+  level._effect["vfx_br_leaves_falling_yellow_lrg"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_leaves_falling_yellow_lrg.vfx");
+  level._effect["vfx_br_pine_falling_pine_needles"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_pine_falling_pine_needles.vfx");
+  level._effect["vfx_br_vent_debris_med"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_vent_debris_med.vfx");
+  level._effect["vfx_br_bulb_lensflare"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_bulb_lensflare.vfx");
+  level._effect["vfx_br_blue_flood_lensflare"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_blue_flood_lensflare.vfx");
+  level._effect["vfx_br_fluorescent_lensflare"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_fluorescent_lensflare.vfx");
+  level._effect["vfx_br_lensflare_bulb_hanging"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_lensflare_bulb_hanging.vfx");
+  level._effect["vfx_br_electrical_sparks"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_electrical_sparks.vfx");
+  level._effect["vfx_br_electrical_sparks_2"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_electrical_sparks_2.vfx");
+  level._effect["vfx_br_water_drips_single"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_water_drips_single.vfx");
+  level._effect["vfx_br_water_drips_single_fast"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_water_drips_single_fast.vfx");
+  level._effect["vfx_br_water_stream"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_water_stream.vfx");
+  level._effect["vfx_br_insect_flies_sml"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_insect_flies_sml.vfx");
+  level._effect["vfx_br_insect_flies_trash"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_insect_flies_trash.vfx");
+  level._effect["vfx_br_birds_circling"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_birds_circling.vfx");
+  level._effect["vfx_br_distant_fog_mtn"] = loadfx("vfx/iw8_br/gen_amb/vfx_br_distant_fog_mtn.vfx");
+  level._effect["vfx_gw_lrg_explosion"] = loadfx("vfx/iw8_mp/grndwar/vfx_gw_lrg_explosion.vfx");
+  level._effect["vfx_gw_aa_tracers"] = loadfx("vfx/iw8_mp/grndwar/vfx_gw_aa_tracers.vfx");
+  level._effect["vfx_gw_ambient_planes"] = loadfx("vfx/iw8_mp/grndwar/vfx_gw_ambient_planes.vfx");
+  level._effect["vfx_gw_smoke_plume_bg_01"] = loadfx("vfx/iw8_mp/grndwar/vfx_gw_smoke_plume_bg_01.vfx");
+  level._effect["gas_realfar"] = loadfx("vfx/iw8_br/gameplay/circle/vfx_br_circle_gas_port_realfar.vfx");
+  level._effect["gas_far"] = loadfx("vfx/iw8_br/gameplay/circle/vfx_br_circle_gas_port_far.vfx");
+  level._effect["gas_medium"] = loadfx("vfx/iw8_br/gameplay/circle/vfx_br_circle_gas_port_medium.vfx");
+  level._effect["gas_close"] = loadfx("vfx/iw8_br/gameplay/circle/vfx_br_circle_gas_port_close.vfx");
+}

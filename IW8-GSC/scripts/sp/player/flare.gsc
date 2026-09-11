@@ -1,0 +1,823 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\sp\player\flare.gsc
+***********************************************/
+
+function level_flareinit() {
+  precachemodel("weapon_zd30_glowstick_wm_lit");
+  precachemodel("viewmodel_flare_iw6");
+  precachemodel("misc_wm_flarestick_throwable");
+  precacheshader("hud_icon_equipment_flare");
+  scripts\engine\sp\utility::add_hint_string("flare_ignite", &"WOUNDED/FLARE_IGNITE");
+  scripts\engine\sp\utility::add_hint_string("flare_off", &"WOUNDED/FLARE_OFF");
+  scripts\engine\sp\utility::add_hint_string("flare_throw", &"WOUNDED/FLARE_THROW");
+  scripts\engine\sp\utility::add_hint_string("flare_distract", &"WOUNDED/FLARE_DISTRACT");
+  level.g_effect["vfx_ai_glow_stick"] = loadfx("vfx/iw8/level/wounded/vfx_ai_glow_stick");
+  level.g_effect["vfx_weapon_flare"] = loadfx("vfx/iw8/level/wounded/vfx_weapon_flare");
+  level.flare = spawnStruct();
+  level.flare.thrownflares = [];
+  level_flaresetcantimeout(0);
+  level_flareworldplacedenable();
+  var0 = level_getflareofftriggers();
+  scripts\engine\utility::array_thread(var0, &level_flareofftriggerlogic);
+  level.g_effect["vfx_player_flare"] = loadfx("vfx/iw8/level/wounded/vfx_player_flare");
+  level.g_effect["vfx_player_flare_light"] = loadfx("vfx/iw8/level/wounded/vfx_player_flare_light");
+  level.g_effect["vfx_player_flare_off"] = loadfx("vfx/iw8/level/wounded/vfx_player_flare_off");
+  level.flare.player = spawnStruct();
+  level.flare.player.model = spawn("script_model", (0, 0, 0));
+
+  if(player_isholdingspecialflareweapon()) {
+    level.flare.player.model setModel("viewmodel_flare_iw6");
+    level.flare.player.model hidepart("J_Striker_Cap");
+  } else {
+    level.flare.player.model setModel("tag_origin");
+  }
+
+  level.flare.player.model linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "none");
+  level.flare.player.lighttag = spawn("script_model", (0, 0, 0));
+  level.flare.player.lighttag setModel("tag_origin");
+  level.flare.player.lighttag linktoplayerview(level.player, "tag_view", (-7, 5, -3), (0, 0, 90), 1, "none");
+  player_setflareequipment(0);
+  player_flaresetammo(0);
+  player_flaresetremainingtime(0);
+  player_flaresetcantimeout(1);
+  player_flaresetcanthrow(1);
+  player_flaresetcanuse(1);
+  player_flaresetcanturnoff(1);
+  player_flaresetautomaticignitehint(0);
+  thread player_flarehidemodellogic();
+  thread player_flaretogglelogic();
+  thread player_flarestealthdetectlogic();
+  var1 = player_flaregetofftriggers();
+  scripts\engine\utility::array_thread(var1, &player_flareofftriggerlogic);
+}
+
+function player_flarehidemodellogic() {
+  level.player endon("death");
+
+  for(;;) {
+    if(player_flareshouldhidemodel()) {
+      level.flare.player.model hide();
+    } else {
+      level.flare.player.model show();
+    }
+
+    waitframe();
+  }
+}
+
+function player_flareshouldhidemodel() {
+  if(level.player ismeleeing() && !player_isholdingspecialflareweapon()) {
+    return true;
+  }
+
+  if(level.player playermount()) {
+    return true;
+  }
+
+  if(level.player isthrowinggrenade()) {
+    return true;
+  }
+
+  if(level.player isonladder()) {
+    return true;
+  }
+
+  return false;
+}
+
+function player_flaregive(var0) {
+  if(!isDefined(var0)) {
+    var0 = 1;
+  }
+
+  player_flaresetammo(var0);
+  player_setflareequipment(1);
+  level.player notifyonplayercommand("toggle_flare", "+actionslot 1");
+  level.player scripts\engine\sp\utility::actionslotoverride(1, "hud_icon_equipment_flare", level.flare.player.ammo);
+
+  if(player_getmaxflareammo() == 1) {
+    level.player scripts\engine\sp\utility::setactionslotoverrideammo(1, -1);
+    return;
+  }
+}
+
+function player_flaretake(var0) {
+  player_setflareequipment(0);
+  level.player scripts\engine\sp\utility::actionslotoverrideremove(1);
+
+  if(player_usingflare()) {
+    player_flareturnoff();
+    return;
+  }
+}
+
+function level_flareworldplacedenable() {
+  var0 = level_flaregetworldplaced();
+
+  foreach(var2 in var0) {
+    playFXOnTag(level.g_effect["vfx_ai_glow_stick"], var2, "tag_fx");
+  }
+}
+
+function level_flaregetworldplaced() {
+  return getEntArray("level_flareWorldPlaced", "targetname");
+}
+
+function level_flaretimeoutlogic(var0) {
+  var0 endon("death");
+  var0.accumulatedtime = 0;
+
+  if(istrue(var0.isthrown)) {
+    level.flare.thrownflares = scripts\engine\utility::array_removeundefined(level.flare.thrownflares);
+
+    if(level.flare.thrownflares.size > 3) {
+      var1 = level.flare.thrownflares[0];
+
+      foreach(var3 in level.flare.thrownflares) {
+        if(var3.accumulatedtime > var1.accumulatedtime) {
+          var1 = var3;
+        }
+      }
+
+      level_flareturnoff(var1);
+    }
+  }
+
+  for(;;) {
+    var0.accumulatedtime += 0.05;
+
+    if(level_flarecantimeout() && var0.accumulatedtime >= 60) {
+      break;
+    }
+
+    waitframe();
+  }
+
+  level_flareturnoff(var0);
+}
+
+function level_flarecantimeout() {
+  return level.flare.cantimeout;
+}
+
+function level_flaresetcantimeout(var0) {
+  level.flare.cantimeout = var0;
+}
+
+function level_flareturnoff(var0) {
+  level notify("level_flareOff");
+  killfxontag(level.g_effect["vfx_player_flare"], var0, "tag_fx");
+  var0 stoploopsound();
+
+  if(isDefined(var0.interact)) {
+    var0.interact delete();
+  }
+
+  var0 delete();
+}
+
+function level_flareofftriggerlogic() {
+  self endon("death");
+
+  for(;;) {
+    self waittill("trigger", var0);
+
+    if(scripts\engine\utility::is_equal(var0, level.player)) {
+      var1 = level_getflares();
+
+      foreach(var3 in var1) {
+        level_flareturnoff(var3);
+      }
+
+      self delete();
+    }
+  }
+}
+
+function level_getflareofftriggers() {
+  return getEntArray("level_flareOff", "targetname");
+}
+
+function level_getflares() {
+  return getEntArray("level_flare", "targetname");
+}
+
+function level_flareailogic(var0) {
+  var0 endon("death");
+  var1 = [];
+  var2 = 2;
+
+  if(istrue(1.5)) {
+    var3 = gettime() + 1500;
+    goto LOC_0000002d;
+  }
+
+  var3 = 0;
+
+  for(;;) {
+    var4 = ai_getaliveaiarray("axis");
+    var5 = [];
+
+    foreach(var7 in var4) {
+      var8 = distancesquared(var7.origin, var1.origin);
+      var9 = var5.size >= var3;
+      var10 = var8 <= 490000;
+      var11 = gettime() >= var3;
+
+      if(!var9 && var10 && var11) {
+        var12 = scripts\engine\utility::array_contains(var2, var7);
+
+        if(!var12) {
+          var7 aieventlistenerevent("investigate", var1, var1.origin);
+          var5 = scripts\engine\utility::array_add(var5, var7);
+        }
+      }
+    }
+
+    var2 = scripts\engine\sp\utility::array_merge(var5, var2);
+    wait 1.5;
+  }
+}
+
+function level_flareaigoallogic(var0) {
+  var0 endon("death");
+  var0 waittill("goal");
+  var0 scripts\engine\sp\utility::set_goalRadius(2048);
+}
+
+function player_flaretogglelogic() {
+  level.player endon("death");
+  level.player endon("removeActionslot1");
+
+  for(;;) {
+    var0 = level.player scripts\engine\utility::waittill_any_return("toggle_flare", "smoke_pressed");
+
+    if(!player_flarecanuse() || level.player isonladder()) {
+      continue;
+    }
+
+    var1 = var0 == "smoke_pressed";
+    var2 = !var1;
+
+    if(player_usingflare()) {
+      if(var2 && player_flarecanthrow()) {
+        var3 = player_getflareammo();
+        player_flaresetammo(var3 - 1);
+        player_flarethrow();
+      }
+
+      continue;
+    }
+
+    if(var2 && player_getflareammo()) {
+      thread player_flareturnon(0);
+      level.player waittill("player_flareIgnite");
+      var3 = player_getflareammo();
+      player_flaresetammo(var3 - 1);
+    }
+  }
+}
+
+function player_flarestealthdetectlogic() {
+  level.player endon("death");
+
+  for(;;) {
+    waitframe();
+
+    if(!isDefined(level.stealth)) {
+      continue;
+    }
+
+    if(player_usingflare()) {
+      level.stealth.detect.range["hidden"]["prone"] = 400;
+      level.stealth.detect.range["hidden"]["crouch"] = 750;
+      level.stealth.detect.range["hidden"]["stand"] = 1200;
+      continue;
+    }
+
+    level.stealth.detect.range["hidden"]["prone"] = 50;
+    level.stealth.detect.range["hidden"]["crouch"] = 90;
+    level.stealth.detect.range["hidden"]["stand"] = 275;
+  }
+}
+
+function player_flaregetofftriggers() {
+  return getEntArray("player_flareOff", "targetname");
+}
+
+function player_flareofftriggerlogic() {
+  self endon("death");
+
+  for(;;) {
+    self waittill("trigger", var0);
+
+    if(scripts\engine\utility::is_equal(var0, level.player) && player_usingflare()) {
+      player_flareturnoff();
+      self delete();
+    }
+  }
+}
+
+function player_flaregetremainingtime() {
+  return level.flare.player.remainingtime;
+}
+
+function player_flaresetremainingtime(var0) {
+  level.flare.player.remainingtime = var0;
+}
+
+function player_flaresetcantimeout(var0) {
+  level.flare.player.cantimeout = var0;
+}
+
+function player_flarecantimeout() {
+  return level.flare.player.cantimeout;
+}
+
+function player_flaresetcanthrow(var0) {
+  level.flare.player.canthrow = var0;
+}
+
+function player_flarecanthrow() {
+  return level.flare.player.canthrow;
+}
+
+function player_flaresetcanuse(var0) {
+  level.flare.player.canuse = var0;
+}
+
+function player_flarecanuse() {
+  return level.flare.player.canuse;
+}
+
+function player_flaresetcanturnoff(var0) {
+  level.flare.player.canturnoff = var0;
+}
+
+function player_flarecanturnoff() {
+  return level.flare.player.canturnoff;
+}
+
+function player_flaregetautomaticignitehint() {
+  return level.flare.player.automaticignitehint;
+}
+
+function player_flaresetautomaticignitehint(var0) {
+  level.flare.player.automaticignitehint = var0;
+}
+
+function player_hasflareequipment() {
+  return level.flare.player.hasequipment;
+}
+
+function player_setflareequipment(var0) {
+  level.flare.player.hasequipment = var0;
+}
+
+function player_flaretimeout() {
+  level.player endon("toggle_flare");
+  level.player endon("player_flareOff");
+
+  for(;;) {
+    var0 = player_flaregetremainingtime();
+
+    if(var0) {
+      if(player_flarecantimeout()) {
+        var1 = max(0, var0 - 0.05);
+        player_flaresetremainingtime(var1);
+      }
+    } else {
+      break;
+    }
+
+    waitframe();
+  }
+
+  thread player_flareturnoff();
+}
+
+function player_flareturnvfxon() {
+  if(scripts\engine\utility::hastag(level.flare.player.model.model, "tag_fx")) {
+    playFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_fx");
+    return;
+  }
+
+  playFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_origin");
+}
+
+function player_flareturnvfxoff() {
+  if(scripts\engine\utility::hastag(level.flare.player.model.model, "tag_fx")) {
+    killfxontag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_fx");
+    return;
+  }
+
+  killfxontag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_origin");
+}
+
+function player_flareturnoff() {
+  level.player notify("player_flareOff");
+  player_flaresetremainingtime(0);
+  stopFXOnTag(level.g_effect["vfx_player_flare_light"], level.flare.player.lighttag, "tag_origin");
+  playFXOnTag(level.g_effect["vfx_player_flare_off"], level.flare.player.lighttag, "tag_origin");
+
+  if(player_isholdingspecialflareweapon()) {
+    level.player stopgestureviewmodel("ges_th_flare_ignite", 0.2, 0);
+  }
+
+  thread player_flareturnvfxoff();
+  level.flare.player.model stoploopsound();
+
+  if(player_flaregetautomaticignitehint()) {
+    scripts\engine\sp\utility::display_hint("flare_ignite", 10, 4, level.player, "player_flareIgnite");
+    return;
+  }
+}
+
+#using_animtree("player");
+
+function player_flareturnon(var0) {
+  var1 = player_isholdingspecialflareweapon() && var0 || !var0;
+
+  if(var1) {
+    level.flare.player.model setModel("viewmodel_flare_iw6");
+    level.flare.player.model hidepart("J_Striker_Cap");
+
+    if(player_isholdingspecialflareweapon()) {
+      var2 = "ges_th_flare_ignite";
+    } else {
+      var2 = "ges_th_flare_ignite_weapon";
+    }
+
+    level.player forceplaygestureviewmodel(var2, undefined, 0, 0, 1, 1);
+    level.player scripts\common\utility::allow_weapon_switch(0);
+    level.player scripts\common\utility::allow_reload(0);
+    player_flaresetcanuse(0);
+    wait 0.35;
+
+    if(!var1) {
+      level.flare.player.model playSound("flare_ignite_plr");
+    }
+
+    level.flare.player.model unlinkfromplayerview(level.player);
+    level.flare.player.model linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "none");
+  }
+
+  level.flare.player.remainingtime = 60;
+  level.player notify("player_flareIgnite");
+  level.flare.player.model playLoopSound("flare_loop");
+  player_flareturnvfxon();
+  playFXOnTag(level.g_effect["vfx_player_flare_light"], level.flare.player.lighttag, "tag_origin");
+
+  if(var2) {
+    if(player_isholdingspecialflareweapon()) {
+      var3 = getanimlength(%th_vm_flare_turnon);
+    } else {
+      var3 = level.player getgestureanimlength("ges_th_flare_ignite_weapon");
+    }
+
+    if(var3 > 0.35) {
+      var4 = var3 - 0.35;
+      wait var4;
+    }
+
+    level.player scripts\common\utility::allow_weapon_switch(1);
+    level.player scripts\common\utility::allow_reload(1);
+    player_flaresetcanuse(1);
+  }
+
+  if(!player_isholdingspecialflareweapon()) {
+    level.flare.player.model setModel("tag_origin");
+    level.flare.player.model unlinkfromplayerview(level.player);
+    level.flare.player.model linktoplayerview(level.player, "tag_view", (-7, 5, -3), (90, 0, 0), 1, "none");
+  }
+
+  thread player_flareloopgesturelogic();
+}
+
+#using_animtree("");
+
+function player_flareloopgesturelogic() {
+  level.player endon("player_flareOff");
+  var0 = getanimlength(%th_vm_flare_turnon);
+  var1 = getanimlength(%th_vm_flare_idle);
+  var2 = level.player.currentweapon;
+  var3 = player_flarecanloopgesture();
+
+  for(;;) {
+    var4 = player_flarecanloopgesture();
+
+    if(var4) {
+      if(var3) {
+        level.player forceplaygestureviewmodel("ges_th_flare_ignite", undefined, 0, var0);
+        var5 = var0;
+      } else {
+        level.player forceplaygestureviewmodel("ges_th_flare_ignite", undefined, 0, 0, 1, 1);
+        var5 = var1;
+      }
+    } else {
+      level.player stopgestureviewmodel("ges_th_flare_ignite", 0, 1);
+      var5 = 0.05;
+    }
+
+    var6 = level.player scripts\engine\utility::waittill_notify_or_timeout_return("weapon_change", var5);
+
+    if(var6 == "weapon_change") {
+      var7 = player_weaponisspecialflareweapon(var2);
+      var8 = player_isholdingspecialflareweapon();
+      var9 = var7 && !var8;
+      var10 = !var7 && var8;
+
+      if(var9) {
+        level.flare.player.model unlinkfromplayerview(level.player);
+        level.flare.player.model linktoplayerview(level.player, "tag_view", (-7, 5, -3), (90, 0, 0), 1, "none");
+        stopFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_fx");
+        level.flare.player.model setModel("tag_origin");
+        playFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_origin");
+        level.player stopgestureviewmodel("ges_th_flare_ignite", 0.2, 0);
+        level.player waittill("weapon_change");
+      } else if(var10) {
+        level.flare.player.model unlinkfromplayerview(level.player);
+        level.flare.player.model linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "none");
+        stopFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_origin");
+        level.flare.player.model setModel("viewmodel_flare_iw6");
+        level.flare.player.model hidepart("J_Striker_Cap");
+        playFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_fx");
+      }
+    }
+
+    var3 = var4;
+    var2 = level.player.currentweapon;
+  }
+}
+
+function player_flarecanloopgesture() {
+  if(level.player isthrowinggrenade()) {
+    return false;
+  }
+
+  if(level.player islinked()) {
+    return false;
+  }
+
+  if(!level.player isweaponsenabled()) {
+    return false;
+  }
+
+  if(!player_isholdingspecialflareweapon()) {
+    return false;
+  }
+
+  return true;
+}
+
+function player_flarethrow() {
+  level.player notify("flare_throw");
+  level.player stopgestureviewmodel("ges_th_flare_ignite", 0, 1);
+  level.player forceplaygestureviewmodel("ges_th_flare_throw");
+  level.player scripts\common\utility::allow_offhand_primary_weapons(0);
+  level.player scripts\common\utility::allow_reload(0);
+  player_flaresetcanuse(0);
+  wait 0.2;
+  thread player_flareturnvfxoff();
+  level.flare.player.model unlinkfromplayerview(level.player);
+  level.flare.player.model linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "none");
+  level.flare.player.model setModel("viewmodel_flare_iw6");
+  level.flare.player.model hidepart("J_Striker_Cap");
+  thread player_flareturnvfxon();
+  wait 0.1;
+  level.flare.player.model unlinkfromplayerview(level.player);
+  level.flare.player.model linktoplayerview(level.player, "tag_view", (-7, 5, -3), (0, 0, 0), 1, "none");
+  level.player scripts\common\utility::allow_reload(1);
+  level.player scripts\common\utility::allow_offhand_primary_weapons(1);
+  player_flaresetcanuse(1);
+  player_flareturnoff();
+  var0 = [];
+  GscBinSkip0(0x2e, "prone", 600);
+}
+
+function level_spawnstaticflare(var0, var1) {
+  var2 = scripts\sp\script_items::scriptitem_buildspawnflags(0, 1, 1, 0, 1);
+  var3 = spawnscriptitem("script_item_level_flare", var0, var1, var2, "misc_wm_flarestick_throwable", "", (0, 0, 0), var0);
+  playFXOnTag(level.g_effect["vfx_weapon_flare"], var3, "tag_fx");
+  var3 playLoopSound("flare_loop");
+  var3.targetname = "level_flare";
+  thread player_flarepickuplogic(var3);
+  thread level_flaretimeoutlogic(var3);
+  thread level_flareatrestmonitor(var3);
+  return var3;
+}
+
+function level_spawnflare(var0, var1, var2, var3) {
+  if(!isDefined(var1)) {
+    var1 = (0, 0, 0);
+  }
+
+  if(!isDefined(var2)) {
+    var2 = 0;
+  }
+
+  var4 = scripts\sp\script_items::scriptitem_buildspawnflags(0, 1, 1, 0, 1);
+  var5 = var1 * var2;
+  var6 = (0, 0, 0);
+
+  if(istrue(var3)) {
+    var6 = (83, 0, 0);
+  }
+
+  var7 = spawnscriptitem("script_item_level_flare", var0, var6, var4, "misc_wm_flarestick_throwable", "", var5, var0);
+  playFXOnTag(level.g_effect["vfx_weapon_flare"], var7, "tag_fx");
+  var7 playLoopSound("flare_loop");
+  var7.targetname = "level_flare";
+
+  if(istrue(var3)) {
+    var7.isthrown = 1;
+    level.flare.thrownflares = scripts\engine\utility::array_removeundefined(level.flare.thrownflares);
+    level.flare.thrownflares[level.flare.thrownflares.size] = var7;
+  }
+
+  thread player_flarepickuplogic(var7);
+  thread level_flaretimeoutlogic(var7);
+  thread level_flareatrestmonitor(var7);
+  return var7;
+}
+
+function level_flareatrestmonitor(var0) {
+  var0 endon("death");
+  var0 endon("entitydeleted");
+  var1 = 0.25;
+  var2 = var0.origin;
+  var0.atrest = 0;
+  var3 = 12;
+
+  for(;;) {
+    var2 = var0.origin;
+    wait var1;
+    var4 = length(var0.origin - var2);
+
+    if(var4 > var3 * var1) {
+      var0.atrest = 0;
+      continue;
+    }
+
+    var0.atrest = 1;
+  }
+}
+
+function player_flarepickuplogic(var0) {
+  var0 endon("death");
+
+  if(istrue(level.flare_pickup_disabled)) {
+    return;
+  }
+
+  var0.interact = scripts\engine\utility::spawn_tag_origin(var0 gettagorigin("tag_origin"));
+  var0.interact linkTo(var0, "tag_origin");
+  var0.interact scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"SCRIPT/PICKUP", 50, 125, 125, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, 45);
+  var0.interact notsolid();
+  thread player_flareconditionalpickup(var0);
+  var0.interact waittill("trigger");
+  player_flarepickupsingle(var0);
+  var0.interact delete();
+  killfxontag(level.g_effect["vfx_player_flare"], var0, "tag_fx");
+  var0 stoploopsound();
+  var0 delete();
+}
+
+function player_flareconditionalpickup(var0) {
+  var0 endon("death");
+  var0.interact endon("death");
+
+  while(isDefined(var0.interact)) {
+    if(player_getflareammo() >= player_getmaxflareammo()) {
+      var0.interact unlink();
+      var0.interact.origin = var0 gettagorigin("tag_origin") - (0, 0, 10000);
+    }
+
+    while(player_getflareammo() >= player_getmaxflareammo()) {
+      wait 0.25;
+    }
+
+    var0.interact.origin = var0 gettagorigin("tag_origin");
+    var0.interact linkTo(var0, "tag_origin");
+
+    while(player_getflareammo() < player_getmaxflareammo()) {
+      wait 0.25;
+    }
+
+    wait 0.05;
+  }
+}
+
+function player_flarepickupsingle(var0) {
+  var0 endon("death");
+
+  if(istrue(level.flarefastpickup)) {
+    player_flaresetcanuse(0);
+  } else {
+    level.player forceplaygestureviewmodel("ges_swipe");
+    player_flaresetcanuse(0);
+    wait 0.35;
+  }
+
+  if(!player_hasflareequipment()) {
+    player_flaregive(0);
+  } else {
+    var1 = player_getflareammo();
+    player_flaresetammo(var1 + 1);
+  }
+
+  if(!player_usingflare()) {
+    if(player_isholdingspecialflareweapon()) {
+      level.player stopgestureviewmodel("ges_swipe", 0, 1);
+      thread player_flareturnon(1);
+      level.player waittill("player_flareIgnite");
+    } else {
+      player_flareturnon(1);
+    }
+  }
+
+  thread scripts\engine\utility::play_sound_in_space("weap_pickup", level.player.origin);
+  player_flaresetcanuse(1);
+}
+
+function player_isholdingspecialflareweapon() {
+  if(!isDefined(level.player.currentweapon)) {
+    return 0;
+  }
+
+  if(level.player.currentweapon.basename == "none") {
+    return 0;
+  }
+
+  return player_weaponisspecialflareweapon(level.player.currentweapon);
+}
+
+function player_weaponisspecialflareweapon(var0) {
+  var1 = player_getflareweapons();
+  return scripts\engine\utility::array_contains(var1, var0);
+}
+
+function player_getflareweapons() {
+  return [getcompleteweaponname("iw8_gunless")];
+}
+
+function player_usingflare() {
+  return level.flare.player.remainingtime;
+}
+
+function player_waittillusingflare() {
+  while(!player_usingflare()) {
+    waitframe();
+  }
+}
+
+function player_getmaxflareammo() {
+  if(isDefined(level.flare) && isDefined(level.flare.player) && isDefined(level.flare.player.ammomax)) {
+    return level.flare.player.ammomax;
+  }
+
+  return 1;
+}
+
+function player_getflareammo() {
+  return level.flare.player.ammo;
+}
+
+function player_flaresetammo(var0) {
+  var1 = player_getmaxflareammo();
+  level.flare.player.ammo = int(clamp(var0, 0, var1));
+
+  if(!player_hasflareequipment()) {
+    return;
+  }
+
+  if(var1 == 1) {
+    if(level.flare.player.ammo > 0) {
+      level.player setweaponhudiconoverride("actionslot1", "hud_icon_equipment_flare");
+      return;
+    }
+
+    level.player setweaponhudiconoverride("actionslot1", "none");
+    return;
+  }
+
+  level.player scripts\engine\sp\utility::setactionslotoverrideammo(1, level.flare.player.ammo);
+}
+
+function ai_getaliveaiarray(var0) {
+  if(isDefined(var0)) {
+    var1 = getaiarray(var0);
+  } else {
+    var1 = getaiarray();
+  }
+
+  var1 = array_removedeaddyingorundefined(var1);
+  return var1;
+}
+
+function array_removedeaddyingorundefined(var0) {
+  var0 = scripts\engine\utility::array_removeundefined(var0);
+  var0 = scripts\engine\utility::array_removedead_or_dying(var0);
+  return var0;
+}
